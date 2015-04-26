@@ -30,7 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -39,15 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseEntity.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="MasterStructure.cs" />
-    <Compile Include="Part.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="BomContext.cs" />
+    <Compile Include="Entities\Item.cs" />
+    <Compile Include="Entities\MasterStructure.cs" />
+    <Compile Include="Entities\Part.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RawMaterial.cs" />
-    <Compile Include="RawMaterialType.cs" />
-    <Compile Include="Supplier.cs" />
+    <Compile Include="Entities\RawMaterial.cs" />
+    <Compile Include="Enums\RawMaterialType.cs" />
+    <Compile Include="Repository.cs" />
+    <Compile Include="Entities\Supplier.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

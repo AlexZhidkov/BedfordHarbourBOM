@@ -6,8 +6,23 @@ using System.Collections.Generic;
 namespace Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class RepositoryTests
     {
+        [TestMethod]
+        public void CreateDb()
+        {
+            using (var db = new BomContext())
+            {
+                var supplier = new Supplier
+                {
+                    Name = "Test"
+                };
+
+                db.Suppliers.Add(supplier);
+                db.SaveChanges();
+            }
+        }
+
         [TestMethod]
         public void TestMethod1()
         {
