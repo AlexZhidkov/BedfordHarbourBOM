@@ -9,6 +9,6 @@ namespace Data
     public class MasterStructure : BaseEntity
     {
         public string ProductDefinition { get; set; }
-        public IEnumerable<Item> Subassemblies { get; set; }
+        public IEnumerable<Part> Subassemblies { get; set; }
     }
 }

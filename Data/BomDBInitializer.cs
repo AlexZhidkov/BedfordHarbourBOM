@@ -1,10 +1,18 @@
-//http://www.entityframeworktutorial.net/code-first/seed-database-in-code-first.aspx
-public class BomDbInitializer : DropCreateDatabaseAlways<BomContext>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Entity;
+
+namespace Data
+{
+    public class BomDbInitializer : DropCreateDatabaseIfModelChanges<BomContext>
     {
         protected override void Seed(BomContext context)
         {
             //Suppliers
-            var oneSteel = new Supplier { Name = "One Steel", Contact = "Fred", Phone = "0420420420" });
+            var oneSteel = new Supplier { Name = "One Steel", Contact = "Fred", Phone = "0420420420" };
             context.Suppliers.Add(new Supplier { Name = "Action Laser", Contact = "John", Phone = "0420420421" });
             context.Suppliers.Add(new Supplier { Name = "Agshop", Contact = "Bob", Phone = "0420420422" });
             context.Suppliers.Add(new Supplier { Name = "Murray George", Contact = "Murray", Phone = "0420420423" });
@@ -75,7 +83,7 @@ public class BomDbInitializer : DropCreateDatabaseAlways<BomContext>
             var basePart = new Part 
             {
                 Description = "Base",
-                Subassemblies = new List<Part> { topRing, innerRing, outerRing },
+                Items = new List<Item> { topRing, innerRing, outerRing },
                 IsOwnMake = true
             };
             var conePart = new Part 
@@ -95,8 +103,8 @@ public class BomDbInitializer : DropCreateDatabaseAlways<BomContext>
             context.MasterStructures.Add(new MasterStructure 
             { 
                 ProductDefinition = "Field Bin", 
-                Subassemblies = new List<Part> { basePart, conePart, wallPart, topPart };
-            };
+                Subassemblies = new List<Part> { basePart, conePart, wallPart, topPart }
+            });
 
             //Stock - contains only raw material
             context.Stocks.Add(new Stock
@@ -105,31 +113,32 @@ public class BomDbInitializer : DropCreateDatabaseAlways<BomContext>
                 Count = 10,
                 //Actual price we bought this material for.
                 Price = 1100
-            };
+            });
             context.Stocks.Add(new Stock
             {
                 RawMaterial = rm_65x65x2,
                 Count = 20,
                 //Actual price we bought this material for.
                 Price = 1000
-            };
+            });
             context.Stocks.Add(new Stock
             {
                 RawMaterial = rm_32NBx6,
                 Count = 30,
                 //Actual price we bought this material for.
                 Price = 600
-            };
+            });
 
             //Product - contains parts made by us.
             context.Products.Add(new Product
             {
-                Part = topRing,
+                Item = topRing,
                 Count = 3,
                 //Cost of one.
                 Cost = 3500
-            };
+            });
 
             base.Seed(context);
         }
     }
+}
