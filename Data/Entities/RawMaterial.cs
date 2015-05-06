@@ -12,5 +12,7 @@ namespace Data
         public string Description { get; set; }
         public int Length { get; set; }
         public IEnumerable<Supplier> Suppliers { get; set; }
+        //TODO: Confirm is it best, lowest or latest price? 
+        public int Price { get; set; }
     }
 }

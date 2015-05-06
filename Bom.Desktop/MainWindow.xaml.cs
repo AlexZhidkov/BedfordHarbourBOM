@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DesktopBom
+namespace Bom.Desktop
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,6 +23,12 @@ namespace DesktopBom
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void SuppliersButton_Click(object sender, RoutedEventArgs e)
+        {
+            var suppliersWindow = new SuppliersWindow();
+            suppliersWindow.Show();
         }
     }
 }

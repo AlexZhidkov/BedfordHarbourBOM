@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DesktopBom.Properties
+namespace Bom.Desktop.Properties
 {
 
 

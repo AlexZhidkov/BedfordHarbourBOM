@@ -4,16 +4,15 @@
     <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
     <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
   </configSections>
-  <connectionStrings>
-    <add name="BomContext"
-      providerName="System.Data.SqlClient"
-      connectionString="Server=(LocalDB)\v11.0;Initial File Name=|DataDirectory|\BomDbTest.mdf;Trusted_Connection=True;MultipleActiveResultSets=True" />
+  <connectionStrings>   
+    <add name="BomContext"          
+      providerName="System.Data.SqlClient"          
+      connectionString="Server=(local)\SQL2014;Database=master;User ID=sa;Password=Password12!"/> 
   </connectionStrings>
   <entityFramework>
-    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
-      <parameters>
-        <parameter value="v11.0" />
-      </parameters>
-    </defaultConnectionFactory>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.SqlConnectionFactory, EntityFramework" />
+   <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+    </providers>
   </entityFramework>
 </configuration>

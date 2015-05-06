@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DesktopBom
+namespace Bom.Desktop
 {
     /// <summary>
     /// Interaction logic for App.xaml

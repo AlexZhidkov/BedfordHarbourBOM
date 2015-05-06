@@ -1,0 +1,13 @@
+﻿<Window x:Class="Bom.Desktop.SuppliersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewmodel="clr-namespace:Bom.Desktop.ViewModels"
+        Title="SuppliersWindow" Height="300" Width="300">
+    <Grid>
+        <Grid.DataContext>
+            <viewmodel:SupplierViewModel/>
+        </Grid.DataContext>
+        <DataGrid ItemsSource="{Binding Suppliers}"/>
+
+    </Grid>
+</Window>
