@@ -11,6 +11,7 @@ namespace Data
         public Part Part { get; set; }
         public Item Item { get; set; }
         public int Count { get; set; }
+        public DateTime CountDate { get; set; }
         public int Cost { get; set; }
     }
 }
