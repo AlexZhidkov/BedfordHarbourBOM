@@ -10,6 +10,7 @@ namespace Data
     {
         public RawMaterial RawMaterial { get; set; }
         public int Count { get; set; }
+        public DateTime CountDate { get; set; }
         public int Price { get; set; }
     }
 }
