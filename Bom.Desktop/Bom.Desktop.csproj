@@ -53,10 +53,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="StockAddWindow.xaml.cs">
+      <DependentUpon>StockAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StockAdjustWindow.xaml.cs">
+      <DependentUpon>StockAdjustWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StockWindow.xaml.cs">
+      <DependentUpon>StockWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SuppliersWindow.xaml.cs">
       <DependentUpon>SuppliersWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\StockItem.cs" />
+    <Compile Include="ViewModels\StockViewModel.cs" />
     <Compile Include="ViewModels\SupplierViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -70,6 +81,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="StockAddWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StockAdjustWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StockWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SuppliersWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -10,31 +10,30 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Bom.Desktop
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for StockWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class StockWindow : Window
     {
-        public MainWindow()
+        public StockWindow()
         {
             InitializeComponent();
         }
 
-        private void SuppliersButton_Click(object sender, RoutedEventArgs e)
+        private void AdjustButton_Click(object sender, RoutedEventArgs e)
         {
-            var suppliersWindow = new SuppliersWindow();
-            suppliersWindow.Show();
+            var stockAdjustWindow = new StockAdjustWindow();
+            stockAdjustWindow.ShowDialog();
         }
 
-        private void StockButton_Click(object sender, RoutedEventArgs e)
+        private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            var stockWindow = new StockWindow();
-            stockWindow.Show();
+            var stockAddWindow = new StockAddWindow();
+            stockAddWindow.ShowDialog();
         }
     }
 }
