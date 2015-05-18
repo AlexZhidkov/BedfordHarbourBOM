@@ -30,7 +30,8 @@ namespace Bom.Desktop.ViewModels
                     DateOfCount = DateTime.Now,
                     Count = 15,
                     Cost = 900,
-                    TotalCost = 900 * 15
+                    TotalCost = 900 * 15,
+                    Notes = "Just a note"
                 },
                 new StockItem
                 {

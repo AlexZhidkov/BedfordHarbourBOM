@@ -66,6 +66,7 @@
       <DependentUpon>SuppliersWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\StockAdjustViewModel.cs" />
     <Compile Include="ViewModels\StockItem.cs" />
     <Compile Include="ViewModels\StockViewModel.cs" />
     <Compile Include="ViewModels\SupplierViewModel.cs" />

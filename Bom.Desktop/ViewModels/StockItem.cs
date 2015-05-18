@@ -14,5 +14,6 @@ namespace Bom.Desktop.ViewModels
         public int Count { get; set; }
         public int Cost { get; set; }
         public int TotalCost { get; set; }
+        public string Notes { get; set; }
     }
 }
