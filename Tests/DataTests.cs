@@ -15,6 +15,7 @@ namespace Tests
             AppDomain.CurrentDomain.SetData("DataDirectory", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""));
         }
 
+        [Ignore]
         [TestMethod]
         public void CreateDb()
         {
