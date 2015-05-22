@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data
+namespace Core.Common.Contracts
 {
-    public class Repository
+    public interface IIdentifiableEntity
     {
-        //public IEnumerable<StockItem> GetStock()
-        //{
-        //}
+        int EntityId { get; set; }
     }
 }

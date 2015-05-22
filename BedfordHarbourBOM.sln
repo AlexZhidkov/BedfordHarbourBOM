@@ -1,15 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{466A6437-F2D0-419D-A389-A4AD30D0D1F2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{9D321410-6CA2-4EAE-B737-FDC7594544FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bom.Desktop", "Bom.Desktop\Bom.Desktop.csproj", "{444363B6-4525-4F51-A2A9-293E879F3513}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bom.Desktop.Infrastructure", "Bom.Desktop.Infrastructure\Bom.Desktop.Infrastructure.csproj", "{E19389C0-294C-4D33-8933-C119B6D13086}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{BC9DE329-5066-4740-82A8-EB92868EF8EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{CD48938B-CE0F-435F-821D-8348DE7604EE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8154E969-45E6-4E85-8B4E-581DC313E8FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{95304D7D-5641-451B-926D-C7AC86328C09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bom.Business.Entities", "Bom.Business.Entities\Bom.Business.Entities.csproj", "{9D062E6F-BB5B-476D-925C-2BE58549DB01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bom.Client.Entities", "Bom.Client.Entities\Bom.Client.Entities.csproj", "{A50C38D7-5AB5-486A-9049-7C710DF61192}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common.Contracts", "Core.Common.Contracts\Core.Common.Contracts.csproj", "{BC9EA015-D89A-409D-A3CC-9909DDCB786E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +29,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{466A6437-F2D0-419D-A389-A4AD30D0D1F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{466A6437-F2D0-419D-A389-A4AD30D0D1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{466A6437-F2D0-419D-A389-A4AD30D0D1F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{466A6437-F2D0-419D-A389-A4AD30D0D1F2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9D321410-6CA2-4EAE-B737-FDC7594544FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9D321410-6CA2-4EAE-B737-FDC7594544FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D321410-6CA2-4EAE-B737-FDC7594544FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,8 +41,25 @@ Global
 		{E19389C0-294C-4D33-8933-C119B6D13086}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E19389C0-294C-4D33-8933-C119B6D13086}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E19389C0-294C-4D33-8933-C119B6D13086}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D062E6F-BB5B-476D-925C-2BE58549DB01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D062E6F-BB5B-476D-925C-2BE58549DB01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D062E6F-BB5B-476D-925C-2BE58549DB01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D062E6F-BB5B-476D-925C-2BE58549DB01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A50C38D7-5AB5-486A-9049-7C710DF61192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A50C38D7-5AB5-486A-9049-7C710DF61192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A50C38D7-5AB5-486A-9049-7C710DF61192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A50C38D7-5AB5-486A-9049-7C710DF61192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC9EA015-D89A-409D-A3CC-9909DDCB786E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC9EA015-D89A-409D-A3CC-9909DDCB786E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC9EA015-D89A-409D-A3CC-9909DDCB786E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC9EA015-D89A-409D-A3CC-9909DDCB786E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9D062E6F-BB5B-476D-925C-2BE58549DB01} = {BC9DE329-5066-4740-82A8-EB92868EF8EC}
+		{A50C38D7-5AB5-486A-9049-7C710DF61192} = {CD48938B-CE0F-435F-821D-8348DE7604EE}
+		{BC9EA015-D89A-409D-A3CC-9909DDCB786E} = {8154E969-45E6-4E85-8B4E-581DC313E8FD}
 	EndGlobalSection
 EndGlobal

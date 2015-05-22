@@ -12,7 +12,13 @@ namespace Tests
         [TestMethod]
         public void GetSuppliers()
         {
+            
+        }
 
+        [TestMethod]
+        public void GetStock()
+        {
+            var repo = new Repository();
         }
 
     }
