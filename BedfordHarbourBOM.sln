@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bom.Client.Entities", "Bom.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common.Contracts", "Core.Common.Contracts\Core.Common.Contracts.csproj", "{BC9EA015-D89A-409D-A3CC-9909DDCB786E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common", "Core.Common\Core.Common.csproj", "{EA04E951-7123-4B9A-A6C0-E454EB743FCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{BC9EA015-D89A-409D-A3CC-9909DDCB786E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC9EA015-D89A-409D-A3CC-9909DDCB786E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC9EA015-D89A-409D-A3CC-9909DDCB786E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA04E951-7123-4B9A-A6C0-E454EB743FCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA04E951-7123-4B9A-A6C0-E454EB743FCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA04E951-7123-4B9A-A6C0-E454EB743FCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA04E951-7123-4B9A-A6C0-E454EB743FCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,5 +67,6 @@ Global
 		{9D062E6F-BB5B-476D-925C-2BE58549DB01} = {BC9DE329-5066-4740-82A8-EB92868EF8EC}
 		{A50C38D7-5AB5-486A-9049-7C710DF61192} = {CD48938B-CE0F-435F-821D-8348DE7604EE}
 		{BC9EA015-D89A-409D-A3CC-9909DDCB786E} = {8154E969-45E6-4E85-8B4E-581DC313E8FD}
+		{EA04E951-7123-4B9A-A6C0-E454EB743FCD} = {8154E969-45E6-4E85-8B4E-581DC313E8FD}
 	EndGlobalSection
 EndGlobal
