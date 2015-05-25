@@ -58,9 +58,6 @@
     <Compile Include="Core\NotNavigableAttribute.cs" />
     <Compile Include="Core\ObjectBase.cs" />
     <Compile Include="Data\DataRepositoryBase.cs" />
-    <Compile Include="Data\IDataRepository.cs" />
-    <Compile Include="Data\IDataRepositoryFactory.cs" />
-    <Compile Include="Data\IDirtyCapable.cs" />
     <Compile Include="Extensions\CoreExtensions.cs" />
     <Compile Include="Extensions\DataExtensions.cs" />
     <Compile Include="Extensions\MefExtensions.cs" />

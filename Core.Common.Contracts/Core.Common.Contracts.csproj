@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDataRepository.cs" />
+    <Compile Include="IDataRepositoryFactory.cs" />
+    <Compile Include="IDirtyCapable.cs" />
     <Compile Include="IIdentifiableEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
