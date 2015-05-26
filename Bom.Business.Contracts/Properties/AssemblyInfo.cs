@@ -6,11 +6,11 @@ using System.Runtime.Serialization;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Bom.Business.Entities")]
+[assembly: AssemblyTitle("Bom.Business.Contracts")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Bom.Business.Entities")]
+[assembly: AssemblyProduct("Bom.Business.Contracts")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +21,7 @@ using System.Runtime.Serialization;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e08d3a8a-62d1-43f1-9a30-b2a72988ebb7")]
+[assembly: Guid("4b70e459-854e-4d2b-a064-068eccd2ca4b")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -37,4 +37,4 @@ using System.Runtime.Serialization;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
 [assembly: ContractNamespace("https://github.com/AlexZhidkov/BedfordHarbourBOM",
-                              ClrNamespace = "Bom.Business.Entities")]
+                              ClrNamespace = "Bom.Business.Contracts")]

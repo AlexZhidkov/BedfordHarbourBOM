@@ -13,7 +13,7 @@ namespace Bom.Data
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class DataRepositoryFactory : IDataRepositoryFactory
     {
-        T IDataRepositoryFactory.GetDataRepository<T>()
+        public T GetDataRepository<T>() where T : IDataRepository
         {
             return ObjectBase.Container.GetExportedValue<T>();
         }
