@@ -12,15 +12,13 @@ namespace Bom.Business.Managers.Tests
     public class SupplierManagerTests
     {
         [TestMethod]
-        [Ignore]
         public void UpdateSupplier_AddNew()
         {
             var newSupplier = new Supplier();
             var addedSupplier = new Supplier {Id = 1};
 
             Mock<IDataRepositoryFactory> mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
-            mockDataRepositoryFactory.Setup(mock => mock.GetDataRepository<ISupplierRepository>().Add(newSupplier))
-                .Returns(addedSupplier);
+            mockDataRepositoryFactory.Setup(mock => mock.GetDataRepository<ISupplierRepository>().Add(newSupplier)).Returns(addedSupplier);
 
             SupplierManager manager = new SupplierManager(mockDataRepositoryFactory.Object);
             var resultedSupplier = manager.UpdateSupplier(newSupplier);

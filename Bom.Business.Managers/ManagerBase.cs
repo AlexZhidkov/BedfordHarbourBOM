@@ -14,7 +14,8 @@ namespace Bom.Business.Managers
     {
         public ManagerBase()
         {
-            ObjectBase.Container.SatisfyImportsOnce(true);
+            if (ObjectBase.Container != null)
+                ObjectBase.Container.SatisfyImportsOnce(this);
         }
 
         protected T ExecuteFaultHandledOperation<T>(Func<T> codetoExecute)

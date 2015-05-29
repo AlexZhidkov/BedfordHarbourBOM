@@ -20,7 +20,6 @@ namespace Bom.Data.Tests
             ObjectBase.Container = MEFLoader.Init();
         }
 
-        [Ignore]
         [TestMethod]
         public void test_repository_usage()
         {
@@ -31,7 +30,6 @@ namespace Bom.Data.Tests
             Assert.IsNotNull(suppliers);
         }
 
-        [Ignore]
         [TestMethod]
         public void test_repository_factory_usage()
         {
