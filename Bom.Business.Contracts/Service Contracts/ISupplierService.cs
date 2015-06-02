@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Bom.Business.Entities;
 using Core.Common.Exceptions;
 
-namespace Bom.Business.Contracts.Service_Contracts
+namespace Bom.Business.Contracts
 {
     [ServiceContract]
     public interface ISupplierService

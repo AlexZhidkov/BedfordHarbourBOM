@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DA0F5152-AFC6-4A7F-B753-ADB3A20937E6}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{EB1356AD-0BBC-46BB-A777-250BBCC9D897}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bom.Business.Managers</RootNamespace>
-    <AssemblyName>Bom.Business.Managers</AssemblyName>
+    <RootNamespace>Bom.ServiceHost.Console</RootNamespace>
+    <AssemblyName>Bom.ServiceHost.Console</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -35,6 +37,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Discovery" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,30 +45,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ManagerBase.cs" />
-    <Compile Include="Managers\SupplierManager.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bom.Business.Bootstrapper\Bom.Business.Bootstrapper.csproj">
+      <Project>{75393849-86DA-4361-97AE-A5E51B4764F5}</Project>
+      <Name>Bom.Business.Bootstrapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bom.Business.Contracts\Bom.Business.Contracts.csproj">
-      <Project>{49282531-c8e2-4e44-a33c-c576e6ebecb4}</Project>
+      <Project>{49282531-C8E2-4E44-A33C-C576E6EBECB4}</Project>
       <Name>Bom.Business.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Bom.Business.Entities\Bom.Business.Entities.csproj">
-      <Project>{9d062e6f-bb5b-476d-925c-2be58549db01}</Project>
-      <Name>Bom.Business.Entities</Name>
+    <ProjectReference Include="..\Bom.Business.Managers\Bom.Business.Managers.csproj">
+      <Project>{DA0F5152-AFC6-4A7F-B753-ADB3A20937E6}</Project>
+      <Name>Bom.Business.Managers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Bom.Common\Bom.Common.csproj">
-      <Project>{993f9605-28d3-437c-9cb3-1ceec3a4a453}</Project>
+      <Project>{993F9605-28D3-437C-9CB3-1CEEC3A4A453}</Project>
       <Name>Bom.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bom.Data.Contracts\Bom.Data.Contracts.csproj">
-      <Project>{85c1ebb9-cdf5-4110-8593-2e2bb627daf0}</Project>
-      <Name>Bom.Data.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bom.Data\Bom.Data.csproj">
-      <Project>{1C8C670B-9073-4A7B-AA44-A4F009E54C0D}</Project>
-      <Name>Bom.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
       <Project>{BC9EA015-D89A-409D-A3CC-9909DDCB786E}</Project>

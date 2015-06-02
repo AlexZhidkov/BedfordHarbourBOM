@@ -9,18 +9,23 @@ using System.Threading.Tasks;
 using Bom.Data;
 using Bom.Data.Contracts;
 using Core.Common.Core;
-using Bom.Business.Contracts.Service_Contracts;
+using Bom.Business.Contracts;
 using Bom.Business.Entities;
+using Bom.Common;
 using Core.Common.Contracts;
 using Core.Common.Exceptions;
 
-namespace Bom.Business.Managers.Managers
+namespace Bom.Business.Managers
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall,
                   ConcurrencyMode = ConcurrencyMode.Multiple,
                   ReleaseServiceInstanceOnTransactionComplete = false)]
     public class SupplierManager : ManagerBase, ISupplierService
     {
+        public SupplierManager()
+        {
+        }
+
         public SupplierManager(IDataRepositoryFactory dataRepositoryFactory)
         {
             _dataRepositoryFactory = dataRepositoryFactory;
@@ -29,6 +34,8 @@ namespace Bom.Business.Managers.Managers
         [Import]
         private IDataRepositoryFactory _dataRepositoryFactory;
 
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomAdminRole)]
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomUserRole)]
         public Supplier GetSupplier(int supplierId)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -46,6 +53,8 @@ namespace Bom.Business.Managers.Managers
             });
         }
 
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomAdminRole)]
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomUserRole)]
         public Supplier[] GetAllSuppliers()
         {
             return ExecuteFaultHandledOperation(() =>
@@ -57,7 +66,7 @@ namespace Bom.Business.Managers.Managers
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
-        //[PrincipalPermission(SecurityAction.Demand, Role = Security.BomAdminRole)]
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomAdminRole)]
         public Supplier UpdateSupplier(Supplier supplier)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -76,6 +85,7 @@ namespace Bom.Business.Managers.Managers
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomAdminRole)]
         public void DeleteSupplier(int supplierId)
         {
             ExecuteFaultHandledOperation(() =>

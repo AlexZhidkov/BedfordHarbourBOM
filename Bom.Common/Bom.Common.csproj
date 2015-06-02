@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DA0F5152-AFC6-4A7F-B753-ADB3A20937E6}</ProjectGuid>
+    <ProjectGuid>{993F9605-28D3-437C-9CB3-1CEEC3A4A453}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bom.Business.Managers</RootNamespace>
-    <AssemblyName>Bom.Business.Managers</AssemblyName>
+    <RootNamespace>Bom.Common</RootNamespace>
+    <AssemblyName>Bom.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,10 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,39 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ManagerBase.cs" />
-    <Compile Include="Managers\SupplierManager.cs" />
+    <Compile Include="Security.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Bom.Business.Contracts\Bom.Business.Contracts.csproj">
-      <Project>{49282531-c8e2-4e44-a33c-c576e6ebecb4}</Project>
-      <Name>Bom.Business.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bom.Business.Entities\Bom.Business.Entities.csproj">
-      <Project>{9d062e6f-bb5b-476d-925c-2be58549db01}</Project>
-      <Name>Bom.Business.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bom.Common\Bom.Common.csproj">
-      <Project>{993f9605-28d3-437c-9cb3-1ceec3a4a453}</Project>
-      <Name>Bom.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bom.Data.Contracts\Bom.Data.Contracts.csproj">
-      <Project>{85c1ebb9-cdf5-4110-8593-2e2bb627daf0}</Project>
-      <Name>Bom.Data.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bom.Data\Bom.Data.csproj">
-      <Project>{1C8C670B-9073-4A7B-AA44-A4F009E54C0D}</Project>
-      <Name>Bom.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
-      <Project>{BC9EA015-D89A-409D-A3CC-9909DDCB786E}</Project>
-      <Name>Core.Common.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
-      <Project>{EA04E951-7123-4B9A-A6C0-E454EB743FCD}</Project>
-      <Name>Core.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

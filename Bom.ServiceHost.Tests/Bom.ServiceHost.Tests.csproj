@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2CEDA65C-AAD4-4CB2-878C-11D49BA0BEF8}</ProjectGuid>
+    <ProjectGuid>{53A02FA0-7A3F-4CF8-9686-3DA0E756D785}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bom.Business.Managers.Tests</RootNamespace>
-    <AssemblyName>Bom.Business.Managers.Tests</AssemblyName>
+    <RootNamespace>Bom.ServiceHost.Tests</RootNamespace>
+    <AssemblyName>Bom.ServiceHost.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,11 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq, Version=4.2.1502.911, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -54,41 +51,25 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="SupplierManagerTests.cs" />
+    <Compile Include="ServiceAccessTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Bom.Business.Contracts\Bom.Business.Contracts.csproj">
-      <Project>{49282531-C8E2-4E44-A33C-C576E6EBECB4}</Project>
+      <Project>{49282531-c8e2-4e44-a33c-c576e6ebecb4}</Project>
       <Name>Bom.Business.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Bom.Business.Entities\Bom.Business.Entities.csproj">
       <Project>{9d062e6f-bb5b-476d-925c-2be58549db01}</Project>
       <Name>Bom.Business.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Bom.Business.Managers\Bom.Business.Managers.csproj">
-      <Project>{da0f5152-afc6-4a7f-b753-adb3a20937e6}</Project>
-      <Name>Bom.Business.Managers</Name>
+    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
+      <Project>{ea04e951-7123-4b9a-a6c0-e454eb743fcd}</Project>
+      <Name>Core.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Bom.Common\Bom.Common.csproj">
-      <Project>{993F9605-28D3-437C-9CB3-1CEEC3A4A453}</Project>
-      <Name>Bom.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bom.Data.Contracts\Bom.Data.Contracts.csproj">
-      <Project>{85C1EBB9-CDF5-4110-8593-2E2BB627DAF0}</Project>
-      <Name>Bom.Data.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bom.Data\Bom.Data.csproj">
-      <Project>{1C8C670B-9073-4A7B-AA44-A4F009E54C0D}</Project>
-      <Name>Bom.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
-      <Project>{BC9EA015-D89A-409D-A3CC-9909DDCB786E}</Project>
-      <Name>Core.Common.Contracts</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
