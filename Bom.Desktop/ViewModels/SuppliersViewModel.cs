@@ -9,7 +9,7 @@ namespace Bom.Desktop.ViewModels
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class StockViewModel
+    public class SuppliersViewModel
     {
     }
 }

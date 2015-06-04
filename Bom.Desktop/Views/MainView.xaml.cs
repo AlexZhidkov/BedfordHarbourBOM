@@ -12,20 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Bom.Desktop.ViewModels;
-using Core.Common.Core;
+using Core.Common.UI.Core;
 
-namespace Bom.Desktop
+namespace Bom.Desktop.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainView : UserControlViewBase
     {
-        public MainWindow()
+        public MainView()
         {
             InitializeComponent();
-            main.DataContext = ObjectBase.Container.GetExportedValue<MainViewModel>();
         }
     }
 }

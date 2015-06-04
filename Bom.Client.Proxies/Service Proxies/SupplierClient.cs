@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bom.Client.Contracts;
 
-namespace Bom.Client.Proxies.Service_Proxies
+namespace Bom.Client.Proxies
 {
     [Export(typeof(ISupplierService))]
     [PartCreationPolicy(CreationPolicy.NonShared)]

@@ -1,0 +1,26 @@
+﻿<core1:UserControlViewBase x:Class="Bom.Desktop.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                          xmlns:core="http://www.BedfordHarbourBom.com/Core"
+                          xmlns:conv="clr-namespace:Bom.Desktop.Support"
+                          xmlns:core1="clr-namespace:Core.Common.UI.Core;assembly=Core.Common.UI"
+                          mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+<!--
+        <Image Grid.Row="0" Source="/CarRental.Admin;component/Resources/pluralsight.png" HorizontalAlignment="Left" 
+               Stretch="UniformToFill" Width="277" />
+-->
+        <TabControl Grid.Row="1">
+            <TabItem Header="{Binding StockViewModel.ViewTitle}" Content="{Binding StockViewModel}" />
+            <TabItem Header="{Binding SuppliersViewModel.ViewTitle}" Content="{Binding SuppliersViewModel}" />
+        </TabControl>
+
+    </Grid>
+</core1:UserControlViewBase>

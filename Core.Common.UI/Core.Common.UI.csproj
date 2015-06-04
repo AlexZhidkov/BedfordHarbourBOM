@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AA39CDFA-9D28-4C01-A5A9-87D5F5FB0FDD}</ProjectGuid>
+    <ProjectGuid>{58C9310A-6CB5-4081-90CC-B608F66C4372}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bom.Client.Proxies</RootNamespace>
-    <AssemblyName>Bom.Client.Proxies</AssemblyName>
+    <RootNamespace>Core.Common.UI</RootNamespace>
+    <AssemblyName>Core.Common.UI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,40 +30,45 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=5.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.5.6.0.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\DelegateCommand.cs" />
+    <Compile Include="Core\UserControlViewBase.cs" />
+    <Compile Include="Core\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service Proxies\SupplierClient.cs" />
-    <Compile Include="ServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Bom.Client.Contracts\Bom.Client.Contracts.csproj">
-      <Project>{C8C0712E-874D-4E0D-A49E-9601893B62EC}</Project>
-      <Name>Bom.Client.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bom.Client.Entities\Bom.Client.Entities.csproj">
-      <Project>{a50c38d7-5ab5-486a-9049-7c710df61192}</Project>
-      <Name>Bom.Client.Entities</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
       <Project>{BC9EA015-D89A-409D-A3CC-9909DDCB786E}</Project>
       <Name>Core.Common.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core.Common\Core.Common.csproj">
-      <Project>{EA04E951-7123-4B9A-A6C0-E454EB743FCD}</Project>
+      <Project>{ea04e951-7123-4b9a-a6c0-e454eb743fcd}</Project>
       <Name>Core.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

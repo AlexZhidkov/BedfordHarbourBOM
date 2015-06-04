@@ -12,8 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Bom.Desktop.ViewModels;
-using Core.Common.Core;
 
 namespace Bom.Desktop
 {
@@ -25,7 +23,18 @@ namespace Bom.Desktop
         public MainWindow()
         {
             InitializeComponent();
-            main.DataContext = ObjectBase.Container.GetExportedValue<MainViewModel>();
+        }
+
+        private void SuppliersButton_Click(object sender, RoutedEventArgs e)
+        {
+            var suppliersWindow = new SuppliersWindow();
+            suppliersWindow.Show();
+        }
+
+        private void StockButton_Click(object sender, RoutedEventArgs e)
+        {
+            var stockWindow = new StockWindow();
+            stockWindow.Show();
         }
     }
 }

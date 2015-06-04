@@ -12,20 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Bom.Desktop.ViewModels;
-using Core.Common.Core;
 
-namespace Bom.Desktop
+namespace Bom.Desktop.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SuppliersView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SuppliersView : UserControl
     {
-        public MainWindow()
+        public SuppliersView()
         {
             InitializeComponent();
-            main.DataContext = ObjectBase.Container.GetExportedValue<MainViewModel>();
         }
     }
 }
