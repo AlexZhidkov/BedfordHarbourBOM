@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Support\SupplierEventArgs.cs" />
     <Compile Include="Support\ViewModelNullToVisibilityConverter.cs" />
+    <Compile Include="ViewModels\EditSupplierViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\StockViewModel.cs" />
     <Compile Include="ViewModels\SuppliersViewModel.cs" />
@@ -125,6 +126,14 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bom.Client.Bootstapper\Bom.Client.Bootstapper.csproj">
+      <Project>{ddd265e5-a6bb-4e1c-a045-633d8a4122c5}</Project>
+      <Name>Bom.Client.Bootstapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bom.Client.Contracts\Bom.Client.Contracts.csproj">
+      <Project>{C8C0712E-874D-4E0D-A49E-9601893B62EC}</Project>
+      <Name>Bom.Client.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bom.Client.Entities\Bom.Client.Entities.csproj">
       <Project>{A50C38D7-5AB5-486A-9049-7C710DF61192}</Project>
       <Name>Bom.Client.Entities</Name>

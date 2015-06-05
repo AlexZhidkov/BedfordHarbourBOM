@@ -12,13 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core.Common.UI.Core;
 
 namespace Bom.Desktop.Views
 {
     /// <summary>
     /// Interaction logic for StockView.xaml
     /// </summary>
-    public partial class StockView : UserControl
+    public partial class StockView : UserControlViewBase
     {
         public StockView()
         {

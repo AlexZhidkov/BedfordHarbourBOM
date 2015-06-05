@@ -1,11 +1,79 @@
-﻿<UserControl x:Class="Bom.Desktop.Views.SuppliersView"
+﻿<core:UserControlViewBase x:Class="Bom.Desktop.Views.SuppliersView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:core="clr-namespace:Core.Common.UI.Core;assembly=Core.Common.UI"
+             xmlns:conv="clr-namespace:Bom.Desktop.Support"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <conv:ViewModelNullToVisibilityConverter x:Key="viewModelNullToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Button Content="Add New" Command="{Binding AddSupplierCommand}" />
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" SharedSizeGroup="links" />
+                    <ColumnDefinition Width="150" SharedSizeGroup="name" />
+                    <ColumnDefinition Width="80" SharedSizeGroup="contact" />
+                    <ColumnDefinition Width="60" SharedSizeGroup="phone" />
+                    <ColumnDefinition Width="130" SharedSizeGroup="notes" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="1" Text="Name" />
+                <TextBlock Grid.Column="2" Text="Contact" />
+                <TextBlock Grid.Column="3" Text="Phone" />
+                <TextBlock Grid.Column="4" Text="Notes" />
+            </Grid>
+            <ItemsControl Grid.Row="2" ItemsSource="{Binding Suppliers}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" SharedSizeGroup="links" />
+                                <ColumnDefinition Width="150" SharedSizeGroup="name" />
+                                <ColumnDefinition Width="80" SharedSizeGroup="contact" />
+                                <ColumnDefinition Width="60" SharedSizeGroup="phone" />
+                                <ColumnDefinition Width="130" SharedSizeGroup="notes" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <TextBlock>
+                                    <Hyperlink Command="{Binding DataContext.EditSupplierCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding}">
+                                        <TextBlock Text="edit" />
+                                    </Hyperlink>
+                                </TextBlock>
+                                <TextBlock Text=" " />
+                                <TextBlock>
+                                    <Hyperlink Command="{Binding DataContext.DeleteSupplierCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding}">
+                                        <TextBlock Text="delete"/>
+                                    </Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Text="{Binding Name}" />
+                            <TextBlock Grid.Column="2" Text="{Binding Contact}" />
+                            <TextBlock Grid.Column="3" Text="{Binding Phone}" />
+                            <TextBlock Grid.Column="4" Text="{Binding Notes}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+        <Border Grid.Column="1" CornerRadius="4" Margin="10" BorderBrush="SteelBlue" BorderThickness="1" Background="BlanchedAlmond"
+                Visibility="{Binding CurrentSupplierViewModel, Converter={StaticResource viewModelNullToVisibilityConverter}}">
+            <ContentControl Content="{Binding CurrentSupplierViewModel}" />
+        </Border>
+
     </Grid>
-</UserControl>
+</core:UserControlViewBase>
