@@ -34,8 +34,8 @@ namespace Bom.Business.Managers
         [Import]
         private IDataRepositoryFactory _dataRepositoryFactory;
 
-        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomAdminRole)]
-        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomUserRole)]
+//        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomAdminRole)]
+//        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomUserRole)]
         public Supplier GetSupplier(int supplierId)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -53,8 +53,8 @@ namespace Bom.Business.Managers
             });
         }
 
-        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomAdminRole)]
-        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomUserRole)]
+//        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomAdminRole)]
+//        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomUserRole)]
         public Supplier[] GetAllSuppliers()
         {
             return ExecuteFaultHandledOperation(() =>
@@ -66,7 +66,7 @@ namespace Bom.Business.Managers
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
-        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomAdminRole)]
+//        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomAdminRole)]
         public Supplier UpdateSupplier(Supplier supplier)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -85,7 +85,7 @@ namespace Bom.Business.Managers
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
-        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomAdminRole)]
+//        [PrincipalPermission(SecurityAction.Demand, Role = Security.BomAdminRole)]
         public void DeleteSupplier(int supplierId)
         {
             ExecuteFaultHandledOperation(() =>

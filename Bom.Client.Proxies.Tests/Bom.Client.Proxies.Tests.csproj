@@ -66,6 +66,10 @@
       <Project>{C8C0712E-874D-4E0D-A49E-9601893B62EC}</Project>
       <Name>Bom.Client.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bom.Client.Entities\Bom.Client.Entities.csproj">
+      <Project>{A50C38D7-5AB5-486A-9049-7C710DF61192}</Project>
+      <Name>Bom.Client.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bom.Client.Proxies\Bom.Client.Proxies.csproj">
       <Project>{AA39CDFA-9D28-4C01-A5A9-87D5F5FB0FDD}</Project>
       <Name>Bom.Client.Proxies</Name>

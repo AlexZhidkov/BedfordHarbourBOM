@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Bom.Business.Entities;
 using Bom.Data.Contracts;
 
-namespace Bom.Data.Data_Repositories
+namespace Bom.Data
 {
     [Export(typeof(ISupplierRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]

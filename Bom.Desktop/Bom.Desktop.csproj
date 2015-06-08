@@ -138,6 +138,10 @@
       <Project>{A50C38D7-5AB5-486A-9049-7C710DF61192}</Project>
       <Name>Bom.Client.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bom.Common\Bom.Common.csproj">
+      <Project>{993F9605-28D3-437C-9CB3-1CEEC3A4A453}</Project>
+      <Name>Bom.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
       <Project>{BC9EA015-D89A-409D-A3CC-9909DDCB786E}</Project>
       <Name>Core.Common.Contracts</Name>

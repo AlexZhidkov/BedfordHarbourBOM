@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using Bom.Data;
-using Bom.Data.Data_Repositories;
 
 namespace Bom.Business.Bootstrapper
 {

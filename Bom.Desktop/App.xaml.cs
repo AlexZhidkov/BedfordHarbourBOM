@@ -4,8 +4,11 @@ using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Linq;
 using System.Reflection;
+using System.Security.Principal;
+using System.Threading;
 using System.Windows;
 using Bom.Client.Bootstapper;
+using Bom.Common;
 using Core.Common.Core;
 
 namespace Bom.Desktop
@@ -23,6 +26,13 @@ namespace Bom.Desktop
             {
                 new AssemblyCatalog(Assembly.GetExecutingAssembly())
             });
+
+            //ToDo remove this for production use
+            //seting up user role for dev testing purposes
+            GenericPrincipal principal = new GenericPrincipal(
+            new GenericIdentity("DebugUser"), new string[] { "Administrators", Security.BomAdminRole });
+            Thread.CurrentPrincipal = principal;
+
         }
     }
 }

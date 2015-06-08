@@ -44,5 +44,18 @@ namespace Bom.Client.Proxies.Tests
 
             Assert.IsTrue(proxy is SupplierClient);
         }
+
+        [TestMethod]
+        [Ignore]
+        public void GetAllSuppliers_fromDB()
+        {
+            ISupplierService proxy
+                = ObjectBase.Container.GetExportedValue<ISupplierService>();
+
+            var s = proxy.GetAllSuppliers();
+            Assert.IsNotNull(s);
+
+        }
+
     }
 }

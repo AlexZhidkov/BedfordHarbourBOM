@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Runtime.Remoting.Messaging;
 using System.Security.Principal;
 using System.Threading;
+using Bom.Business.Bootstrapper;
 using Bom.Business.Entities;
 using Bom.Business.Managers;
 using Bom.Common;
+using Bom.Data;
 using Bom.Data.Contracts;
 using Core.Common.Contracts;
+using Core.Common.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -50,6 +54,20 @@ namespace Bom.Business.Managers.Tests
             var resultedSupplier = manager.UpdateSupplier(existingSupplier);
 
             Assert.AreEqual(updatedSupplier, resultedSupplier);
+        }
+
+        [TestMethod]
+        [Ignore]
+        public void GetAll_fromDB()
+        {
+            ObjectBase.Container = MEFLoader.Init();
+
+            var f = new DataRepositoryFactory();
+            SupplierManager manager = new SupplierManager(f);
+            var suppliers = manager.GetAllSuppliers();
+
+            Assert.IsNotNull(suppliers);
+
         }
     }
 }

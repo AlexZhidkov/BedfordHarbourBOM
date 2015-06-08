@@ -17,6 +17,8 @@ namespace Bom.ServiceHost
     {
         static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
+
             GenericPrincipal principal = new GenericPrincipal(
              new GenericIdentity("Console"), new string[] { Security.BomAdminRole });
             Thread.CurrentPrincipal = principal;
