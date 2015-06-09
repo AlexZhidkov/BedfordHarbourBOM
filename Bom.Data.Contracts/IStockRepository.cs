@@ -3,7 +3,7 @@ using Core.Common.Contracts;
 
 namespace Bom.Data.Contracts
 {
-    public interface ISupplierRepository : IDataRepository<Supplier>
+    public interface IStockRepository : IDataRepository<Stock>
     {
     }
 }

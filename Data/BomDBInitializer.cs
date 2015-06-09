@@ -112,21 +112,21 @@ namespace Data
                 RawMaterial = rm_74x65x2,
                 Count = 10,
                 //Actual price we bought this material for.
-                Price = 1100
+                Cost = 1100
             });
             context.Stocks.Add(new Stock
             {
                 RawMaterial = rm_65x65x2,
                 Count = 20,
                 //Actual price we bought this material for.
-                Price = 1000
+                Cost = 1000
             });
             context.Stocks.Add(new Stock
             {
                 RawMaterial = rm_32NBx6,
                 Count = 30,
                 //Actual price we bought this material for.
-                Price = 600
+                Cost = 600
             });
 
             //Product - contains parts made by us.

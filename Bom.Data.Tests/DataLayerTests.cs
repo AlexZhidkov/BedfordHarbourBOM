@@ -123,29 +123,4 @@ namespace Bom.Data.Tests
             return suppliers;
         }
     }
-
-    public class RepositoryFactoryTestClass
-    {
-        public RepositoryFactoryTestClass()
-        {
-            ObjectBase.Container.SatisfyImportsOnce(this);
-        }
-
-        public RepositoryFactoryTestClass(IDataRepositoryFactory dataRepositoryFactory)
-        {
-            _DataRepositoryFactory = dataRepositoryFactory;
-        }
-
-        [Import]
-        IDataRepositoryFactory _DataRepositoryFactory;
-
-        public IEnumerable<Supplier> GetSuppliers()
-        {
-            ISupplierRepository supplierRepository = _DataRepositoryFactory.GetDataRepository<ISupplierRepository>();
-
-            IEnumerable<Supplier> suppliers = supplierRepository.Get();
-
-            return suppliers;
-        }
-    }
 }

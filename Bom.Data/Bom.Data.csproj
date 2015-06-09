@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BomContext.cs" />
+    <Compile Include="Data Repositories\StockRepository.cs" />
     <Compile Include="Data Repositories\SupplierRepository.cs" />
     <Compile Include="DataRepositoryBase.cs" />
     <Compile Include="DataRepositoryFactory.cs" />

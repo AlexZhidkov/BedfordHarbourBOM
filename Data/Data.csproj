@@ -50,9 +50,7 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="BomContext.cs" />
     <Compile Include="Entities\Item.cs" />
-    <Compile Include="Entities\MasterStructure.cs" />
     <Compile Include="Entities\Part.cs" />
-    <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\StockTakeHistory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
