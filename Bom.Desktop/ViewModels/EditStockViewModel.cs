@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Bom.Client.Contracts;
 using Bom.Client.Entities;
 using Bom.Desktop.Support;
@@ -9,45 +12,47 @@ using Core.Common.UI.Core;
 
 namespace Bom.Desktop.ViewModels
 {
-    public class EditSupplierViewModel : ViewModelBase
+    public class EditStockViewModel : ViewModelBase
     {
         // note that this viewmodel is instantiated on-demand from parent and not with DI
 
-        public EditSupplierViewModel(IServiceFactory serviceFactory, Supplier supplier)
+        public EditStockViewModel(IServiceFactory serviceFactory, Stock stock)
         {
             _ServiceFactory = serviceFactory;
-            _Supplier = new Supplier()
+            _Stock = new Stock()
             {
-                Id = supplier.Id,
-                Name = supplier.Name,
-                Contact = supplier.Contact,
-                Phone = supplier.Phone,
-                Notes = supplier.Notes
+                Id = stock.Id,
+                Cost = stock.Cost,
+                Count = stock.Count,
+                CountDate = stock.CountDate,
+                Part = stock.Part,
+                Suppliers = stock.Suppliers,
+                Notes = stock.Notes
             };
 
-            _Supplier.CleanAll();
+            _Stock.CleanAll();
 
             SaveCommand = new DelegateCommand<object>(OnSaveCommandExecute, OnSaveCommandCanExecute);
             CancelCommand = new DelegateCommand<object>(OnCancelCommandExecute);
         }
 
         IServiceFactory _ServiceFactory;
-        Supplier _Supplier;
+        Stock _Stock;
 
         public DelegateCommand<object> SaveCommand { get; private set; }
         public DelegateCommand<object> CancelCommand { get; private set; }
 
-        public event EventHandler CancelEditSupplier;
-        public event EventHandler<SupplierEventArgs> SupplierUpdated;
+        public event EventHandler CancelEditStock;
+        public event EventHandler<StockEventArgs> StockUpdated;
 
-        public Supplier Supplier
+        public Stock Stock
         {
-            get { return _Supplier; }
+            get { return _Stock; }
         }
 
         protected override void AddModels(List<ObjectBase> models)
         {
-            models.Add(Supplier);
+            models.Add(Stock);
         }
 
         void OnSaveCommandExecute(object arg)
@@ -56,15 +61,15 @@ namespace Bom.Desktop.ViewModels
 
             if (IsValid)
             {
-                WithClient<ISupplierService>(_ServiceFactory.CreateClient<ISupplierService>(), supplierClient =>
+                WithClient<IStockService>(_ServiceFactory.CreateClient<IStockService>(), stockClient =>
                 {
-                    bool isNew = (_Supplier.Id == 0);
+                    bool isNew = (_Stock.Id == 0);
 
-                    var savedSupplier = supplierClient.UpdateSupplier(_Supplier);
-                    if (savedSupplier != null)
+                    var savedStock = stockClient.UpdateStock(_Stock);
+                    if (savedStock != null)
                     {
-                        if (SupplierUpdated != null)
-                            SupplierUpdated(this, new SupplierEventArgs(savedSupplier, isNew));
+                        if (StockUpdated != null)
+                            StockUpdated(this, new StockEventArgs(savedStock, isNew));
                     }
                 });
             }
@@ -72,13 +77,13 @@ namespace Bom.Desktop.ViewModels
 
         bool OnSaveCommandCanExecute(object arg)
         {
-            return _Supplier.IsDirty;
+            return _Stock.IsDirty;
         }
 
         void OnCancelCommandExecute(object arg)
         {
-            if (CancelEditSupplier != null)
-                CancelEditSupplier(this, EventArgs.Empty);
+            if (CancelEditStock != null)
+                CancelEditStock(this, EventArgs.Empty);
         }
     }
 }

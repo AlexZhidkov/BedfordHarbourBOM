@@ -16,16 +16,8 @@ using Moq;
 namespace Bom.Business.Managers.Tests
 {
     [TestClass]
-    public class SupplierManagerTests
+    public class SupplierManagerTests : TestBase
     {
-        [TestInitialize]
-        public void SetUp()
-        {
-            GenericPrincipal principal = new GenericPrincipal(
-                new GenericIdentity("UnitTest"), new string[] { "Administrators", Security.BomAdminRole });
-            Thread.CurrentPrincipal = principal;
-        }
-
         [TestMethod]
         public void UpdateSupplier_AddNew()
         {

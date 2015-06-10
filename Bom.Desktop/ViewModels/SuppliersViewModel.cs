@@ -26,7 +26,6 @@ namespace Bom.Desktop.ViewModels
             EditSupplierCommand = new DelegateCommand<Supplier>(OnEditSupplierCommand);
             DeleteSupplierCommand = new DelegateCommand<Supplier>(OnDeleteSupplierCommand);
             AddSupplierCommand = new DelegateCommand<object>(OnAddSupplierCommand);
-
         }
 
         IServiceFactory _ServiceFactory;
@@ -41,6 +40,7 @@ namespace Bom.Desktop.ViewModels
         {
             get { return "Suppliers"; }
         }
+
         public event CancelEventHandler ConfirmDelete;
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
 
@@ -76,9 +76,9 @@ namespace Bom.Desktop.ViewModels
         {
             _Suppliers = new ObservableCollection<Supplier>();
 
-            WithClient<ISupplierService>(_ServiceFactory.CreateClient<ISupplierService>(), inventoryClient =>
+            WithClient<ISupplierService>(_ServiceFactory.CreateClient<ISupplierService>(), supplierClient =>
             {
-                Supplier[] suppliers = inventoryClient.GetAllSuppliers();
+                Supplier[] suppliers = supplierClient.GetAllSuppliers();
                 if (suppliers != null)
                 {
                     foreach (Supplier supplier in suppliers)
@@ -131,20 +131,18 @@ namespace Bom.Desktop.ViewModels
 
         void OnDeleteSupplierCommand(Supplier supplier)
         {
-                CancelEventArgs args = new CancelEventArgs();
-                if (ConfirmDelete != null)
-                    ConfirmDelete(this, args);
+            CancelEventArgs args = new CancelEventArgs();
+            if (ConfirmDelete != null)
+                ConfirmDelete(this, args);
 
-                if (!args.Cancel)
+            if (!args.Cancel)
+            {
+                WithClient<ISupplierService>(_ServiceFactory.CreateClient<ISupplierService>(), suplierClient =>
                 {
-                    WithClient<ISupplierService>(_ServiceFactory.CreateClient<ISupplierService>(), suplierClient =>
-                    {
-                        suplierClient.DeleteSupplier(supplier.Id);
-                        _Suppliers.Remove(supplier);
-                    });
-                }
+                    suplierClient.DeleteSupplier(supplier.Id);
+                    _Suppliers.Remove(supplier);
+                });
+            }
         }
-
-
     }
 }

@@ -55,8 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Support\StockEventArgs.cs" />
     <Compile Include="Support\SupplierEventArgs.cs" />
     <Compile Include="Support\ViewModelNullToVisibilityConverter.cs" />
+    <Compile Include="ViewModels\EditStockViewModel.cs" />
     <Compile Include="ViewModels\EditSupplierViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\StockViewModel.cs" />

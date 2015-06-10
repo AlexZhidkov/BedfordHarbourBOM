@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Bom.Common;
 using Core.Common.Contracts;
 
 namespace Bom.Business.Entities
@@ -13,8 +14,9 @@ namespace Bom.Business.Entities
         public string Number { get; set; }
         [DataMember]
         public string Description { get; set; }
-//        [DataMember]
-//        public IEnumerable<Part> Parts { get; set; }
+        //ToDo may be introduce in future releases? Seems to be not required at the moment
+        //[DataMember]
+        //public IEnumerable<Part> Parts { get; set; }
         [DataMember]
         public bool IsOwnMake { get; set; }
         [DataMember]

@@ -67,6 +67,8 @@
   <ItemGroup>
     <Compile Include="SupplierManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StockManagerTests.cs" />
+    <Compile Include="TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bom.Business.Bootstrapper\Bom.Business.Bootstrapper.csproj">

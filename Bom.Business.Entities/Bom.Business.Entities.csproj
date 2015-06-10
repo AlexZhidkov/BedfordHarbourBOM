@@ -43,12 +43,15 @@
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Part.cs" />
-    <Compile Include="PartType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stock.cs" />
     <Compile Include="Supplier.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bom.Common\Bom.Common.csproj">
+      <Project>{993F9605-28D3-437C-9CB3-1CEEC3A4A453}</Project>
+      <Name>Bom.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
       <Project>{bc9ea015-d89a-409d-a3cc-9909ddcb786e}</Project>
       <Name>Core.Common.Contracts</Name>
