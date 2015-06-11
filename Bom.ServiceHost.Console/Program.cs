@@ -29,8 +29,10 @@ namespace Bom.ServiceHost
             Console.WriteLine("");
 
             SM.ServiceHost hostSupplierManager = new SM.ServiceHost(typeof(SupplierManager));
+            SM.ServiceHost hostStockManager = new SM.ServiceHost(typeof(StockManager));
 
             StartService(hostSupplierManager, "SupplierManager");
+            StartService(hostStockManager, "StockManager");
 
             Console.WriteLine("");
             Console.WriteLine("Press [Enter] to exit.");

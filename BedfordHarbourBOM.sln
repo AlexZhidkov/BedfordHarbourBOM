@@ -61,6 +61,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bom.Desktop", "Bom.Desktop\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common.UI", "Core.Common.UI\Core.Common.UI.csproj", "{58C9310A-6CB5-4081-90CC-B608F66C4372}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bom.Desktop.Tests", "Bom.Desktop.Tests\Bom.Desktop.Tests.csproj", "{1AF6DE3A-951A-425A-836E-810874A79B94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -155,6 +157,10 @@ Global
 		{58C9310A-6CB5-4081-90CC-B608F66C4372}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58C9310A-6CB5-4081-90CC-B608F66C4372}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58C9310A-6CB5-4081-90CC-B608F66C4372}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AF6DE3A-951A-425A-836E-810874A79B94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AF6DE3A-951A-425A-836E-810874A79B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AF6DE3A-951A-425A-836E-810874A79B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AF6DE3A-951A-425A-836E-810874A79B94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -182,5 +188,6 @@ Global
 		{624E830A-7EC2-4652-A80F-1A25D8A0ABC7} = {95304D7D-5641-451B-926D-C7AC86328C09}
 		{80CB0A5A-6C32-40AF-9973-21BB21BEA534} = {F20B0B30-C85F-4671-BBEB-369419517364}
 		{58C9310A-6CB5-4081-90CC-B608F66C4372} = {8154E969-45E6-4E85-8B4E-581DC313E8FD}
+		{1AF6DE3A-951A-425A-836E-810874A79B94} = {95304D7D-5641-451B-926D-C7AC86328C09}
 	EndGlobalSection
 EndGlobal

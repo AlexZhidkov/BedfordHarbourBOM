@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Bom.Client.Proxies.Tests
 {
     [TestClass]
-    public class ProxyObtainmentTests
+    public class SupplierProxyObtainmentTests
     {
         [TestInitialize]
         public void Initialize()

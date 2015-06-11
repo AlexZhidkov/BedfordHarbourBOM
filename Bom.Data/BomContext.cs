@@ -21,7 +21,8 @@ namespace Bom.Data
             : base("name=BomContext")
         {
             AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
-            Database.SetInitializer<BomContext>(new DropCreateDatabaseIfModelChanges<BomContext>());
+            Database.SetInitializer<BomContext>(new BomDbInitializer());
+            //Database.SetInitializer<BomContext>(new DropCreateDatabaseIfModelChanges<BomContext>());
             //Database.SetInitializer<BomContext>(null);
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

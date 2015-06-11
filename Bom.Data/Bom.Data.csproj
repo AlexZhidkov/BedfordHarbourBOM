@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BomContext.cs" />
+    <Compile Include="BomDbInitializer.cs" />
     <Compile Include="Data Repositories\StockRepository.cs" />
     <Compile Include="Data Repositories\SupplierRepository.cs" />
     <Compile Include="DataRepositoryBase.cs" />
@@ -64,6 +65,10 @@
     <ProjectReference Include="..\Bom.Business.Entities\Bom.Business.Entities.csproj">
       <Project>{9D062E6F-BB5B-476D-925C-2BE58549DB01}</Project>
       <Name>Bom.Business.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bom.Common\Bom.Common.csproj">
+      <Project>{993F9605-28D3-437C-9CB3-1CEEC3A4A453}</Project>
+      <Name>Bom.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Bom.Data.Contracts\Bom.Data.Contracts.csproj">
       <Project>{85C1EBB9-CDF5-4110-8593-2E2BB627DAF0}</Project>

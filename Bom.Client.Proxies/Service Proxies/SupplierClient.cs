@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
+﻿using System.ComponentModel.Composition;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using Bom.Client.Contracts;
+using Bom.Client.Entities;
 
 namespace Bom.Client.Proxies
 {
@@ -13,17 +9,17 @@ namespace Bom.Client.Proxies
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class SupplierClient : ClientBase<ISupplierService>, ISupplierService
     {
-        public Entities.Supplier GetSupplier(int supplierId)
+        public Supplier GetSupplier(int supplierId)
         {
             return Channel.GetSupplier(supplierId);
         }
 
-        public Entities.Supplier[] GetAllSuppliers()
+        public Supplier[] GetAllSuppliers()
         {
             return Channel.GetAllSuppliers();
         }
 
-        public Entities.Supplier UpdateSupplier(Entities.Supplier supplier)
+        public Supplier UpdateSupplier(Supplier supplier)
         {
             return Channel.UpdateSupplier(supplier);
         }
