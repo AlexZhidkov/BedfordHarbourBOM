@@ -58,6 +58,9 @@
     <Compile Include="Support\StockEventArgs.cs" />
     <Compile Include="Support\SupplierEventArgs.cs" />
     <Compile Include="Support\ViewModelNullToVisibilityConverter.cs" />
+    <Compile Include="UpdateStockWindow.xaml.cs">
+      <DependentUpon>UpdateStockWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\EditStockViewModel.cs" />
     <Compile Include="ViewModels\EditSupplierViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -87,6 +90,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UpdateStockWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EditSupplierView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

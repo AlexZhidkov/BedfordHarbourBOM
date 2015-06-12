@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace Bom.Data.Data_Repositories
 
         protected override IEnumerable<Stock> GetEntities(BomContext entityContext)
         {
-            return entityContext.Stocks.Select(e => e);
+            return entityContext.Stocks.Select(e => e).Include(s => s.Part);
         }
 
         protected override Stock GetEntity(BomContext entityContext, int id)

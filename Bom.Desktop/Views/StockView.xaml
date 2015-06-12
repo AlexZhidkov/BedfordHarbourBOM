@@ -7,9 +7,69 @@
              xmlns:conv="clr-namespace:Bom.Desktop.Support"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.Resources>
-        <conv:ViewModelNullToVisibilityConverter x:Key="viewModelNullToVisibilityConverter" />
-    </UserControl.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Button Content="Add New" Command="{Binding AddStockCommand}" />
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" SharedSizeGroup="links" />
+                    <ColumnDefinition Width="150" SharedSizeGroup="cost" />
+                    <ColumnDefinition Width="80" SharedSizeGroup="count" />
+                    <ColumnDefinition Width="60" SharedSizeGroup="countDate" />
+                    <ColumnDefinition Width="130" SharedSizeGroup="notes" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="1" Text="Cost" />
+                <TextBlock Grid.Column="2" Text="Count" />
+                <TextBlock Grid.Column="3" Text="Count Date" />
+                <TextBlock Grid.Column="4" Text="Notes" />
+            </Grid>
+            <ItemsControl Grid.Row="2" ItemsSource="{Binding Stocks}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" SharedSizeGroup="links" />
+                                <ColumnDefinition Width="150" SharedSizeGroup="cost" />
+                                <ColumnDefinition Width="80" SharedSizeGroup="count" />
+                                <ColumnDefinition Width="60" SharedSizeGroup="countDate" />
+                                <ColumnDefinition Width="130" SharedSizeGroup="notes" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <TextBlock>
+                                    <Hyperlink Command="{Binding DataContext.EditStockCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding}">
+                                        <TextBlock Text="edit" />
+                                    </Hyperlink>
+                                </TextBlock>
+                                <TextBlock Text=" " />
+                                <TextBlock>
+                                    <Hyperlink Command="{Binding DataContext.DeleteStockCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding}">
+                                        <TextBlock Text="delete"/>
+                                    </Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                            <TextBlock Grid.Column="1" Text="{Binding Part.Description}" />
+                            <TextBlock Grid.Column="2" >
+                                <Hyperlink Click="UpdateStock_Click" Tag="{Binding}">
+                                    <TextBlock Text="{Binding Count}"/>
+                                </Hyperlink>
+                            </TextBlock>
+                            <TextBlock Grid.Column="3" Text="{Binding CountDate}" />
+                            <TextBlock Grid.Column="4" Text="{Binding Notes}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
     </Grid>
 </core:UserControlViewBase>
