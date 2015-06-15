@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,23 +13,30 @@ using Core.Common.UI.Core;
 
 namespace Bom.Desktop.ViewModels
 {
+    [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class EditStockViewModel : ViewModelBase
     {
-        // note that this viewmodel is instantiated on-demand from parent and not with DI
+        [ImportingConstructor]
+        public EditStockViewModel([Import("Stock")]Stock stock)
+            : this(null, stock)
+        {
+        }
 
         public EditStockViewModel(IServiceFactory serviceFactory, Stock stock)
         {
-            _ServiceFactory = serviceFactory;
+            _ServiceFactory = serviceFactory ?? ObjectBase.Container.GetExportedValue<IServiceFactory>();
+
             _Stock = new Stock()
-            {
-                Id = stock.Id,
-                Cost = stock.Cost,
-                Count = stock.Count,
-                CountDate = stock.CountDate,
-                Part = stock.Part,
-                Suppliers = stock.Suppliers,
-                Notes = stock.Notes
-            };
+                {
+                    Id = stock.Id,
+                    Cost = stock.Cost,
+                    Count = stock.Count,
+                    CountDate = stock.CountDate,
+                    Part = stock.Part,
+                    Suppliers = stock.Suppliers,
+                    Notes = stock.Notes
+                };
 
             _Stock.CleanAll();
 

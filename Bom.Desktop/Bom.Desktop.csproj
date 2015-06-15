@@ -66,6 +66,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\StockViewModel.cs" />
     <Compile Include="ViewModels\SuppliersViewModel.cs" />
+    <Compile Include="ViewModels\UpdateStockViewModel.cs" />
     <Compile Include="Views\EditSupplierView.xaml.cs">
       <DependentUpon>EditSupplierView.xaml</DependentUpon>
     </Compile>

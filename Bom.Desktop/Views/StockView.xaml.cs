@@ -66,7 +66,7 @@ namespace Bom.Desktop.Views
         {
             var myValue = ((Hyperlink)sender).Tag;
             var stock = (Stock) myValue;
-            UpdateStockWindow updateStockWindow = new UpdateStockWindow(1);
+            UpdateStockWindow updateStockWindow = new UpdateStockWindow(stock);
             updateStockWindow.Show();
         }
     }

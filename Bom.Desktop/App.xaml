@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:Bom.Desktop.ViewModels"
              xmlns:v="clr-namespace:Bom.Desktop.Views"
+             xmlns:desktop="clr-namespace:Bom.Desktop"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <DataTemplate DataType="{x:Type vm:StockViewModel}">

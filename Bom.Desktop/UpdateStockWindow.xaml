@@ -1,8 +1,42 @@
 ﻿<Window x:Class="Bom.Desktop.UpdateStockWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="UpdateStockWindow" Height="300" Width="300" Loaded="Window_Loaded">
+        xmlns:controls="clr-namespace:Core.Common.UI.Controls;assembly=Core.Common.UI"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        Title="UpdateStockWindow" Height="300" Width="300" DataContextChanged="Window_DataContextChanged">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <controls:ValidationHeader Grid.Row="0" DataContext="{Binding}" />
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="180" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Part:" />
+            <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Count:" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Date:" />
+            <TextBlock Grid.Row="3" Grid.Column="0" Margin="3" Text="Cost:" />
+            <TextBlock Grid.Row="4" Grid.Column="0" Margin="3" Text="Notes:" />
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="3" Width="160" Text="{Binding Stock.Part.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Width="70" Text="{Binding Stock.Count, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <DatePicker Grid.Row="2" Grid.Column="1" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDate="{Binding Stock.CountDate}" DisplayDate="{x:Static system:DateTime.Now}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Width="60" Text="{Binding Stock.Cost, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="3" Width="80" Text="{Binding Stock.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Content="Save" Margin="5" Command="{Binding SaveCommand}" />
+            <Button Content="Cancel" Margin="5" Command="{Binding CancelCommand}" />
+        </StackPanel>
     </Grid>
 </Window>

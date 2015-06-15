@@ -64,7 +64,7 @@
                                     <TextBlock Text="{Binding Count}"/>
                                 </Hyperlink>
                             </TextBlock>
-                            <TextBlock Grid.Column="3" Text="{Binding CountDate}" />
+                            <TextBlock Grid.Column="3" Text="{Binding CountDate, StringFormat=dd-MM-yyyy}" />
                             <TextBlock Grid.Column="4" Text="{Binding Notes}" />
                         </Grid>
                     </DataTemplate>

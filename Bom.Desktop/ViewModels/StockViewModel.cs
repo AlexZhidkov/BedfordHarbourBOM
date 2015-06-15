@@ -23,9 +23,9 @@ namespace Bom.Desktop.ViewModels
         {
             _ServiceFactory = serviceFactory;
 
-            EditStockCommand = new DelegateCommand<Stock>(OnEditStockCommand);
+            //EditStockCommand = new DelegateCommand<Stock>(OnEditStockCommand);
             DeleteStockCommand = new DelegateCommand<Stock>(OnDeleteStockCommand);
-            AddStockCommand = new DelegateCommand<object>(OnAddStockCommand);
+            //AddStockCommand = new DelegateCommand<object>(OnAddStockCommand);
 
         }
 
@@ -87,6 +87,7 @@ namespace Bom.Desktop.ViewModels
             });
         }
 
+/*
         void OnEditStockCommand(Stock stock)
         {
             if (stock != null)
@@ -105,6 +106,7 @@ namespace Bom.Desktop.ViewModels
             CurrentStockViewModel.CancelEditStock += CurrentStockViewModel_CancelEvent;
         }
 
+*/
         void CurrentStockViewModel_StockUpdated(object sender, Support.StockEventArgs e)
         {
             if (!e.IsNew)
