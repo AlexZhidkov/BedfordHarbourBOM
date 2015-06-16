@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Bom.Business.Entities;
 using Bom.Data.Contracts;
 
-namespace Bom.Data.Data_Repositories
+namespace Bom.Data
 {
     [Export(typeof(IStockRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
@@ -16,12 +16,12 @@ namespace Bom.Data.Data_Repositories
     {
         protected override Stock AddEntity(BomContext entityContext, Stock entity)
         {
-            throw new NotImplementedException();
+            return entityContext.Stocks.Add(entity);
         }
 
         protected override Stock UpdateEntity(BomContext entityContext, Stock entity)
         {
-            throw new NotImplementedException();
+            return (entityContext.Stocks.Where(e => e.Id == entity.Id)).FirstOrDefault();
         }
 
         protected override IEnumerable<Stock> GetEntities(BomContext entityContext)
@@ -31,7 +31,7 @@ namespace Bom.Data.Data_Repositories
 
         protected override Stock GetEntity(BomContext entityContext, int id)
         {
-            throw new NotImplementedException();
+            return (entityContext.Stocks.Where(e => e.Id == id)).FirstOrDefault();
         }
     }
 }

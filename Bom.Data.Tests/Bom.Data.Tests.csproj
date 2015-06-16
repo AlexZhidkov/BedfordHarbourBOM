@@ -68,6 +68,7 @@
     <Compile Include="DataLayerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryFactoryTestClass.cs" />
+    <Compile Include="PartTests.cs" />
     <Compile Include="StockTests.cs" />
   </ItemGroup>
   <ItemGroup>

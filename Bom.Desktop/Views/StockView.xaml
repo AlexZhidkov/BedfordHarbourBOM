@@ -60,7 +60,7 @@
                             </StackPanel>
                             <TextBlock Grid.Column="1" Text="{Binding Part.Description}" />
                             <TextBlock Grid.Column="2" >
-                                <Hyperlink Click="UpdateStock_Click" Tag="{Binding}">
+                                <Hyperlink Command="{Binding DataContext.EditStockCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding}">
                                     <TextBlock Text="{Binding Count}"/>
                                 </Hyperlink>
                             </TextBlock>

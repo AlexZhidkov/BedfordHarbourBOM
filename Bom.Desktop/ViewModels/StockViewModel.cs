@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bom.Client.Contracts;
 using Bom.Client.Entities;
+using Bom.Desktop.Support;
 using Core.Common;
 using Core.Common.Contracts;
 using Core.Common.UI.Core;
@@ -23,9 +24,9 @@ namespace Bom.Desktop.ViewModels
         {
             _ServiceFactory = serviceFactory;
 
-            //EditStockCommand = new DelegateCommand<Stock>(OnEditStockCommand);
+            EditStockCommand = new DelegateCommand<Stock>(OnEditStockCommand);
             DeleteStockCommand = new DelegateCommand<Stock>(OnDeleteStockCommand);
-            //AddStockCommand = new DelegateCommand<object>(OnAddStockCommand);
+            AddStockCommand = new DelegateCommand<object>(OnAddStockCommand);
 
         }
 
@@ -43,6 +44,7 @@ namespace Bom.Desktop.ViewModels
         }
         public event CancelEventHandler ConfirmDelete;
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
+        public event EventHandler<EditStockViewModel> OpenEditStockWindow;
 
         public EditStockViewModel CurrentStockViewModel
         {
@@ -87,7 +89,6 @@ namespace Bom.Desktop.ViewModels
             });
         }
 
-/*
         void OnEditStockCommand(Stock stock)
         {
             if (stock != null)
@@ -96,6 +97,12 @@ namespace Bom.Desktop.ViewModels
                 CurrentStockViewModel.StockUpdated += CurrentStockViewModel_StockUpdated;
                 CurrentStockViewModel.CancelEditStock += CurrentStockViewModel_CancelEvent;
             }
+
+            bool isNew = stock == null; // ToDo Confirm
+            if (OpenEditStockWindow != null)
+                OpenEditStockWindow(this, CurrentStockViewModel);
+                //OpenEditStockWindow(this, new StockEventArgs(stock, isNew));
+
         }
 
         void OnAddStockCommand(object arg)
@@ -106,7 +113,6 @@ namespace Bom.Desktop.ViewModels
             CurrentStockViewModel.CancelEditStock += CurrentStockViewModel_CancelEvent;
         }
 
-*/
         void CurrentStockViewModel_StockUpdated(object sender, Support.StockEventArgs e)
         {
             if (!e.IsNew)
@@ -148,7 +154,6 @@ namespace Bom.Desktop.ViewModels
                 });
             }
         }
-
 
     }
 }

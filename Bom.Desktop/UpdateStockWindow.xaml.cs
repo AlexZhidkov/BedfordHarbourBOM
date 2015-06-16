@@ -26,22 +26,14 @@ namespace Bom.Desktop
     /// </summary>
     public partial class UpdateStockWindow
     {
-        private Stock _editStock;
-
         public UpdateStockWindow()
         {
-            
         }
 
-        public UpdateStockWindow(Stock stock)
+        public UpdateStockWindow(EditStockViewModel editStockViewModel)
         {
             InitializeComponent();
-            //ToDo Review this
-            var container = new CompositionContainer(ObjectBase.Container.Catalog);
-            container.ComposeExportedValue("ServiceFactory", stock);
-            container.ComposeExportedValue("Stock", stock);
-            DataContext = container.GetExportedValue<EditStockViewModel>();
-            _editStock = stock;
+            DataContext = editStockViewModel;
         }
 
         private void OnUnwireViewModelEvents(ViewModelBase viewModel)
@@ -82,7 +74,6 @@ namespace Bom.Desktop
                 {
                     // view going out of scope and view-model disconnected (but still around in the parent)
                     // unwire events to allow view to dispose
-
                     OnUnwireViewModelEvents(e.OldValue as ViewModelBase);
                 }
             }

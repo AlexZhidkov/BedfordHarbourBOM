@@ -39,5 +39,14 @@ namespace Bom.Data.Tests
 
             return stocks;
         }
+
+        public IEnumerable<Part> GetAllParts()
+        {
+            IPartRepository partRepository = _DataRepositoryFactory.GetDataRepository<IPartRepository>();
+
+            IEnumerable<Part> parts = partRepository.Get();
+
+            return parts;
+        }
     }
 }

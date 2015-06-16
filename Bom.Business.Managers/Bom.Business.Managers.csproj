@@ -43,7 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ManagerBase.cs" />
-    <Compile Include="Managers\SupplierManager.cs" />
+    <Compile Include="PartManager.cs" />
+    <Compile Include="SupplierManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StockManager.cs" />
   </ItemGroup>

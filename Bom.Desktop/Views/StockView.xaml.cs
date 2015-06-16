@@ -1,20 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Bom.Client.Entities;
 using Bom.Desktop.ViewModels;
+using Core.Common;
 using Core.Common.UI.Core;
 
 namespace Bom.Desktop.Views
@@ -36,6 +23,7 @@ namespace Bom.Desktop.Views
             {
                 vm.ConfirmDelete -= OnConfirmDelete;
                 vm.ErrorOccured -= OnErrorOccured;
+                vm.OpenEditStockWindow -= OnOpenEditStockWindow;
             }
         }
 
@@ -46,6 +34,7 @@ namespace Bom.Desktop.Views
             {
                 vm.ConfirmDelete += OnConfirmDelete;
                 vm.ErrorOccured += OnErrorOccured;
+                vm.OpenEditStockWindow += OnOpenEditStockWindow;
             }
         }
 
@@ -57,17 +46,16 @@ namespace Bom.Desktop.Views
                 e.Cancel = true;
         }
 
-        void OnErrorOccured(object sender, Core.Common.ErrorMessageEventArgs e)
+        void OnErrorOccured(object sender, ErrorMessageEventArgs e)
         {
             MessageBox.Show(e.ErrorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        private void UpdateStock_Click(object sender, RoutedEventArgs e)
+        void OnOpenEditStockWindow(object sender, EditStockViewModel e)
         {
-            var myValue = ((Hyperlink)sender).Tag;
-            var stock = (Stock) myValue;
-            UpdateStockWindow updateStockWindow = new UpdateStockWindow(stock);
+            UpdateStockWindow updateStockWindow = new UpdateStockWindow(e);
             updateStockWindow.Show();
         }
+
     }
 }
