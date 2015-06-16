@@ -40,7 +40,7 @@ namespace Bom.Business.Managers
         }
 
         [OperationBehavior(TransactionScopeRequired = true)]
-        public Part UpdatePart(Part partItem)
+        public Part UpdatePart(Part part)
         {
             return ExecuteFaultHandledOperation(() =>
             {
@@ -48,16 +48,16 @@ namespace Bom.Business.Managers
 
                 Part updatedEntity = null;
 
-                if (partItem.Id == 0)
-                    updatedEntity = partRepository.Add(partItem);
+                if (part.Id == 0)
+                    updatedEntity = partRepository.Add(part);
                 else
-                    updatedEntity = partRepository.Update(partItem);
+                    updatedEntity = partRepository.Update(part);
 
                 return updatedEntity;
             });
         }
 
-        public void DeletePart(int partItemId)
+        public void DeletePart(int partId)
         {
             throw new NotImplementedException();
         }

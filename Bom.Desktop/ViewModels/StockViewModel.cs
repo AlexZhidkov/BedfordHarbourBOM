@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Bom.Client.Contracts;
 using Bom.Client.Entities;
 using Bom.Desktop.Support;
@@ -22,19 +19,22 @@ namespace Bom.Desktop.ViewModels
         [ImportingConstructor]
         public StockViewModel(IServiceFactory serviceFactory)
         {
-            _ServiceFactory = serviceFactory;
+            _serviceFactory = serviceFactory;
 
             EditStockCommand = new DelegateCommand<Stock>(OnEditStockCommand);
+            EditPartCommand = new DelegateCommand<Part>(OnEditPartCommand);
             DeleteStockCommand = new DelegateCommand<Stock>(OnDeleteStockCommand);
             AddStockCommand = new DelegateCommand<object>(OnAddStockCommand);
 
         }
 
-        IServiceFactory _ServiceFactory;
+        readonly IServiceFactory _serviceFactory;
 
-        EditStockViewModel _CurrentStockViewModel;
+        EditStockViewModel _currentStockViewModel;
+        EditPartViewModel _currentPartViewModel;
 
         public DelegateCommand<Stock> EditStockCommand { get; private set; }
+        public DelegateCommand<Part> EditPartCommand { get; private set; }
         public DelegateCommand<Stock> DeleteStockCommand { get; private set; }
         public DelegateCommand<object> AddStockCommand { get; private set; }
 
@@ -45,30 +45,44 @@ namespace Bom.Desktop.ViewModels
         public event CancelEventHandler ConfirmDelete;
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
         public event EventHandler<EditStockViewModel> OpenEditStockWindow;
+        public event EventHandler<EditPartViewModel> OpenEditPartWindow;
 
         public EditStockViewModel CurrentStockViewModel
         {
-            get { return _CurrentStockViewModel; }
+            get { return _currentStockViewModel; }
             set
             {
-                if (_CurrentStockViewModel != value)
+                if (_currentStockViewModel != value)
                 {
-                    _CurrentStockViewModel = value;
+                    _currentStockViewModel = value;
                     OnPropertyChanged(() => CurrentStockViewModel, false);
                 }
             }
         }
 
-        ObservableCollection<Stock> _Stocks;
+        public EditPartViewModel CurrentPartViewModel
+        {
+            get { return _currentPartViewModel; }
+            set
+            {
+                if (_currentPartViewModel != value)
+                {
+                    _currentPartViewModel = value;
+                    OnPropertyChanged(() => CurrentPartViewModel, false);
+                }
+            }
+        }
+
+        ObservableCollection<Stock> _stocks;
 
         public ObservableCollection<Stock> Stocks
         {
-            get { return _Stocks; }
+            get { return _stocks; }
             set
             {
-                if (_Stocks != value)
+                if (_stocks != value)
                 {
-                    _Stocks = value;
+                    _stocks = value;
                     OnPropertyChanged(() => Stocks, false);
                 }
             }
@@ -76,15 +90,15 @@ namespace Bom.Desktop.ViewModels
 
         protected override void OnViewLoaded()
         {
-            _Stocks = new ObservableCollection<Stock>();
+            _stocks = new ObservableCollection<Stock>();
 
-            WithClient<IStockService>(_ServiceFactory.CreateClient<IStockService>(), inventoryClient =>
+            WithClient(_serviceFactory.CreateClient<IStockService>(), inventoryClient =>
             {
                 Stock[] stocks = inventoryClient.GetAllStocks();
                 if (stocks != null)
                 {
                     foreach (Stock stock in stocks)
-                        _Stocks.Add(stock);
+                        _stocks.Add(stock);
                 }
             });
         }
@@ -93,31 +107,41 @@ namespace Bom.Desktop.ViewModels
         {
             if (stock != null)
             {
-                CurrentStockViewModel = new EditStockViewModel(_ServiceFactory, stock);
+                CurrentStockViewModel = new EditStockViewModel(_serviceFactory, stock);
                 CurrentStockViewModel.StockUpdated += CurrentStockViewModel_StockUpdated;
                 CurrentStockViewModel.CancelEditStock += CurrentStockViewModel_CancelEvent;
             }
 
-            bool isNew = stock == null; // ToDo Confirm
             if (OpenEditStockWindow != null)
                 OpenEditStockWindow(this, CurrentStockViewModel);
-                //OpenEditStockWindow(this, new StockEventArgs(stock, isNew));
+        }
 
+        void OnEditPartCommand(Part part)
+        {
+            if (part != null)
+            {
+                CurrentPartViewModel = new EditPartViewModel(_serviceFactory, part);
+                CurrentPartViewModel.PartUpdated += CurrentPartViewModel_PartUpdated;
+                CurrentPartViewModel.CancelEditPart += CurrentPartViewModel_CancelEvent;
+            }
+
+            if (OpenEditPartWindow != null)
+                OpenEditPartWindow(this, CurrentPartViewModel);
         }
 
         void OnAddStockCommand(object arg)
         {
             Stock stock = new Stock();
-            CurrentStockViewModel = new EditStockViewModel(_ServiceFactory, stock);
+            CurrentStockViewModel = new EditStockViewModel(_serviceFactory, stock);
             CurrentStockViewModel.StockUpdated += CurrentStockViewModel_StockUpdated;
             CurrentStockViewModel.CancelEditStock += CurrentStockViewModel_CancelEvent;
         }
 
-        void CurrentStockViewModel_StockUpdated(object sender, Support.StockEventArgs e)
+        void CurrentStockViewModel_StockUpdated(object sender, StockEventArgs e)
         {
             if (!e.IsNew)
             {
-                Stock stock = _Stocks.Where(item => item.Id == e.Stock.Id).FirstOrDefault();
+                Stock stock = _stocks.FirstOrDefault(item => item.Id == e.Stock.Id);
                 if (stock != null)
                 {
                     stock.Count = e.Stock.Count;
@@ -129,7 +153,7 @@ namespace Bom.Desktop.ViewModels
                 }
             }
             else
-                _Stocks.Add(e.Stock);
+                _stocks.Add(e.Stock);
 
             CurrentStockViewModel = null;
         }
@@ -137,6 +161,29 @@ namespace Bom.Desktop.ViewModels
         void CurrentStockViewModel_CancelEvent(object sender, EventArgs e)
         {
             CurrentStockViewModel = null;
+        }
+
+        void CurrentPartViewModel_PartUpdated(object sender, PartEventArgs e)
+        {
+            if (!e.IsNew)
+            {
+                foreach (var stock in _stocks.Where(item => item.Part.Id == e.Part.Id))
+                {
+                    stock.Part.Description = e.Part.Description;
+                    stock.Part.IsOwnMake = e.Part.IsOwnMake;
+                    stock.Part.Length = e.Part.Length;
+                    stock.Part.Number = e.Part.Number;
+                    stock.Part.Type = e.Part.Type;
+                    stock.Part.Cost = e.Part.Cost;
+                    stock.Part.Notes = e.Part.Notes;
+                }
+            }
+            CurrentPartViewModel = null;
+        }
+
+        void CurrentPartViewModel_CancelEvent(object sender, EventArgs e)
+        {
+            CurrentPartViewModel = null;
         }
 
         void OnDeleteStockCommand(Stock stock)
@@ -147,10 +194,10 @@ namespace Bom.Desktop.ViewModels
 
             if (!args.Cancel)
             {
-                WithClient<IStockService>(_ServiceFactory.CreateClient<IStockService>(), suplierClient =>
+                WithClient(_serviceFactory.CreateClient<IStockService>(), suplierClient =>
                 {
                     suplierClient.DeleteStock(stock.Id);
-                    _Stocks.Remove(stock);
+                    _stocks.Remove(stock);
                 });
             }
         }

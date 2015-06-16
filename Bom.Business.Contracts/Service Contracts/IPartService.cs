@@ -11,10 +11,10 @@ namespace Bom.Business.Contracts
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        Part UpdatePart(Part stockItem);
+        Part UpdatePart(Part part);
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        void DeletePart(int stockItemId);
+        void DeletePart(int partId);
     }
 }

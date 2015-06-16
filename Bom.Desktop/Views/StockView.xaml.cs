@@ -24,6 +24,7 @@ namespace Bom.Desktop.Views
                 vm.ConfirmDelete -= OnConfirmDelete;
                 vm.ErrorOccured -= OnErrorOccured;
                 vm.OpenEditStockWindow -= OnOpenEditStockWindow;
+                vm.OpenEditPartWindow -= OnOpenEditPartWindow;
             }
         }
 
@@ -35,6 +36,7 @@ namespace Bom.Desktop.Views
                 vm.ConfirmDelete += OnConfirmDelete;
                 vm.ErrorOccured += OnErrorOccured;
                 vm.OpenEditStockWindow += OnOpenEditStockWindow;
+                vm.OpenEditPartWindow += OnOpenEditPartWindow;
             }
         }
 
@@ -55,6 +57,12 @@ namespace Bom.Desktop.Views
         {
             UpdateStockWindow updateStockWindow = new UpdateStockWindow(e);
             updateStockWindow.Show();
+        }
+
+        void OnOpenEditPartWindow(object sender, EditPartViewModel e)
+        {
+            EditPartWindow editPartWindow = new EditPartWindow(e);
+            editPartWindow.Show();
         }
 
     }
