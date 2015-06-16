@@ -37,7 +37,7 @@
             <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Width="60" Text="{Binding Part.Number, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
             <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Width="60" Text="{Binding Part.Type, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
             <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Width="60" Text="{Binding Part.Length, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <TextBox Grid.Row="4" Grid.Column="1" Margin="3" Width="60" Text="{Binding Part.IsOwnMake, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <CheckBox Grid.Row="4" Grid.Column="1" Margin="3" Width="60" IsChecked="{Binding Part.IsOwnMake, Mode=TwoWay}" HorizontalAlignment="Left"/>
             <TextBox Grid.Row="5" Grid.Column="1" Margin="3" Width="60" Text="{Binding Part.Cost, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
             <TextBox Grid.Row="6" Grid.Column="1" Margin="3" Width="80" Text="{Binding Part.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
         </Grid>
