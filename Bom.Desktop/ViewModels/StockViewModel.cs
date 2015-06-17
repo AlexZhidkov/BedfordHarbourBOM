@@ -112,8 +112,7 @@ namespace Bom.Desktop.ViewModels
                 CurrentStockViewModel.CancelEditStock += CurrentStockViewModel_CancelEvent;
             }
 
-            if (OpenEditStockWindow != null)
-                OpenEditStockWindow(this, CurrentStockViewModel);
+            if (OpenEditStockWindow != null) OpenEditStockWindow(this, CurrentStockViewModel);
         }
 
         void OnEditPartCommand(Part part)
@@ -125,8 +124,7 @@ namespace Bom.Desktop.ViewModels
                 CurrentPartViewModel.CancelEditPart += CurrentPartViewModel_CancelEvent;
             }
 
-            if (OpenEditPartWindow != null)
-                OpenEditPartWindow(this, CurrentPartViewModel);
+            if (OpenEditPartWindow != null) OpenEditPartWindow(this, CurrentPartViewModel);
         }
 
         void OnAddStockCommand(object arg)
@@ -135,6 +133,8 @@ namespace Bom.Desktop.ViewModels
             CurrentStockViewModel = new EditStockViewModel(_serviceFactory, stock);
             CurrentStockViewModel.StockUpdated += CurrentStockViewModel_StockUpdated;
             CurrentStockViewModel.CancelEditStock += CurrentStockViewModel_CancelEvent;
+
+            if (OpenEditStockWindow != null) OpenEditStockWindow(this, CurrentStockViewModel);
         }
 
         void CurrentStockViewModel_StockUpdated(object sender, StockEventArgs e)

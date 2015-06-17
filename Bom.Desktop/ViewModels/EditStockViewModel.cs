@@ -17,9 +17,12 @@ namespace Bom.Desktop.ViewModels
     {
         public EditStockViewModel(IServiceFactory serviceFactory, Stock stock)
         {
-            _ServiceFactory = serviceFactory ?? ObjectBase.Container.GetExportedValue<IServiceFactory>();
+            _serviceFactory = serviceFactory ?? ObjectBase.Container.GetExportedValue<IServiceFactory>();
+            _isNew = (stock.Id == 0);
 
-            _Stock = new Stock()
+            if (_isNew) LoadParts();
+
+            _stock = new Stock()
                 {
                     Id = stock.Id,
                     Cost = stock.Cost,
@@ -30,14 +33,28 @@ namespace Bom.Desktop.ViewModels
                     Notes = stock.Notes
                 };
 
-            _Stock.CleanAll();
+            _stock.CleanAll();
 
             SaveCommand = new DelegateCommand<object>(OnSaveCommandExecute, OnSaveCommandCanExecute);
             CancelCommand = new DelegateCommand<object>(OnCancelCommandExecute);
         }
 
-        IServiceFactory _ServiceFactory;
-        Stock _Stock;
+        private void LoadParts()
+        {
+            WithClient(_serviceFactory.CreateClient<IPartService>(), partsClient =>
+            {
+                if (partsClient == null) return;
+                Part[] parts = partsClient.GetAllParts();
+                if (parts == null) return;
+                _parts = new List<Part>();
+                foreach (Part part in parts) _parts.Add(part);
+            });
+        }
+
+        readonly IServiceFactory _serviceFactory;
+        readonly Stock _stock;
+        readonly bool _isNew;
+        List<Part> _parts = null;
 
         public DelegateCommand<object> SaveCommand { get; private set; }
         public DelegateCommand<object> CancelCommand { get; private set; }
@@ -45,9 +62,19 @@ namespace Bom.Desktop.ViewModels
         public event EventHandler CancelEditStock;
         public event EventHandler<StockEventArgs> StockUpdated;
 
+        public bool IsNew
+        {
+            get { return _isNew; }
+        }
+
         public Stock Stock
         {
-            get { return _Stock; }
+            get { return _stock; }
+        }
+
+        public List<Part> Parts
+        {
+            get { return _parts; }
         }
 
         protected override void AddModels(List<ObjectBase> models)
@@ -61,15 +88,13 @@ namespace Bom.Desktop.ViewModels
 
             if (IsValid)
             {
-                WithClient<IStockService>(_ServiceFactory.CreateClient<IStockService>(), stockClient =>
+                WithClient<IStockService>(_serviceFactory.CreateClient<IStockService>(), stockClient =>
                 {
-                    bool isNew = (_Stock.Id == 0);
-
-                    var savedStock = stockClient.UpdateStock(_Stock);
+                    var savedStock = stockClient.UpdateStock(_stock);
                     if (savedStock != null)
                     {
                         if (StockUpdated != null)
-                            StockUpdated(this, new StockEventArgs(savedStock, isNew));
+                            StockUpdated(this, new StockEventArgs(savedStock, _isNew));
                     }
                 });
             }
@@ -77,7 +102,7 @@ namespace Bom.Desktop.ViewModels
 
         bool OnSaveCommandCanExecute(object arg)
         {
-            return _Stock.IsDirty;
+            return _stock.IsDirty;
         }
 
         void OnCancelCommandExecute(object arg)

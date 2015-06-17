@@ -35,6 +35,8 @@ namespace Bom.Data
             modelBuilder.Entity<Stock>().HasKey<int>(e => e.Id).Ignore(e => e.EntityId);
             modelBuilder.Entity<Part>().HasKey<int>(e => e.Id).Ignore(e => e.EntityId);
 
+            modelBuilder.Entity<Stock>().HasRequired(e => e.Part);
+
             //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
     }
