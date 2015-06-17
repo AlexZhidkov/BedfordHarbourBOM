@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:Core.Common.UI.Controls;assembly=Core.Common.UI"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:common="clr-namespace:Bom.Common;assembly=Bom.Common"
         Title="EditPartWindow" Height="300" Width="300" DataContextChanged="Window_DataContextChanged">
     <Grid>
         <Grid.RowDefinitions>
@@ -34,12 +35,16 @@
             <TextBlock Grid.Row="6" Grid.Column="0" Margin="3" Text="Notes:" />
 
             <TextBox Grid.Row="0" Grid.Column="1" Margin="3" Width="160" Text="{Binding Part.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Width="60" Text="{Binding Part.Number, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Width="60" Text="{Binding Part.Type, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Width="160" Text="{Binding Part.Number, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <ComboBox Grid.Row="2" Grid.Column="1" Margin="3"
+                ItemsSource="{Binding Source={controls:Enumeration {x:Type common:PartType}}}" 
+                DisplayMemberPath="Description" 
+                SelectedValue="{Binding Part.Type}"  
+                SelectedValuePath="Value"  />
             <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Width="60" Text="{Binding Part.Length, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
             <CheckBox Grid.Row="4" Grid.Column="1" Margin="3" Width="60" IsChecked="{Binding Part.IsOwnMake, Mode=TwoWay}" HorizontalAlignment="Left"/>
             <TextBox Grid.Row="5" Grid.Column="1" Margin="3" Width="60" Text="{Binding Part.Cost, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <TextBox Grid.Row="6" Grid.Column="1" Margin="3" Width="80" Text="{Binding Part.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="6" Grid.Column="1" Margin="3" Width="160" Text="{Binding Part.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
         </Grid>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button Content="Save" Margin="5" Command="{Binding SaveCommand}" />

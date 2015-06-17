@@ -52,6 +52,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\EnumerationExtension.cs" />
     <Compile Include="Controls\ValidationHeader.xaml.cs">
       <DependentUpon>ValidationHeader.xaml</DependentUpon>
     </Compile>
