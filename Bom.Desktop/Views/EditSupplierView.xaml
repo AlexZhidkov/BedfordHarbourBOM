@@ -19,7 +19,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="130" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80" />
@@ -29,12 +29,13 @@
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Contact:" />
             <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Phone:" />
             <TextBlock Grid.Row="3" Grid.Column="0" Margin="3" Text="Notes:" />
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="3" Width="160" Text="{Binding Supplier.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Width="70" Text="{Binding Supplier.Contact, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Width="60" Text="{Binding Supplier.Phone, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Width="80" Text="{Binding Supplier.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding Supplier.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding Supplier.Contact, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Text="{Binding Supplier.Phone, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Supplier.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" 
+                     AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
         </Grid>
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="Save" Margin="5" Command="{Binding SaveCommand}" />
             <Button Content="Cancel" Margin="5" Command="{Binding CancelCommand}" />
         </StackPanel>

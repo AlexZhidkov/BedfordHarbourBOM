@@ -4,7 +4,7 @@
         xmlns:controls="clr-namespace:Core.Common.UI.Controls;assembly=Core.Common.UI"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:common="clr-namespace:Bom.Common;assembly=Bom.Common"
-        Title="EditPartWindow" Height="300" Width="300" DataContextChanged="Window_DataContextChanged">
+        Title="Edit Part" Height="400" Width="300" DataContextChanged="Window_DataContextChanged">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -20,11 +20,11 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="130" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="180" />
+                <ColumnDefinition Width="200" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Description:" />
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Number:" />
@@ -34,19 +34,20 @@
             <TextBlock Grid.Row="5" Grid.Column="0" Margin="3" Text="Cost:" />
             <TextBlock Grid.Row="6" Grid.Column="0" Margin="3" Text="Notes:" />
 
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="3" Width="160" Text="{Binding Part.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Width="160" Text="{Binding Part.Number, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding Part.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding Part.Number, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
             <ComboBox Grid.Row="2" Grid.Column="1" Margin="3"
                 ItemsSource="{Binding Source={controls:Enumeration {x:Type common:PartType}}}" 
                 DisplayMemberPath="Description" 
                 SelectedValue="{Binding Part.Type}"  
                 SelectedValuePath="Value"  />
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Width="60" Text="{Binding Part.Length, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <CheckBox Grid.Row="4" Grid.Column="1" Margin="3" Width="60" IsChecked="{Binding Part.IsOwnMake, Mode=TwoWay}" HorizontalAlignment="Left"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Margin="3" Width="60" Text="{Binding Part.Cost, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <TextBox Grid.Row="6" Grid.Column="1" Margin="3" Width="160" Text="{Binding Part.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Part.Length, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <CheckBox Grid.Row="4" Grid.Column="1" Margin="3" IsChecked="{Binding Part.IsOwnMake, Mode=TwoWay}" HorizontalAlignment="Left"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Margin="3" Text="{Binding Part.Cost, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="6" Grid.Column="1" Margin="3" Text="{Binding Part.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left"
+                AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
         </Grid>
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="Save" Margin="5" Command="{Binding SaveCommand}" />
             <Button Content="Cancel" Margin="5" Command="{Binding CancelCommand}" />
         </StackPanel>

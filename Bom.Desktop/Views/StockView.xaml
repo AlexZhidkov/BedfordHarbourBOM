@@ -6,7 +6,7 @@
              xmlns:core="clr-namespace:Core.Common.UI.Core;assembly=Core.Common.UI"
              xmlns:conv="clr-namespace:Bom.Desktop.Support"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="550">
     <Grid>
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
@@ -14,16 +14,13 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <Button Content="Add New" Command="{Binding AddStockCommand}" />
-            </StackPanel>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150" SharedSizeGroup="name" />
-                    <ColumnDefinition Width="60" SharedSizeGroup="cost" />
-                    <ColumnDefinition Width="60" SharedSizeGroup="count" />
+                    <ColumnDefinition Width="50" SharedSizeGroup="cost" />
+                    <ColumnDefinition Width="50" SharedSizeGroup="count" />
                     <ColumnDefinition Width="100" SharedSizeGroup="countDate" />
-                    <ColumnDefinition Width="130" SharedSizeGroup="notes" />
+                    <ColumnDefinition Width="200" SharedSizeGroup="notes" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Name" />
                 <TextBlock Grid.Column="1" Text="Cost" />
@@ -31,16 +28,16 @@
                 <TextBlock Grid.Column="3" Text="Count Date" />
                 <TextBlock Grid.Column="4" Text="Notes" />
             </Grid>
-            <ItemsControl Grid.Row="2" ItemsSource="{Binding Stocks}">
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding Stocks}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="150" SharedSizeGroup="name" />
-                                <ColumnDefinition Width="60" SharedSizeGroup="cost" />
-                                <ColumnDefinition Width="60" SharedSizeGroup="count" />
+                                <ColumnDefinition Width="50" SharedSizeGroup="cost" />
+                                <ColumnDefinition Width="50" SharedSizeGroup="count" />
                                 <ColumnDefinition Width="100" SharedSizeGroup="countDate" />
-                                <ColumnDefinition Width="130" SharedSizeGroup="notes" />
+                                <ColumnDefinition Width="200" SharedSizeGroup="notes" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" >
                                 <Hyperlink Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding Part}">
@@ -54,11 +51,14 @@
                                 </Hyperlink>
                             </TextBlock>
                             <TextBlock Grid.Column="3" Text="{Binding CountDate, StringFormat=dd/MM/yyyy}" />
-                            <TextBlock Grid.Column="4" Text="{Binding Notes}" />
+                            <TextBlock Grid.Column="4" Text="{Binding Notes}" TextWrapping="Wrap" />
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Add New" Command="{Binding AddStockCommand}"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </core:UserControlViewBase>

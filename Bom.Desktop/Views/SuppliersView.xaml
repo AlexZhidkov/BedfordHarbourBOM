@@ -21,10 +21,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <Button Content="Add New" Command="{Binding AddSupplierCommand}" />
-            </StackPanel>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80" SharedSizeGroup="links" />
                     <ColumnDefinition Width="150" SharedSizeGroup="name" />
@@ -37,7 +34,7 @@
                 <TextBlock Grid.Column="3" Text="Phone" />
                 <TextBlock Grid.Column="4" Text="Notes" />
             </Grid>
-            <ItemsControl Grid.Row="2" ItemsSource="{Binding Suppliers}">
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding Suppliers}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -64,11 +61,14 @@
                             <TextBlock Grid.Column="1" Text="{Binding Name}" />
                             <TextBlock Grid.Column="2" Text="{Binding Contact}" />
                             <TextBlock Grid.Column="3" Text="{Binding Phone}" />
-                            <TextBlock Grid.Column="4" Text="{Binding Notes}" />
+                            <TextBlock Grid.Column="4" Text="{Binding Notes}" TextWrapping="Wrap" />
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Add New" Command="{Binding AddSupplierCommand}" />
+            </StackPanel>
         </Grid>
         <Border Grid.Column="1" CornerRadius="4" Margin="10" BorderBrush="SteelBlue" BorderThickness="1" Background="BlanchedAlmond"
                 Visibility="{Binding CurrentSupplierViewModel, Converter={StaticResource viewModelNullToVisibilityConverter}}">
