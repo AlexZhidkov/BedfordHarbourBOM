@@ -9,11 +9,6 @@ namespace Bom.Client.Proxies
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class StockClient : ClientBase<IStockService>, IStockService
     {
-        public Stock[] GetAllStocks()
-        {
-            return Channel.GetAllStocks();
-        }
-
         public Stock UpdateStock(Stock stockItem)
         {
             return Channel.UpdateStock(stockItem);
@@ -22,6 +17,11 @@ namespace Bom.Client.Proxies
         public void DeleteStock(int stockItemId)
         {
             Channel.DeleteStock(stockItemId);
+        }
+
+        public StockItemData[] GetAllStockItems()
+        {
+            return Channel.GetAllStockItems();
         }
     }
 }

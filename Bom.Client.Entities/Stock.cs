@@ -9,20 +9,20 @@ namespace Bom.Client.Entities
 {
     public class Stock : BaseEntity
     {
-        private Part _part;
+        private int _partId;
         private int _count;
         private DateTime _countDate;
         private int _cost;
         private IEnumerable<Supplier> _suppliers;
 
-        public Part Part
+        public int PartId
         {
-            get { return _part; }
+            get { return _partId; }
             set
             {
-                if (_part == value) return;
-                _part = value;
-                OnPropertyChanged(() => Part);
+                if (_partId == value) return;
+                _partId = value;
+                OnPropertyChanged(() => PartId);
             }
         }
 
@@ -74,7 +74,7 @@ namespace Bom.Client.Entities
         {
             public StockValidator()
             {
-                RuleFor(obj => obj.Part).NotNull();
+                RuleFor(obj => obj.PartId).GreaterThan(0);
                 RuleFor(obj => obj.Count).GreaterThanOrEqualTo(0);
                 RuleFor(obj => obj.Cost).GreaterThanOrEqualTo(0);
                 RuleFor(obj => obj.CountDate.Date).LessThanOrEqualTo(DateTime.Now.Date);

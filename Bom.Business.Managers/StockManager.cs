@@ -61,5 +61,32 @@ namespace Bom.Business.Managers
         {
             throw new NotImplementedException();
         }
+
+        public StockItemData[] GetAllStockItems()
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IStockRepository stockRepository = _dataRepositoryFactory.GetDataRepository<IStockRepository>();
+
+                List<StockItemData> stockItems = new List<StockItemData>();
+
+                IEnumerable<StockItemsInfo> stockInfoSet = stockRepository.GetAllStockItemsInfo();
+                foreach (StockItemsInfo stockItemsInfo in stockInfoSet)
+                {
+                    stockItems.Add(new StockItemData()
+                    {
+                        StockId = stockItemsInfo.Stock.Id,
+                        PartId = stockItemsInfo.Part.Id,
+                        PartDescription = stockItemsInfo.Part.Description,
+                        Count = stockItemsInfo.Stock.Count,
+                        CountDate = stockItemsInfo.Stock.CountDate,
+                        Cost = stockItemsInfo.Stock.Cost,
+                        Notes = stockItemsInfo.Stock.Notes
+                    });
+                }
+
+                return stockItems.ToArray();
+            });
+        }
     }
 }

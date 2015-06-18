@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ServiceModel;
 using Bom.Client.Entities;
 using Core.Common.Contracts;
 
@@ -13,7 +8,7 @@ namespace Bom.Client.Contracts
     public interface IStockService : IServiceContract
     {
         [OperationContract]
-        Stock[] GetAllStocks();
+        StockItemData[] GetAllStockItems();
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]

@@ -9,7 +9,7 @@ namespace Bom.Business.Entities
     public class Stock : BaseEntity, IIdentifiableEntity
     {
         [DataMember]
-        public Part Part { get; set; }
+        public int PartId { get; set; }
         [DataMember]
         public int Count { get; set; }
         [DataMember]

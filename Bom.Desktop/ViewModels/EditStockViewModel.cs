@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,23 +16,28 @@ namespace Bom.Desktop.ViewModels
 {
     public class EditStockViewModel : ViewModelBase
     {
-        public EditStockViewModel(IServiceFactory serviceFactory, Stock stock)
+        public EditStockViewModel(IServiceFactory serviceFactory, StockItemData stockItem)
         {
             _serviceFactory = serviceFactory ?? ObjectBase.Container.GetExportedValue<IServiceFactory>();
-            _isNew = (stock.Id == 0);
+            _isNew = (stockItem.StockId == 0);
 
-            if (_isNew) LoadParts();
-
-            _stock = new Stock()
+            if (_isNew)
+            {
+                LoadParts();
+            }
+            else
+            {
+                _partDescription = stockItem.PartDescription;
+                _stock = new Stock()
                 {
-                    Id = stock.Id,
-                    Cost = stock.Cost,
-                    Count = stock.Count,
-                    CountDate = stock.CountDate,
-                    Part = stock.Part,
-                    Suppliers = stock.Suppliers,
-                    Notes = stock.Notes
+                    Id = stockItem.StockId,
+                    Cost = stockItem.Cost,
+                    Count = stockItem.Count,
+                    CountDate = stockItem.CountDate,
+                    PartId = stockItem.PartId,
+                    Notes = stockItem.Notes
                 };
+            }
 
             _stock.CleanAll();
 
@@ -52,7 +58,8 @@ namespace Bom.Desktop.ViewModels
         }
 
         readonly IServiceFactory _serviceFactory;
-        readonly Stock _stock;
+        readonly string _partDescription;
+        readonly Stock _stock = new Stock();
         readonly bool _isNew;
         List<Part> _parts = null;
 
@@ -65,6 +72,11 @@ namespace Bom.Desktop.ViewModels
         public bool IsNew
         {
             get { return _isNew; }
+        }
+
+        public string PartDescription
+        {
+            get { return _partDescription; }
         }
 
         public Stock Stock

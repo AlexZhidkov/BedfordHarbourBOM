@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bom.Business.Entities;
 using Bom.Data.Contracts;
+using Core.Common.Extensions;
 
 namespace Bom.Data
 {
@@ -26,12 +27,28 @@ namespace Bom.Data
 
         protected override IEnumerable<Stock> GetEntities(BomContext entityContext)
         {
-            return entityContext.Stocks.Select(e => e).Include(s => s.Part);
+            return entityContext.Stocks.Select(e => e);
         }
 
         protected override Stock GetEntity(BomContext entityContext, int id)
         {
             return (entityContext.Stocks.Where(e => e.Id == id)).FirstOrDefault();
+        }
+
+        public IEnumerable<StockItemsInfo> GetAllStockItemsInfo()
+        {
+            using (BomContext entityContext = new BomContext())
+            {
+                var query = from s in entityContext.Stocks
+                            join p in entityContext.Parts on s.PartId equals p.Id
+                            select new StockItemsInfo()
+                            {
+                                Stock = s,
+                                Part = p
+                            };
+
+                return query.ToFullyLoaded();
+            }
         }
     }
 }

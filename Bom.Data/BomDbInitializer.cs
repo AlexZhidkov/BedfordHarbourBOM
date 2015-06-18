@@ -69,21 +69,21 @@ namespace Bom.Data
             context.Stocks.Add(new Stock
             {
                 Id = 1,
-                Part = part1,
+                PartId = part1.Id,
                 Count = 1,
                 CountDate = new DateTime(2015, 1, 1)
             });
             context.Stocks.Add(new Stock
             {
                 Id = 2,
-                Part = part2,
+                PartId = part2.Id,
                 Count = 2,
                 CountDate = new DateTime(2015, 1, 1)
             });
             context.Stocks.Add(new Stock
             {
                 Id = 3,
-                Part = part3,
+                PartId = part3.Id,
                 Count = 3,
                 CountDate = new DateTime(2015, 1, 1)
             });

@@ -49,14 +49,13 @@ namespace Bom.Business.Managers.Tests
         }
 
         [TestMethod]
-        [Ignore]
         public void GetAll_fromDB()
         {
             ObjectBase.Container = MEFLoader.Init();
 
             var f = new DataRepositoryFactory();
-            SupplierManager manager = new SupplierManager(f);
-            var suppliers = manager.GetAllSuppliers();
+            StockManager manager = new StockManager(f);
+            var suppliers = manager.GetAllStockItems();
 
             Assert.IsNotNull(suppliers);
 

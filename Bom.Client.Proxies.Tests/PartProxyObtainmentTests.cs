@@ -54,7 +54,17 @@ namespace Bom.Client.Proxies.Tests
 
             var s = proxy.GetAllParts();
             Assert.IsNotNull(s);
+        }
 
+        [TestMethod]
+        public void GetAllStockItems_fromDB()
+        {
+            IStockService proxy = ObjectBase.Container.GetExportedValue<IStockService>();
+
+            var s = proxy.GetAllStockItems();
+
+            Assert.IsNotNull(s);
+            Assert.IsTrue(s.Length > 0);
         }
 
     }

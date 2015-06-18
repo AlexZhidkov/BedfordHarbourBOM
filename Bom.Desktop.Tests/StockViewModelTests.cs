@@ -15,14 +15,14 @@ namespace Bom.Desktop.Tests
         [TestMethod]
         public void TestViewLoaded()
         {
-            Stock[] data = new List<Stock>()
+            StockItemData[] data = new List<StockItemData>()
                 {
-                    new Stock() { Id = 1 },
-                    new Stock() { Id = 2 }
+                    new StockItemData() { StockId = 1 },
+                    new StockItemData() { StockId = 2 }
                 }.ToArray();
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
-            mockServiceFactory.Setup(mock => mock.CreateClient<IStockService>().GetAllStocks()).Returns(data);
+            mockServiceFactory.Setup(mock => mock.CreateClient<IStockService>().GetAllStockItems()).Returns(data);
 
             StockViewModel viewModel = new StockViewModel(mockServiceFactory.Object);
 
@@ -54,18 +54,18 @@ namespace Bom.Desktop.Tests
         [TestMethod]
         public void TestEditStockCommand()
         {
-            Stock stock = TestHelper.GetTestStock();
+            StockItemData stock = TestHelper.GetTestStockItemData();
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
 
             StockViewModel viewModel = new StockViewModel(mockServiceFactory.Object);
 
-            viewModel.Stocks = new ObservableCollection<Stock>()
-                {
-                    stock
-                };
+            viewModel.Stocks = new ObservableCollection<StockItemData>()
+            {
+                stock
+            };
 
-            Assert.IsTrue(viewModel.Stocks[0].Notes == "Test Notes");
+            Assert.IsTrue(viewModel.Stocks[0].Count == 5);
             Assert.IsTrue(viewModel.CurrentStockViewModel == null);
 
             viewModel.EditStockCommand.Execute(stock);
@@ -74,25 +74,25 @@ namespace Bom.Desktop.Tests
 
             mockServiceFactory.Setup(mock => mock.CreateClient<IStockService>().UpdateStock(It.IsAny<Stock>())).Returns(viewModel.CurrentStockViewModel.Stock);
 
-            viewModel.CurrentStockViewModel.Stock.Notes = "Note 2";
+            viewModel.CurrentStockViewModel.Stock.Count = 9;
             viewModel.CurrentStockViewModel.SaveCommand.Execute(null);
 
-            Assert.IsTrue(viewModel.Stocks[0].Notes == "Note 2");
+            Assert.IsTrue(viewModel.Stocks[0].Count == 9);
         }
 
         [TestMethod]
         public void TestDeleteStockCommand()
         {
-            Stock stock = TestHelper.GetTestStock();
+            StockItemData stock = TestHelper.GetTestStockItemData();
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
-            mockServiceFactory.Setup(mock => mock.CreateClient<IStockService>().DeleteStock(stock.Id));
+            mockServiceFactory.Setup(mock => mock.CreateClient<IStockService>().DeleteStock(stock.StockId));
 
             StockViewModel viewModel = new StockViewModel(mockServiceFactory.Object);
-            viewModel.Stocks = new ObservableCollection<Stock>()
-                {
-                    stock
-                };
+            viewModel.Stocks = new ObservableCollection<StockItemData>()
+            {
+                stock
+            };
 
             viewModel.ConfirmDelete += (s, e) => e.Cancel = false;
 
@@ -106,14 +106,14 @@ namespace Bom.Desktop.Tests
         [TestMethod]
         public void TestDeleteStockCommandWithCancel()
         {
-            Stock stock = TestHelper.GetTestStock();
+            StockItemData stock = TestHelper.GetTestStockItemData();
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
-            mockServiceFactory.Setup(mock => mock.CreateClient<IStockService>().DeleteStock(stock.Id));
+            mockServiceFactory.Setup(mock => mock.CreateClient<IStockService>().DeleteStock(stock.StockId));
 
             var viewModel = new StockViewModel(mockServiceFactory.Object)
             {
-                Stocks = new ObservableCollection<Stock>()
+                Stocks = new ObservableCollection<StockItemData>()
                 {
                     stock
                 }
@@ -134,14 +134,14 @@ namespace Bom.Desktop.Tests
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
 
             StockViewModel viewModel = new StockViewModel(mockServiceFactory.Object);
-            viewModel.Stocks = new ObservableCollection<Stock>();
+            viewModel.Stocks = new ObservableCollection<StockItemData>();
 
             Assert.IsTrue(viewModel.CurrentStockViewModel == null);
 
             viewModel.AddStockCommand.Execute(null);
 
             Assert.IsTrue(viewModel.CurrentStockViewModel != null);
-            viewModel.CurrentStockViewModel.Stock.Part = new Part();
+            viewModel.CurrentStockViewModel.Stock.PartId = 1;
 
             mockServiceFactory.Setup(mock => mock.CreateClient<IStockService>().UpdateStock(It.IsAny<Stock>())).Returns(viewModel.CurrentStockViewModel.Stock);
 

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 
 namespace Core.Common.UI.Core
@@ -13,38 +11,36 @@ namespace Core.Common.UI.Core
 
         public DelegateCommand(Action<T> execute, Predicate<T> canExecute, string label)
         {
-            _Execute = execute;
-            _CanExecute = canExecute;
+            _execute = execute;
+            _canExecute = canExecute;
 
             Label = label;
         }
 
-        readonly Action<T> _Execute = null;
-        readonly Predicate<T> _CanExecute = null;
+        readonly Action<T> _execute;
+        readonly Predicate<T> _canExecute;
 
         public string Label { get; set; }
 
         public void Execute(object parameter)
         {
-            _Execute((T)parameter);
+            _execute((T)parameter);
         }
 
         public bool CanExecute(object parameter)
         {
-            return _CanExecute == null ? true : _CanExecute((T)parameter);
+            return _canExecute == null || _canExecute((T)parameter);
         }
 
         public event EventHandler CanExecuteChanged
         {
             add
             {
-                if (_CanExecute != null)
-                    CommandManager.RequerySuggested += value;
+                if (_canExecute != null) CommandManager.RequerySuggested += value;
             }
             remove
             {
-                if (_CanExecute != null)
-                    CommandManager.RequerySuggested -= value;
+                if (_canExecute != null) CommandManager.RequerySuggested -= value;
             }
         }
     }
