@@ -57,6 +57,7 @@ namespace Bom.Client.Proxies.Tests
         }
 
         [TestMethod]
+        [Ignore]
         public void GetAllStockItems_fromDB()
         {
             IStockService proxy = ObjectBase.Container.GetExportedValue<IStockService>();

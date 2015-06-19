@@ -83,5 +83,13 @@ namespace Bom.Desktop
             }
         }
 
+        private void ComboBox_OnDropDownClosed(object sender, EventArgs e)
+        {
+            var selectedPart = ((sender as ComboBox).SelectionBoxItem as Part);
+            var stockItem = (EditStockViewModel)DataContext;
+
+            stockItem.PartDescription = selectedPart.Description;
+            stockItem.Stock.PartId = selectedPart.Id;
+        }
     }
 }

@@ -38,7 +38,7 @@
                 Visibility="{Binding Parts, Converter={StaticResource viewModelNullToVisibilityConverter}}"
                 ItemsSource="{Binding Parts}" 
                 DisplayMemberPath="Description" 
-                SelectedValue="{Binding Stock.Part}" />
+                DropDownClosed="ComboBox_OnDropDownClosed"/>
             <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding Stock.Count, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
             <DatePicker Grid.Row="2" Grid.Column="1" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDate="{Binding Stock.CountDate}" DisplayDate="{x:Static system:DateTime.Now}"/>
             <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Stock.Cost, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />

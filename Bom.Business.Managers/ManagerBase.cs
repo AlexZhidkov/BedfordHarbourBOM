@@ -34,7 +34,17 @@ namespace Bom.Business.Managers
             }
             catch (Exception ex)
             {
-                throw new FaultException(ex.Message);
+                var message = new StringBuilder(ex.Message);
+                //ToDo refactor this
+                if (ex.InnerException != null)
+                {
+                    message.AppendFormat(" InnerException: {0}", ex.InnerException.Message);
+                    if (ex.InnerException.InnerException != null)
+                    {
+                        message.AppendFormat(" InnerException: {0}", ex.InnerException.InnerException.Message);
+                    }
+                }
+                throw new FaultException(message.ToString());
             }
         }
 

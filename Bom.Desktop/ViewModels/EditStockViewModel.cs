@@ -27,7 +27,7 @@ namespace Bom.Desktop.ViewModels
             }
             else
             {
-                _partDescription = stockItem.PartDescription;
+                PartDescription = stockItem.PartDescription;
                 _stock = new Stock()
                 {
                     Id = stockItem.StockId,
@@ -58,7 +58,6 @@ namespace Bom.Desktop.ViewModels
         }
 
         readonly IServiceFactory _serviceFactory;
-        readonly string _partDescription;
         readonly Stock _stock = new Stock();
         readonly bool _isNew;
         List<Part> _parts = null;
@@ -74,10 +73,7 @@ namespace Bom.Desktop.ViewModels
             get { return _isNew; }
         }
 
-        public string PartDescription
-        {
-            get { return _partDescription; }
-        }
+        public string PartDescription { get; set; }
 
         public Stock Stock
         {
