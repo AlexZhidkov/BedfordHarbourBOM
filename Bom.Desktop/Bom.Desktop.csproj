@@ -70,6 +70,7 @@
     <Compile Include="ViewModels\EditSupplierViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\StockViewModel.cs" />
+    <Compile Include="ViewModels\PartsViewModel.cs" />
     <Compile Include="ViewModels\SuppliersViewModel.cs" />
     <Compile Include="Views\EditSupplierView.xaml.cs">
       <DependentUpon>EditSupplierView.xaml</DependentUpon>
@@ -79,6 +80,9 @@
     </Compile>
     <Compile Include="Views\StockView.xaml.cs">
       <DependentUpon>StockView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PartsView.xaml.cs">
+      <DependentUpon>PartsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SuppliersView.xaml.cs">
       <DependentUpon>SuppliersView.xaml</DependentUpon>
@@ -114,6 +118,10 @@
     <Page Include="Views\StockView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PartsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SuppliersView.xaml">
       <SubType>Designer</SubType>

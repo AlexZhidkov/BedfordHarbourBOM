@@ -55,6 +55,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="PartsViewModelTests.cs" />
     <Compile Include="SuppliersViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EditSupplierViewModelTests.cs" />

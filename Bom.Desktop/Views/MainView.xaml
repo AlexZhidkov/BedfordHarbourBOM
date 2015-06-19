@@ -19,6 +19,7 @@
 -->
         <TabControl Grid.Row="1">
             <TabItem Header="{Binding StockViewModel.ViewTitle}" Content="{Binding StockViewModel}" />
+            <TabItem Header="{Binding PartsViewModel.ViewTitle}" Content="{Binding PartsViewModel}" />
             <TabItem Header="{Binding SuppliersViewModel.ViewTitle}" Content="{Binding SuppliersViewModel}" />
         </TabControl>
 

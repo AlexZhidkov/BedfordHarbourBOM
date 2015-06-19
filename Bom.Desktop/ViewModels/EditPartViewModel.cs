@@ -20,6 +20,30 @@ namespace Bom.Desktop.ViewModels
                 _part = partClient.GetPart(partId);
             });
 
+            Initialize();
+        }
+
+        public EditPartViewModel(IServiceFactory serviceFactory, Part part)
+        {
+            _serviceFactory = serviceFactory ?? Container.GetExportedValue<IServiceFactory>();
+
+            _part = new Part
+            {
+                Id = part.Id,
+                Cost = part.Cost,
+                Description = part.Description,
+                IsOwnMake = part.IsOwnMake,
+                Length = part.Length,
+                Number = part.Number,
+                Type = part.Type,
+                Notes = part.Notes
+            };
+
+            Initialize();
+        }
+
+        private void Initialize()
+        {
             _part.CleanAll();
 
             SaveCommand = new DelegateCommand<object>(OnSaveCommandExecute, OnSaveCommandCanExecute);
