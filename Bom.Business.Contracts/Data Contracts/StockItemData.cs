@@ -4,12 +4,12 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Bom.Business.Entities;
 using Core.Common.ServiceModel;
 
 namespace Bom.Business.Contracts
 {
-    [DataContract(Namespace = "www.bedfordharbour.bom.com.au")]
-    public class StockItemData : DataContractBase
+    public class StockItemData : BaseEntity
     {
         [DataMember]
         public int StockId { get; set; }
@@ -23,7 +23,5 @@ namespace Bom.Business.Contracts
         public DateTime CountDate { get; set; }
         [DataMember]
         public int Cost { get; set; }
-        [DataMember]
-        public string Notes { get; set; }
     }
 }

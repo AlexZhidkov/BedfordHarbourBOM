@@ -138,23 +138,31 @@ namespace Bom.Desktop.ViewModels
 
         void CurrentStockViewModel_StockUpdated(object sender, StockEventArgs e)
         {
-/*ToDo
             if (!e.IsNew)
             {
-                Stock stock = _stocks.FirstOrDefault(item => item.StockId == e.Stock.Id);
+                StockItemData stock = _stocks.Single(item => item.StockId == e.Stock.Id);
                 if (stock != null)
                 {
                     stock.Count = e.Stock.Count;
                     stock.CountDate = e.Stock.CountDate;
                     stock.PartId = e.Stock.PartId;
                     stock.Cost = e.Stock.Cost;
-                    stock.Suppliers = e.Stock.Suppliers;
                     stock.Notes = e.Stock.Notes;
                 }
             }
             else
-                _stocks.Add(e.Stock);
-*/
+            {
+                _stocks.Add(new StockItemData
+                {
+                    StockId = e.Stock.Id,
+                    PartId = e.Stock.PartId,
+                    PartDescription = e.PartDescription,
+                    Count = e.Stock.Count,
+                    CountDate = e.Stock.CountDate,
+                    Cost = e.Stock.Cost,
+                    Notes = e.Stock.Notes
+                });
+            }
 
             CurrentStockViewModel = null;
         }
@@ -168,18 +176,10 @@ namespace Bom.Desktop.ViewModels
         {
             if (!e.IsNew)
             {
-/*ToDo
                 foreach (var stock in _stocks.Where(item => item.PartId == e.Part.Id))
                 {
-                    stock.Part.Description = e.Part.Description;
-                    stock.Part.IsOwnMake = e.Part.IsOwnMake;
-                    stock.Part.Length = e.Part.Length;
-                    stock.Part.Number = e.Part.Number;
-                    stock.Part.Type = e.Part.Type;
-                    stock.Part.Cost = e.Part.Cost;
-                    stock.Part.Notes = e.Part.Notes;
+                    stock.PartDescription = e.Part.Description;
                 }
-*/
             }
             CurrentPartViewModel = null;
         }
@@ -200,7 +200,7 @@ namespace Bom.Desktop.ViewModels
                 WithClient(_serviceFactory.CreateClient<IStockService>(), suplierClient =>
                 {
                     suplierClient.DeleteStock(stockId);
-//ToDo                    _stocks.Remove(stock);
+                    _stocks.Remove(_stocks.Single(i => i.StockId == stockId));
                 });
             }
         }

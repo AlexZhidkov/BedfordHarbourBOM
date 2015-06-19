@@ -106,7 +106,7 @@ namespace Bom.Desktop.ViewModels
                     if (savedStock != null)
                     {
                         if (StockUpdated != null)
-                            StockUpdated(this, new StockEventArgs(savedStock, _isNew));
+                            StockUpdated(this, new StockEventArgs(savedStock, _isNew, PartDescription));
                     }
                 });
             }

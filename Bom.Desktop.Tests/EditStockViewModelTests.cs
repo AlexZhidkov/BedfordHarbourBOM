@@ -19,7 +19,7 @@ namespace Bom.Desktop.Tests
 
             EditStockViewModel viewModel = new EditStockViewModel(mockServiceFactory.Object, stock);
 
-            //ToDo Assert.IsTrue(viewModel.Stock != null && viewModel.Stock != stock);
+            Assert.IsTrue(viewModel.Stock != null);
             Assert.IsTrue(viewModel.Stock.Id == stock.StockId && viewModel.Stock.Notes == stock.Notes);
         }
 

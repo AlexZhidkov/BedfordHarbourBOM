@@ -38,7 +38,7 @@ namespace Bom.Desktop.Tests
         [TestMethod]
         public void TestCurrentStockSetting()
         {
-            Stock stock = new Stock() { Id = 1 };
+            StockItemData stock = new StockItemData() { StockId = 1 };
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
 
@@ -48,7 +48,7 @@ namespace Bom.Desktop.Tests
 
             viewModel.EditStockCommand.Execute(stock);
 
-            Assert.IsTrue(viewModel.CurrentStockViewModel != null && viewModel.CurrentStockViewModel.Stock.Id == stock.Id);
+            Assert.IsTrue(viewModel.CurrentStockViewModel != null && viewModel.CurrentStockViewModel.Stock.Id == stock.StockId);
         }
 
         [TestMethod]
@@ -98,7 +98,7 @@ namespace Bom.Desktop.Tests
 
             Assert.IsTrue(viewModel.Stocks.Count == 1);
 
-            viewModel.DeleteStockCommand.Execute(stock);
+            viewModel.DeleteStockCommand.Execute(stock.StockId);
 
             Assert.IsTrue(viewModel.Stocks.Count == 0);
         }
@@ -123,7 +123,7 @@ namespace Bom.Desktop.Tests
 
             Assert.IsTrue(viewModel.Stocks.Count == 1);
 
-            viewModel.DeleteStockCommand.Execute(stock);
+            viewModel.DeleteStockCommand.Execute(stock.StockId);
 
             Assert.IsTrue(viewModel.Stocks.Count == 1);
         }

@@ -32,7 +32,7 @@
             <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Date:" />
             <TextBlock Grid.Row="3" Grid.Column="0" Margin="3" Text="Cost:" />
             <TextBlock Grid.Row="4" Grid.Column="0" Margin="3" Text="Notes:" />
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding Stock.Part.Description}" HorizontalAlignment="Left" 
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding PartDescription}" HorizontalAlignment="Left" 
                 Visibility="{Binding Stock.Part, Converter={StaticResource viewModelNullToVisibilityConverter}}" />
             <ComboBox Grid.Row="0" Grid.Column="1" Margin="3" 
                 Visibility="{Binding Parts, Converter={StaticResource viewModelNullToVisibilityConverter}}"
