@@ -11,8 +11,8 @@ namespace Core.Common.Utils
             where T : class, new()
             where U : class, new()
         {
-            List<PropertyInfo> sourceProperties = source.GetType().GetProperties().ToList<PropertyInfo>();
-            List<PropertyInfo> destinationProperties = destination.GetType().GetProperties().ToList<PropertyInfo>();
+            List<PropertyInfo> sourceProperties = source.GetType().GetProperties().ToList();
+            List<PropertyInfo> destinationProperties = destination.GetType().GetProperties().ToList();
 
             foreach (PropertyInfo sourceProperty in sourceProperties)
             {

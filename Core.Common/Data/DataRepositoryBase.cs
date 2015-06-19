@@ -34,7 +34,7 @@ namespace Core.Common.Data
         {
             using (U entityContext = new U())
             {
-                entityContext.Entry<T>(entity).State = EntityState.Deleted;
+                entityContext.Entry(entity).State = EntityState.Deleted;
                 entityContext.SaveChanges();
             }
         }
@@ -44,7 +44,7 @@ namespace Core.Common.Data
             using (U entityContext = new U())
             {
                 T entity = GetEntity(entityContext, id);
-                entityContext.Entry<T>(entity).State = EntityState.Deleted;
+                entityContext.Entry(entity).State = EntityState.Deleted;
                 entityContext.SaveChanges();
             }
         }

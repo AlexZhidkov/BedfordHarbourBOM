@@ -39,6 +39,16 @@ namespace Bom.Business.Managers
             });
         }
 
+        public Part GetPart(int id)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IPartRepository partRepository = _dataRepositoryFactory.GetDataRepository<IPartRepository>();
+
+                return partRepository.Get(id);
+            });
+        }
+
         [OperationBehavior(TransactionScopeRequired = true)]
         public Part UpdatePart(Part part)
         {

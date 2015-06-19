@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Bom.Client.Contracts;
 using Bom.Client.Entities;
 using Bom.Desktop.Support;
@@ -15,30 +11,23 @@ namespace Bom.Desktop.ViewModels
 {
     public class EditPartViewModel : ViewModelBase
     {
-        public EditPartViewModel(IServiceFactory serviceFactory, Part part)
+        public EditPartViewModel(IServiceFactory serviceFactory, int partId)
         {
-            _ServiceFactory = serviceFactory ?? ObjectBase.Container.GetExportedValue<IServiceFactory>();
+            _serviceFactory = serviceFactory ?? Container.GetExportedValue<IServiceFactory>();
 
-            _Part = new Part()
-                {
-                    Id = part.Id,
-                    Cost = part.Cost,
-                    Description = part.Description,
-                    Number = part.Number,
-                    IsOwnMake = part.IsOwnMake,
-                    Length = part.Length,
-                    Type = part.Type,
-                    Notes = part.Notes
-                };
+            WithClient(_serviceFactory.CreateClient<IPartService>(), partClient =>
+            {
+                _part = partClient.GetPart(partId);
+            });
 
-            _Part.CleanAll();
+            _part.CleanAll();
 
             SaveCommand = new DelegateCommand<object>(OnSaveCommandExecute, OnSaveCommandCanExecute);
             CancelCommand = new DelegateCommand<object>(OnCancelCommandExecute);
         }
 
-        IServiceFactory _ServiceFactory;
-        Part _Part;
+        readonly IServiceFactory _serviceFactory;
+        Part _part;
 
         public DelegateCommand<object> SaveCommand { get; private set; }
         public DelegateCommand<object> CancelCommand { get; private set; }
@@ -48,7 +37,7 @@ namespace Bom.Desktop.ViewModels
 
         public Part Part
         {
-            get { return _Part; }
+            get { return _part; }
         }
 
         protected override void AddModels(List<ObjectBase> models)
@@ -62,11 +51,11 @@ namespace Bom.Desktop.ViewModels
 
             if (IsValid)
             {
-                WithClient<IPartService>(_ServiceFactory.CreateClient<IPartService>(), partClient =>
+                WithClient(_serviceFactory.CreateClient<IPartService>(), partClient =>
                 {
-                    bool isNew = (_Part.Id == 0);
+                    bool isNew = (_part.Id == 0);
 
-                    var savedPart = partClient.UpdatePart(_Part);
+                    var savedPart = partClient.UpdatePart(_part);
                     if (savedPart != null)
                     {
                         if (PartUpdated != null)
@@ -78,7 +67,7 @@ namespace Bom.Desktop.ViewModels
 
         bool OnSaveCommandCanExecute(object arg)
         {
-            return _Part.IsDirty;
+            return _part.IsDirty;
         }
 
         void OnCancelCommandExecute(object arg)

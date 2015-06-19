@@ -56,7 +56,7 @@ namespace Bom.Desktop.ViewModels
 
             if (IsValid)
             {
-                WithClient<ISupplierService>(_ServiceFactory.CreateClient<ISupplierService>(), supplierClient =>
+                WithClient(_ServiceFactory.CreateClient<ISupplierService>(), supplierClient =>
                 {
                     bool isNew = (_Supplier.Id == 0);
 

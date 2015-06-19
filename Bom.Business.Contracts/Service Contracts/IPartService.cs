@@ -10,6 +10,9 @@ namespace Bom.Business.Contracts
         Part[] GetAllParts();
 
         [OperationContract]
+        Part GetPart(int id);
+
+        [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         Part UpdatePart(Part part);
 

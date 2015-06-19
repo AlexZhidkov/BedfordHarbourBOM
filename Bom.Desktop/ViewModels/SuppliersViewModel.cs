@@ -76,7 +76,7 @@ namespace Bom.Desktop.ViewModels
         {
             _Suppliers = new ObservableCollection<Supplier>();
 
-            WithClient<ISupplierService>(_ServiceFactory.CreateClient<ISupplierService>(), supplierClient =>
+            WithClient(_ServiceFactory.CreateClient<ISupplierService>(), supplierClient =>
             {
                 Supplier[] suppliers = supplierClient.GetAllSuppliers();
                 if (suppliers != null)
@@ -137,7 +137,7 @@ namespace Bom.Desktop.ViewModels
 
             if (!args.Cancel)
             {
-                WithClient<ISupplierService>(_ServiceFactory.CreateClient<ISupplierService>(), suplierClient =>
+                WithClient(_ServiceFactory.CreateClient<ISupplierService>(), suplierClient =>
                 {
                     suplierClient.DeleteSupplier(supplier.Id);
                     _Suppliers.Remove(supplier);

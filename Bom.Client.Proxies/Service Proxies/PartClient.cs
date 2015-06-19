@@ -14,6 +14,11 @@ namespace Bom.Client.Proxies
             return Channel.GetAllParts();
         }
 
+        public Part GetPart(int id)
+        {
+            return Channel.GetPart(id);
+        }
+
         public Part UpdatePart(Part part)
         {
             return Channel.UpdatePart(part);

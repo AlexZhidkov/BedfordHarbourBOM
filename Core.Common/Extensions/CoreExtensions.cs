@@ -13,7 +13,7 @@ namespace Core.Common.Extensions
     {
         public static void Merge<T>(this ObservableCollection<T> source, ObservableCollection<T> collection)
         {
-            Merge<T>(source, collection, false);
+            Merge(source, collection, false);
         }
 
         public static void Merge<T>(this ObservableCollection<T> source, ObservableCollection<T> collection, bool ignoreDuplicates)

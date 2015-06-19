@@ -100,7 +100,7 @@ namespace Bom.Desktop.ViewModels
 
             if (IsValid)
             {
-                WithClient<IStockService>(_serviceFactory.CreateClient<IStockService>(), stockClient =>
+                WithClient(_serviceFactory.CreateClient<IStockService>(), stockClient =>
                 {
                     var savedStock = stockClient.UpdateStock(_stock);
                     if (savedStock != null)
