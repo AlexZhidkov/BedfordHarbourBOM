@@ -24,6 +24,7 @@ namespace Bom.Desktop.ViewModels
             if (_isNew)
             {
                 LoadParts();
+                _stock.CountDate = DateTime.Now;
             }
             else
             {

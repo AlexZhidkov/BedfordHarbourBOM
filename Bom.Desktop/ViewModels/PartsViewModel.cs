@@ -41,6 +41,7 @@ namespace Bom.Desktop.ViewModels
 
         public event CancelEventHandler ConfirmDelete;
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
+        public event EventHandler<EditPartViewModel> OpenEditPartWindow;
 
         public EditPartViewModel CurrentPartViewModel
         {
@@ -93,6 +94,7 @@ namespace Bom.Desktop.ViewModels
                 CurrentPartViewModel.PartUpdated += CurrentPartViewModel_PartUpdated;
                 CurrentPartViewModel.CancelEditPart += CurrentPartViewModel_CancelEvent;
             }
+            if (OpenEditPartWindow != null) OpenEditPartWindow(this, CurrentPartViewModel);
         }
 
         void OnAddPartCommand(object arg)
@@ -101,6 +103,7 @@ namespace Bom.Desktop.ViewModels
             CurrentPartViewModel = new EditPartViewModel(_serviceFactory, part);
             CurrentPartViewModel.PartUpdated += CurrentPartViewModel_PartUpdated;
             CurrentPartViewModel.CancelEditPart += CurrentPartViewModel_CancelEvent;
+            if (OpenEditPartWindow != null) OpenEditPartWindow(this, CurrentPartViewModel);
         }
 
         void CurrentPartViewModel_PartUpdated(object sender, PartEventArgs e)
