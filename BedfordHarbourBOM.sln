@@ -24,6 +24,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common.Tests", "Core.Common.Tests\Core.Common.Tests.csproj", "{F929584B-5E27-4E34-AA8A-710B69ABDCED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resource Access", "Resource Access", "{7D4D8D6D-85E3-440A-87D3-53100D084321}"
+	ProjectSection(SolutionItems) = preProject
+		SQL queries.txt = SQL queries.txt
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bom.Data", "Bom.Data\Bom.Data.csproj", "{1C8C670B-9073-4A7B-AA44-A4F009E54C0D}"
 EndProject

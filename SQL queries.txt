@@ -1,0 +1,93 @@
+select * from Parts p
+select * from Subassemblies s
+--update parts set cost = 10 where id = 3
+--update parts set cost = 50 where id = 2
+--insert parts (description, type, isOwnMake, Length, Cost) values ('Master assembly 1', 0, 1, 0, 0)
+--insert Subassemblies(AssemblyId, SubassemblyId, CostContribution) values (8, 3, 10)
+---------------
+Declare @TotalCost int
+exec @TotalCost = sp_walkSubassemblies @PartId = 8
+print @TotalCost
+---------------
+--drop procedure [dbo].[sp_walkSubassemblies]
+CREATE PROCEDURE [dbo].[sp_walkSubassemblies]
+	@partId int
+AS
+
+Declare @subPartId int
+Declare @costContribution int
+Declare @cost int
+Declare @CurrCost int
+Declare @TotalCost int
+Declare @taken int
+
+Declare curP cursor local For
+	select SubassemblyId, CostContribution, p.Cost  
+	from Subassemblies s
+	inner join Parts p on p.Id = s.SubassemblyId
+	where AssemblyId = @partId
+
+OPEN curP 
+set @TotalCost = 0
+set @taken = 0
+Fetch Next From curP Into @subPartId, @costContribution, @cost
+
+While @@Fetch_Status = 0 Begin
+	exec @CurrCost = [dbo].[sp_walkSubassemblies] @partId = @subPartId
+	if @CurrCost = 0
+	begin
+		set @CurrCost = @cost * @costContribution / 100
+		set @taken = 1
+	end
+	set @TotalCost = @TotalCost + @CurrCost
+	
+	print @taken
+	print @cost
+	print @costContribution
+	print @CurrCost
+	print '@subPartId = ' + CAST(@subPartId AS nvarchar(10)) + ' @TotalCost = ' + CAST(@TotalCost AS nvarchar(10)) 
+	print '---'
+
+Fetch Next From curP Into @subPartId, @costContribution, @cost
+End -- End of Fetch
+
+Close curP
+Deallocate curP
+	print '==='
+	if @taken = 0
+	begin
+		set @TotalCost = @cost + (@TotalCost * @costContribution / 100)
+	end
+return @TotalCost
+---------------
+CREATE FUNCTION getCost (@PartId int)
+RETURNS int
+WITH EXECUTE AS CALLER
+AS
+BEGIN
+    DECLARE @Cost int;
+	select @Cost=sum(s.CostContribution * p.Cost / 100)
+	from Subassemblies s
+	inner join Parts p on p.Id = s.SubassemblyId
+	where s.AssemblyId = @PartId
+	group by AssemblyId     
+	RETURN(@Cost);
+END;
+---------------
+
+with components (ParentId, ChildId, Description, cost)
+as
+(
+	select s.AssemblyId, s.SubassemblyId, s.Notes, p.cost as cost
+	from Subassemblies as s
+	inner join parts as p on p.Id = s.SubassemblyId
+	where AssemblyId = 8
+	union all
+	select s.AssemblyId, s.SubassemblyId, s.Notes, s.CostContribution * p.Cost / 100 as cost
+	from Subassemblies as s
+	inner join parts as p on p.Id = s.SubassemblyId
+	inner join components as c on s.AssemblyId = c.ChildId	
+)
+
+select * from components
+---------------
