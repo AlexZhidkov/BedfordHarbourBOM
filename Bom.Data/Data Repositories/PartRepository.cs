@@ -35,7 +35,12 @@ namespace Bom.Data
             var part = (entityContext.Parts.Where(e => e.Id == id)).FirstOrDefault();
             if (part == null) return null;
 
-            part.Components = entityContext.Subassemblies.Where(e => e.AssemblyId == id).ToFullyLoaded();
+            var components = from component in entityContext.Parts
+                    join assembly in entityContext.Subassemblies on component.Id equals assembly.SubassemblyId
+                    where assembly.AssemblyId == id
+                    select component;
+
+            part.Components = components.ToFullyLoaded();
 
             return part;
         }

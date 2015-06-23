@@ -15,7 +15,7 @@ namespace Bom.Business.Entities
         [DataMember]
         public string Description { get; set; }
         [DataMember]
-        public IEnumerable<Subassembly> Components { get; set; }
+        public IEnumerable<Part> Components { get; set; }
         [DataMember]
         public bool IsOwnMake { get; set; }
         [DataMember]

@@ -48,6 +48,7 @@ namespace Bom.Desktop.ViewModels
 
             SaveCommand = new DelegateCommand<object>(OnSaveCommandExecute, OnSaveCommandCanExecute);
             CancelCommand = new DelegateCommand<object>(OnCancelCommandExecute);
+            EditPartCommand = new DelegateCommand<int>(OnEditPartCommandExecute);
         }
 
         readonly IServiceFactory _serviceFactory;
@@ -55,9 +56,11 @@ namespace Bom.Desktop.ViewModels
 
         public DelegateCommand<object> SaveCommand { get; private set; }
         public DelegateCommand<object> CancelCommand { get; private set; }
+        public DelegateCommand<int> EditPartCommand { get; private set; }
 
         public event EventHandler CancelEditPart;
         public event EventHandler<PartEventArgs> PartUpdated;
+        public event EventHandler<EditPartViewModel> OpenEditPartWindow;
 
         public Part Part
         {
@@ -98,6 +101,11 @@ namespace Bom.Desktop.ViewModels
         {
             if (CancelEditPart != null)
                 CancelEditPart(this, EventArgs.Empty);
+        }
+
+        void OnEditPartCommandExecute(int partId)
+        {
+            if (OpenEditPartWindow != null) OpenEditPartWindow(this, new EditPartViewModel(_serviceFactory, partId));
         }
     }
 }

@@ -43,6 +43,7 @@ namespace Bom.Desktop
             {
                 vm.PartUpdated -= OnPartUpdated;
                 vm.CancelEditPart -= OnCancelEditPart;
+                vm.OpenEditPartWindow -= OnOpenEditPartWindow;
             }
         }
 
@@ -53,6 +54,7 @@ namespace Bom.Desktop
             {
                 vm.PartUpdated += OnPartUpdated;
                 vm.CancelEditPart += OnCancelEditPart;
+                vm.OpenEditPartWindow += OnOpenEditPartWindow;
             }
         }
 
@@ -81,6 +83,12 @@ namespace Bom.Desktop
             {
                 OnWireViewModelEvents(e.NewValue as ViewModelBase);
             }
+        }
+
+        void OnOpenEditPartWindow(object sender, EditPartViewModel e)
+        {
+            EditPartWindow editPartWindow = new EditPartWindow(e);
+            editPartWindow.Show();
         }
 
     }

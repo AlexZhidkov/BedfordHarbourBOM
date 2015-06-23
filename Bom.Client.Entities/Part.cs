@@ -13,6 +13,7 @@ namespace Bom.Client.Entities
         private PartType _type;
         private string _number;
         private string _description;
+        private IEnumerable<Part> _components;
         private bool _isOwnMake;
         private int _length;
         private int _cost;
@@ -36,6 +37,17 @@ namespace Bom.Client.Entities
                 if (_description == value) return;
                 _description = value;
                 OnPropertyChanged(() => Description);
+            }
+        }
+
+        public IEnumerable<Part> Components
+        {
+            get { return _components; }
+            set
+            {
+                if (_components == value) return;
+                _components = value;
+                OnPropertyChanged(() => Components);
             }
         }
 
