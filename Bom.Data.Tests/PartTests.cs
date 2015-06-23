@@ -30,6 +30,16 @@ namespace Bom.Data.Tests
         }
 
         [TestMethod]
+        public void test_subassemblies_repository_usage()
+        {
+            PartRepositoryTestClass repositoryTest = new PartRepositoryTestClass();
+
+            Part part = repositoryTest.GetPart(3);
+
+            Assert.IsNotNull(part.Components);
+        }
+
+        [TestMethod]
         public void test_part_repository_factory_usage()
         {
             RepositoryFactoryTestClass factoryTest = new RepositoryFactoryTestClass();
@@ -120,6 +130,11 @@ namespace Bom.Data.Tests
             IEnumerable<Part> partItems = _PartRepository.Get();
 
             return partItems;
+        }
+
+        public Part GetPart(int partId)
+        {
+            return _PartRepository.Get(partId);
         }
     }
 }

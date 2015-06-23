@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bom.Business.Entities;
 using Bom.Data.Contracts;
+using Core.Common.Extensions;
 
 namespace Bom.Data
 {
@@ -31,7 +32,12 @@ namespace Bom.Data
 
         protected override Part GetEntity(BomContext entityContext, int id)
         {
-            return (entityContext.Parts.Where(e => e.Id == id)).FirstOrDefault();
+            var part = (entityContext.Parts.Where(e => e.Id == id)).FirstOrDefault();
+            if (part == null) return null;
+
+            part.Components = entityContext.Subassemblies.Where(e => e.AssemblyId == id).ToFullyLoaded();
+
+            return part;
         }
     }
 }

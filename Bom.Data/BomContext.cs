@@ -16,6 +16,7 @@ namespace Bom.Data
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<Part> Parts { get; set; }
+        public DbSet<Subassembly> Subassemblies { get; set; }
 
         public BomContext()
             : base("name=BomContext")
@@ -34,6 +35,7 @@ namespace Bom.Data
             modelBuilder.Entity<Supplier>().HasKey<int>(e => e.Id).Ignore(e => e.EntityId);
             modelBuilder.Entity<Stock>().HasKey<int>(e => e.Id).Ignore(e => e.EntityId);
             modelBuilder.Entity<Part>().HasKey<int>(e => e.Id).Ignore(e => e.EntityId);
+            modelBuilder.Entity<Subassembly>().HasKey<int>(e => e.Id).Ignore(e => e.EntityId);
 
             //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }

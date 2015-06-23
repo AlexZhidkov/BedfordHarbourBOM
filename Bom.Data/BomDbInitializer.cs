@@ -66,6 +66,27 @@ namespace Bom.Data
             context.Parts.Add(part2);
             context.Parts.Add(part3);
 
+            var subassembly1 = new Subassembly
+            {
+                Id = 1,
+                AssemblyId = 3,
+                SubassemblyId = 1,
+                CostContribution = 33,
+                Notes = "Component 1"
+            };
+
+            var subassembly2 = new Subassembly
+            {
+                Id = 2,
+                AssemblyId = 3,
+                SubassemblyId = 2,
+                CostContribution = 50,
+                Notes = "Component 2"
+            };
+
+            context.Subassemblies.Add(subassembly1);
+            context.Subassemblies.Add(subassembly2);
+
             context.Stocks.Add(new Stock
             {
                 Id = 1,

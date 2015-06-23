@@ -14,9 +14,8 @@ namespace Bom.Business.Entities
         public string Number { get; set; }
         [DataMember]
         public string Description { get; set; }
-        //ToDo may be introduce in future releases? Seems to be not required at the moment
-        //[DataMember]
-        //public IEnumerable<Part> Parts { get; set; }
+        [DataMember]
+        public IEnumerable<Subassembly> Components { get; set; }
         [DataMember]
         public bool IsOwnMake { get; set; }
         [DataMember]
