@@ -39,7 +39,7 @@ namespace Bom.Data
         {
             using (BomContext entityContext = new BomContext())
             {
-                var query = from s in entityContext.Stocks
+                IQueryable<StockItemsInfo> query = from s in entityContext.Stocks
                             join p in entityContext.Parts on s.PartId equals p.Id
                             select new StockItemsInfo()
                             {

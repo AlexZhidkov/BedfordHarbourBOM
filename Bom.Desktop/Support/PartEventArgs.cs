@@ -1,4 +1,5 @@
 ﻿using System;
+using Bom.Client.Contracts;
 using Bom.Client.Entities;
 
 namespace Bom.Desktop.Support

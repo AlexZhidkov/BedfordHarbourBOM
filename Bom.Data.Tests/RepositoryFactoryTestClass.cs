@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using Bom.Business.Entities;
 using Bom.Data.Contracts;
 using Core.Common.Contracts;
 using Core.Common.Core;
+using DTO = Bom.Business.Contracts;
+using Entities = Bom.Business.Entities;
 
 namespace Bom.Data.Tests
 {
@@ -22,29 +23,29 @@ namespace Bom.Data.Tests
         [Import]
         IDataRepositoryFactory _DataRepositoryFactory;
 
-        public IEnumerable<Supplier> GetSuppliers()
+        public IEnumerable<Entities.Supplier> GetSuppliers()
         {
             ISupplierRepository supplierRepository = _DataRepositoryFactory.GetDataRepository<ISupplierRepository>();
 
-            IEnumerable<Supplier> suppliers = supplierRepository.Get();
+            IEnumerable<Entities.Supplier> suppliers = supplierRepository.Get();
 
             return suppliers;
         }
 
-        public IEnumerable<Stock> GetAllStock()
+        public IEnumerable<Entities.Stock> GetAllStock()
         {
             IStockRepository stockRepository = _DataRepositoryFactory.GetDataRepository<IStockRepository>();
 
-            IEnumerable<Stock> stocks = stockRepository.Get();
+            IEnumerable<Entities.Stock> stocks = stockRepository.Get();
 
             return stocks;
         }
 
-        public IEnumerable<Part> GetAllParts()
+        public IEnumerable<DTO.Part> GetAllParts()
         {
             IPartRepository partRepository = _DataRepositoryFactory.GetDataRepository<IPartRepository>();
 
-            IEnumerable<Part> parts = partRepository.Get();
+            var parts = partRepository.Get();
 
             return parts;
         }

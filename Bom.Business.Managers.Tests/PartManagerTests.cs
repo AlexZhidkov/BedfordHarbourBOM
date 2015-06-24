@@ -1,14 +1,6 @@
-﻿using System;
-using System.Security.Principal;
-using System.Threading;
-using Bom.Business.Bootstrapper;
-using Bom.Business.Contracts;
-using Bom.Business.Entities;
-using Bom.Common;
-using Bom.Data;
+﻿using Bom.Business.Contracts;
 using Bom.Data.Contracts;
 using Core.Common.Contracts;
-using Core.Common.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

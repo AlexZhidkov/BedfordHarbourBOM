@@ -76,6 +76,10 @@
       <Project>{75393849-86da-4361-97ae-a5e51b4764f5}</Project>
       <Name>Bom.Business.Bootstrapper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bom.Business.Contracts\Bom.Business.Contracts.csproj">
+      <Project>{49282531-c8e2-4e44-a33c-c576e6ebecb4}</Project>
+      <Name>Bom.Business.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bom.Business.Entities\Bom.Business.Entities.csproj">
       <Project>{9d062e6f-bb5b-476d-925c-2be58549db01}</Project>
       <Name>Bom.Business.Entities</Name>

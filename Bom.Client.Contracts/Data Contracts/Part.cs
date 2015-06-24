@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Bom.Common;
 using FluentValidation;
+using Bom.Client.Entities;
+using Bom.Common;
 
-namespace Bom.Client.Entities
+namespace Bom.Client.Contracts
 {
     public class Part : BaseEntity
     {
         private PartType _type;
         private string _number;
         private string _description;
-        private IEnumerable<Part> _components;
+        private IEnumerable<SubassemblyData> _components;
         private bool _isOwnMake;
         private int _length;
         private int _cost;
@@ -40,7 +41,7 @@ namespace Bom.Client.Entities
             }
         }
 
-        public IEnumerable<Part> Components
+        public IEnumerable<SubassemblyData> Components
         {
             get { return _components; }
             set

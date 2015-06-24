@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Bom.Business.Bootstrapper;
-using Bom.Business.Entities;
+using Bom.Business.Contracts;
 using Bom.Data.Contracts;
 using Core.Common.Contracts;
 using Core.Common.Core;
@@ -30,13 +30,13 @@ namespace Bom.Data.Tests
         }
 
         [TestMethod]
-        public void test_subassemblies_repository_usage()
+        public void test_components_repository_usage()
         {
             PartRepositoryTestClass repositoryTest = new PartRepositoryTestClass();
 
-            Part part = repositoryTest.GetPart(3);
+            var components = repositoryTest.GetComponents(3);
 
-            Assert.IsNotNull(part.Components);
+            Assert.IsNotNull(components);
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace Bom.Data.Tests
         {
             RepositoryFactoryTestClass factoryTest = new RepositoryFactoryTestClass();
 
-            IEnumerable<Part> parts = factoryTest.GetAllParts();
+            var parts = factoryTest.GetAllParts();
 
             Assert.IsTrue(parts != null);
         }
@@ -135,6 +135,11 @@ namespace Bom.Data.Tests
         public Part GetPart(int partId)
         {
             return _PartRepository.Get(partId);
+        }
+
+        public IEnumerable<SubassemblyData> GetComponents(int partId)
+        {
+            return _PartRepository.GetComponents(partId);
         }
     }
 }

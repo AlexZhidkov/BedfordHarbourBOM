@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using Bom.Business.Contracts;
-using Bom.Business.Entities;
+//using Bom.Business.Entities;
 using Bom.Data.Contracts;
 using Core.Common.Contracts;
 
@@ -44,8 +44,9 @@ namespace Bom.Business.Managers
             return ExecuteFaultHandledOperation(() =>
             {
                 IPartRepository partRepository = _dataRepositoryFactory.GetDataRepository<IPartRepository>();
-
-                return partRepository.Get(id);
+                var part = partRepository.Get(id);
+                part.Components = partRepository.GetComponents(id);
+                return part;
             });
         }
 
