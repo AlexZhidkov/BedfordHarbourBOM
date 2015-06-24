@@ -4,7 +4,11 @@
         xmlns:controls="clr-namespace:Core.Common.UI.Controls;assembly=Core.Common.UI"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:common="clr-namespace:Bom.Common;assembly=Bom.Common"
+        xmlns:support="clr-namespace:Bom.Desktop.Support"
         Title="Edit Part" Height="500" Width="300" DataContextChanged="Window_DataContextChanged">
+    <Window.Resources>
+        <support:ViewModelNullToVisibilityConverter x:Key="viewModelNullToVisibilityConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -47,17 +51,17 @@
             <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Part.Length, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
             <CheckBox Grid.Row="4" Grid.Column="1" Margin="3" IsChecked="{Binding Part.IsOwnMake, Mode=TwoWay}" HorizontalAlignment="Left"/>
             <TextBox Grid.Row="5" Grid.Column="1" Margin="3" Text="{Binding Part.Cost, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <ListBox Grid.Row="6" Grid.Column="1" Margin="3" BorderThickness="0" ItemsSource="{Binding Part.Components}">
+            <ListBox Grid.Row="6" Grid.Column="1" Margin="3" BorderThickness="0" ItemsSource="{Binding Part.Components, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" >
-                            <Button Margin="3" Content="{Binding Description}" Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Id}"/>
-                            <Button Margin="3" Content="X" Command="{Binding RemoveComponentCommand}" />
+                            <Button Margin="3" Content="{Binding PartDescription}" Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding SubassemblyId}"/>
+                            <Button Margin="3" Content="X" Command="{Binding DataContext.RemoveComponentCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding SubassemblyId}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" Content="Add" Margin="5" Command="{Binding AddComponentCommand}" />
+            <Button Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" Content="Add" Margin="5" Command="{Binding DataContext.AddComponentCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Part.Id}"/>
             <TextBox Grid.Row="8" Grid.Column="1" Margin="3" Text="{Binding Part.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left"
                 AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
         </Grid>
@@ -65,5 +69,9 @@
             <Button Content="Save" Margin="5" Command="{Binding SaveCommand}" />
             <Button Content="Cancel" Margin="5" Command="{Binding CancelCommand}" />
         </StackPanel>
+        <Border Grid.Row="1" CornerRadius="4" Margin="10" BorderBrush="SteelBlue" BorderThickness="1" Background="BlanchedAlmond"
+                Visibility="{Binding CurrentAddComponentViewModel, Converter={StaticResource viewModelNullToVisibilityConverter}}">
+            <ContentControl Content="{Binding CurrentAddComponentViewModel}" />
+        </Border>
     </Grid>
 </Window>

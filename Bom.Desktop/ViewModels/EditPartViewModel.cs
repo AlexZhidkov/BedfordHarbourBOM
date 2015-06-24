@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Bom.Client.Contracts;
 using Bom.Client.Entities;
 using Bom.Desktop.Support;
@@ -49,14 +50,32 @@ namespace Bom.Desktop.ViewModels
             SaveCommand = new DelegateCommand<object>(OnSaveCommandExecute, OnSaveCommandCanExecute);
             CancelCommand = new DelegateCommand<object>(OnCancelCommandExecute);
             EditPartCommand = new DelegateCommand<int>(OnEditPartCommandExecute);
+            AddComponentCommand = new DelegateCommand<int>(OnAddComponentCommandExecute);
+            RemoveComponentCommand = new DelegateCommand<int>(OnRemoveComponentCommandExecute);
         }
 
         readonly IServiceFactory _serviceFactory;
         Part _part;
+        AddComponentViewModel _addComponentViewModel;
+
+        public AddComponentViewModel CurrentAddComponentViewModel
+        {
+            get { return _addComponentViewModel; }
+            set
+            {
+                if (_addComponentViewModel != value)
+                {
+                    _addComponentViewModel = value;
+                    OnPropertyChanged(() => CurrentAddComponentViewModel, false);
+                }
+            }
+        }
 
         public DelegateCommand<object> SaveCommand { get; private set; }
         public DelegateCommand<object> CancelCommand { get; private set; }
         public DelegateCommand<int> EditPartCommand { get; private set; }
+        public DelegateCommand<int> AddComponentCommand { get; private set; }
+        public DelegateCommand<int> RemoveComponentCommand { get; private set; }
 
         public event EventHandler CancelEditPart;
         public event EventHandler<PartEventArgs> PartUpdated;
@@ -106,6 +125,28 @@ namespace Bom.Desktop.ViewModels
         void OnEditPartCommandExecute(int partId)
         {
             if (OpenEditPartWindow != null) OpenEditPartWindow(this, new EditPartViewModel(_serviceFactory, partId));
+        }
+
+        private void OnAddComponentCommandExecute(int partId)
+        {
+            CurrentAddComponentViewModel = new AddComponentViewModel(_serviceFactory);
+            CurrentAddComponentViewModel.CancelAddComponent += AddComponentViewModel_CancelEvent;
+            CurrentAddComponentViewModel.ComponentAdded += AddComponentViewModel_ComponentAdded;
+        }
+
+        private void AddComponentViewModel_ComponentAdded(object sender, int e)
+        {
+            //ToDo implement
+        }
+
+        private void AddComponentViewModel_CancelEvent(object sender, EventArgs e)
+        {
+            CurrentAddComponentViewModel = null;
+        }
+
+        private void OnRemoveComponentCommandExecute(int partId)
+        {
+            _part.Components = _part.Components.Where(c => c.SubassemblyId != partId);
         }
     }
 }
