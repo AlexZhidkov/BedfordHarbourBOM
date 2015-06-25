@@ -12,6 +12,7 @@ namespace Bom.Business.Entities
         public int AssemblyId { get; set; }
         public int SubassemblyId { get; set; }
         public int CostContribution { get; set; }
+        public int Count { get; set; }
 
         public int EntityId
         {

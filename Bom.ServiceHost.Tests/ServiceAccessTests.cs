@@ -9,7 +9,6 @@ namespace Bom.ServiceHost.Tests
     public class ServiceAccessTests
     {
         [TestMethod]
-        [Ignore]
         public void test_supplier_manager_as_service()
         {
             ChannelFactory<ISupplierService> channelFactory =

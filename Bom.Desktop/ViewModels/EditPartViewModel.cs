@@ -40,6 +40,26 @@ namespace Bom.Desktop.ViewModels
                 Notes = part.Notes
             };
 
+            if (part.Components != null)
+            {
+                _part.Components = new List<SubassemblyData>();
+                foreach (var component in part.Components)
+                {
+                    _part.Components = _part.Components.Concat(new[]
+                    {
+                        new SubassemblyData
+                        {
+                            Id = component.Id,
+                            AssemblyId = component.AssemblyId,
+                            SubassemblyId = component.SubassemblyId,
+                            PartDescription = component.PartDescription,
+                            Count = component.Count,
+                            CostContribution = component.CostContribution,
+                            Notes = component.Notes,
+                        }
+                    });
+                }
+            }
             Initialize();
         }
 
@@ -50,15 +70,16 @@ namespace Bom.Desktop.ViewModels
             SaveCommand = new DelegateCommand<object>(OnSaveCommandExecute, OnSaveCommandCanExecute);
             CancelCommand = new DelegateCommand<object>(OnCancelCommandExecute);
             EditPartCommand = new DelegateCommand<int>(OnEditPartCommandExecute);
+            EditComponentCommand = new DelegateCommand<SubassemblyData>(OnEditComponentCommandExecute);
             AddComponentCommand = new DelegateCommand<int>(OnAddComponentCommandExecute);
             RemoveComponentCommand = new DelegateCommand<int>(OnRemoveComponentCommandExecute);
         }
 
         readonly IServiceFactory _serviceFactory;
         Part _part;
-        AddComponentViewModel _addComponentViewModel;
+        EditComponentViewModel _addComponentViewModel;
 
-        public AddComponentViewModel CurrentAddComponentViewModel
+        public EditComponentViewModel CurrentAddComponentViewModel
         {
             get { return _addComponentViewModel; }
             set
@@ -75,6 +96,7 @@ namespace Bom.Desktop.ViewModels
         public DelegateCommand<object> CancelCommand { get; private set; }
         public DelegateCommand<int> EditPartCommand { get; private set; }
         public DelegateCommand<int> AddComponentCommand { get; private set; }
+        public DelegateCommand<SubassemblyData> EditComponentCommand { get; private set; }
         public DelegateCommand<int> RemoveComponentCommand { get; private set; }
 
         public event EventHandler CancelEditPart;
@@ -129,17 +151,44 @@ namespace Bom.Desktop.ViewModels
 
         private void OnAddComponentCommandExecute(int partId)
         {
-            CurrentAddComponentViewModel = new AddComponentViewModel(_serviceFactory);
-            CurrentAddComponentViewModel.CancelAddComponent += AddComponentViewModel_CancelEvent;
-            CurrentAddComponentViewModel.ComponentAdded += AddComponentViewModel_ComponentAdded;
+            var component = new SubassemblyData
+            {
+                AssemblyId = partId
+            };
+            CurrentAddComponentViewModel = new EditComponentViewModel(_serviceFactory, component, true);
+            CurrentAddComponentViewModel.CancelAddComponent += EditComponentViewModel_CancelEvent;
+            CurrentAddComponentViewModel.ComponentUpdated += EditComponentViewModel_ComponentUpdated;
         }
 
-        private void AddComponentViewModel_ComponentAdded(object sender, int e)
+        private void OnEditComponentCommandExecute(SubassemblyData component)
         {
-            //ToDo implement
+            CurrentAddComponentViewModel = new EditComponentViewModel(_serviceFactory, component, false);
+            CurrentAddComponentViewModel.CancelAddComponent += EditComponentViewModel_CancelEvent;
+            CurrentAddComponentViewModel.ComponentUpdated += EditComponentViewModel_ComponentUpdated;
         }
 
-        private void AddComponentViewModel_CancelEvent(object sender, EventArgs e)
+        private void EditComponentViewModel_ComponentUpdated(object sender, Support.ComponentEventArgs e)
+        {
+            if (!e.IsNew)
+            {
+                SubassemblyData component = Part.Components.FirstOrDefault(item => item.Id == e.Component.Id);
+                if (component != null)
+                {
+                    component.AssemblyId = e.Component.AssemblyId;
+                    component.SubassemblyId = e.Component.SubassemblyId;
+                    component.PartDescription = e.Component.PartDescription;
+                    component.CostContribution = e.Component.CostContribution;
+                    component.Notes = e.Component.Notes;
+                }
+            }
+            else
+                _part.Components = _part.Components.Concat(new[] { e.Component });
+
+            _part.IsDirty = true;
+            CurrentAddComponentViewModel = null;
+        }
+
+        private void EditComponentViewModel_CancelEvent(object sender, EventArgs e)
         {
             CurrentAddComponentViewModel = null;
         }

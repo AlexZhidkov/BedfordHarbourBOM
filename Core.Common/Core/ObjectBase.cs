@@ -43,7 +43,7 @@ namespace Core.Common.Core
         public virtual bool IsDirty
         {
             get { return _IsDirty; }
-            protected set
+            set
             {
                 _IsDirty = value;
                 OnPropertyChanged("IsDirty", false);

@@ -18,5 +18,8 @@
         <DataTemplate DataType="{x:Type vm:EditSupplierViewModel}">
             <v:EditSupplierView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:EditComponentViewModel}">
+            <v:EditComponentView />
+        </DataTemplate>
     </Application.Resources>
 </Application>

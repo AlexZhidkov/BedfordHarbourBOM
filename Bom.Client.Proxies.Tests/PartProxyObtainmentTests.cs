@@ -45,28 +45,6 @@ namespace Bom.Client.Proxies.Tests
             Assert.IsTrue(proxy is PartClient);
         }
 
-        [TestMethod]
-        [Ignore]
-        public void GetAllParts_fromDB()
-        {
-            IPartService proxy
-                = ObjectBase.Container.GetExportedValue<IPartService>();
-
-            var s = proxy.GetAllParts();
-            Assert.IsNotNull(s);
-        }
-
-        [TestMethod]
-        [Ignore]
-        public void GetAllStockItems_fromDB()
-        {
-            IStockService proxy = ObjectBase.Container.GetExportedValue<IStockService>();
-
-            var s = proxy.GetAllStockItems();
-
-            Assert.IsNotNull(s);
-            Assert.IsTrue(s.Length > 0);
-        }
 
     }
 }

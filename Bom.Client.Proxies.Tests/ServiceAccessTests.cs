@@ -7,7 +7,6 @@ namespace Bom.Client.Proxies.Tests
     public class ServiceAccessTests
     {
         [TestMethod]
-        [Ignore]
         public void test_supplier_client_connection()
         {
             SupplierClient proxy = new SupplierClient();

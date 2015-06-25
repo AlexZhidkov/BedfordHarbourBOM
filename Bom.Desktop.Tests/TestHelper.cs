@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bom.Client.Contracts;
 using Bom.Client.Entities;
+using Bom.Common;
 
 namespace Bom.Desktop.Tests
 {
@@ -28,7 +29,7 @@ namespace Bom.Desktop.Tests
             {
                 Id = 1,
                 Notes = "Test Notes",
-                Suppliers = new[] { new Supplier { Id = 1, Name = "Test Supplier 1" } },
+                Suppliers = new[] {new Supplier {Id = 1, Name = "Test Supplier 1"}},
                 PartId = 1,
                 Cost = 99,
                 Count = 5,
@@ -46,6 +47,54 @@ namespace Bom.Desktop.Tests
                 Count = 5,
                 Cost = 99,
                 CountDate = new DateTime(2010, 1, 21)
+            };
+        }
+
+        public static Part GetTestPart()
+        {
+            return new Part
+            {
+                Id = 1,
+                Description = "Test Part Description",
+                Number = "12345",
+                Type = PartType.Assembly,
+                Cost = 99,
+                IsOwnMake = true,
+                Length = 55,
+                Notes = "Test Notes",
+                Components = new[]
+                {
+                    new SubassemblyData
+                    {
+                        AssemblyId = 1,
+                        SubassemblyId = 2,
+                        PartDescription = "Subassembly 2",
+                        CostContribution = 33,
+                        Notes = "Notes"
+                    },
+                    new SubassemblyData
+                    {
+                        AssemblyId = 1,
+                        SubassemblyId = 2,
+                        PartDescription = "Subassembly 2",
+                        CostContribution = 33,
+                        Notes = "Notes"
+                    }
+                }
+            };
+        }
+
+        public static SubassemblyData GetTestComponent()
+        {
+            return new SubassemblyData
+            {
+                Id = 1,
+                AssemblyId = 1,
+                SubassemblyId = 2,
+                PartDescription = "Subassembly 2",
+                CostContribution = 50,
+                Count = 5,
+                Notes = "Test Notes",
             };
         }
     }

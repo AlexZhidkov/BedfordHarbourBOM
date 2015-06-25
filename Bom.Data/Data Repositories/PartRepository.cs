@@ -98,16 +98,17 @@ namespace Bom.Data
         {
             using (BomContext entityContext = new BomContext())
             {
-
                 IQueryable<SubassemblyData> components = from component in entityContext.Parts
                     join assembly in entityContext.Subassemblies on component.Id equals assembly.SubassemblyId
                     where assembly.AssemblyId == assemblyId
                     select new SubassemblyData
                     {
+                        Id = assembly.Id,
                         AssemblyId = assembly.AssemblyId,
                         SubassemblyId = assembly.SubassemblyId,
                         PartDescription = component.Description,
                         CostContribution = assembly.CostContribution,
+                        Count = assembly.Count,
                         Notes = assembly.Notes
                     };
 

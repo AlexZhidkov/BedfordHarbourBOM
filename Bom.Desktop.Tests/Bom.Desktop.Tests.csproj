@@ -55,6 +55,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="EditComponentViewModelTests.cs" />
+    <Compile Include="EditPartViewModelTests.cs" />
     <Compile Include="PartsViewModelTests.cs" />
     <Compile Include="SuppliersViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,6 +73,10 @@
     <ProjectReference Include="..\Bom.Client.Entities\Bom.Client.Entities.csproj">
       <Project>{A50C38D7-5AB5-486A-9049-7C710DF61192}</Project>
       <Name>Bom.Client.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bom.Common\Bom.Common.csproj">
+      <Project>{993F9605-28D3-437C-9CB3-1CEEC3A4A453}</Project>
+      <Name>Bom.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Bom.Desktop\Bom.Desktop.csproj">
       <Project>{80CB0A5A-6C32-40AF-9973-21BB21BEA534}</Project>
