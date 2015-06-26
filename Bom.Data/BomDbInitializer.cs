@@ -61,7 +61,6 @@ namespace Bom.Data
                 Type = PartType.RHS,
                 Number = ""
             };
-
             var part4 = new Part
             {
                 Id = 4,
@@ -73,7 +72,6 @@ namespace Bom.Data
                 Type = PartType.Undefined,
                 Number = "4"
             };
-
             var rm32NB = new Part
             {
                 Id = 5,
