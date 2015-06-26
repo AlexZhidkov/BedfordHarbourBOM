@@ -26,7 +26,7 @@
                 <RowDefinition Height="130" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="180" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Description:" />

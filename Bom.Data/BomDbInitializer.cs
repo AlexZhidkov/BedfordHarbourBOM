@@ -41,9 +41,30 @@ namespace Bom.Data
                 Type = PartType.Assembly,
                 Number = "A"
             };
-            var part4 = new Part
+            var topRing = new Part
             {
                 Id = 2,
+                Cost = 258.6M,
+                Length = 19,
+                Description = "Top Ring - 65 x 74 x 2.5 Silo Tube - 19M",
+                IsOwnMake = true,
+                Type = PartType.Assembly,
+                Number = ""
+            };
+            var rm1 = new Part
+            {
+                Id = 3,
+                Cost = 163.32M,
+                Length = 12,
+                Description = "74.6 X 65 X 2.5MM X 12M",
+                IsOwnMake = false,
+                Type = PartType.RHS,
+                Number = ""
+            };
+
+            var part4 = new Part
+            {
+                Id = 4,
                 Cost = 231.9M,
                 Notes = "",
                 Length = 20,
@@ -52,37 +73,25 @@ namespace Bom.Data
                 Type = PartType.Undefined,
                 Number = "4"
             };
-            var part3 = new Part
-            {
-                Id = 3,
-                Cost = 149,
-                Notes = "",
-                Length = 0,
-                Description = "Assembly",
-                IsOwnMake = true,
-                Type = PartType.Assembly,
-                Number = "N3"
-            };
+            context.Parts.Add(rm1);
+            context.Parts.Add(topRing);
             context.Parts.Add(mainFrame);
             context.Parts.Add(part4);
-            context.Parts.Add(part3);
 
             var subassembly1 = new Subassembly
             {
                 Id = 1,
-                AssemblyId = 3,
-                SubassemblyId = 1,
-                CostContribution = 33,
-                Notes = "Component 1"
+                AssemblyId = mainFrame.Id,
+                SubassemblyId = topRing.Id,
+                CostContribution = 1
             };
 
             var subassembly2 = new Subassembly
             {
                 Id = 2,
-                AssemblyId = 3,
-                SubassemblyId = 2,
-                CostContribution = 50,
-                Notes = "Component 2"
+                AssemblyId = topRing.Id,
+                SubassemblyId = rm1.Id,
+                CostContribution = 1.583333333M
             };
 
             context.Subassemblies.Add(subassembly1);
@@ -105,8 +114,15 @@ namespace Bom.Data
             context.Stocks.Add(new Stock
             {
                 Id = 3,
-                PartId = part3.Id,
+                PartId = topRing.Id,
                 Count = 3,
+                CountDate = new DateTime(2015, 1, 1)
+            });
+            context.Stocks.Add(new Stock
+            {
+                Id = 4,
+                PartId = rm1.Id,
+                Count = 13,
                 CountDate = new DateTime(2015, 1, 1)
             });
 

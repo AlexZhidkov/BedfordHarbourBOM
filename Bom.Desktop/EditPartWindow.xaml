@@ -5,7 +5,7 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:common="clr-namespace:Bom.Common;assembly=Bom.Common"
         xmlns:support="clr-namespace:Bom.Desktop.Support"
-        Title="Edit Part" Height="500" Width="300" DataContextChanged="Window_DataContextChanged">
+        Title="Edit Part" Height="500" Width="400" DataContextChanged="Window_DataContextChanged">
     <Window.Resources>
         <support:ViewModelNullToVisibilityConverter x:Key="viewModelNullToVisibilityConverter" />
     </Window.Resources>
@@ -30,7 +30,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Description:" />
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Number:" />

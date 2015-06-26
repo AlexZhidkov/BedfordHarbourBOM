@@ -6,7 +6,7 @@
              xmlns:core="clr-namespace:Core.Common.UI.Core;assembly=Core.Common.UI"
              xmlns:conv="clr-namespace:Bom.Desktop.Support"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="550">
+             d:DesignHeight="300" d:DesignWidth="800">
     <Grid>
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
@@ -16,11 +16,11 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150" SharedSizeGroup="name" />
+                    <ColumnDefinition Width="300" SharedSizeGroup="name" />
                     <ColumnDefinition Width="50" SharedSizeGroup="cost" />
                     <ColumnDefinition Width="50" SharedSizeGroup="count" />
                     <ColumnDefinition Width="100" SharedSizeGroup="countDate" />
-                    <ColumnDefinition Width="200" SharedSizeGroup="notes" />
+                    <ColumnDefinition Width="300" SharedSizeGroup="notes" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Name" />
                 <TextBlock Grid.Column="1" Text="Cost" />
@@ -33,11 +33,11 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150" SharedSizeGroup="name" />
+                                <ColumnDefinition Width="300" SharedSizeGroup="name" />
                                 <ColumnDefinition Width="50" SharedSizeGroup="cost" />
                                 <ColumnDefinition Width="50" SharedSizeGroup="count" />
                                 <ColumnDefinition Width="100" SharedSizeGroup="countDate" />
-                                <ColumnDefinition Width="200" SharedSizeGroup="notes" />
+                                <ColumnDefinition Width="300" SharedSizeGroup="notes" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" >
                                 <Hyperlink Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding PartId}">

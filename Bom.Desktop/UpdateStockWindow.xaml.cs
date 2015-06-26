@@ -92,5 +92,11 @@ namespace Bom.Desktop
             stockItem.PartDescription = selectedPart.Description;
             stockItem.Stock.PartId = selectedPart.Id;
         }
+
+        private void TodayButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var stockItem = (EditStockViewModel)DataContext;
+            stockItem.Stock.CountDate = DateTime.Now;
+        }
     }
 }

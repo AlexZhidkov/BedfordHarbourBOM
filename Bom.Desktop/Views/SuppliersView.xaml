@@ -70,7 +70,7 @@
                 <Button Content="Add New" Command="{Binding AddSupplierCommand}" />
             </StackPanel>
         </Grid>
-        <Border Grid.Column="1" CornerRadius="4" Margin="10" BorderBrush="SteelBlue" BorderThickness="1" Background="BlanchedAlmond"
+        <Border Grid.Column="0" CornerRadius="4" Margin="10" BorderBrush="SteelBlue" BorderThickness="1" Background="BlanchedAlmond"
                 Visibility="{Binding CurrentSupplierViewModel, Converter={StaticResource viewModelNullToVisibilityConverter}}">
             <ContentControl Content="{Binding CurrentSupplierViewModel}" />
         </Border>

@@ -6,7 +6,7 @@
              xmlns:core="clr-namespace:Core.Common.UI.Core;assembly=Core.Common.UI"
              xmlns:conv="clr-namespace:Bom.Desktop.Support"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="650">
     <UserControl.Resources>
         <conv:ViewModelNullToVisibilityConverter x:Key="viewModelNullToVisibilityConverter" />
     </UserControl.Resources>
@@ -23,8 +23,8 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="130" SharedSizeGroup="description" />
-                    <ColumnDefinition Width="130" SharedSizeGroup="notes" />
+                    <ColumnDefinition Width="300" SharedSizeGroup="description" />
+                    <ColumnDefinition Width="300" SharedSizeGroup="notes" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Description" />
                 <TextBlock Grid.Column="1" Text="Notes" />
@@ -34,8 +34,8 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="130" SharedSizeGroup="description" />
-                                <ColumnDefinition Width="130" SharedSizeGroup="notes" />
+                                <ColumnDefinition Width="300" SharedSizeGroup="description" />
+                                <ColumnDefinition Width="300" SharedSizeGroup="notes" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" >
                                 <Hyperlink Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding}">
