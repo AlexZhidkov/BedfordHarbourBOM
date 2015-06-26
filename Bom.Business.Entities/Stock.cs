@@ -15,7 +15,7 @@ namespace Bom.Business.Entities
         [DataMember]
         public DateTime CountDate { get; set; }
         [DataMember]
-        public int Cost { get; set; }
+        public decimal Cost { get; set; }
         [DataMember]
         public IEnumerable<Supplier> Suppliers { get; set; }
 

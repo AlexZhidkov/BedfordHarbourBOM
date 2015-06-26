@@ -29,27 +29,28 @@ namespace Bom.Data
                 Notes = "Notes 2",
                 Phone = "22334455"
             });
-            var part1 = new Part
+
+            var mainFrame = new Part
             {
                 Id = 1,
-                Cost = 99,
-                Notes = "Notes 1",
-                Length = 10,
-                Description = "Desc 1",
-                IsOwnMake = false,
-                Type = PartType.Flat,
-                Number = "N1"
+                Cost = 99M,
+                Notes = "",
+                Length = 0,
+                Description = "Main Frame",
+                IsOwnMake = true,
+                Type = PartType.Assembly,
+                Number = "A"
             };
-            var part2 = new Part
+            var part4 = new Part
             {
                 Id = 2,
-                Cost = 49,
-                Notes = "Notes 2",
+                Cost = 231.9M,
+                Notes = "",
                 Length = 20,
-                Description = "Desc 2",
+                Description = "32NB @ 1875mm Trusses",
                 IsOwnMake = false,
-                Type = PartType.Pipe,
-                Number = "N2"
+                Type = PartType.Undefined,
+                Number = "4"
             };
             var part3 = new Part
             {
@@ -62,8 +63,8 @@ namespace Bom.Data
                 Type = PartType.Assembly,
                 Number = "N3"
             };
-            context.Parts.Add(part1);
-            context.Parts.Add(part2);
+            context.Parts.Add(mainFrame);
+            context.Parts.Add(part4);
             context.Parts.Add(part3);
 
             var subassembly1 = new Subassembly
@@ -90,14 +91,14 @@ namespace Bom.Data
             context.Stocks.Add(new Stock
             {
                 Id = 1,
-                PartId = part1.Id,
+                PartId = mainFrame.Id,
                 Count = 1,
                 CountDate = new DateTime(2015, 1, 1)
             });
             context.Stocks.Add(new Stock
             {
                 Id = 2,
-                PartId = part2.Id,
+                PartId = part4.Id,
                 Count = 2,
                 CountDate = new DateTime(2015, 1, 1)
             });

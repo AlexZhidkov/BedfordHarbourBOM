@@ -15,7 +15,7 @@ namespace Bom.Client.Contracts
         private int _assemblyId;
         private int _subassemblyId;
         private string _partDescription;
-        private int _costContribution;
+        private decimal _costContribution;
         private int _count;
 
         public int AssemblyId
@@ -50,7 +50,7 @@ namespace Bom.Client.Contracts
             }
         }
 
-        public int CostContribution
+        public decimal CostContribution
         {
             get { return _costContribution; }
             set

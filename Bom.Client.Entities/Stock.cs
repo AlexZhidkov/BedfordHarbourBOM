@@ -12,7 +12,7 @@ namespace Bom.Client.Entities
         private int _partId;
         private int _count;
         private DateTime _countDate;
-        private int _cost;
+        private decimal _cost;
         private IEnumerable<Supplier> _suppliers;
 
         public int PartId
@@ -48,7 +48,7 @@ namespace Bom.Client.Entities
             }
         }
 
-        public int Cost
+        public decimal Cost
         {
             get { return _cost; }
             set

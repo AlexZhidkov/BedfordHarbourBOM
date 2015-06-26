@@ -12,7 +12,7 @@ namespace Bom.Business.Entities
         public string Description { get; set; }
         public bool IsOwnMake { get; set; }
         public int Length { get; set; }
-        public int Cost { get; set; }
+        public decimal Cost { get; set; }
 
         public int EntityId
         {

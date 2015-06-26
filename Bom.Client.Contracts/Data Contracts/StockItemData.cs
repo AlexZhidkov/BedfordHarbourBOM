@@ -17,7 +17,7 @@ namespace Bom.Client.Contracts
         private string _partDescription;
         private int _count;
         private DateTime _countDate;
-        private int _cost;
+        private decimal _cost;
 
         public int PartId
         {
@@ -73,7 +73,7 @@ namespace Bom.Client.Contracts
             }
         }
 
-        public int Cost
+        public decimal Cost
         {
             get { return _cost; }
             set

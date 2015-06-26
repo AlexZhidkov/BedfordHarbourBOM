@@ -22,7 +22,7 @@ namespace Bom.Business.Contracts
         [DataMember]
         public int Length { get; set; }
         [DataMember]
-        public int Cost { get; set; }
+        public decimal Cost { get; set; }
 
         public int EntityId
         {

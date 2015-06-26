@@ -18,7 +18,7 @@ namespace Bom.Business.Contracts
         [DataMember]
         public string PartDescription { get; set; }
         [DataMember]
-        public int CostContribution { get; set; }
+        public decimal CostContribution { get; set; }
         [DataMember]
         public int Count { get; set; }
     }

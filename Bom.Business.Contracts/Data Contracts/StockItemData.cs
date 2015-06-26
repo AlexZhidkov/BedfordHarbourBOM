@@ -22,6 +22,6 @@ namespace Bom.Business.Contracts
         [DataMember]
         public DateTime CountDate { get; set; }
         [DataMember]
-        public int Cost { get; set; }
+        public decimal Cost { get; set; }
     }
 }
