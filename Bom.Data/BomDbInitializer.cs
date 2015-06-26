@@ -71,7 +71,7 @@ namespace Bom.Data
                 IsOwnMake = false,
                 Type = PartType.Undefined,
                 Number = "4"
-            };
+            }; 
             var rm32NB = new Part
             {
                 Id = 5,
