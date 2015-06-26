@@ -41,16 +41,16 @@
             <TextBlock Grid.Row="6" Grid.Column="0" Margin="3" Text="Components:" />
             <TextBlock Grid.Row="8" Grid.Column="0" Margin="3" Text="Notes:" />
 
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding Part.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding Part.Number, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding Part.Description, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding Part.Number, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
             <ComboBox Grid.Row="2" Grid.Column="1" Margin="3"
                 ItemsSource="{Binding Source={controls:Enumeration {x:Type common:PartType}}}" 
                 DisplayMemberPath="Description" 
                 SelectedValue="{Binding Part.Type}"  
                 SelectedValuePath="Value"  />
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Part.Length, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Part.Length, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
             <CheckBox Grid.Row="4" Grid.Column="1" Margin="3" IsChecked="{Binding Part.IsOwnMake, Mode=TwoWay}" HorizontalAlignment="Left"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Margin="3" Text="{Binding Part.Cost, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="5" Grid.Column="1" Margin="3" Text="{Binding Part.Cost, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
             <ListBox Grid.Row="6" Grid.Column="1" Margin="3" BorderThickness="0" ItemsSource="{Binding Part.Components, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -62,7 +62,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             <Button Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" Content="Add" Margin="5" Command="{Binding DataContext.AddComponentCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Part.Id}"/>
-            <TextBox Grid.Row="8" Grid.Column="1" Margin="3" Text="{Binding Part.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left"
+            <TextBox Grid.Row="8" Grid.Column="1" Margin="3" Text="{Binding Part.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch"
                 AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
         </Grid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">

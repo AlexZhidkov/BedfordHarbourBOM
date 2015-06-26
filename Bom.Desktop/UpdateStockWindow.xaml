@@ -39,13 +39,13 @@
                 ItemsSource="{Binding Parts}" 
                 DisplayMemberPath="Description" 
                 DropDownClosed="ComboBox_OnDropDownClosed"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding Stock.Count, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding Stock.Count, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
             <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
                 <DatePicker Margin="3" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDate="{Binding Stock.CountDate}" DisplayDate="{x:Static system:DateTime.Now}"/>
                 <Button Name="TodayButton" Content="Today" Margin="3" Click="TodayButton_OnClick" />
             </StackPanel>
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Stock.Cost, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <TextBox Grid.Row="4" Grid.Column="1" Margin="3" Text="{Binding Stock.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left"
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Stock.Cost, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="3" Text="{Binding Stock.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch"
                 AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
         </Grid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">

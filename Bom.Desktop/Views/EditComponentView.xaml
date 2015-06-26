@@ -42,9 +42,9 @@
                 SelectedValue="{Binding Component.SubassemblyId}"
                 SelectedValuePath="Id"
                 DropDownClosed="ComboBox_OnDropDownClosed"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding Component.CostContribution, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Text="{Binding Component.Count, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Component.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" 
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding Component.CostContribution, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Text="{Binding Component.Count, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Component.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" 
                      AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
         </Grid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">

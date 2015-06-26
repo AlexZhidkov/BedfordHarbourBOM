@@ -73,29 +73,52 @@ namespace Bom.Data
                 Type = PartType.Undefined,
                 Number = "4"
             };
+
+            var rm32NB = new Part
+            {
+                Id = 5,
+                Cost = 31.62M,
+                Notes = "",
+                Length = 6,
+                Description = "32NB MED X 6M",
+                IsOwnMake = false,
+                Type = PartType.Pipe,
+            };
+
             context.Parts.Add(rm1);
             context.Parts.Add(topRing);
             context.Parts.Add(mainFrame);
             context.Parts.Add(part4);
+            context.Parts.Add(rm32NB);
 
-            var subassembly1 = new Subassembly
+            context.Subassemblies.Add(new Subassembly
             {
                 Id = 1,
                 AssemblyId = mainFrame.Id,
                 SubassemblyId = topRing.Id,
                 CostContribution = 1
-            };
-
-            var subassembly2 = new Subassembly
+            });
+            context.Subassemblies.Add(new Subassembly
             {
                 Id = 2,
                 AssemblyId = topRing.Id,
                 SubassemblyId = rm1.Id,
-                CostContribution = 1.583333333M
-            };
-
-            context.Subassemblies.Add(subassembly1);
-            context.Subassemblies.Add(subassembly2);
+                CostContribution = 1.583333333M,
+            });
+            context.Subassemblies.Add(new Subassembly
+            {
+                Id = 3,
+                AssemblyId = mainFrame.Id,
+                SubassemblyId = part4.Id,
+                CostContribution = 22
+            });
+            context.Subassemblies.Add(new Subassembly
+            {
+                Id = 4,
+                AssemblyId = part4.Id,
+                SubassemblyId = rm32NB.Id,
+                CostContribution = 3
+            });
 
             context.Stocks.Add(new Stock
             {
