@@ -39,6 +39,7 @@ namespace Bom.Desktop.Tests
             Part part = new Part() { Id = 1 };
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
+            mockServiceFactory.Setup(mock => mock.CreateClient<IPartService>().GetPart(1)).Returns(part);
 
             PartsViewModel viewModel = new PartsViewModel(mockServiceFactory.Object);
 
@@ -55,13 +56,14 @@ namespace Bom.Desktop.Tests
             Part part = new Part() { Id = 1, Description = "Test Description 1" };
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
+            mockServiceFactory.Setup(mock => mock.CreateClient<IPartService>().GetPart(1)).Returns(part);
 
             PartsViewModel viewModel = new PartsViewModel(mockServiceFactory.Object);
 
             viewModel.Parts = new ObservableCollection<Part>()
-                {
-                    part
-                };
+            {
+                part
+            };
 
             Assert.IsTrue(viewModel.Parts[0].Description == "Test Description 1");
             Assert.IsTrue(viewModel.CurrentPartViewModel == null);

@@ -23,6 +23,8 @@ namespace Bom.Business.Contracts
         public int Length { get; set; }
         [DataMember]
         public decimal Cost { get; set; }
+        [DataMember]
+        public decimal OwnCost { get; set; }
 
         public int EntityId
         {

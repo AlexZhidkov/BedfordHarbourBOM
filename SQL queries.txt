@@ -9,57 +9,6 @@ Declare @TotalCost int
 exec @TotalCost = sp_walkSubassemblies @PartId = 8
 print @TotalCost
 ---------------
---drop procedure [dbo].[sp_walkSubassemblies]
-CREATE PROCEDURE [dbo].[sp_walkSubassemblies]
-	@partId int
-AS
-
-Declare @subPartId int
-Declare @costContribution int
-Declare @cost int
-Declare @CurrCost int
-Declare @TotalCost int
-Declare @taken int
-
-Declare curP cursor local For
-	select SubassemblyId, CostContribution, p.Cost  
-	from Subassemblies s
-	inner join Parts p on p.Id = s.SubassemblyId
-	where AssemblyId = @partId
-
-OPEN curP 
-set @TotalCost = 0
-set @taken = 0
-Fetch Next From curP Into @subPartId, @costContribution, @cost
-
-While @@Fetch_Status = 0 Begin
-	exec @CurrCost = [dbo].[sp_walkSubassemblies] @partId = @subPartId
-	if @CurrCost = 0
-	begin
-		set @CurrCost = @cost * @costContribution / 100
-		set @taken = 1
-	end
-	set @TotalCost = @TotalCost + @CurrCost
-	
-	print @taken
-	print @cost
-	print @costContribution
-	print @CurrCost
-	print '@subPartId = ' + CAST(@subPartId AS nvarchar(10)) + ' @TotalCost = ' + CAST(@TotalCost AS nvarchar(10)) 
-	print '---'
-
-Fetch Next From curP Into @subPartId, @costContribution, @cost
-End -- End of Fetch
-
-Close curP
-Deallocate curP
-	print '==='
-	if @taken = 0
-	begin
-		set @TotalCost = @cost + (@TotalCost * @costContribution / 100)
-	end
-return @TotalCost
----------------
 CREATE FUNCTION getCost (@PartId int)
 RETURNS int
 WITH EXECUTE AS CALLER
@@ -74,7 +23,6 @@ BEGIN
 	RETURN(@Cost);
 END;
 ---------------
-
 with components (ParentId, ChildId, Description, cost)
 as
 (
@@ -90,4 +38,71 @@ as
 )
 
 select * from components
+
 ---------------
+--drop procedure [dbo].[sp_walkSubassemblies]
+CREATE PROCEDURE [dbo].[sp_walkSubassemblies]
+	@partId int,
+	@TotalCost decimal(25,13) OUTPUT
+AS
+
+Declare @subassembliesId int
+Declare @subPartId int
+Declare @costContribution decimal(25,13)
+Declare @cost decimal(25,13)
+Declare @CurrCost decimal(25,13)
+--Declare @TotalCost decimal(25,13)
+Declare @taken int
+
+Declare curP cursor local For
+	select s.Id, SubassemblyId, CostContribution, p.OwnCost  
+	from Subassemblies s
+	inner join Parts p on p.Id = s.SubassemblyId
+	where AssemblyId = @partId
+
+OPEN curP 
+set @TotalCost = 0
+set @taken = 0
+Fetch Next From curP Into @subassembliesId, @subPartId, @costContribution, @cost
+
+While @@Fetch_Status = 0 Begin
+	exec [dbo].[sp_walkSubassemblies] @subPartId, @CurrCost output
+	if @CurrCost = 0
+	begin
+		set @CurrCost = @cost * @costContribution
+		set @taken = 1
+	end
+	set @TotalCost = @TotalCost + (@CurrCost * @costContribution)
+	
+	update Subassemblies set InheritedCost = @CurrCost
+	where Id = @subassembliesId
+	print @partId
+	print @cost
+	print @costContribution
+	print @CurrCost
+	print @TotalCost 
+	print '---'
+
+Fetch Next From curP Into @subassembliesId, @subPartId, @costContribution, @cost
+End -- End of Fetch
+
+Close curP
+Deallocate curP
+update Parts set Cost = @TotalCost + OwnCost
+where Id = @partId
+
+	print '==='
+	if @taken = 0
+	begin
+		--set @TotalCost = @cost + (@TotalCost * @costContribution)
+		select @TotalCost = Cost from Parts where Id = @partId
+	end
+return @TotalCost
+---------------
+Declare @TotalCost decimal(18,2)
+exec dbo.sp_walkSubassemblies 1, @TotalCost output
+print @TotalCost
+---------------
+select * from Parts p
+left join Subassemblies s on p.Id = s.AssemblyId
+order by p.id

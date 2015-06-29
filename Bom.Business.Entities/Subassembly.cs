@@ -11,6 +11,14 @@ namespace Bom.Business.Entities
     {
         public int AssemblyId { get; set; }
         public int SubassemblyId { get; set; }
+        /// <summary>
+        /// How much of the cost of the Assembly comes from the Subassembly in $.
+        /// Value calculated from cost of the Subassembly multiplied by its CostContribution.
+        /// </summary>
+        public decimal InheritedCost { get; set; }
+        /// <summary>
+        /// How many units (or lengths) of Subassembly used to build Assembly
+        /// </summary>
         public decimal CostContribution { get; set; }
         public int Count { get; set; }
 

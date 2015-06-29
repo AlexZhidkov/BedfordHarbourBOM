@@ -16,6 +16,7 @@ namespace Bom.Client.Contracts
         private int _subassemblyId;
         private string _partDescription;
         private decimal _costContribution;
+        private decimal _inheritedCost;
         private int _count;
 
         public int AssemblyId
@@ -50,6 +51,9 @@ namespace Bom.Client.Contracts
             }
         }
 
+        /// <summary>
+        /// How many units (or lengths) of Subassembly used to build Assembly
+        /// </summary>
         public decimal CostContribution
         {
             get { return _costContribution; }
@@ -58,6 +62,21 @@ namespace Bom.Client.Contracts
                 if (_costContribution == value) return;
                 _costContribution = value;
                 OnPropertyChanged(() => CostContribution);
+            }
+        }
+
+        /// <summary>
+        /// How much of the cost of the Assembly comes from the Subassembly in $.
+        /// Value calculated from cost of the Subassembly multiplied by its CostContribution.
+        /// </summary>
+        public decimal InheritedCost
+        {
+            get { return _inheritedCost; }
+            set
+            {
+                if (_inheritedCost == value) return;
+                _inheritedCost = value;
+                OnPropertyChanged(() => InheritedCost);
             }
         }
 

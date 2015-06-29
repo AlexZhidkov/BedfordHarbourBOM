@@ -33,7 +33,6 @@ namespace Bom.Data
             var mainFrame = new Part
             {
                 Id = 1,
-                Cost = 99M,
                 Notes = "",
                 Length = 0,
                 Description = "Main Frame",
@@ -44,7 +43,6 @@ namespace Bom.Data
             var topRing = new Part
             {
                 Id = 2,
-                Cost = 258.6M,
                 Length = 19,
                 Description = "Top Ring - 65 x 74 x 2.5 Silo Tube - 19M",
                 IsOwnMake = true,
@@ -54,7 +52,7 @@ namespace Bom.Data
             var rm1 = new Part
             {
                 Id = 3,
-                Cost = 163.32M,
+                OwnCost = 163.32M,
                 Length = 12,
                 Description = "74.6 X 65 X 2.5MM X 12M",
                 IsOwnMake = false,
@@ -64,7 +62,6 @@ namespace Bom.Data
             var part4 = new Part
             {
                 Id = 4,
-                Cost = 231.9M,
                 Notes = "",
                 Length = 20,
                 Description = "32NB @ 1875mm Trusses",
@@ -75,7 +72,7 @@ namespace Bom.Data
             var rm32NB = new Part
             {
                 Id = 5,
-                Cost = 31.62M,
+                OwnCost = 31.62M,
                 Notes = "",
                 Length = 6,
                 Description = "32NB MED X 6M",
@@ -115,7 +112,7 @@ namespace Bom.Data
                 Id = 4,
                 AssemblyId = part4.Id,
                 SubassemblyId = rm32NB.Id,
-                CostContribution = 3
+                CostContribution = 0.333333M
             });
 
             context.Stocks.Add(new Stock

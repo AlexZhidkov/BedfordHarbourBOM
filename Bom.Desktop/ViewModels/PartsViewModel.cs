@@ -90,7 +90,7 @@ namespace Bom.Desktop.ViewModels
         {
             if (part != null)
             {
-                CurrentPartViewModel = new EditPartViewModel(_serviceFactory, part);
+                CurrentPartViewModel = new EditPartViewModel(_serviceFactory, part.Id);
                 CurrentPartViewModel.PartUpdated += CurrentPartViewModel_PartUpdated;
                 CurrentPartViewModel.CancelEditPart += CurrentPartViewModel_CancelEvent;
             }
