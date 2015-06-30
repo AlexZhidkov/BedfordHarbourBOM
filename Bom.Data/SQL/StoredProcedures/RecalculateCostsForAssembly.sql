@@ -2,6 +2,7 @@
 	@partId int,
 	@TotalCost decimal(25,13) OUTPUT
 AS
+
 Declare @subassembliesId int
 Declare @subPartId int
 Declare @costContribution decimal(25,13)
