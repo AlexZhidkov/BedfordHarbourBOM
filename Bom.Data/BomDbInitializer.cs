@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Bom.Business.Entities;
@@ -13,6 +15,8 @@ namespace Bom.Data
     {
         protected override void Seed(BomContext context)
         {
+            DropCreateStoredProcedures(context);
+
             context.Suppliers.Add(new Supplier
             {
                 Id = 1,
@@ -30,15 +34,15 @@ namespace Bom.Data
                 Phone = "22334455"
             });
 
-            var mainFrame = new Part
+            var bin = new Part
             {
                 Id = 1,
-                Notes = "",
+                Notes = "Main product",
                 Length = 0,
-                Description = "Main Frame",
+                Description = "Bin",
                 IsOwnMake = true,
                 Type = PartType.Assembly,
-                Number = "A"
+                Number = "Bin"
             };
             var topRing = new Part
             {
@@ -68,10 +72,20 @@ namespace Bom.Data
                 IsOwnMake = false,
                 Type = PartType.Undefined,
                 Number = "4"
-            }; 
-            var rm32NB = new Part
+            };
+            var part36 = new Part
             {
                 Id = 5,
+                Notes = "",
+                Length = 1700,
+                Description = "32NB Drawbar Brackets@ 1700mm",
+                IsOwnMake = true,
+                Type = PartType.Undefined,
+                Number = "36"
+            };
+            var rm32NB = new Part
+            {
+                Id = 6,
                 OwnCost = 31.62M,
                 Notes = "",
                 Length = 6,
@@ -79,12 +93,34 @@ namespace Bom.Data
                 IsOwnMake = false,
                 Type = PartType.Pipe,
             };
+            var aFrame = new Part
+            {
+                Id = 7,
+                Notes = "",
+                Length = 0,
+                Description = "A-Frame Galvanised",
+                IsOwnMake = true,
+                Type = PartType.Assembly,
+                Number = "D"
+            };
+            var mainFrame = new Part
+            {
+                Id = 8,
+                Notes = "",
+                Length = 0,
+                Description = "Main Frame",
+                IsOwnMake = true,
+                Type = PartType.Assembly,
+                Number = "A"
+            };
 
             context.Parts.Add(rm1);
             context.Parts.Add(topRing);
             context.Parts.Add(mainFrame);
             context.Parts.Add(part4);
             context.Parts.Add(rm32NB);
+            context.Parts.Add(part36);
+            context.Parts.Add(aFrame);
 
             context.Subassemblies.Add(new Subassembly
             {
@@ -113,6 +149,34 @@ namespace Bom.Data
                 AssemblyId = part4.Id,
                 SubassemblyId = rm32NB.Id,
                 CostContribution = 0.333333M
+            });
+            context.Subassemblies.Add(new Subassembly
+            {
+                Id = 5,
+                AssemblyId = part36.Id,
+                SubassemblyId = rm32NB.Id,
+                CostContribution = 0.333333M
+            });
+            context.Subassemblies.Add(new Subassembly
+            {
+                Id = 6,
+                AssemblyId = aFrame.Id,
+                SubassemblyId = part36.Id,
+                CostContribution = 2M
+            });
+            context.Subassemblies.Add(new Subassembly
+            {
+                Id = 7,
+                AssemblyId = bin.Id,
+                SubassemblyId = mainFrame.Id,
+                CostContribution = 1
+            });
+            context.Subassemblies.Add(new Subassembly
+            {
+                Id = 8,
+                AssemblyId = bin.Id,
+                SubassemblyId = aFrame.Id,
+                CostContribution = 1
             });
 
             context.Stocks.Add(new Stock
@@ -145,6 +209,21 @@ namespace Bom.Data
             });
 
             base.Seed(context);
+        }
+
+        private void DropCreateStoredProcedures(BomContext context)
+        {
+/*
+            // Delete all stored procs, views
+            foreach (var file in Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sql\\Seed"), "*.sql"))
+            {
+                context.Database.ExecuteSqlCommand(File.ReadAllText(file), new object[0]);
+            }
+*/
+            foreach (var file in Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SQL\\StoredProcedures"), "*.sql"))
+            {
+                context.Database.ExecuteSqlCommand(File.ReadAllText(file), new object[0]);
+            }
         }
     }
 }
