@@ -56,5 +56,18 @@ namespace Bom.Business.Managers.Tests
 
             Assert.AreEqual(updatedPart, resultedPart);
         }
+
+        [TestMethod]
+        public void UpdatePart_RecalculateCostsForAssembly()
+        {
+            Mock<IDataRepositoryFactory> mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
+            Mock<IPartRepository> mockPartRepository = new Mock<IPartRepository>();
+            mockDataRepositoryFactory.Setup(mock => mock.GetDataRepository<IPartRepository>()).Returns(mockPartRepository.Object);
+            PartManager manager = new PartManager(mockDataRepositoryFactory.Object);
+
+            manager.RecalculateCostsForAssembly(1);
+
+            mockPartRepository.Verify(f => f.RecalculateCostsForAssembly(1));
+        }
     }
 }

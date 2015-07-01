@@ -55,6 +55,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DashboardViewModelTests.cs" />
     <Compile Include="EditComponentViewModelTests.cs" />
     <Compile Include="EditPartViewModelTests.cs" />
     <Compile Include="PartsViewModelTests.cs" />

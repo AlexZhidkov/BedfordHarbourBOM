@@ -72,5 +72,15 @@ namespace Bom.Business.Managers
         {
             throw new NotImplementedException();
         }
+
+        public void RecalculateCostsForAssembly(int partId)
+        {
+            ExecuteFaultHandledOperation(() =>
+            {
+                IPartRepository partRepository = _dataRepositoryFactory.GetDataRepository<IPartRepository>();
+                partRepository.RecalculateCostsForAssembly(partId);
+
+            });
+        }
     }
 }

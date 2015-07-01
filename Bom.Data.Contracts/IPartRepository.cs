@@ -7,5 +7,7 @@ namespace Bom.Data.Contracts
     public interface IPartRepository : IDataRepository<Part>
     {
         IEnumerable<SubassemblyData> GetComponents(int assemblyId);
+
+        void RecalculateCostsForAssembly(int partId);
     }
 }

@@ -28,5 +28,10 @@ namespace Bom.Client.Proxies
         {
             Channel.DeletePart(partId);
         }
+
+        public void RecalculateCostsForAssembly(int partId)
+        {
+            Channel.RecalculateCostsForAssembly(partId);
+        }
     }
 }

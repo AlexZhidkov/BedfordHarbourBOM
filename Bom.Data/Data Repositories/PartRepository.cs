@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -113,6 +115,25 @@ namespace Bom.Data
                     };
 
                 return components.ToFullyLoaded();
+            }
+        }
+
+        public void RecalculateCostsForAssembly(int partId)
+        {
+            using (BomContext entityContext = new BomContext())
+            {
+                var id = new SqlParameter("@id", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Input, 
+                    Value = partId
+                };
+                var cost = new SqlParameter("@cost", SqlDbType.Decimal)
+                {
+                    Direction = ParameterDirection.Output
+                };
+
+                entityContext.Database.ExecuteSqlCommand("EXEC dbo.RecalculateCostsForAssembly @partId = @id, @TotalCost = @cost output", 
+                    id, cost);
             }
         }
     }

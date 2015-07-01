@@ -21,16 +21,16 @@ namespace Bom.Desktop.ViewModels
         [ImportingConstructor]
         public SuppliersViewModel(IServiceFactory serviceFactory)
         {
-            _ServiceFactory = serviceFactory;
+            _serviceFactory = serviceFactory;
 
             EditSupplierCommand = new DelegateCommand<Supplier>(OnEditSupplierCommand);
             DeleteSupplierCommand = new DelegateCommand<Supplier>(OnDeleteSupplierCommand);
             AddSupplierCommand = new DelegateCommand<object>(OnAddSupplierCommand);
         }
 
-        IServiceFactory _ServiceFactory;
+        readonly IServiceFactory _serviceFactory;
 
-        EditSupplierViewModel _CurrentSupplierViewModel;
+        EditSupplierViewModel _currentSupplierViewModel;
 
         public DelegateCommand<Supplier> EditSupplierCommand { get; private set; }
         public DelegateCommand<Supplier> DeleteSupplierCommand { get; private set; }
@@ -46,12 +46,12 @@ namespace Bom.Desktop.ViewModels
 
         public EditSupplierViewModel CurrentSupplierViewModel
         {
-            get { return _CurrentSupplierViewModel; }
+            get { return _currentSupplierViewModel; }
             set
             {
-                if (_CurrentSupplierViewModel != value)
+                if (_currentSupplierViewModel != value)
                 {
-                    _CurrentSupplierViewModel = value;
+                    _currentSupplierViewModel = value;
                     OnPropertyChanged(() => CurrentSupplierViewModel, false);
                 }
             }
@@ -76,7 +76,7 @@ namespace Bom.Desktop.ViewModels
         {
             _Suppliers = new ObservableCollection<Supplier>();
 
-            WithClient(_ServiceFactory.CreateClient<ISupplierService>(), supplierClient =>
+            WithClient(_serviceFactory.CreateClient<ISupplierService>(), supplierClient =>
             {
                 Supplier[] suppliers = supplierClient.GetAllSuppliers();
                 if (suppliers != null)
@@ -91,7 +91,7 @@ namespace Bom.Desktop.ViewModels
         {
             if (supplier != null)
             {
-                CurrentSupplierViewModel = new EditSupplierViewModel(_ServiceFactory, supplier);
+                CurrentSupplierViewModel = new EditSupplierViewModel(_serviceFactory, supplier);
                 CurrentSupplierViewModel.SupplierUpdated += CurrentSupplierViewModel_SupplierUpdated;
                 CurrentSupplierViewModel.CancelEditSupplier += CurrentSupplierViewModel_CancelEvent;
             }
@@ -100,7 +100,7 @@ namespace Bom.Desktop.ViewModels
         void OnAddSupplierCommand(object arg)
         {
             Supplier supplier = new Supplier();
-            CurrentSupplierViewModel = new EditSupplierViewModel(_ServiceFactory, supplier);
+            CurrentSupplierViewModel = new EditSupplierViewModel(_serviceFactory, supplier);
             CurrentSupplierViewModel.SupplierUpdated += CurrentSupplierViewModel_SupplierUpdated;
             CurrentSupplierViewModel.CancelEditSupplier += CurrentSupplierViewModel_CancelEvent;
         }
@@ -137,7 +137,7 @@ namespace Bom.Desktop.ViewModels
 
             if (!args.Cancel)
             {
-                WithClient(_ServiceFactory.CreateClient<ISupplierService>(), suplierClient =>
+                WithClient(_serviceFactory.CreateClient<ISupplierService>(), suplierClient =>
                 {
                     suplierClient.DeleteSupplier(supplier.Id);
                     _Suppliers.Remove(supplier);

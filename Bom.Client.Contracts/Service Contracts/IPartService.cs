@@ -25,5 +25,8 @@ namespace Bom.Client.Contracts
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void DeletePart(int partId);
+
+        [OperationContract]
+        void RecalculateCostsForAssembly(int partId);
     }
 }
