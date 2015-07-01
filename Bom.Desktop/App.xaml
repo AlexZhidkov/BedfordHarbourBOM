@@ -6,6 +6,9 @@
              xmlns:desktop="clr-namespace:Bom.Desktop"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
+            <v:DashboardView />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type vm:StockViewModel}">
             <v:StockView />
         </DataTemplate>

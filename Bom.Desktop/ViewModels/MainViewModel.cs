@@ -13,6 +13,8 @@ namespace Bom.Desktop.ViewModels
     public class MainViewModel : ViewModelBase
     {
         [Import]
+        public DashboardViewModel DashboardViewModel { get; private set; }
+        [Import]
         public StockViewModel StockViewModel { get; private set; }
         [Import]
         public PartsViewModel PartsViewModel { get; private set; }

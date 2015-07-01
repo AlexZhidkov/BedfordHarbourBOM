@@ -114,6 +114,7 @@ namespace Bom.Data
                 Number = "A"
             };
 
+            context.Parts.Add(bin);
             context.Parts.Add(rm1);
             context.Parts.Add(topRing);
             context.Parts.Add(mainFrame);

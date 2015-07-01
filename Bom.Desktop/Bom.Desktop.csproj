@@ -66,6 +66,7 @@
     <Compile Include="UpdateStockWindow.xaml.cs">
       <DependentUpon>UpdateStockWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\EditComponentViewModel.cs" />
     <Compile Include="ViewModels\EditPartViewModel.cs" />
     <Compile Include="ViewModels\EditStockViewModel.cs" />
@@ -74,6 +75,9 @@
     <Compile Include="ViewModels\StockViewModel.cs" />
     <Compile Include="ViewModels\PartsViewModel.cs" />
     <Compile Include="ViewModels\SuppliersViewModel.cs" />
+    <Compile Include="Views\DashboardView.xaml.cs">
+      <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditComponentView.xaml.cs">
       <DependentUpon>EditComponentView.xaml</DependentUpon>
     </Compile>
@@ -109,6 +113,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UpdateStockWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DashboardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
