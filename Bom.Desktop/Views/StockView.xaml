@@ -17,13 +17,13 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="300" SharedSizeGroup="name" />
-                    <ColumnDefinition Width="50" SharedSizeGroup="cost" />
+                    <ColumnDefinition Width="50" SharedSizeGroup="value" />
                     <ColumnDefinition Width="50" SharedSizeGroup="count" />
                     <ColumnDefinition Width="100" SharedSizeGroup="countDate" />
                     <ColumnDefinition Width="300" SharedSizeGroup="notes" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Name" />
-                <TextBlock Grid.Column="1" Text="Cost" />
+                <TextBlock Grid.Column="1" Text="Value" />
                 <TextBlock Grid.Column="2" Text="Count" />
                 <TextBlock Grid.Column="3" Text="Count Date" />
                 <TextBlock Grid.Column="4" Text="Notes" />
@@ -34,7 +34,7 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="300" SharedSizeGroup="name" />
-                                <ColumnDefinition Width="50" SharedSizeGroup="cost" />
+                                <ColumnDefinition Width="50" SharedSizeGroup="value" />
                                 <ColumnDefinition Width="50" SharedSizeGroup="count" />
                                 <ColumnDefinition Width="100" SharedSizeGroup="countDate" />
                                 <ColumnDefinition Width="300" SharedSizeGroup="notes" />
