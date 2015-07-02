@@ -17,6 +17,14 @@ namespace Bom.Common
         Pipe,
         [Description("Flat")]
         Flat,
+        [Description("Coil")]
+        Coil,
+        [Description("Plate")]
+        Plate,
+        [Description("Sheet")]
+        Sheet,
+        [Description("Rod")]
+        Rod,
         [Description("Assembly")]
         Assembly
     }
