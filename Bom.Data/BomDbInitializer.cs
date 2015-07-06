@@ -16,7 +16,19 @@ namespace Bom.Data
         protected override void Seed(BomContext context)
         {
             DropCreateStoredProcedures(context);
+            RunSqlScripts(context);
+        }
 
+        private void RunSqlScripts(BomContext context)
+        {
+            foreach (var file in Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SQL"), "*.sql"))
+            {
+                context.Database.ExecuteSqlCommand(File.ReadAllText(file), new object[0]);
+            }
+        }
+
+        private void OldSeed(BomContext context)
+        {
             context.Suppliers.Add(new Supplier
             {
                 Id = 1,

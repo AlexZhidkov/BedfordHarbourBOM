@@ -5,7 +5,7 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:common="clr-namespace:Bom.Common;assembly=Bom.Common"
         xmlns:support="clr-namespace:Bom.Desktop.Support"
-        Title="Edit Part" Height="500" Width="400" DataContextChanged="Window_DataContextChanged">
+        Title="Edit Part" Height="650" Width="550" DataContextChanged="Window_DataContextChanged">
     <Window.Resources>
         <support:ViewModelNullToVisibilityConverter x:Key="viewModelNullToVisibilityConverter" />
     </Window.Resources>
@@ -30,7 +30,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="450" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Description:" />
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Number:" />
@@ -51,10 +51,11 @@
             <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Part.Length, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
             <CheckBox Grid.Row="4" Grid.Column="1" Margin="3" IsChecked="{Binding Part.IsOwnMake, Mode=TwoWay}" HorizontalAlignment="Left"/>
             <TextBox Grid.Row="5" Grid.Column="1" Margin="3" Text="{Binding Part.Cost, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
-            <ListBox Grid.Row="6" Grid.Column="1" Margin="3" BorderThickness="0" ItemsSource="{Binding Part.Components, UpdateSourceTrigger=PropertyChanged}">
+            <ListBox Grid.Row="6" Grid.Column="1" Margin="3" BorderThickness="0" ItemsSource="{Binding Part.Components, UpdateSourceTrigger=PropertyChanged}" Height="200">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" >
+                            <Button Margin="3" Content="Part" Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding SubassemblyId}"/>
                             <Button Margin="3" Content="{Binding PartDescription}" Command="{Binding DataContext.EditComponentCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"/>
                             <Button Margin="3" Content="X" Command="{Binding DataContext.RemoveComponentCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding SubassemblyId}"/>
                         </StackPanel>

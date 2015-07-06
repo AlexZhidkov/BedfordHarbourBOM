@@ -89,6 +89,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SQL\DatabaseSeed.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SQL\StoredProcedures\RecalculateCostsForAssembly.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

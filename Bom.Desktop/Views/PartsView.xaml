@@ -29,8 +29,8 @@
                 <TextBlock Grid.Column="0" Text="Description" />
                 <TextBlock Grid.Column="1" Text="Notes" />
             </Grid>
-            <ItemsControl Grid.Row="1" ItemsSource="{Binding Parts}">
-                <ItemsControl.ItemTemplate>
+            <ListBox Grid.Row="1" ItemsSource="{Binding Parts}" Height="400">
+                <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -45,9 +45,9 @@
                             <TextBlock Grid.Column="1" Text="{Binding Notes}" TextWrapping="Wrap" />
                         </Grid>
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
                 <Button Content="Add New" Command="{Binding AddPartCommand}" />
             </StackPanel>
         </Grid>
