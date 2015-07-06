@@ -49,5 +49,14 @@ namespace Bom.Data.Tests
 
             return parts;
         }
+
+        public DTO.Part Update(DTO.Part part)
+        {
+            IPartRepository partRepository = _DataRepositoryFactory.GetDataRepository<IPartRepository>();
+
+            var updated = partRepository.Update(part);
+
+            return updated;
+        }
     }
 }

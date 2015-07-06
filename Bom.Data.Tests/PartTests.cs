@@ -69,6 +69,23 @@ namespace Bom.Data.Tests
         }
 
         [TestMethod]
+        [Ignore]
+        public void test_part_repository_mocking_update()
+        {
+            PartRepositoryTestClass factoryTest = new PartRepositoryTestClass();
+
+            Part updated = new Part
+            {
+                Id = 1,
+                OwnCost = 2
+            };
+
+            Part ret = factoryTest.Update(updated);
+
+            Assert.AreEqual(ret, updated);
+        }
+
+        [TestMethod]
         public void test_factory_mocking_part1()
         {
             List<Part> parts = new List<Part>()
@@ -140,6 +157,11 @@ namespace Bom.Data.Tests
         public IEnumerable<SubassemblyData> GetComponents(int partId)
         {
             return _PartRepository.GetComponents(partId);
+        }
+
+        public Part Update(Part part)
+        {
+            return _PartRepository.Update(part);
         }
     }
 }

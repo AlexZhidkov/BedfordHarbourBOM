@@ -31,7 +31,7 @@ namespace Bom.Desktop.ViewModels
             _part = new Part
             {
                 Id = part.Id,
-                Cost = part.Cost,
+                ComponentsCost = part.ComponentsCost,
                 Description = part.Description,
                 IsOwnMake = part.IsOwnMake,
                 Length = part.Length,
@@ -53,7 +53,6 @@ namespace Bom.Desktop.ViewModels
                             AssemblyId = component.AssemblyId,
                             SubassemblyId = component.SubassemblyId,
                             PartDescription = component.PartDescription,
-                            Count = component.Count,
                             CostContribution = component.CostContribution,
                             Notes = component.Notes,
                         }

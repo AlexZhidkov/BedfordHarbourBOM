@@ -1,6 +1,9 @@
-﻿using Bom.Business.Contracts;
+﻿using Bom.Business.Bootstrapper;
+using Bom.Business.Contracts;
+using Bom.Data;
 using Bom.Data.Contracts;
 using Core.Common.Contracts;
+using Core.Common.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -45,8 +48,8 @@ namespace Bom.Business.Managers.Tests
         [TestMethod]
         public void UpdatePart_UpdateExisting()
         {
-            var existingPart = new Part { Id = 1 };
-            var updatedPart = new Part { Id = 1 };
+            var existingPart = new Part { Id = 1, OwnCost = 1};
+            var updatedPart = new Part { Id = 1, OwnCost = 2};
 
             Mock<IDataRepositoryFactory> mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
             mockDataRepositoryFactory.Setup(mock => mock.GetDataRepository<IPartRepository>().Update(existingPart)).Returns(updatedPart);
@@ -69,5 +72,6 @@ namespace Bom.Business.Managers.Tests
 
             mockPartRepository.Verify(f => f.RecalculateCostsForAssembly(1));
         }
+
     }
 }

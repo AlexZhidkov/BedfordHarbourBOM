@@ -7,7 +7,7 @@
              xmlns:controls="clr-namespace:Core.Common.UI.Controls;assembly=Core.Common.UI"
              xmlns:support="clr-namespace:Bom.Desktop.Support"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="500">
     <UserControl.Resources>
         <support:ViewModelNullToVisibilityConverter x:Key="viewModelNullToVisibilityConverter" />
     </UserControl.Resources>
@@ -22,29 +22,26 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="130" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="180" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Description:" />
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Cost contribution:" />
-            <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Count:" />
-            <TextBlock Grid.Row="3" Grid.Column="0" Margin="3" Text="Notes:" />
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding PartDescription}" HorizontalAlignment="Left" 
+            <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Notes:" />
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding PartDescription}" HorizontalAlignment="Stretch" 
                 Visibility="{Binding Component.PartDescription, Converter={StaticResource viewModelNullToVisibilityConverter}}" />
             <ComboBox Name="ComponentComboBox" Grid.Row="0" Grid.Column="1" Margin="3" 
                 Visibility="{Binding Parts, Converter={StaticResource viewModelNullToVisibilityConverter}}"
                 ItemsSource="{Binding Parts}" 
-                DisplayMemberPath="Description" 
+                DisplayMemberPath="Description"
                 SelectedValue="{Binding Component.SubassemblyId}"
                 SelectedValuePath="Id"
                 DropDownClosed="ComboBox_OnDropDownClosed"/>
             <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding Component.CostContribution, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Text="{Binding Component.Count, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Component.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" 
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Text="{Binding Component.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" 
                      AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
         </Grid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">

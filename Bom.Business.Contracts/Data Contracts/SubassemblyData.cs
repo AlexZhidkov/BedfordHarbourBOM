@@ -21,7 +21,5 @@ namespace Bom.Business.Contracts
         public decimal CostContribution { get; set; }
         [DataMember]
         public decimal InheritedCost { get; set; }
-        [DataMember]
-        public int Count { get; set; }
     }
 }

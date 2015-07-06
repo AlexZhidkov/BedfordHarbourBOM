@@ -38,12 +38,12 @@ End -- End of Fetch
 
 Close curP
 Deallocate curP
-update Parts set Cost = @TotalCost + OwnCost
+update Parts set ComponentsCost = @TotalCost
 	where Id = @partId
 
 	if @isTaken = 0
 	begin
-		select @TotalCost = Cost from Parts where Id = @partId
+		select @TotalCost = ComponentsCost  + OwnCost from Parts where Id = @partId
 	end
 return @TotalCost
 

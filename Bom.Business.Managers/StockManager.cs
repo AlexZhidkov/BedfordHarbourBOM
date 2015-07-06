@@ -80,7 +80,7 @@ namespace Bom.Business.Managers
                         PartDescription = stockItemsInfo.Part.Description,
                         Count = stockItemsInfo.Stock.Count,
                         CountDate = stockItemsInfo.Stock.CountDate,
-                        Cost = stockItemsInfo.Stock.Cost,
+                        Cost = stockItemsInfo.Stock.Count * (stockItemsInfo.Part.ComponentsCost + stockItemsInfo.Part.OwnCost),
                         Notes = stockItemsInfo.Stock.Notes
                     });
                 }

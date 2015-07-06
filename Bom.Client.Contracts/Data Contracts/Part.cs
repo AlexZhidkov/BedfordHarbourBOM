@@ -18,7 +18,7 @@ namespace Bom.Client.Contracts
         private bool _isOwnMake;
         private int _length;
         private decimal _ownCost;
-        private decimal _cost;
+        private decimal _componentsCost;
 
         public PartType Type
         {
@@ -93,14 +93,14 @@ namespace Bom.Client.Contracts
         /// <summary>
         /// Total cost of assembly, calculated from total costs of all subassemblies and added own cost.
         /// </summary>
-        public decimal Cost
+        public decimal ComponentsCost
         {
-            get { return _cost; }
+            get { return _componentsCost; }
             set
             {
-                if (_cost == value) return;
-                _cost = value;
-                OnPropertyChanged(() => Cost);
+                if (_componentsCost == value) return;
+                _componentsCost = value;
+                OnPropertyChanged(() => ComponentsCost);
             }
         }
 
@@ -121,7 +121,7 @@ namespace Bom.Client.Contracts
             {
                 RuleFor(obj => obj.Description).NotEmpty();
                 RuleFor(obj => obj.Length).GreaterThanOrEqualTo(0);
-                RuleFor(obj => obj.Cost).GreaterThanOrEqualTo(0);
+                RuleFor(obj => obj.ComponentsCost).GreaterThanOrEqualTo(0);
             }
         }
 

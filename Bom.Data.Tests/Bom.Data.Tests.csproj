@@ -88,6 +88,10 @@
       <Project>{85C1EBB9-CDF5-4110-8593-2E2BB627DAF0}</Project>
       <Name>Bom.Data.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bom.Data\Bom.Data.csproj">
+      <Project>{1C8C670B-9073-4A7B-AA44-A4F009E54C0D}</Project>
+      <Name>Bom.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
       <Project>{bc9ea015-d89a-409d-a3cc-9909ddcb786e}</Project>
       <Name>Core.Common.Contracts</Name>

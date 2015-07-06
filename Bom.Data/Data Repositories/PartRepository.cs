@@ -28,7 +28,8 @@ namespace Bom.Data
                 Number = part.Number,
                 Description = part.Description,
                 Type = part.Type,
-                Cost = part.Cost,
+                ComponentsCost = part.ComponentsCost,
+                OwnCost = part.OwnCost,
                 IsOwnMake = part.IsOwnMake,
                 Length = part.Length,
                 Notes = part.Notes
@@ -39,6 +40,8 @@ namespace Bom.Data
         private static void UpdateComponentsOfAssembly(BomContext entityContext, Part entity)
         {
             entityContext.Subassemblies.RemoveRange(entityContext.Subassemblies.Where(s => s.AssemblyId == entity.Id));
+            if (entity.Components == null) return;
+
             foreach (var component in entity.Components)
             {
                 entityContext.Subassemblies.Add(new Subassembly
@@ -66,7 +69,8 @@ namespace Bom.Data
                 Number = e.Number,
                 Description = e.Description,
                 Type = e.Type,
-                Cost = e.Cost,
+                ComponentsCost = e.ComponentsCost,
+                OwnCost = e.OwnCost,
                 IsOwnMake = e.IsOwnMake,
                 Length = e.Length,
                 Notes = e.Notes
@@ -89,7 +93,8 @@ namespace Bom.Data
                 Number = data.Number,
                 Description = data.Description,
                 Type = data.Type,
-                Cost = data.Cost,
+                ComponentsCost = data.ComponentsCost,
+                OwnCost = data.OwnCost,
                 IsOwnMake = data.IsOwnMake,
                 Length = data.Length,
                 Notes = data.Notes
@@ -110,7 +115,6 @@ namespace Bom.Data
                         SubassemblyId = assembly.SubassemblyId,
                         PartDescription = component.Description,
                         CostContribution = assembly.CostContribution,
-                        Count = assembly.Count,
                         Notes = assembly.Notes
                     };
 

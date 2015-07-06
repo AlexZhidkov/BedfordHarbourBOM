@@ -37,7 +37,7 @@ namespace Bom.Data
 
             modelBuilder.Entity<Part>().HasKey<int>(e => e.Id).Ignore(e => e.EntityId);
             modelBuilder.Entity<Part>().Property(o => o.OwnCost).HasPrecision(25, 13);
-            modelBuilder.Entity<Part>().Property(o => o.Cost).HasPrecision(25, 13);
+            modelBuilder.Entity<Part>().Property(o => o.ComponentsCost).HasPrecision(25, 13);
 
             modelBuilder.Entity<Subassembly>().HasKey<int>(e => e.Id).Ignore(e => e.EntityId);
             modelBuilder.Entity<Subassembly>().Property(o => o.CostContribution).HasPrecision(25, 13);

@@ -114,7 +114,8 @@ namespace Bom.Desktop.ViewModels
                 if (part != null)
                 {
                     part.Id = e.Part.Id;
-                    part.Cost = e.Part.Cost;
+                    part.ComponentsCost = e.Part.ComponentsCost;
+                    part.OwnCost = e.Part.OwnCost;
                     part.Description = e.Part.Description;
                     part.IsOwnMake = e.Part.IsOwnMake;
                     part.Length = e.Part.Length;

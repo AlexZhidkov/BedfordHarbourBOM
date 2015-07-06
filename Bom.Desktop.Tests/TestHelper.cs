@@ -58,7 +58,7 @@ namespace Bom.Desktop.Tests
                 Description = "Test Part Description",
                 Number = "12345",
                 Type = PartType.Assembly,
-                Cost = 99,
+                ComponentsCost = 99,
                 IsOwnMake = true,
                 Length = 55,
                 Notes = "Test Notes",
@@ -93,7 +93,6 @@ namespace Bom.Desktop.Tests
                 SubassemblyId = 2,
                 PartDescription = "Subassembly 2",
                 CostContribution = 50,
-                Count = 5,
                 Notes = "Test Notes",
             };
         }

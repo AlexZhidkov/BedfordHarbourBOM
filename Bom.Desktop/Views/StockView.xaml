@@ -28,34 +28,34 @@
                 <TextBlock Grid.Column="3" Text="Count Date" />
                 <TextBlock Grid.Column="4" Text="Notes" />
             </Grid>
-                <ListBox Grid.Row="1" ItemsSource="{Binding Stocks}" Height="400">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="300" SharedSizeGroup="name" />
-                                    <ColumnDefinition Width="50" SharedSizeGroup="value" />
-                                    <ColumnDefinition Width="50" SharedSizeGroup="count" />
-                                    <ColumnDefinition Width="100" SharedSizeGroup="countDate" />
-                                    <ColumnDefinition Width="300" SharedSizeGroup="notes" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" >
+            <ListBox Grid.Row="1" ItemsSource="{Binding Stocks}" Height="400">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300" SharedSizeGroup="name" />
+                                <ColumnDefinition Width="50" SharedSizeGroup="value" />
+                                <ColumnDefinition Width="50" SharedSizeGroup="count" />
+                                <ColumnDefinition Width="100" SharedSizeGroup="countDate" />
+                                <ColumnDefinition Width="300" SharedSizeGroup="notes" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"  Margin="3">
                                 <Hyperlink Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding PartId}">
                                     <TextBlock Text="{Binding PartDescription}"/>
                                 </Hyperlink>
                             </TextBlock>
-                                <TextBlock Grid.Column="1" Text="{Binding Cost}"/>
-                                <TextBlock Grid.Column="2" >
+                            <TextBlock Grid.Column="1" Text="{Binding Cost, StringFormat=c}" HorizontalAlignment="Right" Margin="3"/>
+                            <TextBlock Grid.Column="2" Margin="3" >
                                 <Hyperlink Command="{Binding DataContext.EditStockCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding}">
-                                    <TextBlock Text="{Binding Count}"/>
+                                    <TextBlock Text="{Binding Count}" HorizontalAlignment="Right"/>
                                 </Hyperlink>
                             </TextBlock>
-                                <TextBlock Grid.Column="3" Text="{Binding CountDate, StringFormat=dd/MM/yyyy}" />
-                                <TextBlock Grid.Column="4" Text="{Binding Notes}" TextWrapping="Wrap" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                            <TextBlock Grid.Column="3" Text="{Binding CountDate, StringFormat=dd/MM/yyyy}" Margin="3"/>
+                            <TextBlock Grid.Column="4" Text="{Binding Notes}" TextWrapping="Wrap"  Margin="3"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
                 <Button Content="Add New" Command="{Binding AddStockCommand}"/>
             </StackPanel>

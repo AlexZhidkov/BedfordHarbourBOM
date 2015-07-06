@@ -48,17 +48,5 @@ namespace Bom.Business.Managers.Tests
             Assert.AreEqual(updatedSupplier, resultedSupplier);
         }
 
-        [TestMethod]
-        public void GetAll_fromDB()
-        {
-            ObjectBase.Container = MEFLoader.Init();
-
-            var f = new DataRepositoryFactory();
-            StockManager manager = new StockManager(f);
-            var suppliers = manager.GetAllStockItems();
-
-            Assert.IsNotNull(suppliers);
-
-        }
     }
 }

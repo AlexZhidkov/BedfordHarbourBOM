@@ -34,19 +34,16 @@ namespace Bom.Desktop.Tests
 
             bool componentUpdated = false;
             string note = "";
-            int count = 0;
             viewModel.ComponentUpdated += (s, e) =>
             {
                 componentUpdated = true;
                 note = e.Component.Notes;
-                count = e.Component.Count;
             };
 
             viewModel.SaveCommand.Execute(null);
 
             Assert.IsTrue(componentUpdated);
             Assert.AreEqual(component.Notes, note);
-            Assert.AreEqual(component.Count, count);
         }
 
         [TestMethod]

@@ -20,7 +20,6 @@ namespace Bom.Business.Entities
         /// How many units (or lengths) of Subassembly used to build Assembly
         /// </summary>
         public decimal CostContribution { get; set; }
-        public int Count { get; set; }
 
         public int EntityId
         {

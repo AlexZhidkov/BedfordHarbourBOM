@@ -25,7 +25,6 @@ namespace Bom.Desktop.ViewModels
                 AssemblyId = component.AssemblyId,
                 SubassemblyId = component.SubassemblyId,
                 PartDescription = component.PartDescription,
-                Count = component.Count,
                 CostContribution = component.CostContribution,
                 Notes = component.Notes
             };
@@ -65,7 +64,7 @@ namespace Bom.Desktop.ViewModels
                 Part[] parts = partsClient.GetAllParts();
                 if (parts == null) return;
                 _parts = new List<Part>();
-                foreach (Part part in parts) _parts.Add(part);
+                foreach (Part part in parts.OrderBy(p => p.Description)) _parts.Add(part);
             });
         }
 

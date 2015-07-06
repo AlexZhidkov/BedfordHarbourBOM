@@ -17,7 +17,6 @@ namespace Bom.Client.Contracts
         private string _partDescription;
         private decimal _costContribution;
         private decimal _inheritedCost;
-        private int _count;
 
         public int AssemblyId
         {
@@ -80,17 +79,6 @@ namespace Bom.Client.Contracts
             }
         }
 
-        public int Count
-        {
-            get { return _count; }
-            set
-            {
-                if (_count == value) return;
-                _count = value;
-                OnPropertyChanged(() => Count);
-            }
-        }
-
         class SubassemblyDataValidator : AbstractValidator<SubassemblyData>
         {
             public SubassemblyDataValidator()
@@ -99,7 +87,6 @@ namespace Bom.Client.Contracts
                 RuleFor(obj => obj.AssemblyId).GreaterThan(0);
                 RuleFor(obj => obj.SubassemblyId).GreaterThan(0);
                 RuleFor(obj => obj.CostContribution).GreaterThanOrEqualTo(0).LessThanOrEqualTo(100);
-                RuleFor(obj => obj.Count).GreaterThan(0);
             }
         }
 

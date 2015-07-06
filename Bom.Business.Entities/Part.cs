@@ -18,9 +18,9 @@ namespace Bom.Business.Entities
         /// </summary>
         public decimal OwnCost { get; set; }
         /// <summary>
-        /// Total cost of assembly, calculated from total costs of all subassemblies and added own cost.
+        /// Total cost of all subassemblies.
         /// </summary>
-        public decimal Cost { get; set; }
+        public decimal ComponentsCost { get; set; }
 
         public int EntityId
         {
