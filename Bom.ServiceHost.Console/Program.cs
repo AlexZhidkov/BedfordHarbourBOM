@@ -10,13 +10,17 @@ using Bom.Business.Managers;
 using Bom.Common;
 using Core.Common.Core;
 using SM = System.ServiceModel;
+using NLog;
 
 namespace Bom.ServiceHost
 {
     class Program
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         static void Main(string[] args)
         {
+            logger.Info("Bom.ServiceHost.Console started"); 
             AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
 
             GenericPrincipal principal = new GenericPrincipal(
@@ -44,6 +48,8 @@ namespace Bom.ServiceHost
             StopService(hostSupplierManager, "SupplierManager");
             StopService(hostStockManager, "StockManager");
             StopService(hostPartManager, "PartManager");
+
+            logger.Info("Bom.ServiceHost.Console exit");
         }
 
         static void StartService(SM.ServiceHost host, string serviceDescription)
