@@ -49,7 +49,9 @@
     <Compile Include="Service Contracts\IStockService.cs" />
     <Compile Include="Service Contracts\ISupplierService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bom.Business.Entities\Bom.Business.Entities.csproj">
       <Project>{9d062e6f-bb5b-476d-925c-2be58549db01}</Project>

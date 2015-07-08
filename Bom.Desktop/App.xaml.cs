@@ -10,6 +10,7 @@ using System.Windows;
 using Bom.Client.Bootstapper;
 using Bom.Common;
 using Core.Common.Core;
+using NLog;
 
 namespace Bom.Desktop
 {
@@ -18,9 +19,12 @@ namespace Bom.Desktop
     /// </summary>
     public partial class App : Application
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            logger.Info("Bom.Desktop started.");
 
             ObjectBase.Container = MEFLoader.Init(new List<ComposablePartCatalog>() 
             {
@@ -34,5 +38,12 @@ namespace Bom.Desktop
             Thread.CurrentPrincipal = principal;
 
         }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+            logger.Info("Bom.Desktop exited.");
+        }
+
     }
 }
