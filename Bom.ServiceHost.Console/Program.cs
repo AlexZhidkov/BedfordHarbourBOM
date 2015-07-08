@@ -17,7 +17,7 @@ namespace Bom.ServiceHost
     class Program
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
-
+        
         static void Main(string[] args)
         {
             logger.Info("Bom.ServiceHost.Console started"); 
@@ -56,6 +56,7 @@ namespace Bom.ServiceHost
         {
             host.Open();
             Console.WriteLine("Service {0} started.", serviceDescription);
+            logger.Info("Service {0} started.", serviceDescription); 
 
             foreach (var endpoint in host.Description.Endpoints)
             {
@@ -72,6 +73,7 @@ namespace Bom.ServiceHost
         {
             host.Close();
             Console.WriteLine("Service {0} stopped.", serviceDescription);
+            logger.Info("Service {0} stopped.", serviceDescription);
         }
     }
 }
