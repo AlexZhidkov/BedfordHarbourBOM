@@ -11,6 +11,7 @@ using Bom.Business.Contracts;
 using Bom.Business.Entities;
 using Bom.Data.Contracts;
 using Core.Common.Extensions;
+using Core.Common.Utils;
 using Part = Bom.Business.Contracts.Part;
 
 namespace Bom.Data
@@ -58,6 +59,9 @@ namespace Bom.Data
         {
             UpdateComponentsOfAssembly(entityContext, entity);
             var data = (entityContext.Parts.Where(e => e.Id == entity.Id)).FirstOrDefault();
+            //ToDo refactor this.
+            SimpleMapper.PropertyMap(entity, data);
+
             return DataEntityToPart(data);
         }
 

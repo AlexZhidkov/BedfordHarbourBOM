@@ -69,7 +69,6 @@ namespace Bom.Data.Tests
         }
 
         [TestMethod]
-        [Ignore]
         public void test_part_repository_mocking_update()
         {
             PartRepositoryTestClass factoryTest = new PartRepositoryTestClass();
@@ -82,7 +81,7 @@ namespace Bom.Data.Tests
 
             Part ret = factoryTest.Update(updated);
 
-            Assert.AreEqual(ret, updated);
+            Assert.AreEqual(ret.OwnCost, updated.OwnCost);
         }
 
         [TestMethod]
