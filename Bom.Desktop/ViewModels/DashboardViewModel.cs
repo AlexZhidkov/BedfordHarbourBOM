@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Bom.Client.Contracts;
@@ -19,6 +22,18 @@ namespace Bom.Desktop.ViewModels
         {
             _serviceFactory = serviceFactory;
             RecalculateCostsForAssemblyCommand = new DelegateCommand<string>(OnRecalculateCostsForAssemblyCommand);
+
+            LatestVersion = new NotifyTaskCompletion<string>(getLatestVersionNumberAsync("https://github.com/AlexZhidkov/BedfordHarbourBOM/releases/latest"));
+        }
+
+        private static async Task<string> getLatestVersionNumberAsync(string url)
+        {
+            using (var client = new HttpClient())
+            {
+                var page = await client.GetStringAsync(url).ConfigureAwait(false);
+                var version = page.Substring(page.IndexOf("/AlexZhidkov/BedfordHarbourBOM/releases/tag/") + 44, 7);
+                return version;
+            }
         }
 
         readonly IServiceFactory _serviceFactory;
@@ -29,6 +44,13 @@ namespace Bom.Desktop.ViewModels
         {
             get { return "Dashboard"; }
         }
+
+        public string AppVersion
+        {
+            get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); ; }
+        }
+
+        public NotifyTaskCompletion<string> LatestVersion { get; private set; }
 
         private void OnRecalculateCostsForAssemblyCommand(string partId)
         {

@@ -53,6 +53,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -75,6 +76,7 @@
     <Compile Include="Support\StockEventArgs.cs" />
     <Compile Include="Support\ComponentEventArgs.cs" />
     <Compile Include="Support\SupplierEventArgs.cs" />
+    <Compile Include="Support\BooleanToVisibilityConverter.cs" />
     <Compile Include="Support\ViewModelNullToVisibilityConverter.cs" />
     <Compile Include="EditPartWindow.xaml.cs">
       <DependentUpon>EditPartWindow.xaml</DependentUpon>

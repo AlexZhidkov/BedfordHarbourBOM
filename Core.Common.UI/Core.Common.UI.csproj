@@ -73,6 +73,7 @@
       <DependentUpon>ValidationHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\DelegateCommand.cs" />
+    <Compile Include="Core\NotifyTaskCompletion.cs" />
     <Compile Include="Core\UserControlViewBase.cs" />
     <Compile Include="Core\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
