@@ -8,21 +8,27 @@ using System.Text;
 using System.Threading.Tasks;
 using Bom.Business.Entities;
 using Bom.Common;
+using NLog;
 
 namespace Bom.Data
 {
     public class BomDbInitializer : DropCreateDatabaseIfModelChanges<BomContext>
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         protected override void Seed(BomContext context)
         {
+            logger.Info("Seed database");
             DropCreateStoredProcedures(context);
             RunSqlScripts(context);
         }
 
         private void RunSqlScripts(BomContext context)
         {
+            logger.Info("Looking for SQL scripts in {0}", AppDomain.CurrentDomain.BaseDirectory);
             foreach (var file in Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SQL"), "*.sql"))
             {
+                logger.Info("Executing SQL script {0}", file);
                 context.Database.ExecuteSqlCommand(File.ReadAllText(file), new object[0]);
             }
         }
@@ -233,8 +239,11 @@ namespace Bom.Data
                 context.Database.ExecuteSqlCommand(File.ReadAllText(file), new object[0]);
             }
 */
+
+            logger.Info("Looking for SQL scripts in {0}", AppDomain.CurrentDomain.BaseDirectory);
             foreach (var file in Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SQL\\StoredProcedures"), "*.sql"))
             {
+                logger.Info("Executing SQL script {0}", file);
                 context.Database.ExecuteSqlCommand(File.ReadAllText(file), new object[0]);
             }
         }
