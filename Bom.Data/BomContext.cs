@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bom.Business.Entities;
 using Core.Common.Contracts;
+using NLog;
 
 namespace Bom.Data
 {
@@ -18,10 +19,15 @@ namespace Bom.Data
         public DbSet<Part> Parts { get; set; }
         public DbSet<Subassembly> Subassemblies { get; set; }
 
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         public BomContext()
             : base("name=BomContext")
         {
-            AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
+            logger.Debug("Database name: {0}", this.Database.Connection.Database);
+            logger.Debug("ConnectionString: {0}", this.Database.Connection.ConnectionString);
+
+            //AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
             Database.SetInitializer(new BomDbInitializer());
             //Database.SetInitializer<BomContext>(new DropCreateDatabaseIfModelChanges<BomContext>());
             //Database.SetInitializer<BomContext>(null);

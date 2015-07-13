@@ -20,8 +20,14 @@ namespace Bom.ServiceHost
         
         static void Main(string[] args)
         {
-            logger.Info("Bom.ServiceHost.Console started"); 
-            AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
+            logger.Info("Bom.ServiceHost.Console started");
+
+            var currentDirectory = System.IO.Directory.GetCurrentDirectory();
+            var assemblyNameIndex = currentDirectory.IndexOf(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
+            var dataDirectory = currentDirectory.Substring(0, assemblyNameIndex - 1);
+
+            AppDomain.CurrentDomain.SetData("DataDirectory", dataDirectory);
+
 
             GenericPrincipal principal = new GenericPrincipal(
              new GenericIdentity("Console"), new string[] { Security.BomAdminRole });

@@ -7,11 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Common.Core;
 using Core.Common.Exceptions;
+using NLog;
 
 namespace Bom.Business.Managers
 {
     public class ManagerBase
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         public ManagerBase()
         {
             if (ObjectBase.Container != null)
@@ -26,10 +29,12 @@ namespace Bom.Business.Managers
             }
             catch (AuthorizationValidationException ex)
             {
+                logger.Error("Throwing AuthorizationValidationException: {0}", ex.Message);
                 throw new FaultException<AuthorizationValidationException>(ex, ex.Message);
             }
             catch (FaultException ex)
             {
+                logger.Error("Throwing FaultException: {0}", ex.Message);
                 throw ex;
             }
             catch (Exception ex)
@@ -46,6 +51,7 @@ namespace Bom.Business.Managers
 
                 traverse(ex);
 
+                logger.Error("Throwing exception: {0}", message.ToString());
                 throw new FaultException(message.ToString());
             }
         }
@@ -58,14 +64,17 @@ namespace Bom.Business.Managers
             }
             catch (AuthorizationValidationException ex)
             {
+                logger.Error("Throwing AuthorizationValidationException: {0}", ex.Message);
                 throw new FaultException<AuthorizationValidationException>(ex, ex.Message);
             }
             catch (FaultException ex)
             {
+                logger.Error("Throwing FaultException: {0}", ex.Message);
                 throw ex;
             }
             catch (Exception ex)
             {
+                logger.Error("Throwing Exception: {0}", ex.Message);
                 throw new FaultException(ex.Message);
             }
         }
