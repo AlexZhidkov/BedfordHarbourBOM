@@ -15,6 +15,12 @@ namespace Bom.Business.Managers.Tests
             GenericPrincipal principal = new GenericPrincipal(
                 new GenericIdentity("UnitTest"), new string[] { "Administrators", Security.BomAdminRole });
             Thread.CurrentPrincipal = principal;
+
+            var currentDirectory = System.IO.Directory.GetCurrentDirectory();
+            var assemblyNameIndex = currentDirectory.IndexOf(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
+            var dataDirectory = currentDirectory.Substring(0, assemblyNameIndex - 1);
+
+            AppDomain.CurrentDomain.SetData("DataDirectory", dataDirectory);
         }
 
     }
