@@ -22,7 +22,7 @@ namespace Bom.Data
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         public BomContext()
-            : base("name=BomContext")
+            : base("BomContext")
         {
             logger.Debug("Database name: {0}", this.Database.Connection.Database);
             logger.Debug("ConnectionString: {0}", this.Database.Connection.ConnectionString);

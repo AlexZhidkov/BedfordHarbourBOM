@@ -72,6 +72,11 @@
     <Compile Include="Data Repositories\SupplierRepository.cs" />
     <Compile Include="DataRepositoryBase.cs" />
     <Compile Include="DataRepositoryFactory.cs" />
+    <Compile Include="Migrations\201507140842051_Initial.cs" />
+    <Compile Include="Migrations\201507140842051_Initial.Designer.cs">
+      <DependentUpon>201507140842051_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +122,11 @@
     <Content Include="SQL\StoredProcedures\RecalculateCostsForAssembly.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201507140842051_Initial.resx">
+      <DependentUpon>201507140842051_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
