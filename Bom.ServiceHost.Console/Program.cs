@@ -22,11 +22,19 @@ namespace Bom.ServiceHost
         {
             logger.Info("Bom.ServiceHost.Console started");
 
-            var currentDirectory = System.IO.Directory.GetCurrentDirectory();
-            var assemblyNameIndex = currentDirectory.IndexOf(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
-            var dataDirectory = currentDirectory.Substring(0, assemblyNameIndex - 1);
+            //ToDo Refactor
+            try
+            {
+                var currentDirectory = System.IO.Directory.GetCurrentDirectory();
+                var assemblyNameIndex = currentDirectory.IndexOf(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
+                var dataDirectory = currentDirectory.Substring(0, assemblyNameIndex - 1);
 
-            AppDomain.CurrentDomain.SetData("DataDirectory", dataDirectory);
+                AppDomain.CurrentDomain.SetData("DataDirectory", dataDirectory);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message); 
+            }
 
 
             GenericPrincipal principal = new GenericPrincipal(
