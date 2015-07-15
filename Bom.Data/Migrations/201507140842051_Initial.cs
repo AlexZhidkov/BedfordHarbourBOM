@@ -1,4 +1,5 @@
 using System.IO;
+using NLog;
 
 namespace Bom.Data.Migrations
 {
@@ -7,8 +8,11 @@ namespace Bom.Data.Migrations
     
     public partial class Initial : DbMigration
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         public override void Up()
         {
+            logger.Info("Initial.Up() entered");
+
             CreateTable(
                 "dbo.Parts",
                 c => new
@@ -63,9 +67,11 @@ namespace Bom.Data.Migrations
                     })
                 .PrimaryKey(t => t.Id);
 
+            logger.Info("Running DatabaseSeed.sql");
             var databaseSeed = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"SQL\DatabaseSeed.sql");
             Sql(File.ReadAllText(databaseSeed));
 
+            logger.Info("Running RecalculateCostsForAssembly.sql");
             var recalculateCostsForAssembly = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"SQL\StoredProcedures\RecalculateCostsForAssembly.sql");
             Sql(File.ReadAllText(recalculateCostsForAssembly));
         }

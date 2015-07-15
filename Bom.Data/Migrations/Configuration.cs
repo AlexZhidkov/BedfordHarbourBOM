@@ -1,3 +1,5 @@
+using NLog;
+
 namespace Bom.Data.Migrations
 {
     using System;
@@ -7,13 +9,16 @@ namespace Bom.Data.Migrations
 
     public sealed class Configuration : DbMigrationsConfiguration<Bom.Data.BomContext>
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         public Configuration()
         {
+            logger.Info("Configuration() constructor entered");
             AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(Bom.Data.BomContext context)
         {
+            logger.Info("Seed entered");
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

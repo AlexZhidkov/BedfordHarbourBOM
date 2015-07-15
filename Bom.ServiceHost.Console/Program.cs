@@ -22,20 +22,7 @@ namespace Bom.ServiceHost
         {
             logger.Info("Bom.ServiceHost.Console started");
 
-            //ToDo Refactor
-            try
-            {
-                var currentDirectory = System.IO.Directory.GetCurrentDirectory();
-                var assemblyNameIndex = currentDirectory.IndexOf(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
-                var dataDirectory = currentDirectory.Substring(0, assemblyNameIndex - 1);
-
-                AppDomain.CurrentDomain.SetData("DataDirectory", dataDirectory);
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex.Message); 
-            }
-
+            SetDataDirectory();
 
             GenericPrincipal principal = new GenericPrincipal(
              new GenericIdentity("Console"), new string[] { Security.BomAdminRole });
@@ -64,6 +51,15 @@ namespace Bom.ServiceHost
             StopService(hostPartManager, "PartManager");
 
             logger.Info("Bom.ServiceHost.Console exit");
+        }
+
+        private static void SetDataDirectory()
+        {
+            var currentDirectory = System.IO.Directory.GetCurrentDirectory();
+            var assemblyNameIndex = currentDirectory.IndexOf(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name,
+                StringComparison.Ordinal);
+            var dataDirectory = assemblyNameIndex > 0 ? currentDirectory.Substring(0, assemblyNameIndex - 1) : currentDirectory;
+            AppDomain.CurrentDomain.SetData("DataDirectory", dataDirectory);
         }
 
         static void StartService(SM.ServiceHost host, string serviceDescription)

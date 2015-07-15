@@ -34,6 +34,8 @@ namespace Bom.Data
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            logger.Info("OnModelCreating entered");
+
             modelBuilder.Ignore<PropertyChangedEventHandler>();
             modelBuilder.Ignore<ExtensionDataObject>();
             modelBuilder.Ignore<IIdentifiableEntity>();

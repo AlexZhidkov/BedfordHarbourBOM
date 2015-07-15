@@ -12,6 +12,7 @@ using Bom.Data.Migrations;
 
 namespace Bom.Data
 {
+    //ToDo Remove this class
     public class BomDbInitializer : MigrateDatabaseToLatestVersion<BomContext, Configuration>
     {
     }
