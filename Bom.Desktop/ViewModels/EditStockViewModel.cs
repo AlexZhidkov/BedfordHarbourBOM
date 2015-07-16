@@ -16,26 +16,23 @@ namespace Bom.Desktop.ViewModels
 {
     public class EditStockViewModel : ViewModelBase
     {
-        public EditStockViewModel(IServiceFactory serviceFactory, StockItemData stockItem)
+        public EditStockViewModel(IServiceFactory serviceFactory, Part stockItem)
         {
             _serviceFactory = serviceFactory ?? ObjectBase.Container.GetExportedValue<IServiceFactory>();
-            _isNew = (stockItem.StockId == 0);
+            _isNew = (stockItem.Id == 0);
 
             if (_isNew)
             {
-                LoadParts();
-                _stock.CountDate = DateTime.Now;
+                throw new NotImplementedException();
             }
             else
             {
-                PartDescription = stockItem.PartDescription;
-                _stock = new Stock()
+                PartDescription = stockItem.Description;
+                _stock = new Part()
                 {
-                    Id = stockItem.StockId,
-                    Cost = stockItem.Cost,
+                    //ToDo
+                    Id = stockItem.Id,
                     Count = stockItem.Count,
-                    CountDate = stockItem.CountDate,
-                    PartId = stockItem.PartId,
                     Notes = stockItem.Notes
                 };
             }
@@ -59,7 +56,7 @@ namespace Bom.Desktop.ViewModels
         }
 
         readonly IServiceFactory _serviceFactory;
-        readonly Stock _stock = new Stock();
+        readonly Part _stock = new Part();
         readonly bool _isNew;
         List<Part> _parts = null;
 
@@ -76,7 +73,7 @@ namespace Bom.Desktop.ViewModels
 
         public string PartDescription { get; set; }
 
-        public Stock Stock
+        public Part Stock
         {
             get { return _stock; }
         }
@@ -97,9 +94,9 @@ namespace Bom.Desktop.ViewModels
 
             if (IsValid)
             {
-                WithClient(_serviceFactory.CreateClient<IStockService>(), stockClient =>
+                WithClient(_serviceFactory.CreateClient<IPartService>(), partClient =>
                 {
-                    var savedStock = stockClient.UpdateStock(_stock);
+                    var savedStock = partClient.UpdatePart(_stock);
                     if (savedStock != null)
                     {
                         if (StockUpdated != null)

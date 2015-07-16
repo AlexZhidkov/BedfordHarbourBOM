@@ -37,6 +37,9 @@ namespace Bom.Desktop.ViewModels
                 Length = part.Length,
                 Number = part.Number,
                 Type = part.Type,
+                Count = part.Count,
+                CountDate = part.CountDate,
+                OnOrder = part.OnOrder,
                 Notes = part.Notes
             };
 

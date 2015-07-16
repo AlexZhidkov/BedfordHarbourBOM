@@ -30,13 +30,7 @@
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Count:" />
             <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Date:" />
             <TextBlock Grid.Row="3" Grid.Column="0" Margin="3" Text="Notes:" />
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding PartDescription}" HorizontalAlignment="Left" 
-                Visibility="{Binding Stock.Part, Converter={StaticResource viewModelNullToVisibilityConverter}}" />
-            <ComboBox Grid.Row="0" Grid.Column="1" Margin="3" 
-                Visibility="{Binding Parts, Converter={StaticResource viewModelNullToVisibilityConverter}}"
-                ItemsSource="{Binding Parts}" 
-                DisplayMemberPath="Description" 
-                DropDownClosed="ComboBox_OnDropDownClosed"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding PartDescription}" HorizontalAlignment="Left" />
             <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding Stock.Count, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
             <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
                 <DatePicker Margin="3" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDate="{Binding Stock.CountDate}" DisplayDate="{x:Static system:DateTime.Now}"/>

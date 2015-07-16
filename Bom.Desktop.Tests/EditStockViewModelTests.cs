@@ -13,29 +13,30 @@ namespace Bom.Desktop.Tests
         [TestMethod]
         public void TestViewModelConstruction()
         {
-            StockItemData stock = TestHelper.GetTestStockItemData();
+            Part stock = TestHelper.GetTestPart();
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
 
             EditStockViewModel viewModel = new EditStockViewModel(mockServiceFactory.Object, stock);
 
             Assert.IsTrue(viewModel.Stock != null);
-            Assert.IsTrue(viewModel.Stock.Id == stock.StockId && viewModel.Stock.Notes == stock.Notes);
+            Assert.IsTrue(viewModel.Stock.Id == stock.Id && viewModel.Stock.Notes == stock.Notes);
         }
 
         [TestMethod]
         public void TestSaveCommand()
         {
-            StockItemData stock = TestHelper.GetTestStockItemData();
+            Part stock = TestHelper.GetTestPart();
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
 
             EditStockViewModel viewModel = new EditStockViewModel(mockServiceFactory.Object, stock);
 
-            mockServiceFactory.Setup(mock => mock.CreateClient<IStockService>().UpdateStock(It.IsAny<Stock>())).Returns(viewModel.Stock);
+            mockServiceFactory.Setup(mock => mock.CreateClient<IPartService>().UpdatePart(It.IsAny<Part>())).Returns(viewModel.Stock);
 
+            viewModel.Stock.Description = "Description";
             viewModel.Stock.Notes = "Black";
-
+            
             bool stockUpdated = false;
             string color = string.Empty;
             viewModel.StockUpdated += (s, e) =>
@@ -53,7 +54,7 @@ namespace Bom.Desktop.Tests
         [TestMethod]
         public void TestCanSaveCommand()
         {
-            StockItemData stock = TestHelper.GetTestStockItemData();
+            Part stock = TestHelper.GetTestPart();
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
 
@@ -69,23 +70,26 @@ namespace Bom.Desktop.Tests
         [TestMethod]
         public void TestStockIsValid()
         {
-            StockItemData stock = TestHelper.GetTestStockItemData();
+            Part stock = TestHelper.GetTestPart();
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
 
             EditStockViewModel viewModel = new EditStockViewModel(mockServiceFactory.Object, stock);
 
-            viewModel.Stock.PartId = 0;
+            viewModel.Stock.Id = 0;
             Assert.IsFalse(viewModel.Stock.IsValid);
 
-            viewModel.Stock.PartId = 1;
+            viewModel.Stock.Id = 1;
+            viewModel.Stock.Description = "Test";
+            viewModel.Stock.ComponentsCost = 0;
+
             Assert.IsTrue(viewModel.Stock.IsValid);
         }
 
         [TestMethod]
         public void TestCancelCommand()
         {
-            StockItemData stock = new StockItemData { StockId = 1, Notes = "White" };
+            Part stock = new Part { Id = 1, Notes = "White" };
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
 

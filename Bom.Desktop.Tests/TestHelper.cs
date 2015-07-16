@@ -61,6 +61,7 @@ namespace Bom.Desktop.Tests
                 ComponentsCost = 99,
                 IsOwnMake = true,
                 Length = 55,
+                Count = 5,
                 Notes = "Test Notes",
                 Components = new[]
                 {
