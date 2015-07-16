@@ -19,6 +19,10 @@ namespace Bom.Client.Contracts
         private int _length;
         private decimal _ownCost;
         private decimal _componentsCost;
+        private int _count;
+        private DateTime _countDate;
+        private int _onOrder;
+        private IEnumerable<Supplier> _suppliers;
 
         public PartType Type
         {
@@ -112,6 +116,59 @@ namespace Bom.Client.Contracts
                 if (_number == value) return;
                 _number = value;
                 OnPropertyChanged(() => Number);
+            }
+        }
+
+        /// <summary>
+        /// Number of item ordered pending delivery
+        /// </summary>
+        public int Count
+        {
+            get { return _count; }
+            set
+            {
+                if (_count == value) return;
+                _count = value;
+                OnPropertyChanged(() => Count);
+            }
+        }
+
+        /// <summary>
+        /// Stock count date
+        /// </summary>
+        public DateTime CountDate
+        {
+            get { return _countDate; }
+            set
+            {
+                if (_countDate == value) return;
+                _countDate = value;
+                OnPropertyChanged(() => CountDate);
+            }
+        }
+
+        /// <summary>
+        /// Number of item ordered pending delivery
+        /// </summary>
+        public int OnOrder
+        {
+            get { return _onOrder; }
+            set
+            {
+                if (_onOrder == value) return;
+                _onOrder = value;
+                OnPropertyChanged(() => OnOrder);
+            }
+        }
+
+        public IEnumerable<Supplier> Suppliers
+        {
+            get { return _suppliers; }
+            set
+            {
+                if (_suppliers == value) return;
+                _suppliers = value;
+                OnPropertyChanged(() => Suppliers);
             }
         }
 

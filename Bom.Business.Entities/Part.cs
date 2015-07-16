@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Bom.Common;
 using Core.Common.Contracts;
@@ -31,6 +32,23 @@ namespace Bom.Business.Entities
         /// </summary>
         [DataMember]
         public decimal ComponentsCost { get; set; }
+        /// <summary>
+        /// Stock count on CountDate
+        /// </summary>
+        [DataMember]
+        public int Count { get; set; }
+        /// <summary>
+        /// Stock count date
+        /// </summary>
+        [DataMember]
+        public DateTime CountDate { get; set; }
+        /// <summary>
+        /// Number of item ordered pending delivery
+        /// </summary>
+        [DataMember]
+        public int OnOrder { get; set; }
+        [DataMember]
+        public IEnumerable<Supplier> Suppliers { get; set; }
 
         public int EntityId
         {

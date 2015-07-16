@@ -76,6 +76,10 @@
     <Compile Include="Migrations\201507140842051_Initial.Designer.cs">
       <DependentUpon>201507140842051_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507160840057_AddCountsToPart.cs" />
+    <Compile Include="Migrations\201507160840057_AddCountsToPart.Designer.cs">
+      <DependentUpon>201507160840057_AddCountsToPart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -126,6 +130,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201507140842051_Initial.resx">
       <DependentUpon>201507140842051_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507160840057_AddCountsToPart.resx">
+      <DependentUpon>201507160840057_AddCountsToPart.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
