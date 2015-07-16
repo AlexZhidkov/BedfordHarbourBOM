@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using Bom.Business.Bootstrapper;
 using Bom.Business.Contracts;
+using Bom.Business.Entities;
 using Bom.Data.Contracts;
 using Core.Common.Contracts;
 using Core.Common.Core;
@@ -66,22 +67,6 @@ namespace Bom.Data.Tests
             IEnumerable<Part> ret = repositoryTest.GetAllPart();
 
             Assert.AreEqual(ret, parts);
-        }
-
-        [TestMethod]
-        public void test_part_repository_mocking_update()
-        {
-            PartRepositoryTestClass factoryTest = new PartRepositoryTestClass();
-
-            Part updated = new Part
-            {
-                Id = 1,
-                OwnCost = 2
-            };
-
-            Part ret = factoryTest.Update(updated);
-
-            Assert.AreEqual(ret.OwnCost, updated.OwnCost);
         }
 
         [TestMethod]

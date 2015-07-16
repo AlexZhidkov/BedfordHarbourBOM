@@ -12,7 +12,6 @@ using Bom.Business.Entities;
 using Bom.Data.Contracts;
 using Core.Common.Extensions;
 using Core.Common.Utils;
-using Part = Bom.Business.Contracts.Part;
 
 namespace Bom.Data
 {
@@ -22,6 +21,8 @@ namespace Bom.Data
     {
         protected override Part AddEntity(BomContext entityContext, Part part)
         {
+            return entityContext.Parts.Add(part);
+/*
             UpdateComponentsOfAssembly(entityContext, part);
             entityContext.Parts.Add(new Business.Entities.Part
             {
@@ -36,6 +37,7 @@ namespace Bom.Data
                 Notes = part.Notes
             });
             return part;
+*/
         }
 
         private static void UpdateComponentsOfAssembly(BomContext entityContext, Part entity)
@@ -57,35 +59,17 @@ namespace Bom.Data
 
         protected override Part UpdateEntity(BomContext entityContext, Part entity)
         {
-            UpdateComponentsOfAssembly(entityContext, entity);
-            var data = (entityContext.Parts.Where(e => e.Id == entity.Id)).FirstOrDefault();
-            //ToDo refactor this.
-            SimpleMapper.PropertyMap(entity, data);
-
-            return DataEntityToPart(data);
+            return (entityContext.Parts.Where(e => e.Id == entity.Id)).FirstOrDefault();
         }
 
         protected override IEnumerable<Part> GetEntities(BomContext entityContext)
         {
-            return entityContext.Parts.Select(e => new Part
-            {
-                Id = e.Id,
-                Number = e.Number,
-                Description = e.Description,
-                Type = e.Type,
-                ComponentsCost = e.ComponentsCost,
-                OwnCost = e.OwnCost,
-                IsOwnMake = e.IsOwnMake,
-                Length = e.Length,
-                Notes = e.Notes
-            });
+            return entityContext.Parts.Select(e => e);
         }
 
         protected override Part GetEntity(BomContext entityContext, int id)
         {
-            var data = (entityContext.Parts.Where(e => e.Id == id)).FirstOrDefault();
-
-            return DataEntityToPart(data);
+            return (entityContext.Parts.Where(e => e.Id == id)).FirstOrDefault();
         }
 
         private static Part DataEntityToPart(Business.Entities.Part data)

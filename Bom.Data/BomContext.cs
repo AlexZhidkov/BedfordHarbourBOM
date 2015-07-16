@@ -44,6 +44,7 @@ namespace Bom.Data
             modelBuilder.Entity<Stock>().HasKey<int>(e => e.Id).Ignore(e => e.EntityId);
 
             modelBuilder.Entity<Part>().HasKey<int>(e => e.Id).Ignore(e => e.EntityId);
+            modelBuilder.Entity<Part>().Ignore(e => e.Components);
             modelBuilder.Entity<Part>().Property(o => o.OwnCost).HasPrecision(25, 13);
             modelBuilder.Entity<Part>().Property(o => o.ComponentsCost).HasPrecision(25, 13);
 

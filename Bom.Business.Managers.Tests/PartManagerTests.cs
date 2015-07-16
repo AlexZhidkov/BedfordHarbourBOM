@@ -1,5 +1,6 @@
 ﻿using Bom.Business.Bootstrapper;
 using Bom.Business.Contracts;
+using Bom.Business.Entities;
 using Bom.Data;
 using Bom.Data.Contracts;
 using Core.Common.Contracts;
