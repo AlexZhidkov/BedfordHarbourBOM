@@ -10,7 +10,7 @@ using FluentValidation;
 
 namespace Bom.Client.Contracts
 {
-    public class SubassemblyData : BaseEntity
+    public class Subassembly : BaseEntity
     {
         private int _assemblyId;
         private int _subassemblyId;
@@ -79,7 +79,7 @@ namespace Bom.Client.Contracts
             }
         }
 
-        class SubassemblyDataValidator : AbstractValidator<SubassemblyData>
+        class SubassemblyDataValidator : AbstractValidator<Subassembly>
         {
             public SubassemblyDataValidator()
             {

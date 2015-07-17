@@ -15,11 +15,11 @@ namespace Bom.Desktop.ViewModels
     public class EditComponentViewModel : ViewModelBase
     {
         // note that this viewmodel is instantiated on-demand from parent and not with DI
-        public EditComponentViewModel(IServiceFactory serviceFactory, SubassemblyData component, bool isNew)
+        public EditComponentViewModel(IServiceFactory serviceFactory, Subassembly component, bool isNew)
         {
             _serviceFactory = serviceFactory;
             _isNew = isNew;
-            _component = new SubassemblyData
+            _component = new Subassembly
             {
                 Id = component.Id,
                 AssemblyId = component.AssemblyId,
@@ -37,7 +37,7 @@ namespace Bom.Desktop.ViewModels
 
         IServiceFactory _serviceFactory;
         bool _isNew;
-        SubassemblyData _component;
+        Subassembly _component;
         List<Part> _parts;
 
         public DelegateCommand<object> SaveCommand { get; private set; }
@@ -46,7 +46,7 @@ namespace Bom.Desktop.ViewModels
         public event EventHandler CancelAddComponent;
         public event EventHandler<ComponentEventArgs> ComponentUpdated;
 
-        public SubassemblyData Component
+        public Subassembly Component
         {
             get { return _component; }
         }

@@ -138,7 +138,7 @@ namespace Bom.Data.Tests
             return _PartRepository.Get(partId);
         }
 
-        public IEnumerable<SubassemblyData> GetComponents(int partId)
+        public IEnumerable<Subassembly> GetComponents(int partId)
         {
             return _PartRepository.GetComponents(partId);
         }

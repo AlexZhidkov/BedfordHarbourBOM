@@ -65,7 +65,7 @@ namespace Bom.Desktop.Tests
                 Notes = "Test Notes",
                 Components = new[]
                 {
-                    new SubassemblyData
+                    new Subassembly
                     {
                         AssemblyId = 1,
                         SubassemblyId = 2,
@@ -73,7 +73,7 @@ namespace Bom.Desktop.Tests
                         CostContribution = 33,
                         Notes = "Notes"
                     },
-                    new SubassemblyData
+                    new Subassembly
                     {
                         AssemblyId = 1,
                         SubassemblyId = 2,
@@ -85,9 +85,9 @@ namespace Bom.Desktop.Tests
             };
         }
 
-        public static SubassemblyData GetTestComponent()
+        public static Subassembly GetTestComponent()
         {
-            return new SubassemblyData
+            return new Subassembly
             {
                 Id = 1,
                 AssemblyId = 1,

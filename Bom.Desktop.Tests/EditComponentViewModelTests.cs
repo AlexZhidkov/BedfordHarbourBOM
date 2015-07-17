@@ -13,7 +13,7 @@ namespace Bom.Desktop.Tests
         [TestMethod]
         public void TestViewModelConstruction()
         {
-            SubassemblyData component = TestHelper.GetTestComponent();
+            Subassembly component = TestHelper.GetTestComponent();
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
 
@@ -26,7 +26,7 @@ namespace Bom.Desktop.Tests
         [TestMethod]
         public void TestSaveCommand()
         {
-            SubassemblyData component = TestHelper.GetTestComponent();
+            Subassembly component = TestHelper.GetTestComponent();
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
 
@@ -49,7 +49,7 @@ namespace Bom.Desktop.Tests
         [TestMethod]
         public void TestCanSaveCommand()
         {
-            SubassemblyData component = TestHelper.GetTestComponent();
+            Subassembly component = TestHelper.GetTestComponent();
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
 
@@ -65,7 +65,7 @@ namespace Bom.Desktop.Tests
         [TestMethod]
         public void TestComponentIsValid()
         {
-            SubassemblyData component = TestHelper.GetTestComponent();
+            Subassembly component = TestHelper.GetTestComponent();
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
 
@@ -81,7 +81,7 @@ namespace Bom.Desktop.Tests
         [TestMethod]
         public void TestCancelCommand()
         {
-            SubassemblyData component = new SubassemblyData { Id = 1, Notes = "White" };
+            Subassembly component = new Subassembly { Id = 1, Notes = "White" };
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
 

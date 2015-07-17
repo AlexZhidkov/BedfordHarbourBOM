@@ -45,8 +45,7 @@ namespace Bom.Business.Managers
             {
                 IPartRepository partRepository = _dataRepositoryFactory.GetDataRepository<IPartRepository>();
                 var part = partRepository.Get(id);
-                //ToDo
-                //part.Components = partRepository.GetComponents(id);
+                part.Components = partRepository.GetComponents(id);
                 return part;
             });
         }

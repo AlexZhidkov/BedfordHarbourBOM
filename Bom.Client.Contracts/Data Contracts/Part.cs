@@ -14,7 +14,7 @@ namespace Bom.Client.Contracts
         private PartType _type;
         private string _number;
         private string _description;
-        private IEnumerable<SubassemblyData> _components;
+        private IEnumerable<Subassembly> _components;
         private bool _isOwnMake;
         private int _length;
         private decimal _ownCost;
@@ -46,7 +46,7 @@ namespace Bom.Client.Contracts
             }
         }
 
-        public IEnumerable<SubassemblyData> Components
+        public IEnumerable<Subassembly> Components
         {
             get { return _components; }
             set

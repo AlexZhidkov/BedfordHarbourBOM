@@ -128,9 +128,9 @@ namespace Bom.Desktop.Tests
                 Notes = "White",
                 Components = new[]
                 {
-                    new SubassemblyData {SubassemblyId = 1},
-                    new SubassemblyData {SubassemblyId = 2},
-                    new SubassemblyData {SubassemblyId = 3}
+                    new Subassembly {SubassemblyId = 1},
+                    new Subassembly {SubassemblyId = 2},
+                    new Subassembly {SubassemblyId = 3}
                 }
             };
 

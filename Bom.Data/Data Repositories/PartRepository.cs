@@ -89,25 +89,18 @@ namespace Bom.Data
             };
         }
 
-        public IEnumerable<SubassemblyData> GetComponents(int assemblyId)
+        public IEnumerable<Subassembly> GetComponents(int assemblyId)
         {
+            IEnumerable<Subassembly> subassemblies;
             using (BomContext entityContext = new BomContext())
             {
-                IQueryable<SubassemblyData> components = from component in entityContext.Parts
-                    join assembly in entityContext.Subassemblies on component.Id equals assembly.SubassemblyId
-                    where assembly.AssemblyId == assemblyId
-                    select new SubassemblyData
-                    {
-                        Id = assembly.Id,
-                        AssemblyId = assembly.AssemblyId,
-                        SubassemblyId = assembly.SubassemblyId,
-                        PartDescription = component.Description,
-                        CostContribution = assembly.CostContribution,
-                        Notes = assembly.Notes
-                    };
-
-                return components.ToFullyLoaded();
+                subassemblies = entityContext.Subassemblies.Where(e => e.AssemblyId == assemblyId).ToFullyLoaded();
+                foreach (var subassembly in subassemblies)
+                {
+                    subassembly.PartDescription = entityContext.Parts.Single(p => p.Id == subassembly.SubassemblyId).Description;
+                }
             }
+            return subassemblies;
         }
 
         public void RecalculateCostsForAssembly(int partId)
