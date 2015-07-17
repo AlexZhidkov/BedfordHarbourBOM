@@ -80,6 +80,10 @@
     <Compile Include="Migrations\201507160840057_AddCountsToPart.Designer.cs">
       <DependentUpon>201507160840057_AddCountsToPart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507170332349_CountDateNullable.cs" />
+    <Compile Include="Migrations\201507170332349_CountDateNullable.Designer.cs">
+      <DependentUpon>201507170332349_CountDateNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -133,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507160840057_AddCountsToPart.resx">
       <DependentUpon>201507160840057_AddCountsToPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507170332349_CountDateNullable.resx">
+      <DependentUpon>201507170332349_CountDateNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

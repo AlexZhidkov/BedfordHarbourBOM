@@ -11,7 +11,7 @@ namespace Bom.Client.Entities
     {
         private int _partId;
         private int _count;
-        private DateTime _countDate;
+        private DateTime? _countDate;
         private decimal _cost;
         private IEnumerable<Supplier> _suppliers;
 
@@ -37,7 +37,7 @@ namespace Bom.Client.Entities
             }
         }
 
-        public DateTime CountDate
+        public DateTime? CountDate
         {
             get { return _countDate; }
             set
@@ -77,7 +77,8 @@ namespace Bom.Client.Entities
                 RuleFor(obj => obj.PartId).GreaterThan(0);
                 RuleFor(obj => obj.Count).GreaterThanOrEqualTo(0);
                 RuleFor(obj => obj.Cost).GreaterThanOrEqualTo(0);
-                RuleFor(obj => obj.CountDate.Date).LessThanOrEqualTo(DateTime.Now.Date);
+                When(obj => obj.CountDate.HasValue,
+                    () => RuleFor(d => d.CountDate.Value.Date).LessThanOrEqualTo(DateTime.Now.Date));
             }
         }
 

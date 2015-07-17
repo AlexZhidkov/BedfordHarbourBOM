@@ -41,7 +41,7 @@ namespace Bom.Business.Entities
         /// Stock count date
         /// </summary>
         [DataMember]
-        public DateTime CountDate { get; set; }
+        public DateTime? CountDate { get; set; }
         /// <summary>
         /// Number of item ordered pending delivery
         /// </summary>

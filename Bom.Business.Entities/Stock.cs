@@ -13,7 +13,7 @@ namespace Bom.Business.Entities
         [DataMember]
         public int Count { get; set; }
         [DataMember]
-        public DateTime CountDate { get; set; }
+        public DateTime? CountDate { get; set; }
         [DataMember]
         public decimal Cost { get; set; }
         [DataMember]

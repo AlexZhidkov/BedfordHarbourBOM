@@ -197,13 +197,11 @@ namespace Bom.Desktop.ViewModels
 
             if (!args.Cancel)
             {
-/*ToDo
-                WithClient(_serviceFactory.CreateClient<IPartService>(), suplierClient =>
+                WithClient(_serviceFactory.CreateClient<IPartService>(), partClient =>
                 {
-                    suplierClient.DeleteStock(stockId);
-                    _stocks.Remove(_stocks.Single(i => i.StockId == stockId));
+                    partClient.DeletePart(stockId);
+                    _stocks.Remove(_stocks.Single(i => i.Id == stockId));
                 });
-*/
             }
         }
 

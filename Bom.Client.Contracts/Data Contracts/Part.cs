@@ -20,7 +20,7 @@ namespace Bom.Client.Contracts
         private decimal _ownCost;
         private decimal _componentsCost;
         private int _count;
-        private DateTime _countDate;
+        private DateTime? _countDate;
         private int _onOrder;
         private IEnumerable<Supplier> _suppliers;
 
@@ -136,7 +136,7 @@ namespace Bom.Client.Contracts
         /// <summary>
         /// Stock count date
         /// </summary>
-        public DateTime CountDate
+        public DateTime? CountDate
         {
             get { return _countDate; }
             set

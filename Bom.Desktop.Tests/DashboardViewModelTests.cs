@@ -18,9 +18,6 @@ namespace Bom.Desktop.Tests
     {
         public DashboardViewModelTests()
         {
-            //
-            // TODO: Add constructor logic here
-            //
         }
 
         private TestContext testContextInstance;
