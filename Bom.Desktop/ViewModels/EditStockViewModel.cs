@@ -28,13 +28,7 @@ namespace Bom.Desktop.ViewModels
             else
             {
                 PartDescription = stockItem.Description;
-                _stock = new Part()
-                {
-                    //ToDo
-                    Id = stockItem.Id,
-                    Count = stockItem.Count,
-                    Notes = stockItem.Notes
-                };
+                _stock = new Part(stockItem);
             }
 
             _stock.CleanAll();

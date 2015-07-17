@@ -9,6 +9,8 @@ namespace Bom.Data.Migrations
         {
             AlterColumn("dbo.Parts", "CountDate", c => c.DateTime());
             AlterColumn("dbo.Stocks", "CountDate", c => c.DateTime());
+
+            Sql("update parts set CountDate = NULL where CountDate = '1900-01-01 00:00:00.000'");
         }
         
         public override void Down()

@@ -7,6 +7,9 @@
              xmlns:conv="clr-namespace:Bom.Desktop.Support"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="800">
+    <UserControl.Resources>
+        <conv:ViewModelNullToVisibilityConverter x:Key="viewModelNullToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
@@ -44,13 +47,14 @@
                                     <TextBlock Text="{Binding Description}"/>
                                 </Hyperlink>
                             </TextBlock>
-                            <TextBlock Grid.Column="1" Text="{Binding Cost, StringFormat=c}" HorizontalAlignment="Right" Margin="3"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Value, StringFormat=c}" HorizontalAlignment="Right" Margin="3"/>
                             <TextBlock Grid.Column="2" Margin="3" >
                                 <Hyperlink Command="{Binding DataContext.EditStockCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding}">
                                     <TextBlock Text="{Binding Count}" HorizontalAlignment="Right"/>
                                 </Hyperlink>
                             </TextBlock>
-                            <TextBlock Grid.Column="3" Text="{Binding CountDate, StringFormat=dd/MM/yyyy}" Margin="3"/>
+                            <TextBlock Grid.Column="3" Text="{Binding CountDate, StringFormat=dd/MM/yyyy}" Margin="3"
+                                Visibility="{Binding CountDate, Converter={StaticResource viewModelNullToVisibilityConverter}}"/>
                             <TextBlock Grid.Column="4" Text="{Binding Notes}" TextWrapping="Wrap"  Margin="3"/>
                         </Grid>
                     </DataTemplate>

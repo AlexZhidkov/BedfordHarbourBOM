@@ -82,7 +82,6 @@ namespace Bom.Desktop.Tests
         }
 
         [TestMethod]
-        [Ignore]
         public void TestDeleteStockCommand()
         {
             Part stock = TestHelper.GetTestPart();
@@ -131,7 +130,6 @@ namespace Bom.Desktop.Tests
         }
 
         [TestMethod]
-        [Ignore]
         public void TestAddStockCommand()
         {
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
@@ -139,16 +137,17 @@ namespace Bom.Desktop.Tests
             StockViewModel viewModel = new StockViewModel(mockServiceFactory.Object);
             viewModel.Stocks = new ObservableCollection<Part>();
 
-            Assert.IsTrue(viewModel.CurrentStockViewModel == null);
+            Assert.IsTrue(viewModel.CurrentPartViewModel == null);
 
             viewModel.AddStockCommand.Execute(null);
 
-            Assert.IsTrue(viewModel.CurrentStockViewModel != null);
-            viewModel.CurrentStockViewModel.Stock.Id = 1;
+            Assert.IsTrue(viewModel.CurrentPartViewModel != null);
+            viewModel.CurrentPartViewModel.Part.Id = 0;
+            viewModel.CurrentPartViewModel.Part.Description = "Test";
 
-            mockServiceFactory.Setup(mock => mock.CreateClient<IPartService>().UpdatePart(It.IsAny<Part>())).Returns(viewModel.CurrentStockViewModel.Stock);
+            mockServiceFactory.Setup(mock => mock.CreateClient<IPartService>().UpdatePart(It.IsAny<Part>())).Returns(viewModel.CurrentPartViewModel.Part);
 
-            viewModel.CurrentStockViewModel.SaveCommand.Execute(null);
+            viewModel.CurrentPartViewModel.SaveCommand.Execute(null);
 
             Assert.IsNotNull(viewModel.Stocks);
             Assert.AreEqual(1, viewModel.Stocks.Count);

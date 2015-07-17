@@ -21,23 +21,9 @@ namespace Bom.Data
     {
         protected override Part AddEntity(BomContext entityContext, Part part)
         {
-            return entityContext.Parts.Add(part);
-/*
-            UpdateComponentsOfAssembly(entityContext, part);
-            entityContext.Parts.Add(new Business.Entities.Part
-            {
-                Id = part.Id,
-                Number = part.Number,
-                Description = part.Description,
-                Type = part.Type,
-                ComponentsCost = part.ComponentsCost,
-                OwnCost = part.OwnCost,
-                IsOwnMake = part.IsOwnMake,
-                Length = part.Length,
-                Notes = part.Notes
-            });
-            return part;
-*/
+            var newPart = entityContext.Parts.Add(part);
+            UpdateComponentsOfAssembly(entityContext, newPart);
+            return newPart;
         }
 
         private static void UpdateComponentsOfAssembly(BomContext entityContext, Part entity)
@@ -59,6 +45,7 @@ namespace Bom.Data
 
         protected override Part UpdateEntity(BomContext entityContext, Part entity)
         {
+            UpdateComponentsOfAssembly(entityContext, entity);
             return (entityContext.Parts.Where(e => e.Id == entity.Id)).FirstOrDefault();
         }
 
@@ -70,23 +57,6 @@ namespace Bom.Data
         protected override Part GetEntity(BomContext entityContext, int id)
         {
             return (entityContext.Parts.Where(e => e.Id == id)).FirstOrDefault();
-        }
-
-        private static Part DataEntityToPart(Business.Entities.Part data)
-        {
-            if (data == null) return null;
-            return new Part
-            {
-                Id = data.Id,
-                Number = data.Number,
-                Description = data.Description,
-                Type = data.Type,
-                ComponentsCost = data.ComponentsCost,
-                OwnCost = data.OwnCost,
-                IsOwnMake = data.IsOwnMake,
-                Length = data.Length,
-                Notes = data.Notes
-            };
         }
 
         public IEnumerable<Subassembly> GetComponents(int assemblyId)

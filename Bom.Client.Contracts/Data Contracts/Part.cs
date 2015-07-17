@@ -24,6 +24,26 @@ namespace Bom.Client.Contracts
         private int _onOrder;
         private IEnumerable<Supplier> _suppliers;
 
+        public Part()
+        {
+        }
+
+        public Part(Part source)
+        {
+            Id = source.Id;
+            Type = source.Type;
+            Number = source.Number;
+            Description = source.Description;
+            IsOwnMake = source.IsOwnMake;
+            Length = source.Length;
+            OwnCost = source.OwnCost;
+            ComponentsCost = source.ComponentsCost;
+            Count = source.Count;
+            CountDate = source.CountDate;
+            OnOrder = source.OnOrder;
+            Notes = source.Notes;
+        }
+
         public PartType Type
         {
             get { return _type; }
@@ -91,6 +111,7 @@ namespace Bom.Client.Contracts
                 if (_ownCost == value) return;
                 _ownCost = value;
                 OnPropertyChanged(() => OwnCost);
+                OnPropertyChanged(() => Value);
             }
         }
 
@@ -105,6 +126,7 @@ namespace Bom.Client.Contracts
                 if (_componentsCost == value) return;
                 _componentsCost = value;
                 OnPropertyChanged(() => ComponentsCost);
+                OnPropertyChanged(() => Value);
             }
         }
 
@@ -130,6 +152,7 @@ namespace Bom.Client.Contracts
                 if (_count == value) return;
                 _count = value;
                 OnPropertyChanged(() => Count);
+                OnPropertyChanged(() => Value);
             }
         }
 
@@ -147,6 +170,14 @@ namespace Bom.Client.Contracts
             }
         }
 
+        /// <summary>
+        /// Value of stock
+        /// </summary>
+        public Decimal Value
+        {
+            get { return (OwnCost + ComponentsCost) * Count; }
+        }
+        
         /// <summary>
         /// Number of item ordered pending delivery
         /// </summary>

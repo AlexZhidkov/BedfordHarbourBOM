@@ -77,6 +77,7 @@ namespace Bom.Desktop.Tests
             EditStockViewModel viewModel = new EditStockViewModel(mockServiceFactory.Object, stock);
 
             viewModel.Stock.Id = 0;
+            viewModel.Stock.Description = "";
             Assert.IsFalse(viewModel.Stock.IsValid);
 
             viewModel.Stock.Id = 1;

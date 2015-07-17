@@ -143,25 +143,22 @@ namespace Bom.Desktop.ViewModels
                 Part stock = _stocks.Single(item => item.Id == e.Stock.Id);
                 if (stock != null)
                 {
-                    //ToDo
+                    stock.Type = e.Stock.Type;
+                    stock.Number = e.Stock.Number;
+                    stock.Description = e.Stock.Description;
+                    stock.IsOwnMake = e.Stock.IsOwnMake;
+                    stock.Length = e.Stock.Length;
+                    stock.OwnCost = e.Stock.OwnCost;
+                    stock.ComponentsCost = e.Stock.ComponentsCost;
                     stock.Count = e.Stock.Count;
                     stock.CountDate = e.Stock.CountDate;
-                    stock.Id = e.Stock.Id;
-                    //stock.Cost = e.Stock.Cost;
+                    stock.OnOrder = e.Stock.OnOrder;
                     stock.Notes = e.Stock.Notes;
                 }
             }
             else
             {
-                _stocks.Add(new Part
-                {
-                    //ToDo
-                    Id = e.Stock.Id,
-                    Description = e.Stock.Description,
-                    Count = e.Stock.Count,
-                    CountDate = e.Stock.CountDate,
-                    Notes = e.Stock.Notes
-                });
+                _stocks.Add(new Part(e.Stock));
             }
 
             CurrentStockViewModel = null;
@@ -176,11 +173,27 @@ namespace Bom.Desktop.ViewModels
         {
             if (!e.IsNew)
             {
-                foreach (var stock in _stocks.Where(item => item.Id == e.Part.Id))
+                Part stock = _stocks.Single(item => item.Id == e.Part.Id);
+                if (stock != null)
                 {
+                    stock.Type = e.Part.Type;
+                    stock.Number = e.Part.Number;
                     stock.Description = e.Part.Description;
+                    stock.IsOwnMake = e.Part.IsOwnMake;
+                    stock.Length = e.Part.Length;
+                    stock.OwnCost = e.Part.OwnCost;
+                    stock.ComponentsCost = e.Part.ComponentsCost;
+                    stock.Count = e.Part.Count;
+                    stock.CountDate = e.Part.CountDate;
+                    stock.OnOrder = e.Part.OnOrder;
+                    stock.Notes = e.Part.Notes;
                 }
             }
+            else
+            {
+                _stocks.Add(new Part(e.Part));
+            }
+
             CurrentPartViewModel = null;
         }
 
