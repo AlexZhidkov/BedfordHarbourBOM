@@ -20,6 +20,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="130" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -28,15 +29,18 @@
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Part:" />
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Count:" />
-            <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Date:" />
-            <TextBlock Grid.Row="3" Grid.Column="0" Margin="3" Text="Notes:" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="On Order:" />
+            <TextBlock Grid.Row="3" Grid.Column="0" Margin="3" Text="Date:" />
+            <TextBlock Grid.Row="4" Grid.Column="0" Margin="3" Text="Notes:" />
+            
             <TextBlock Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding PartDescription}" HorizontalAlignment="Left" />
             <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding Stock.Count, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
-            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Text="{Binding Stock.OnOrder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
+            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
                 <DatePicker Margin="3" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDate="{Binding Stock.CountDate}" DisplayDate="{x:Static system:DateTime.Now}"/>
                 <Button Name="TodayButton" Content="Today" Margin="3" Click="TodayButton_OnClick" />
             </StackPanel>
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Stock.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch"
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="3" Text="{Binding Stock.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch"
                 AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
         </Grid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">

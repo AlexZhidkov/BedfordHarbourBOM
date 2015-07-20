@@ -57,7 +57,7 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" >
                             <Button Margin="3" Content="{Binding PartDescription}" Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding SubassemblyId}"/>
-                            <Button Margin="3" Content="{Binding CostContribution}" Command="{Binding DataContext.EditComponentCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"/>
+                            <Button Margin="3" Content="{Binding CostContribution, StringFormat=N4}" Command="{Binding DataContext.EditComponentCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"/>
                             <Button Margin="3" Content="X" Command="{Binding DataContext.RemoveComponentCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding SubassemblyId}"/>
                         </StackPanel>
                     </DataTemplate>

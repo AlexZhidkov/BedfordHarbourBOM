@@ -6,7 +6,7 @@
              xmlns:core="clr-namespace:Core.Common.UI.Core;assembly=Core.Common.UI"
              xmlns:conv="clr-namespace:Bom.Desktop.Support"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="800">
+             d:DesignHeight="500" d:DesignWidth="850">
     <UserControl.Resources>
         <conv:ViewModelNullToVisibilityConverter x:Key="viewModelNullToVisibilityConverter" />
     </UserControl.Resources>
@@ -23,13 +23,15 @@
                     <ColumnDefinition Width="50" SharedSizeGroup="value" />
                     <ColumnDefinition Width="50" SharedSizeGroup="count" />
                     <ColumnDefinition Width="100" SharedSizeGroup="countDate" />
+                    <ColumnDefinition Width="75" SharedSizeGroup="onOrder" />
                     <ColumnDefinition Width="300" SharedSizeGroup="notes" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Name" />
                 <TextBlock Grid.Column="1" Text="Value" />
                 <TextBlock Grid.Column="2" Text="Count" />
                 <TextBlock Grid.Column="3" Text="Count Date" />
-                <TextBlock Grid.Column="4" Text="Notes" />
+                <TextBlock Grid.Column="4" Text="On Order" />
+                <TextBlock Grid.Column="5" Text="Notes" />
             </Grid>
             <ListBox Grid.Row="1" ItemsSource="{Binding Stocks}" Height="400">
                 <ListBox.ItemTemplate>
@@ -40,6 +42,7 @@
                                 <ColumnDefinition Width="50" SharedSizeGroup="value" />
                                 <ColumnDefinition Width="50" SharedSizeGroup="count" />
                                 <ColumnDefinition Width="100" SharedSizeGroup="countDate" />
+                                <ColumnDefinition Width="75" SharedSizeGroup="onOrder" />
                                 <ColumnDefinition Width="300" SharedSizeGroup="notes" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0"  Margin="3">
@@ -55,7 +58,12 @@
                             </TextBlock>
                             <TextBlock Grid.Column="3" Text="{Binding CountDate, StringFormat=dd/MM/yyyy}" Margin="3"
                                 Visibility="{Binding CountDate, Converter={StaticResource viewModelNullToVisibilityConverter}}"/>
-                            <TextBlock Grid.Column="4" Text="{Binding Notes}" TextWrapping="Wrap"  Margin="3"/>
+                            <TextBlock Grid.Column="4" Margin="3" >
+                                <Hyperlink Command="{Binding DataContext.EditStockCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding}">
+                                    <TextBlock Text="{Binding OnOrder}" HorizontalAlignment="Right"/>
+                                </Hyperlink>
+                            </TextBlock>
+                            <TextBlock Grid.Column="5" Text="{Binding Notes}" TextWrapping="Wrap"  Margin="3"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

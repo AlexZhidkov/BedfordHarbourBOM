@@ -45,7 +45,7 @@ namespace Bom.Data
 
         protected override Part UpdateEntity(BomContext entityContext, Part entity)
         {
-            UpdateComponentsOfAssembly(entityContext, entity);
+            if (entity.Components != null) UpdateComponentsOfAssembly(entityContext, entity);
             return (entityContext.Parts.Where(e => e.Id == entity.Id)).FirstOrDefault();
         }
 
