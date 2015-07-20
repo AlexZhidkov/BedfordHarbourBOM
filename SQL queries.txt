@@ -106,3 +106,30 @@ print @TotalCost
 select * from Parts p
 left join Subassemblies s on p.Id = s.AssemblyId
 order by p.id
+---------------
+Declare @Cap int
+exec dbo.CalculateCapability 170, @Cap output
+print @Cap
+---------------
+select * from Parts
+where Id in (170,4, 54,169)
+
+select * from [dbo].[Subassemblies]
+where SubassemblyId in ( 4, 54,170,169) or assemblyId in (4, 54,170,169)
+
+--update parts set Count = 10 where id = 54
+--alter table Subassemblies add Capability int
+--alter table Parts add Capability int
+
+	select p.Id as partId, s.Id, SubassemblyId, CostContribution, p.Count  
+	from Subassemblies s
+	inner join Parts p on p.Id = s.SubassemblyId
+	--where AssemblyId = @partId
+	order by p.Id
+
+	select * from Parts where Number = '35'
+--insert into Subassemblies values (170, 4, 0, 1, 'AZ test', 0)
+--insert into Subassemblies values (170, 169, 0, 2, 'sub1', 0)
+--update Parts set count = 40 where id = 169
+---------------
+
