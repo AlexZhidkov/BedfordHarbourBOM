@@ -31,6 +31,16 @@ namespace Bom.Business.Entities
         /// </summary>
         [DataMember]
         public decimal CostContribution { get; set; }
+        /// <summary>
+        /// How many Assemblies it is possible to build from current stock of the Subassembly
+        /// </summary>
+        [DataMember]
+        public int Capability { get; set; }
+        /// <summary>
+        /// How many Subassemblies need to build required number of Assemblies
+        /// </summary>
+        [DataMember]
+        public decimal Demand { get; set; }
 
         public int EntityId
         {

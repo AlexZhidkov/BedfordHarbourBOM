@@ -47,6 +47,16 @@ namespace Bom.Business.Entities
         /// </summary>
         [DataMember]
         public int OnOrder { get; set; }
+        /// <summary>
+        /// How many of this parts possible to build from the current stock
+        /// </summary>
+        [DataMember]
+        public int Capability { get; set; }
+        /// <summary>
+        /// How many of this parts need to build required number of product
+        /// </summary>
+        [DataMember]
+        public int Demand { get; set; }
         [DataMember]
         public IEnumerable<Supplier> Suppliers { get; set; }
 

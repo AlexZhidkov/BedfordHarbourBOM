@@ -22,6 +22,8 @@ namespace Bom.Client.Contracts
         private int _count;
         private DateTime? _countDate;
         private int _onOrder;
+        private int _capability;
+        private int _demand;
         private IEnumerable<Supplier> _suppliers;
 
         public Part()
@@ -189,6 +191,34 @@ namespace Bom.Client.Contracts
                 if (_onOrder == value) return;
                 _onOrder = value;
                 OnPropertyChanged(() => OnOrder);
+            }
+        }
+
+        /// <summary>
+        /// How many of this parts possible to build from the current stock
+        /// </summary>
+        public int Capability
+        {
+            get { return _capability; }
+            set
+            {
+                if (_capability == value) return;
+                _capability = value;
+                OnPropertyChanged(() => Capability);
+            }
+        }
+
+        /// <summary>
+        /// How many of this parts need to build required number of product
+        /// </summary>
+        public int Demand
+        {
+            get { return _demand; }
+            set
+            {
+                if (_demand == value) return;
+                _demand = value;
+                OnPropertyChanged(() => Demand);
             }
         }
 

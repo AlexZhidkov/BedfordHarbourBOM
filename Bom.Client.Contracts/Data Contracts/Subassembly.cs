@@ -17,6 +17,8 @@ namespace Bom.Client.Contracts
         private string _partDescription;
         private decimal _costContribution;
         private decimal _inheritedCost;
+        private int _capability;
+        private decimal _demand;
 
         public int AssemblyId
         {
@@ -76,6 +78,34 @@ namespace Bom.Client.Contracts
                 if (_inheritedCost == value) return;
                 _inheritedCost = value;
                 OnPropertyChanged(() => InheritedCost);
+            }
+        }
+
+        /// <summary>
+        /// How many Assemblies it is possible to build from current stock of the Subassembly
+        /// </summary>
+        public int Capability
+        {
+            get { return _capability; }
+            set
+            {
+                if (_capability == value) return;
+                _capability = value;
+                OnPropertyChanged(() => Capability);
+            }
+        }
+
+        /// <summary>
+        /// How many Subassemblies need to build required number of Assemblies
+        /// </summary>
+        public decimal Demand
+        {
+            get { return _demand; }
+            set
+            {
+                if (_demand == value) return;
+                _demand = value;
+                OnPropertyChanged(() => Demand);
             }
         }
 

@@ -53,6 +53,7 @@ namespace Bom.Data
             modelBuilder.Entity<Subassembly>().Ignore(e => e.PartDescription);
             modelBuilder.Entity<Subassembly>().Property(o => o.CostContribution).HasPrecision(25, 13);
             modelBuilder.Entity<Subassembly>().Property(o => o.InheritedCost).HasPrecision(25, 13);
+            modelBuilder.Entity<Subassembly>().Property(o => o.Demand).HasPrecision(25, 13);
 
             //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
