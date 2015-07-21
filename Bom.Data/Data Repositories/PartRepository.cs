@@ -79,7 +79,7 @@ namespace Bom.Data
             {
                 var id = new SqlParameter("@id", SqlDbType.Int)
                 {
-                    Direction = ParameterDirection.Input, 
+                    Direction = ParameterDirection.Input,
                     Value = partId
                 };
                 var cost = new SqlParameter("@cost", SqlDbType.Decimal)
@@ -87,8 +87,32 @@ namespace Bom.Data
                     Direction = ParameterDirection.Output
                 };
 
-                entityContext.Database.ExecuteSqlCommand("EXEC dbo.RecalculateCostsForAssembly @partId = @id, @TotalCost = @cost output", 
+                entityContext.Database.ExecuteSqlCommand("EXEC dbo.RecalculateCostsForAssembly @partId = @id, @TotalCost = @cost output",
                     id, cost);
+            }
+        }
+
+        public void Recalculate(int partId, int productsNeeded)
+        {
+            using (BomContext entityContext = new BomContext())
+            {
+                var id = new SqlParameter("@id", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Input, 
+                    Value = partId
+                };
+                var demand = new SqlParameter("@demand", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Input,
+                    Value = productsNeeded
+                };
+                var count = new SqlParameter("@count", SqlDbType.Decimal)
+                {
+                    Direction = ParameterDirection.Output
+                };
+
+                entityContext.Database.ExecuteSqlCommand("EXEC dbo.Recalculate @partId = @id, @ProductsDemand = @demand, @ProductsCount = @count output",
+                    id, demand, count);
             }
         }
     }

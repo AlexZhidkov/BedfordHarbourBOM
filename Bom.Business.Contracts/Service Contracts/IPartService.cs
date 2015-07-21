@@ -22,5 +22,8 @@ namespace Bom.Business.Contracts
 
         [OperationContract]
         void RecalculateCostsForAssembly(int partId);
+
+        [OperationContract]
+        void Recalculate(int partId, int productsNeeded);
     }
 }

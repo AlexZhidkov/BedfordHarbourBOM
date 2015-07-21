@@ -82,5 +82,15 @@ namespace Bom.Business.Managers
 
             });
         }
+
+        public void Recalculate(int partId, int productsNeeded)
+        {
+            ExecuteFaultHandledOperation(() =>
+            {
+                IPartRepository partRepository = _dataRepositoryFactory.GetDataRepository<IPartRepository>();
+                partRepository.Recalculate(partId, productsNeeded);
+
+            });
+        }
     }
 }

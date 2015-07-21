@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace Bom.Data.Migrations
 {
     using System;
@@ -11,6 +13,12 @@ namespace Bom.Data.Migrations
             AddColumn("dbo.Parts", "Demand", c => c.Int(nullable: false));
             AddColumn("dbo.Subassemblies", "Capability", c => c.Int(nullable: false));
             AddColumn("dbo.Subassemblies", "Demand", c => c.Decimal(nullable: false, precision: 25, scale: 13));
+
+            var recalculateRecurseStoredProcedure = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"SQL\StoredProcedures\RecalculateRecurse.sql");
+            Sql(File.ReadAllText(recalculateRecurseStoredProcedure));
+
+            var recalculateStoredProcedure = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"SQL\StoredProcedures\Recalculate.sql");
+            Sql(File.ReadAllText(recalculateStoredProcedure));
         }
         
         public override void Down()

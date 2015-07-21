@@ -135,6 +135,12 @@
     <Content Include="SQL\StoredProcedures\RecalculateCostsForAssembly.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SQL\StoredProcedures\Recalculate.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SQL\StoredProcedures\RecalculateRecurse.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201507140842051_Initial.resx">

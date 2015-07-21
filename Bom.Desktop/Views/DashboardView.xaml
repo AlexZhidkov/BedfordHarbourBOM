@@ -16,13 +16,19 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Content="Recalculate Costs For a Bin Assembly" Margin="5" Command="{Binding RecalculateCostsForAssemblyCommand}"  CommandParameter="1" />
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Label Content="Number of Bins needed:"/>
+            <TextBox Margin="3" Text="{Binding ProductsNeeded, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+            <Button Content="Recalculate" Margin="5" Command="{Binding RecalculateCommand}" CommandParameter="1" />
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Label Content="Version "/>
             <Label Content="{Binding AppVersion}"/>
         </StackPanel>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
             <Label Content="Latest Version "/>
             <!-- Busy indicator -->
             <Label Content="Loading..." Visibility="{Binding LatestVersion.IsNotCompleted,

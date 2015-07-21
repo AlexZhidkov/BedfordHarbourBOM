@@ -22,6 +22,7 @@ namespace Bom.Desktop.ViewModels
         {
             _serviceFactory = serviceFactory;
             RecalculateCostsForAssemblyCommand = new DelegateCommand<string>(OnRecalculateCostsForAssemblyCommand);
+            RecalculateCommand = new DelegateCommand<string>(OnRecalculateCommand);
 
             LatestVersion = new NotifyTaskCompletion<string>(getLatestVersionNumberAsync("https://github.com/AlexZhidkov/BedfordHarbourBOM/releases/latest"));
         }
@@ -37,8 +38,10 @@ namespace Bom.Desktop.ViewModels
         }
 
         readonly IServiceFactory _serviceFactory;
+        private int _productsNeeded;
 
         public DelegateCommand<string> RecalculateCostsForAssemblyCommand { get; private set; }
+        public DelegateCommand<string> RecalculateCommand { get; private set; }
 
         public override string ViewTitle
         {
@@ -50,6 +53,12 @@ namespace Bom.Desktop.ViewModels
             get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); ; }
         }
 
+        public int ProductsNeeded
+        {
+            get { return _productsNeeded; }
+            set { _productsNeeded = value; }
+        }
+
         public NotifyTaskCompletion<string> LatestVersion { get; private set; }
 
         private void OnRecalculateCostsForAssemblyCommand(string partId)
@@ -59,6 +68,16 @@ namespace Bom.Desktop.ViewModels
             WithClient(_serviceFactory.CreateClient<IPartService>(), partClient =>
             {
                 partClient.RecalculateCostsForAssembly(intPartId);
+            });
+        }
+
+        private void OnRecalculateCommand(string partId)
+        {
+            //ToDo refactor this to accept parameter as int 
+            int intPartId = Int32.Parse(partId);
+            WithClient(_serviceFactory.CreateClient<IPartService>(), partClient =>
+            {
+                partClient.Recalculate(intPartId, _productsNeeded);
             });
         }
     }

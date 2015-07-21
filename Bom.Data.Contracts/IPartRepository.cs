@@ -10,5 +10,6 @@ namespace Bom.Data.Contracts
         IEnumerable<Subassembly> GetComponents(int assemblyId);
 
         void RecalculateCostsForAssembly(int partId);
+        void Recalculate(int partId, int productsNeeded);
     }
 }

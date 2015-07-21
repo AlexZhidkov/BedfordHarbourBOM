@@ -33,5 +33,10 @@ namespace Bom.Client.Proxies
         {
             Channel.RecalculateCostsForAssembly(partId);
         }
+
+        public void Recalculate(int partId, int productsNeeded)
+        {
+            Channel.Recalculate(partId, productsNeeded);
+        }
     }
 }
