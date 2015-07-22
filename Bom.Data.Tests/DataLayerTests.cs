@@ -18,12 +18,7 @@ namespace Bom.Data.Tests
         public void Initialize()
         {
             ObjectBase.Container = MEFLoader.Init();
-
-            var currentDirectory = System.IO.Directory.GetCurrentDirectory();
-            var assemblyNameIndex = currentDirectory.IndexOf(System.Reflection.Assembly.GetExecutingAssembly().GetName().Name);
-            var dataDirectory = currentDirectory.Substring(0, assemblyNameIndex - 1);
-
-            AppDomain.CurrentDomain.SetData("DataDirectory", dataDirectory);
+            AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
         }
 
         [TestMethod]
