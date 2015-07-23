@@ -36,10 +36,12 @@ namespace Bom.ServiceHost
             SM.ServiceHost hostSupplierManager = new SM.ServiceHost(typeof(SupplierManager));
             SM.ServiceHost hostStockManager = new SM.ServiceHost(typeof(StockManager));
             SM.ServiceHost hostPartManager = new SM.ServiceHost(typeof(PartManager));
+            SM.ServiceHost hostOrderManager = new SM.ServiceHost(typeof(OrderManager));
 
             StartService(hostSupplierManager, "SupplierManager");
             StartService(hostStockManager, "StockManager");
             StartService(hostPartManager, "PartManager");
+            StartService(hostOrderManager, "OrderManager");
 
             Console.WriteLine("");
             Console.WriteLine("Press [Enter] to exit.");
@@ -49,6 +51,7 @@ namespace Bom.ServiceHost
             StopService(hostSupplierManager, "SupplierManager");
             StopService(hostStockManager, "StockManager");
             StopService(hostPartManager, "PartManager");
+            StopService(hostOrderManager, "OrderManager");
 
             logger.Info("Bom.ServiceHost.Console exit");
         }
@@ -64,7 +67,16 @@ namespace Bom.ServiceHost
 
         static void StartService(SM.ServiceHost host, string serviceDescription)
         {
-            host.Open();
+            try
+            {
+                host.Open();
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Service {0} failed to start with following error message: {1}", serviceDescription, ex); 
+                throw;
+            }
+
             Console.WriteLine("Service {0} started.", serviceDescription);
             logger.Info("Service {0} started.", serviceDescription); 
 

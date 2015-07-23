@@ -53,6 +53,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="OrderProxyObtainmentTests.cs" />
     <Compile Include="PartProxyObtainmentTests.cs" />
     <Compile Include="SupplierProxyObtainmentTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

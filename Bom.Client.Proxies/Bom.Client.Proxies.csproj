@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service Proxies\OrderClient.cs" />
     <Compile Include="Service Proxies\PartClient.cs" />
     <Compile Include="Service Proxies\StockClient.cs" />
     <Compile Include="Service Proxies\SupplierClient.cs" />
