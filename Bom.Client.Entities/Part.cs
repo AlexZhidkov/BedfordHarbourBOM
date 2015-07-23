@@ -7,7 +7,7 @@ using FluentValidation;
 using Bom.Client.Entities;
 using Bom.Common;
 
-namespace Bom.Client.Contracts
+namespace Bom.Client.Entities
 {
     public class Part : BaseEntity
     {

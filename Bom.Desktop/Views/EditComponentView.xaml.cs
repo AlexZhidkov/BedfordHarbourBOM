@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Bom.Client.Contracts;
+using Bom.Client.Entities;
 using Bom.Desktop.ViewModels;
 using Core.Common.UI.Core;
 

@@ -45,8 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data Contracts\Part.cs" />
-    <Compile Include="Data Contracts\Subassembly.cs" />
     <Compile Include="Data Contracts\StockItemData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service Contracts\IPartService.cs" />

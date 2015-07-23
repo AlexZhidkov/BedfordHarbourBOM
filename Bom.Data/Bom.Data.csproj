@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="BomContext.cs" />
     <Compile Include="BomDbInitializer.cs" />
+    <Compile Include="Data Repositories\OrderRepository.cs" />
     <Compile Include="Data Repositories\PartRepository.cs" />
     <Compile Include="Data Repositories\StockRepository.cs" />
     <Compile Include="Data Repositories\SupplierRepository.cs" />
@@ -87,6 +88,10 @@
     <Compile Include="Migrations\201507210622108_AddCapabilityAndDemand.cs" />
     <Compile Include="Migrations\201507210622108_AddCapabilityAndDemand.Designer.cs">
       <DependentUpon>201507210622108_AddCapabilityAndDemand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507230358306_AddOrders.cs" />
+    <Compile Include="Migrations\201507230358306_AddOrders.Designer.cs">
+      <DependentUpon>201507230358306_AddOrders.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507210622108_AddCapabilityAndDemand.resx">
       <DependentUpon>201507210622108_AddCapabilityAndDemand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507230358306_AddOrders.resx">
+      <DependentUpon>201507230358306_AddOrders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

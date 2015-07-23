@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using Bom.Client.Entities;
-using Core.Common.ServiceModel;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Bom.Client.Contracts
+namespace Bom.Client.Entities
 {
     public class Subassembly : BaseEntity
     {

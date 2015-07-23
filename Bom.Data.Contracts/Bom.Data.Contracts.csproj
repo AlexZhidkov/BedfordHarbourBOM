@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="DTOs\SubassemblyInfo.cs" />
     <Compile Include="DTOs\StockItemsInfo.cs" />
+    <Compile Include="IOrderRepository.cs" />
     <Compile Include="IPartRepository.cs" />
     <Compile Include="IStockRepository.cs" />
     <Compile Include="ISupplierRepository.cs" />

@@ -49,6 +49,15 @@ namespace Bom.Data.Tests
             return parts;
         }
 
+        public IEnumerable<Order> GetAllOrders()
+        {
+            IOrderRepository orderRepository = _DataRepositoryFactory.GetDataRepository<IOrderRepository>();
+
+            var orders = orderRepository.Get();
+
+            return orders;
+        }
+
         public Part Update(Part part)
         {
             IPartRepository partRepository = _DataRepositoryFactory.GetDataRepository<IPartRepository>();
