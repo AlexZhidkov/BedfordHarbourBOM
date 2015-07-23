@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ManagerBase.cs" />
+    <Compile Include="OrderManager.cs" />
     <Compile Include="PartManager.cs" />
     <Compile Include="SupplierManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
