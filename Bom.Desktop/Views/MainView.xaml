@@ -21,6 +21,7 @@
             <TabItem Header="{Binding DashboardViewModel.ViewTitle}" Content="{Binding DashboardViewModel}" />
             <TabItem Header="{Binding StockViewModel.ViewTitle}" Content="{Binding StockViewModel}" />
             <TabItem Header="{Binding SuppliersViewModel.ViewTitle}" Content="{Binding SuppliersViewModel}" />
+            <TabItem Header="{Binding OrdersViewModel.ViewTitle}" Content="{Binding OrdersViewModel}" />
         </TabControl>
 
     </Grid>

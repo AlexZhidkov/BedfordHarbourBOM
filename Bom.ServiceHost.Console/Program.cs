@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
@@ -20,7 +21,9 @@ namespace Bom.ServiceHost
         
         static void Main(string[] args)
         {
-            logger.Info("Bom.ServiceHost.Console started");
+            logger.Info("Bom.ServiceHost.Console version {0} started on {1}",
+                Assembly.GetExecutingAssembly().GetName().Version,
+                System.Environment.MachineName);
 
             SetDataDirectory();
 

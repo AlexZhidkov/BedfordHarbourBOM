@@ -58,7 +58,9 @@
     <Compile Include="DashboardViewModelTests.cs" />
     <Compile Include="EditComponentViewModelTests.cs" />
     <Compile Include="EditPartViewModelTests.cs" />
+    <Compile Include="EditOrderViewModelTests.cs" />
     <Compile Include="PartsViewModelTests.cs" />
+    <Compile Include="OrdersViewModelTests.cs" />
     <Compile Include="SuppliersViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EditSupplierViewModelTests.cs" />

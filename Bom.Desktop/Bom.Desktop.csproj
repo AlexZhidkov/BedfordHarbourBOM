@@ -75,6 +75,7 @@
     <Compile Include="Support\PartEventArgs.cs" />
     <Compile Include="Support\StockEventArgs.cs" />
     <Compile Include="Support\ComponentEventArgs.cs" />
+    <Compile Include="Support\OrderEventArgs.cs" />
     <Compile Include="Support\SupplierEventArgs.cs" />
     <Compile Include="Support\BooleanToVisibilityConverter.cs" />
     <Compile Include="Support\ViewModelNullToVisibilityConverter.cs" />
@@ -88,10 +89,12 @@
     <Compile Include="ViewModels\EditComponentViewModel.cs" />
     <Compile Include="ViewModels\EditPartViewModel.cs" />
     <Compile Include="ViewModels\EditStockViewModel.cs" />
+    <Compile Include="ViewModels\EditOrderViewModel.cs" />
     <Compile Include="ViewModels\EditSupplierViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\StockViewModel.cs" />
     <Compile Include="ViewModels\PartsViewModel.cs" />
+    <Compile Include="ViewModels\OrdersViewModel.cs" />
     <Compile Include="ViewModels\SuppliersViewModel.cs" />
     <Compile Include="Views\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
@@ -110,6 +113,9 @@
     </Compile>
     <Compile Include="Views\PartsView.xaml.cs">
       <DependentUpon>PartsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrdersView.xaml.cs">
+      <DependentUpon>OrdersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SuppliersView.xaml.cs">
       <DependentUpon>SuppliersView.xaml</DependentUpon>
@@ -155,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PartsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OrdersView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

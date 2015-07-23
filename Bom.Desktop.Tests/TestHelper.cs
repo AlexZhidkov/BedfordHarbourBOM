@@ -97,5 +97,15 @@ namespace Bom.Desktop.Tests
                 Notes = "Test Notes",
             };
         }
+
+        public static Order GetTestOrder()
+        {
+            return new Order
+            {
+                Id = 1,
+                InvoiceNumber = "Test Invoice Number",
+                Notes = "Test Notes"
+            };
+        }
     }
 }

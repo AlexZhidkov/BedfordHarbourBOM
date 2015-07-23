@@ -24,7 +24,9 @@ namespace Bom.Desktop
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            logger.Info("Bom.Desktop started.");
+            logger.Info("Bom.Desktop version {0} started on {1}.", 
+                Assembly.GetExecutingAssembly().GetName().Version,
+                System.Environment.MachineName);
 
             ObjectBase.Container = MEFLoader.Init(new List<ComposablePartCatalog>() 
             {

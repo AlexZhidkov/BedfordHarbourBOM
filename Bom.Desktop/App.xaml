@@ -18,6 +18,9 @@
         <DataTemplate DataType="{x:Type vm:SuppliersViewModel}">
             <v:SuppliersView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:OrdersViewModel}">
+            <v:OrdersView />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type vm:EditSupplierViewModel}">
             <v:EditSupplierView />
         </DataTemplate>

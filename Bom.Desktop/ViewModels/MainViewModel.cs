@@ -20,5 +20,7 @@ namespace Bom.Desktop.ViewModels
         public PartsViewModel PartsViewModel { get; private set; }
         [Import]
         public SuppliersViewModel SuppliersViewModel { get; private set; }
+        [Import]
+        public OrdersViewModel OrdersViewModel { get; private set; }
     }
 }
