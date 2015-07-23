@@ -24,15 +24,19 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80" SharedSizeGroup="links" />
-                    <ColumnDefinition Width="150" SharedSizeGroup="name" />
-                    <ColumnDefinition Width="80" SharedSizeGroup="contact" />
-                    <ColumnDefinition Width="60" SharedSizeGroup="phone" />
+                    <ColumnDefinition Width="150" SharedSizeGroup="date" />
+                    <ColumnDefinition Width="80" SharedSizeGroup="invoiceNo" />
+                    <ColumnDefinition Width="60" SharedSizeGroup="supplier" />
+                    <ColumnDefinition Width="60" SharedSizeGroup="eta" />
+                    <ColumnDefinition Width="60" SharedSizeGroup="delivered" />
                     <ColumnDefinition Width="130" SharedSizeGroup="notes" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="1" Text="Name" />
-                <TextBlock Grid.Column="2" Text="Contact" />
-                <TextBlock Grid.Column="3" Text="Phone" />
-                <TextBlock Grid.Column="4" Text="Notes" />
+                <TextBlock Grid.Column="1" Text="Date" />
+                <TextBlock Grid.Column="2" Text="Invoice No" />
+                <TextBlock Grid.Column="3" Text="Supplier" />
+                <TextBlock Grid.Column="4" Text="ETA" />
+                <TextBlock Grid.Column="5" Text="Delivered" />
+                <TextBlock Grid.Column="6" Text="Notes" />
             </Grid>
             <ItemsControl Grid.Row="1" ItemsSource="{Binding Orders}">
                 <ItemsControl.ItemTemplate>
@@ -40,9 +44,11 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80" SharedSizeGroup="links" />
-                                <ColumnDefinition Width="150" SharedSizeGroup="name" />
-                                <ColumnDefinition Width="80" SharedSizeGroup="contact" />
-                                <ColumnDefinition Width="60" SharedSizeGroup="phone" />
+                                <ColumnDefinition Width="150" SharedSizeGroup="date" />
+                                <ColumnDefinition Width="80" SharedSizeGroup="invoiceNo" />
+                                <ColumnDefinition Width="60" SharedSizeGroup="supplier" />
+                                <ColumnDefinition Width="60" SharedSizeGroup="eta" />
+                                <ColumnDefinition Width="60" SharedSizeGroup="delivered" />
                                 <ColumnDefinition Width="130" SharedSizeGroup="notes" />
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
@@ -58,10 +64,12 @@
                                     </Hyperlink>
                                 </TextBlock>
                             </StackPanel>
-                            <TextBlock Grid.Column="1" Text="{Binding Name}" />
-                            <TextBlock Grid.Column="2" Text="{Binding Contact}" />
-                            <TextBlock Grid.Column="3" Text="{Binding Phone}" />
-                            <TextBlock Grid.Column="4" Text="{Binding Notes}" TextWrapping="Wrap" />
+                            <TextBlock Grid.Column="1" Text="{Binding Date}" />
+                            <TextBlock Grid.Column="2" Text="{Binding InvoiceNumber}" />
+                            <TextBlock Grid.Column="3" Text="{Binding Supplier.Name}" />
+                            <TextBlock Grid.Column="4" Text="{Binding EstimatedDeliveryDate}" />
+                            <TextBlock Grid.Column="5" Text="{Binding DeliveryDate}" />
+                            <TextBlock Grid.Column="6" Text="{Binding Notes}" TextWrapping="Wrap" />
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
