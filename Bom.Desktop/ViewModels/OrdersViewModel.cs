@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Bom.Client.Contracts;
 using Bom.Client.Entities;
+using Bom.Desktop.Support;
 using Core.Common;
-using Core.Common.UI.Core;
 using Core.Common.Contracts;
+using Core.Common.UI.Core;
 
 namespace Bom.Desktop.ViewModels
 {
@@ -43,6 +41,7 @@ namespace Bom.Desktop.ViewModels
 
         public event CancelEventHandler ConfirmDelete;
         public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
+        public event EventHandler<EditOrderViewModel> OpenEditOrderWindow;
 
         public EditOrderViewModel CurrentOrderViewModel
         {
@@ -57,16 +56,16 @@ namespace Bom.Desktop.ViewModels
             }
         }
 
-        ObservableCollection<Order> _Orders;
+        ObservableCollection<Order> _orders;
 
         public ObservableCollection<Order> Orders
         {
-            get { return _Orders; }
+            get { return _orders; }
             set
             {
-                if (_Orders != value)
+                if (_orders != value)
                 {
-                    _Orders = value;
+                    _orders = value;
                     OnPropertyChanged(() => Orders, false);
                 }
             }
@@ -74,7 +73,7 @@ namespace Bom.Desktop.ViewModels
 
         protected override void OnViewLoaded()
         {
-            _Orders = new ObservableCollection<Order>();
+            _orders = new ObservableCollection<Order>();
 
             WithClient(_serviceFactory.CreateClient<IOrderService>(), orderClient =>
             {
@@ -82,7 +81,7 @@ namespace Bom.Desktop.ViewModels
                 if (orders != null)
                 {
                     foreach (Order order in orders)
-                        _Orders.Add(order);
+                        _orders.Add(order);
                 }
             });
         }
@@ -95,6 +94,7 @@ namespace Bom.Desktop.ViewModels
                 CurrentOrderViewModel.OrderUpdated += CurrentOrderViewModel_OrderUpdated;
                 CurrentOrderViewModel.CancelEditOrder += CurrentOrderViewModel_CancelEvent;
             }
+            if (OpenEditOrderWindow != null) OpenEditOrderWindow(this, CurrentOrderViewModel);
         }
 
         void OnAddOrderCommand(object arg)
@@ -103,13 +103,14 @@ namespace Bom.Desktop.ViewModels
             CurrentOrderViewModel = new EditOrderViewModel(_serviceFactory, order);
             CurrentOrderViewModel.OrderUpdated += CurrentOrderViewModel_OrderUpdated;
             CurrentOrderViewModel.CancelEditOrder += CurrentOrderViewModel_CancelEvent;
+            if (OpenEditOrderWindow != null) OpenEditOrderWindow(this, CurrentOrderViewModel);
         }
 
-        void CurrentOrderViewModel_OrderUpdated(object sender, Support.OrderEventArgs e)
+        void CurrentOrderViewModel_OrderUpdated(object sender, OrderEventArgs e)
         {
             if (!e.IsNew)
             {
-                Order order = _Orders.Single(item => item.Id == e.Order.Id);
+                Order order = _orders.Single(item => item.Id == e.Order.Id);
                 if (order != null)
                 {
 //ToDo
@@ -117,7 +118,7 @@ namespace Bom.Desktop.ViewModels
                 }
             }
             else
-                _Orders.Add(e.Order);
+                _orders.Add(e.Order);
 
             CurrentOrderViewModel = null;
         }
@@ -138,7 +139,7 @@ namespace Bom.Desktop.ViewModels
                 WithClient(_serviceFactory.CreateClient<IOrderService>(), suplierClient =>
                 {
                     suplierClient.DeleteOrder(order.Id);
-                    _Orders.Remove(order);
+                    _orders.Remove(order);
                 });
             }
         }

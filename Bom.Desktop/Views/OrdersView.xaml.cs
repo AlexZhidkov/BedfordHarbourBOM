@@ -35,6 +35,7 @@ namespace Bom.Desktop.Views
             {
                 vm.ConfirmDelete -= OnConfirmDelete;
                 vm.ErrorOccured -= OnErrorOccured;
+                vm.OpenEditOrderWindow -= OnOpenEditOrderWindow;
             }
         }
 
@@ -45,6 +46,7 @@ namespace Bom.Desktop.Views
             {
                 vm.ConfirmDelete += OnConfirmDelete;
                 vm.ErrorOccured += OnErrorOccured;
+                vm.OpenEditOrderWindow += OnOpenEditOrderWindow;
             }
         }
 
@@ -59,6 +61,12 @@ namespace Bom.Desktop.Views
         void OnErrorOccured(object sender, Core.Common.ErrorMessageEventArgs e)
         {
             MessageBox.Show(e.ErrorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        void OnOpenEditOrderWindow(object sender, EditOrderViewModel e)
+        {
+            EditOrderWindow editPartWindow = new EditOrderWindow(e);
+            editPartWindow.Show();
         }
     }
 }

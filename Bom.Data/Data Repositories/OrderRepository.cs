@@ -27,17 +27,19 @@ namespace Bom.Data
 
         protected override Order UpdateEntity(BomContext entityContext, Order entity)
         {
+            entityContext.Entry(entity).State = EntityState.Modified; 
+            //entityContext.Entry(entity.Supplier).State = EntityState.Detached;
             return (entityContext.Orders.Where(e => e.Id == entity.Id)).FirstOrDefault();
         }
 
         protected override IEnumerable<Order> GetEntities(BomContext entityContext)
         {
-            return entityContext.Orders.Select(e => e);
+            return entityContext.Orders.Select(e => e).Include(o => o.Supplier);
         }
 
         protected override Order GetEntity(BomContext entityContext, int id)
         {
-            return (entityContext.Orders.Where(e => e.Id == id).Include(o => o.Items)).Single();
+            return (entityContext.Orders.Where(e => e.Id == id).Include(o => o.Supplier).Include(o => o.Items)).Single();
         }
 
     }

@@ -78,10 +78,5 @@
                 <Button Content="Add New" Command="{Binding AddOrderCommand}" />
             </StackPanel>
         </Grid>
-        <Border Grid.Column="0" CornerRadius="4" Margin="10" BorderBrush="SteelBlue" BorderThickness="1" Background="BlanchedAlmond"
-                Visibility="{Binding CurrentOrderViewModel, Converter={StaticResource viewModelNullToVisibilityConverter}}">
-            <ContentControl Content="{Binding CurrentOrderViewModel}" />
-        </Border>
-
     </Grid>
 </core:UserControlViewBase>

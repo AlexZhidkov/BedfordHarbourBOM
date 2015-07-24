@@ -72,6 +72,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EditOrderWindow.xaml.cs">
+      <DependentUpon>EditOrderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Support\PartEventArgs.cs" />
     <Compile Include="Support\StockEventArgs.cs" />
     <Compile Include="Support\ComponentEventArgs.cs" />
@@ -120,6 +123,10 @@
     <Compile Include="Views\SuppliersView.xaml.cs">
       <DependentUpon>SuppliersView.xaml</DependentUpon>
     </Compile>
+    <Page Include="EditOrderWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

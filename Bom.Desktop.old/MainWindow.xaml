@@ -1,9 +1,0 @@
-﻿<Window x:Class="Bom.Desktop.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <StackPanel>
-        <Button x:Name="SuppliersButton" Content="Suppliers" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="75" Click="SuppliersButton_Click"/>
-        <Button x:Name="StockButton" Content="Stock" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="75" Click="StockButton_Click"/>
-    </StackPanel>
-</Window>

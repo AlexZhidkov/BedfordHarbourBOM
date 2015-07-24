@@ -10,7 +10,9 @@ namespace Bom.Business.Entities
     public class Order : BaseEntity, IIdentifiableEntity
     {
         [DataMember]
-        public Supplier Supplier { get; set; }
+        public int? SupplierId { get; set; }
+        [DataMember]
+        public virtual Supplier Supplier { get; set; }
         [DataMember]
         public string InvoiceNumber { get; set; }
         [DataMember]

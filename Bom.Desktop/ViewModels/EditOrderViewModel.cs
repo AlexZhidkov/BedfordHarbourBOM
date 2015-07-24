@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Bom.Client.Contracts;
 using Bom.Client.Entities;
 using Bom.Desktop.Support;
+using Core.Common;
 using Core.Common.Contracts;
 using Core.Common.Core;
 using Core.Common.UI.Core;
@@ -15,33 +17,59 @@ namespace Bom.Desktop.ViewModels
 
         public EditOrderViewModel(IServiceFactory serviceFactory, Order order)
         {
-            _ServiceFactory = serviceFactory;
-            _Order = new Order()
+            _serviceFactory = serviceFactory;
+            _order = new Order()
             {
                 Id = order.Id,
                 InvoiceNumber = order.InvoiceNumber,
-                //ToDo ...
+                SupplierId = order.SupplierId,
+                Supplier = order.Supplier,
+                Date = order.Date,
+                DeliveryDate = order.DeliveryDate,
+                EstimatedDeliveryDate = order.EstimatedDeliveryDate,
+                //ToDo confirm this?
+                Items = order.Items,
                 Notes = order.Notes
             };
 
-            _Order.CleanAll();
+            _order.CleanAll();
+            LoadSuppliers();
 
             SaveCommand = new DelegateCommand<object>(OnSaveCommandExecute, OnSaveCommandCanExecute);
             CancelCommand = new DelegateCommand<object>(OnCancelCommandExecute);
         }
 
-        IServiceFactory _ServiceFactory;
-        Order _Order;
+        private IServiceFactory _serviceFactory;
+        private Order _order;
+        private List<Supplier> _suppliers;
 
         public DelegateCommand<object> SaveCommand { get; private set; }
         public DelegateCommand<object> CancelCommand { get; private set; }
 
         public event EventHandler CancelEditOrder;
         public event EventHandler<OrderEventArgs> OrderUpdated;
+        public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
 
         public Order Order
         {
-            get { return _Order; }
+            get { return _order; }
+        }
+
+        public List<Supplier> Suppliers
+        {
+            get { return _suppliers; }
+        }
+
+        private void LoadSuppliers()
+        {
+            WithClient(_serviceFactory.CreateClient<ISupplierService>(), suppliersClient =>
+            {
+                if (suppliersClient == null) return;
+                Supplier[] suppliers = suppliersClient.GetAllSuppliers();
+                if (suppliers == null) return;
+                _suppliers = new List<Supplier>();
+                foreach (Supplier supplier in suppliers.OrderBy(p => p.Name)) _suppliers.Add(supplier);
+            });
         }
 
         protected override void AddModels(List<ObjectBase> models)
@@ -55,11 +83,11 @@ namespace Bom.Desktop.ViewModels
 
             if (IsValid)
             {
-                WithClient(_ServiceFactory.CreateClient<IOrderService>(), orderClient =>
+                WithClient(_serviceFactory.CreateClient<IOrderService>(), orderClient =>
                 {
-                    bool isNew = (_Order.Id == 0);
+                    bool isNew = (_order.Id == 0);
 
-                    var savedOrder = orderClient.UpdateOrder(_Order);
+                    var savedOrder = orderClient.UpdateOrder(_order);
                     if (savedOrder != null)
                     {
                         if (OrderUpdated != null)
@@ -71,7 +99,7 @@ namespace Bom.Desktop.ViewModels
 
         bool OnSaveCommandCanExecute(object arg)
         {
-            return _Order.IsDirty;
+            return _order.IsDirty;
         }
 
         void OnCancelCommandExecute(object arg)

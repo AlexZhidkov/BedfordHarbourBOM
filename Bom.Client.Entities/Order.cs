@@ -6,14 +6,25 @@ namespace Bom.Client.Entities
 {
     public class Order : BaseEntity
     {
+        private int? _supplierId;
         private Supplier _supplier;
         private string _invoiceNumber;
         private DateTime? _date;
         private DateTime? _estimatedDeliveryDate;
         private DateTime? _deliveryDate;
         private IEnumerable<OrderDetail> _items;
-        
-        public Supplier Supplier
+
+        public int SupplierId
+        {
+            get { return _supplierId ?? 0; }
+            set
+            {
+                if (_supplierId == value) return;
+                _supplierId = value;
+                OnPropertyChanged(() => SupplierId);
+            }
+        }
+        public virtual Supplier Supplier
         {
             get { return _supplier; }
             set
