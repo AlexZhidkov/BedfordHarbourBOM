@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Bom.Client.Contracts;
 using Bom.Client.Entities;
 using Bom.Desktop.Support;
@@ -28,12 +29,15 @@ namespace Bom.Desktop.ViewModels
 
             _orderDetail.CleanAll();
 
+            LoadParts();
+
             SaveCommand = new DelegateCommand<object>(OnSaveCommandExecute, OnSaveCommandCanExecute);
             CancelCommand = new DelegateCommand<object>(OnCancelCommandExecute);
         }
 
         IServiceFactory _serviceFactory;
         OrderDetail _orderDetail;
+        List<Part> _parts;
 
         public DelegateCommand<object> SaveCommand { get; private set; }
         public DelegateCommand<object> CancelCommand { get; private set; }
@@ -44,6 +48,23 @@ namespace Bom.Desktop.ViewModels
         public OrderDetail OrderDetail
         {
             get { return _orderDetail; }
+        }
+
+        public List<Part> Parts
+        {
+            get { return _parts; }
+        }
+
+        private void LoadParts()
+        {
+            WithClient(_serviceFactory.CreateClient<IPartService>(), partsClient =>
+            {
+                if (partsClient == null) return;
+                Part[] parts = partsClient.GetAllParts();
+                if (parts == null) return;
+                _parts = new List<Part>();
+                foreach (Part part in parts.OrderBy(p => p.Description)) _parts.Add(part);
+            });
         }
 
         protected override void AddModels(List<ObjectBase> models)

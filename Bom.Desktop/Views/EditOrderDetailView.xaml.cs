@@ -27,5 +27,16 @@ namespace Bom.Desktop.Views
         {
             InitializeComponent();
         }
+
+        private void ComboBox_OnDropDownClosed(object sender, EventArgs e)
+        {
+            var selectedPart = ((sender as ComboBox).SelectionBoxItem as Part);
+            if (selectedPart == null) return;
+            var viewModel = (EditOrderDetailViewModel)DataContext;
+            if (viewModel == null) return;
+
+            viewModel.OrderDetail.PartDescription = selectedPart.Description;
+            //viewModel.Component.SubassemblyId = selectedPart.Id;
+        }
     }
 }

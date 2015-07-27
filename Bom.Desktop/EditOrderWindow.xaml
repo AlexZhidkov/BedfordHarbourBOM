@@ -80,16 +80,8 @@
                             <ColumnDefinition Width="50" SharedSizeGroup="total" />
                             <ColumnDefinition Width="300" SharedSizeGroup="notes" />
                         </Grid.ColumnDefinitions>
-                        <ComboBox Name="ComponentComboBox" Grid.Column="0" Margin="3" 
-                            Visibility="{Binding Part, Converter={StaticResource viewModelNullToVisibilityConverter}}"
-                            ItemsSource="{Binding Part}" 
-                            DisplayMemberPath="Description"
-                            SelectedValue="{Binding Part.Id}"
-                            SelectedValuePath="Id"
-                                  />
-                        <!--
-                            DropDownClosed="ComboBox_OnDropDownClosed"/>
--->
+
+                        <TextBlock Grid.Column="0" Text="{Binding PartDescription}" HorizontalAlignment="Left" Margin="3"/>
                         <TextBlock Grid.Column="1" Text="{Binding Price, StringFormat=c}" HorizontalAlignment="Right" Margin="3"/>
                         <TextBlock Grid.Column="2" Text="{Binding Count}" HorizontalAlignment="Right" Margin="3"/>
                         <TextBlock Grid.Column="3" Text="{Binding Total, StringFormat=c}" HorizontalAlignment="Right" Margin="3"/>
