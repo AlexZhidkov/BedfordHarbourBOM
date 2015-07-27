@@ -34,6 +34,10 @@ namespace Bom.Desktop.ViewModels
             _order.CleanAll();
             LoadSuppliers();
 
+            EditOrderDetailCommand = new DelegateCommand<OrderDetail>(OnEditOrderDetailCommand);
+            //ToDo DeleteOrderDetailCommand = new DelegateCommand<OrderDetail>(OnDeleteOrderDetailCommand);
+            AddOrderDetailCommand = new DelegateCommand<object>(OnAddOrderDetailCommand);
+            
             SaveCommand = new DelegateCommand<object>(OnSaveCommandExecute, OnSaveCommandCanExecute);
             CancelCommand = new DelegateCommand<object>(OnCancelCommandExecute);
         }
@@ -42,6 +46,9 @@ namespace Bom.Desktop.ViewModels
         private Order _order;
         private List<Supplier> _suppliers;
 
+        public DelegateCommand<OrderDetail> EditOrderDetailCommand { get; private set; }
+        public DelegateCommand<OrderDetail> DeleteOrderDetailCommand { get; private set; }
+        public DelegateCommand<object> AddOrderDetailCommand { get; private set; }
         public DelegateCommand<object> SaveCommand { get; private set; }
         public DelegateCommand<object> CancelCommand { get; private set; }
 
@@ -71,6 +78,21 @@ namespace Bom.Desktop.ViewModels
             });
         }
 
+        EditOrderDetailViewModel _currentOrderDetailViewModel;
+
+        public EditOrderDetailViewModel CurrentOrderDetailViewModel
+        {
+            get { return _currentOrderDetailViewModel; }
+            set
+            {
+                if (_currentOrderDetailViewModel != value)
+                {
+                    _currentOrderDetailViewModel = value;
+                    OnPropertyChanged(() => CurrentOrderDetailViewModel, false);
+                }
+            }
+        }
+
         protected override void AddModels(List<ObjectBase> models)
         {
             models.Add(Order);
@@ -94,6 +116,64 @@ namespace Bom.Desktop.ViewModels
                     }
                 });
             }
+        }
+
+        void OnEditOrderDetailCommand(OrderDetail orderItem)
+        {
+            if (orderItem != null)
+            {
+                CurrentOrderDetailViewModel = new EditOrderDetailViewModel(_serviceFactory, orderItem);
+                CurrentOrderDetailViewModel.OrderDetailUpdated += CurrentOrderDetailViewModel_OrderDetailUpdated;
+                CurrentOrderDetailViewModel.CancelEditOrderDetail += CurrentOrderDetailViewModel_CancelEvent;
+            }
+        }
+
+        void OnAddOrderDetailCommand(object arg)
+        {
+            OrderDetail orderDetail = new OrderDetail
+            {
+                OrderId = _order.Id
+            };
+            CurrentOrderDetailViewModel = new EditOrderDetailViewModel(_serviceFactory, orderDetail);
+            CurrentOrderDetailViewModel.OrderDetailUpdated += CurrentOrderDetailViewModel_OrderDetailUpdated;
+            CurrentOrderDetailViewModel.CancelEditOrderDetail += CurrentOrderDetailViewModel_CancelEvent;
+        }
+
+        void CurrentOrderDetailViewModel_OrderDetailUpdated(object sender, Support.OrderDetailEventArgs e)
+        {
+            if (!e.IsNew)
+            {
+                OrderDetail orderDetail = _order.Items.Single(item => item.Id == e.OrderDetail.Id);
+                if (orderDetail != null)
+                {
+                    orderDetail.Count = e.OrderDetail.Count;
+                    orderDetail.OrderId = e.OrderDetail.OrderId;
+                    orderDetail.Price = e.OrderDetail.Price;
+                    orderDetail.Part = e.OrderDetail.Part;
+                    orderDetail.Notes = e.OrderDetail.Notes;
+                }
+            }
+            else
+            {
+                _order.Items = _order.Items.Concat(new[]
+                {
+                    new OrderDetail
+                    {
+                        Id = e.OrderDetail.Id,
+                        Count = e.OrderDetail.Count,
+                        OrderId = e.OrderDetail.OrderId,
+                        Price = e.OrderDetail.Price,
+                        Part = e.OrderDetail.Part,
+                        Notes = e.OrderDetail.Notes
+                    }
+                });
+            }
+            CurrentOrderDetailViewModel = null;
+        }
+
+        void CurrentOrderDetailViewModel_CancelEvent(object sender, EventArgs e)
+        {
+            CurrentOrderDetailViewModel = null;
         }
 
         bool OnSaveCommandCanExecute(object arg)

@@ -5,7 +5,7 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:common="clr-namespace:Bom.Common;assembly=Bom.Common"
         xmlns:support="clr-namespace:Bom.Desktop.Support"
-        Title="Edit Order" Height="800" Width="550" DataContextChanged="Window_DataContextChanged">
+        Title="Edit Order" Height="850" Width="600" DataContextChanged="Window_DataContextChanged">
     <Window.Resources>
         <support:ViewModelNullToVisibilityConverter x:Key="viewModelNullToVisibilityConverter" />
     </Window.Resources>
@@ -99,11 +99,15 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Add New" Command="{Binding AddOrderItemCommand}" />
+            <Button Content="Add New" Command="{Binding AddOrderDetailCommand}" />
         </StackPanel>
         <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="Save" Margin="5" Command="{Binding SaveCommand}" />
             <Button Content="Cancel" Margin="5" Command="{Binding CancelCommand}" />
         </StackPanel>
+        <Border Grid.Row="2" CornerRadius="4" Margin="10" BorderBrush="SteelBlue" BorderThickness="1" Background="BlanchedAlmond"
+                Visibility="{Binding CurrentOrderDetailViewModel, Converter={StaticResource viewModelNullToVisibilityConverter}}">
+            <ContentControl Content="{Binding CurrentOrderDetailViewModel}" />
+        </Border>
     </Grid>
 </Window>
