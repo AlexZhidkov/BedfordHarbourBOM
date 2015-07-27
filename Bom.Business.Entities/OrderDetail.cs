@@ -12,7 +12,12 @@ namespace Bom.Business.Entities
         [DataMember]
         public int OrderId { get; set; }
         [DataMember]
-        public Part Part { get; set; }
+        public int PartId { get; set; }
+        /// <summary>
+        /// Name (description) of Subassembly
+        /// </summary>
+        [DataMember]
+        public string PartDescription { get; set; }
         [DataMember]
         public decimal Price { get; set; }
         [DataMember]

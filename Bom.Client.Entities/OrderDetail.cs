@@ -7,7 +7,8 @@ namespace Bom.Client.Entities
     public class OrderDetail : BaseEntity
     {
         private int _orderId;
-        private Part _part;
+        private int _partId;
+        private string _partDescription;
         private decimal _price;
         private int _count;
 
@@ -22,14 +23,25 @@ namespace Bom.Client.Entities
             }
         }
 
-        public Part Part
+        public int PartId
         {
-            get { return _part; }
+            get { return _partId; }
             set
             {
-                if (_part == value) return;
-                _part = value;
-                OnPropertyChanged(() => Part);
+                if (_partId == value) return;
+                _partId = value;
+                OnPropertyChanged(() => PartId);
+            }
+        }
+
+        public string PartDescription
+        {
+            get { return _partDescription; }
+            set
+            {
+                if (_partDescription == value) return;
+                _partDescription = value;
+                OnPropertyChanged(() => PartDescription);
             }
         }
 

@@ -7,13 +7,13 @@ namespace Bom.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddOrderIdToOrderDetail : IMigrationMetadata
+    public sealed partial class UpdateOrderDetails : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddOrderIdToOrderDetail));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateOrderDetails));
         
         string IMigrationMetadata.Id
         {
-            get { return "201507270531244_AddOrderIdToOrderDetail"; }
+            get { return "201507270858506_UpdateOrderDetails"; }
         }
         
         string IMigrationMetadata.Source

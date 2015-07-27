@@ -149,7 +149,7 @@ namespace Bom.Desktop.ViewModels
                     orderDetail.Count = e.OrderDetail.Count;
                     orderDetail.OrderId = e.OrderDetail.OrderId;
                     orderDetail.Price = e.OrderDetail.Price;
-                    orderDetail.Part = e.OrderDetail.Part;
+                    orderDetail.PartId = e.OrderDetail.PartId;
                     orderDetail.Notes = e.OrderDetail.Notes;
                 }
             }
@@ -163,7 +163,7 @@ namespace Bom.Desktop.ViewModels
                         Count = e.OrderDetail.Count,
                         OrderId = e.OrderDetail.OrderId,
                         Price = e.OrderDetail.Price,
-                        Part = e.OrderDetail.Part,
+                        PartId = e.OrderDetail.PartId,
                         Notes = e.OrderDetail.Notes
                     }
                 });

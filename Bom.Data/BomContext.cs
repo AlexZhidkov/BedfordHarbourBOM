@@ -64,6 +64,7 @@ namespace Bom.Data
             //ToDo establish relationship by OrderID
             modelBuilder.Entity<OrderDetail>().HasKey<int>(e => e.Id).Ignore(e => e.EntityId);
             modelBuilder.Entity<OrderDetail>().Property(o => o.Price).HasPrecision(10, 2);
+            modelBuilder.Entity<OrderDetail>().Ignore(e => e.PartDescription);
         }
     }
 }
