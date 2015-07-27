@@ -14,12 +14,14 @@ namespace Bom.Desktop.Tests
         public void TestViewModelConstruction()
         {
             Order order = TestHelper.GetTestOrder();
+            order.Id = 1;
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
+            mockServiceFactory.Setup(mock => mock.CreateClient<IOrderService>().GetOrder(1)).Returns(order);
 
-            EditOrderViewModel viewModel = new EditOrderViewModel(mockServiceFactory.Object, order);
+            EditOrderViewModel viewModel = new EditOrderViewModel(mockServiceFactory.Object, order.Id);
 
-            Assert.IsTrue(viewModel.Order != null && viewModel.Order != order);
+            Assert.IsTrue(viewModel.Order != null);
             Assert.IsTrue(viewModel.Order.Id == order.Id && viewModel.Order.InvoiceNumber == order.InvoiceNumber);
         }
 
@@ -29,8 +31,9 @@ namespace Bom.Desktop.Tests
             Order order = TestHelper.GetTestOrder();
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
+            mockServiceFactory.Setup(mock => mock.CreateClient<IOrderService>().GetOrder(1)).Returns(order);
 
-            EditOrderViewModel viewModel = new EditOrderViewModel(mockServiceFactory.Object, order);
+            EditOrderViewModel viewModel = new EditOrderViewModel(mockServiceFactory.Object, order.Id);
 
             mockServiceFactory.Setup(mock => mock.CreateClient<IOrderService>().UpdateOrder(It.IsAny<Order>())).Returns(viewModel.Order);
 
@@ -56,8 +59,9 @@ namespace Bom.Desktop.Tests
             Order order = TestHelper.GetTestOrder();
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
+            mockServiceFactory.Setup(mock => mock.CreateClient<IOrderService>().GetOrder(1)).Returns(order);
 
-            EditOrderViewModel viewModel = new EditOrderViewModel(mockServiceFactory.Object, order);
+            EditOrderViewModel viewModel = new EditOrderViewModel(mockServiceFactory.Object, order.Id);
 
             Assert.IsFalse(viewModel.SaveCommand.CanExecute(null));
 
@@ -72,8 +76,9 @@ namespace Bom.Desktop.Tests
             Order order = new Order() { Id = 1, InvoiceNumber = "White" };
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
+            mockServiceFactory.Setup(mock => mock.CreateClient<IOrderService>().GetOrder(1)).Returns(order);
 
-            EditOrderViewModel viewModel = new EditOrderViewModel(mockServiceFactory.Object, order);
+            EditOrderViewModel viewModel = new EditOrderViewModel(mockServiceFactory.Object, order.Id);
 
             bool canceled = false;
             viewModel.CancelEditOrder += (s, e) => canceled = true;

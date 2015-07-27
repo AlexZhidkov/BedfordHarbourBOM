@@ -10,7 +10,7 @@ namespace Bom.Business.Entities
     public class OrderDetail : BaseEntity, IIdentifiableEntity
     {
         [DataMember]
-        public Order Order { get; set; }
+        public int OrderId { get; set; }
         [DataMember]
         public Part Part { get; set; }
         [DataMember]

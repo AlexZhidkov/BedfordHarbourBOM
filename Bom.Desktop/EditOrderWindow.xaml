@@ -5,13 +5,14 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:common="clr-namespace:Bom.Common;assembly=Bom.Common"
         xmlns:support="clr-namespace:Bom.Desktop.Support"
-        Title="Edit Order" Height="670" Width="550" DataContextChanged="Window_DataContextChanged">
+        Title="Edit Order" Height="800" Width="550" DataContextChanged="Window_DataContextChanged">
     <Window.Resources>
         <support:ViewModelNullToVisibilityConverter x:Key="viewModelNullToVisibilityConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -28,7 +29,7 @@
                 <RowDefinition Height="130" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="450" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Supplier:" />
@@ -48,9 +49,11 @@
                     <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Contact:" />
+                <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Contact:" 
+                    Visibility="{Binding Order.Supplier, Converter={StaticResource viewModelNullToVisibilityConverter}}"/>
                 <TextBlock Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding Order.Supplier.Contact}" />
-                <TextBlock Grid.Row="0" Grid.Column="2" Margin="3" Text="Phone:" />
+                <TextBlock Grid.Row="0" Grid.Column="2" Margin="3" Text="Phone:"
+                    Visibility="{Binding Order.Supplier, Converter={StaticResource viewModelNullToVisibilityConverter}}"/>
                 <TextBlock Grid.Row="0" Grid.Column="3" Margin="3" Text="{Binding Order.Supplier.Phone}" />
             </Grid>
             <TextBlock Grid.Row="2" Grid.Column="0" Margin="3" Text="Invoice Number:" />
@@ -60,15 +63,13 @@
             <TextBlock Grid.Row="6" Grid.Column="0" Margin="3" Text="Notes:" />
 
             <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Text="{Binding Order.InvoiceNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
-            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
-                <DatePicker Margin="3" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDate="{Binding Order.Date}" DisplayDate="{x:Static system:DateTime.Now}"/>
-                <Button Name="TodayButton" Content="Today" Margin="3" />
-            </StackPanel>
+            <DatePicker Grid.Row="3" Grid.Column="1" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDate="{Binding Order.Date}" DisplayDate="{x:Static system:DateTime.Now}"/>
+            <DatePicker Grid.Row="3" Grid.Column="1" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDate="{Binding Order.EstimatedDeliveryDate}" DisplayDate="{x:Static system:DateTime.Now}"/>
+            <DatePicker Grid.Row="3" Grid.Column="1" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Top" SelectedDate="{Binding Order.DeliveryDate}" DisplayDate="{x:Static system:DateTime.Now}"/>
             <TextBox Grid.Row="6" Grid.Column="1" Margin="3" Text="{Binding Order.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch"
                 AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
         </Grid>
-        <!--
-        <ListBox Grid.Row="1" ItemsSource="{Binding Order.Items}" Height="400">
+        <ListBox Grid.Row="2" ItemsSource="{Binding Order.Items}" Height="400">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -86,9 +87,9 @@
                             SelectedValue="{Binding Part.Id}"
                             SelectedValuePath="Id"
                                   />
-~1~
+                        <!--
                             DropDownClosed="ComboBox_OnDropDownClosed"/>
-@1@
+-->
                         <TextBlock Grid.Column="1" Text="{Binding Price, StringFormat=c}" HorizontalAlignment="Right" Margin="3"/>
                         <TextBlock Grid.Column="2" Text="{Binding Count}" HorizontalAlignment="Right" Margin="3"/>
                         <TextBlock Grid.Column="3" Text="{Binding Total, StringFormat=c}" HorizontalAlignment="Right" Margin="3"/>
@@ -97,8 +98,10 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
--->
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Add New" Command="{Binding AddOrderItemCommand}" />
+        </StackPanel>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="Save" Margin="5" Command="{Binding SaveCommand}" />
             <Button Content="Cancel" Margin="5" Command="{Binding CancelCommand}" />
         </StackPanel>

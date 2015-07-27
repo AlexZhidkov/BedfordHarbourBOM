@@ -15,22 +15,21 @@ namespace Bom.Desktop.ViewModels
     {
         // note that this viewmodel is instantiated on-demand from parent and not with DI
 
-        public EditOrderViewModel(IServiceFactory serviceFactory, Order order)
+        public EditOrderViewModel(IServiceFactory serviceFactory, int orderId)
         {
-            _serviceFactory = serviceFactory;
-            _order = new Order()
+            _serviceFactory = serviceFactory ?? Container.GetExportedValue<IServiceFactory>();
+
+            if (orderId == 0)
             {
-                Id = order.Id,
-                InvoiceNumber = order.InvoiceNumber,
-                SupplierId = order.SupplierId,
-                Supplier = order.Supplier,
-                Date = order.Date,
-                DeliveryDate = order.DeliveryDate,
-                EstimatedDeliveryDate = order.EstimatedDeliveryDate,
-                //ToDo confirm this?
-                Items = order.Items,
-                Notes = order.Notes
-            };
+                _order = new Order();
+            }
+            else
+            {
+                WithClient(_serviceFactory.CreateClient<IOrderService>(), orderClient =>
+                {
+                    _order = orderClient.GetOrder(orderId);
+                });
+            }
 
             _order.CleanAll();
             LoadSuppliers();

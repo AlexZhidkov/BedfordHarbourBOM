@@ -16,7 +16,7 @@ namespace Bom.Client.Contracts
         Order[] GetAllOrders();
 
         [OperationContract]
-        Order GetOrder(int id);
+        Order GetOrder(int orderId);
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]

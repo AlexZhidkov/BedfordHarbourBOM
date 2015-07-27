@@ -97,6 +97,10 @@
     <Compile Include="Migrations\201507240620536_OrderSupplierId.Designer.cs">
       <DependentUpon>201507240620536_OrderSupplierId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507270531244_AddOrderIdToOrderDetail.cs" />
+    <Compile Include="Migrations\201507270531244_AddOrderIdToOrderDetail.Designer.cs">
+      <DependentUpon>201507270531244_AddOrderIdToOrderDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -169,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507240620536_OrderSupplierId.resx">
       <DependentUpon>201507240620536_OrderSupplierId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507270531244_AddOrderIdToOrderDetail.resx">
+      <DependentUpon>201507270531244_AddOrderIdToOrderDetail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

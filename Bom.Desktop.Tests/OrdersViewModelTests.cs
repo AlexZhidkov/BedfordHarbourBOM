@@ -39,6 +39,7 @@ namespace Bom.Desktop.Tests
             Order order = new Order() { Id = 1 };
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
+            mockServiceFactory.Setup(mock => mock.CreateClient<IOrderService>().GetOrder(1)).Returns(order);
 
             OrdersViewModel viewModel = new OrdersViewModel(mockServiceFactory.Object);
 
@@ -55,6 +56,7 @@ namespace Bom.Desktop.Tests
             Order order = new Order() { Id = 1, InvoiceNumber = "Test Invoice 1" };
 
             Mock<IServiceFactory> mockServiceFactory = new Mock<IServiceFactory>();
+            mockServiceFactory.Setup(mock => mock.CreateClient<IOrderService>().GetOrder(1)).Returns(order);
 
             OrdersViewModel viewModel = new OrdersViewModel(mockServiceFactory.Object);
 

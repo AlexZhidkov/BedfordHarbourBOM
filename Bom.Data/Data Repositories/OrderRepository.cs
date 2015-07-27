@@ -21,6 +21,8 @@ namespace Bom.Data
     {
         protected override Order AddEntity(BomContext entityContext, Order order)
         {
+            //Prevent Entity Framework from creating new Supplier. ToDo confirm.
+            order.Supplier = null;
             var newOrder = entityContext.Orders.Add(order);
             return newOrder;
         }

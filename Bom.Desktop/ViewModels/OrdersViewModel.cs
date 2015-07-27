@@ -90,7 +90,7 @@ namespace Bom.Desktop.ViewModels
         {
             if (order != null)
             {
-                CurrentOrderViewModel = new EditOrderViewModel(_serviceFactory, order);
+                CurrentOrderViewModel = new EditOrderViewModel(_serviceFactory, order.Id);
                 CurrentOrderViewModel.OrderUpdated += CurrentOrderViewModel_OrderUpdated;
                 CurrentOrderViewModel.CancelEditOrder += CurrentOrderViewModel_CancelEvent;
             }
@@ -99,8 +99,8 @@ namespace Bom.Desktop.ViewModels
 
         void OnAddOrderCommand(object arg)
         {
-            Order order = new Order();
-            CurrentOrderViewModel = new EditOrderViewModel(_serviceFactory, order);
+            int zeroAsNewOrderId = 0;
+            CurrentOrderViewModel = new EditOrderViewModel(_serviceFactory, zeroAsNewOrderId);
             CurrentOrderViewModel.OrderUpdated += CurrentOrderViewModel_OrderUpdated;
             CurrentOrderViewModel.CancelEditOrder += CurrentOrderViewModel_CancelEvent;
             if (OpenEditOrderWindow != null) OpenEditOrderWindow(this, CurrentOrderViewModel);
@@ -113,8 +113,15 @@ namespace Bom.Desktop.ViewModels
                 Order order = _orders.Single(item => item.Id == e.Order.Id);
                 if (order != null)
                 {
-//ToDo
+                    order.Date = e.Order.Date;
                     order.Notes = e.Order.Notes;
+                    order.DeliveryDate = e.Order.DeliveryDate;
+                    order.EstimatedDeliveryDate = e.Order.EstimatedDeliveryDate;
+                    order.InvoiceNumber = e.Order.InvoiceNumber;
+                    order.Supplier = e.Order.Supplier;
+                    order.SupplierId = e.Order.SupplierId;
+                    //ToDo decide if need to copy all order items
+                    //order.Items = e.Order.Items;
                 }
             }
             else

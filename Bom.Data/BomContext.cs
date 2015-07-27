@@ -60,10 +60,9 @@ namespace Bom.Data
             modelBuilder.Entity<Subassembly>().Property(o => o.Demand).HasPrecision(25, 13);
 
             modelBuilder.Entity<Order>().HasKey<int>(e => e.Id).Ignore(e => e.EntityId);
-            modelBuilder.Entity<Order>().HasMany(e => e.Items).WithRequired(i => i.Order).WillCascadeOnDelete(true);
 
+            //ToDo establish relationship by OrderID
             modelBuilder.Entity<OrderDetail>().HasKey<int>(e => e.Id).Ignore(e => e.EntityId);
-            modelBuilder.Entity<OrderDetail>().HasRequired(e => e.Order).WithMany(e => e.Items);
             modelBuilder.Entity<OrderDetail>().Property(o => o.Price).HasPrecision(10, 2);
         }
     }

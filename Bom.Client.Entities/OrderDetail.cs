@@ -6,19 +6,19 @@ namespace Bom.Client.Entities
 {
     public class OrderDetail : BaseEntity
     {
-        private Order _order;
+        private int _orderId;
         private Part _part;
         private decimal _price;
         private int _count;
 
-        public Order Order
+        public int OrderId
         {
-            get { return _order; }
+            get { return _orderId; }
             set
             {
-                if (_order == value) return;
-                _order = value;
-                OnPropertyChanged(() => Order);
+                if (_orderId == value) return;
+                _orderId = value;
+                OnPropertyChanged(() => OrderId);
             }
         }
 
