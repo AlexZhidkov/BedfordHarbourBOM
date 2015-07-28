@@ -29,7 +29,9 @@ namespace Bom.Data
 
         protected override Order UpdateEntity(BomContext entityContext, Order entity)
         {
-            entityContext.Entry(entity).State = EntityState.Modified; 
+            //Prevent Entity Framework from creating new Supplier. ToDo confirm.
+            entity.Supplier = null;
+            //entityContext.Entry(entity).State = EntityState.Modified; 
             //entityContext.Entry(entity.Supplier).State = EntityState.Detached;
             return (entityContext.Orders.Where(e => e.Id == entity.Id)).FirstOrDefault();
         }
@@ -41,7 +43,12 @@ namespace Bom.Data
 
         protected override Order GetEntity(BomContext entityContext, int id)
         {
-            return (entityContext.Orders.Where(e => e.Id == id).Include(o => o.Supplier).Include(o => o.Items)).Single();
+            var order = (entityContext.Orders.Where(e => e.Id == id).Include(o => o.Supplier).Include(o => o.Items)).Single();
+            foreach (var item in order.Items)
+            {
+                item.PartDescription = entityContext.Parts.Single(p => p.Id == item.PartId).Description;
+            }
+            return order;
         }
 
     }

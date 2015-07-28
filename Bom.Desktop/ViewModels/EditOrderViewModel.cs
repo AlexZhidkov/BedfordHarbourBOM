@@ -150,6 +150,7 @@ namespace Bom.Desktop.ViewModels
                     orderDetail.OrderId = e.OrderDetail.OrderId;
                     orderDetail.Price = e.OrderDetail.Price;
                     orderDetail.PartId = e.OrderDetail.PartId;
+                    orderDetail.PartDescription = e.OrderDetail.PartDescription;
                     orderDetail.Notes = e.OrderDetail.Notes;
                 }
             }
@@ -164,6 +165,7 @@ namespace Bom.Desktop.ViewModels
                         OrderId = e.OrderDetail.OrderId,
                         Price = e.OrderDetail.Price,
                         PartId = e.OrderDetail.PartId,
+                        PartDescription = e.OrderDetail.PartDescription,
                         Notes = e.OrderDetail.Notes
                     }
                 });
