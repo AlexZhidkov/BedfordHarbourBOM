@@ -44,13 +44,11 @@ namespace Bom.Database.Tests
                                (505, 0, 0, 0,     50, 0),
                                (506, 0, 0, 0,     60, 0),
                                (507, 0, 0, 0,     70, 0),
-                               (508, 0, 0, 0,     80, 0),
+                               (508, 0, 0, 0,     80, 0),   
 
-                               (511, 0, 0, 0,      0, 0),
-                               (512, 0, 0, 0,      0, 0),
-                               (513, 0, 0, 0,   1000, 0),
-                               (514, 0, 0, 0,      0, 0),
-                               (554, 0, 0, 0, 163.32, 0)";
+                               (511, 0, 0, 0,   1000, 0),
+                               (512, 0, 0, 0,     12, 0),
+                               (513, 0, 0, 0,      0, 0)";
                 ExecuteSqlWithConnection(sql, conn);
 
                 sql = @"INSERT INTO Subassemblies(AssemblyId, SubassemblyId, InheritedCost, CostContribution) VALUES
@@ -79,9 +77,7 @@ namespace Bom.Database.Tests
                                (500, 507, 0, 1),
 
                                (511, 512, 0, 1),
-                               (512, 513, 0, 1),
-                               (513, 514, 0, 1),
-                               (514, 554, 0, 2)";
+                               (511, 513, 0, 1)";
 
                 ExecuteSqlWithConnection(sql, conn);
                 conn.Close();
@@ -128,9 +124,11 @@ namespace Bom.Database.Tests
             res = RunRecalculateCost(500); // 0 + 5*502 + 507
             Assert.AreEqual(490, res);
 
-            // 9 SPRecalculateCostBin()
-            res = RunRecalculateCost(511); // 0 + 0 + 1000 + 0 + 2*163.32
-            Assert.AreEqual(1326, res);
+            // 9 SPRecalculateCostZeroPartInFirstLevel()
+            // Tests the fetch loop on the subparts of the next sublevel,
+            // specifically the case when one of the sublevel parts returns 0 cost
+            res = RunRecalculateCost(511); // 1000 + 10 + 0 = 1012
+            Assert.AreEqual(1012, res);
         }
 
         [TestCleanup]

@@ -18,15 +18,16 @@ Declare curP cursor local For
 
 OPEN curP 
 set @TotalCost = 0
-set @isTaken = 0
 Fetch Next From curP Into @subassembliesId, @subPartId, @costContribution, @ownCost
 
+-- loop on the all sub-parts of the next level
 While @@Fetch_Status = 0 Begin
+    -- for each subPartId of the next level, recursively count its cost, considering all subassemblies 
 	exec dbo.RecalculateCostsForAssembly @subPartId, @CurrCost output
 	if @CurrCost = 0
-	begin
+	begin 
+	    -- cost of the subPartId sub-tree is 0, consider sub-part's own cost
 		set @CurrCost = @ownCost * @costContribution
-		set @isTaken = 1
 	end
 	set @TotalCost = @TotalCost + (@CurrCost * @costContribution)
 	
@@ -41,9 +42,8 @@ Deallocate curP
 update Parts set ComponentsCost = @TotalCost
 	where Id = @partId
 
-	if @isTaken = 0
-	begin
-		select @TotalCost = ComponentsCost  + OwnCost from Parts where Id = @partId
-	end
+-- consider own cost of current part (root for the sub-parts tree in the Fetch loop)
+select @TotalCost = ComponentsCost  + OwnCost from Parts where Id = @partId
+
 return @TotalCost
 
