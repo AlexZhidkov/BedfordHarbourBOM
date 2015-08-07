@@ -11,11 +11,7 @@ namespace Bom.Database.Tests
     {
         public StoredProcedures()
         {
-            // call this for auto build system
             makeConnectionStrings();
-
-            // call this for local database in your environment, specifying m_dbName, m_SQLServerInstanceName.
-            // makeConnectionStringsLocal();
         }
 
         [TestInitialize]
@@ -127,7 +123,7 @@ namespace Bom.Database.Tests
             // 9 SPRecalculateCostZeroPartInFirstLevel()
             // Tests the fetch loop on the subparts of the next sublevel,
             // specifically the case when one of the sublevel parts returns 0 cost
-            res = RunRecalculateCost(511); // 1000 + 10 + 0 = 1012
+            res = RunRecalculateCost(511); // 1000 + 12 + 0 = 1012
             Assert.AreEqual(1012, res);
         }
 
@@ -163,7 +159,7 @@ namespace Bom.Database.Tests
         private void CreateUnitTestDB()
         {
             // create a database similar to the SQL Server Model database in the default location,
-            // using connection to global master db
+            // using default connection to master db
             ExecuteSql("CREATE DATABASE " + m_dbName, m_connectionStringGlobal);
         }
 
@@ -250,23 +246,18 @@ namespace Bom.Database.Tests
             return result;
         }
 
-        // create connection strings to run in Continuous Integration environment
         private void makeConnectionStrings()
         {
-            m_connectionStringGlobal = @"Server=(local)\SQL2014;Database=master;User ID=sa;Password=Password12!";
-            m_connectionString = @"Server=(local)\SQL2014;Database=" + m_dbName + ";User ID=sa;Password=Password12!";
-        }
-
-        // create connection strings to run on local database
-        private void makeConnectionStringsLocal()
-        {
-            string SQLServerName = @"localhost\" + m_SQLServerInstanceName;
-            m_connectionStringGlobal = "Data Source=" + SQLServerName + ";Database=master;Trusted_Connection=Yes;";
-            m_connectionString = "Data Source=" + SQLServerName + ";Database=" + m_dbName + ";Trusted_Connection=Yes;";
+            // for SQLServer 2014, need to create the db first with cmd>sqllocaldb create v12.0  
+            // https://connect.microsoft.com/SQLServer/feedback/details/845278/sql-server-2014-express-localdb-does-not-create-automatic-instance-v12-0
+            // 
+            // to debug, disable dropping of the unit test database and connect in MS Management Studio to (localdb)\V12.0.
+            string dataSource = @"Data Source=(localdb)\v12.0;";
+            m_connectionStringGlobal = dataSource + "Integrated Security=true;";
+            m_connectionString = dataSource + "Database=" + m_dbName + ";Integrated Security=true;";
         }
 
         // Data
-        private const string m_SQLServerInstanceName = ""; // put your local sql instance name here
         private const string m_dbName = "BOM_unit_test";
         private string m_connectionStringGlobal;
         private string m_connectionString;
