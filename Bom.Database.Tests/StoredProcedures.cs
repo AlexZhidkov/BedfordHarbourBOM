@@ -193,7 +193,7 @@ namespace Bom.Database.Tests
             // https://connect.microsoft.com/SQLServer/feedback/details/845278/sql-server-2014-express-localdb-does-not-create-automatic-instance-v12-0
             // 
             // to debug, disable dropping of the unit test database and connect in MS Management Studio to (localdb)\V12.0.
-            string dataSource = @"Data Source=(localdb)\v12.0;";
+            string dataSource = @"Data Source=(LocalDB)\mssqllocaldb;";
             m_connectionStringGlobal = dataSource + "Integrated Security=true;";
             m_connectionString = dataSource + "Database=" + m_dbName + ";Integrated Security=true;";
         }
