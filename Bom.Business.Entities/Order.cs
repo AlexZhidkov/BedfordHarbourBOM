@@ -22,7 +22,7 @@ namespace Bom.Business.Entities
         [DataMember]
         public DateTime? DeliveryDate { get; set; }
         [DataMember]
-        public ICollection<OrderDetail> Items { get; set; }
+        public IEnumerable<OrderDetail> Items { get; set; }
 
         public int EntityId
         {

@@ -35,9 +35,9 @@ namespace Bom.Desktop.ViewModels
             LoadSuppliers();
 
             EditOrderDetailCommand = new DelegateCommand<OrderDetail>(OnEditOrderDetailCommand);
-            //ToDo DeleteOrderDetailCommand = new DelegateCommand<OrderDetail>(OnDeleteOrderDetailCommand);
             AddOrderDetailCommand = new DelegateCommand<object>(OnAddOrderDetailCommand);
-            
+            DeleteOrderDetailCommand = new DelegateCommand<int>(OnDeleteOrderDetailCommand);
+
             SaveCommand = new DelegateCommand<object>(OnSaveCommandExecute, OnSaveCommandCanExecute);
             CancelCommand = new DelegateCommand<object>(OnCancelCommandExecute);
         }
@@ -47,7 +47,7 @@ namespace Bom.Desktop.ViewModels
         private List<Supplier> _suppliers;
 
         public DelegateCommand<OrderDetail> EditOrderDetailCommand { get; private set; }
-        public DelegateCommand<OrderDetail> DeleteOrderDetailCommand { get; private set; }
+        public DelegateCommand<int> DeleteOrderDetailCommand { get; private set; }
         public DelegateCommand<object> AddOrderDetailCommand { get; private set; }
         public DelegateCommand<object> SaveCommand { get; private set; }
         public DelegateCommand<object> CancelCommand { get; private set; }
@@ -118,6 +118,11 @@ namespace Bom.Desktop.ViewModels
             }
         }
 
+        void OnDeleteOrderDetailCommand(int orderDetailId)
+        {
+            _order.Items = _order.Items.Where(i => i.Id != orderDetailId);
+        }
+
         void OnEditOrderDetailCommand(OrderDetail orderItem)
         {
             if (orderItem != null)
@@ -156,8 +161,11 @@ namespace Bom.Desktop.ViewModels
             }
             else
             {
-                _order.Items = _order.Items.Concat(new[]
-                {
+                // TODO: check that we have saved new order recently
+                if (_order.Id != 0)
+                { 
+                    _order.Items = _order.Items.Concat(new[]
+                    {
                     new OrderDetail
                     {
                         Id = e.OrderDetail.Id,
@@ -168,7 +176,8 @@ namespace Bom.Desktop.ViewModels
                         PartDescription = e.OrderDetail.PartDescription,
                         Notes = e.OrderDetail.Notes
                     }
-                });
+                    });
+                }
             }
             CurrentOrderDetailViewModel = null;
         }

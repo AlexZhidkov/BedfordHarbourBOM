@@ -52,7 +52,7 @@ namespace Bom.Desktop.Views
 
         void OnConfirmDelete(object sender, CancelEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this supplier?", "Confirm Delete",
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this order?", "Confirm Delete",
                                                       MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.No)
                 e.Cancel = true;

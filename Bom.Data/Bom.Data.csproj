@@ -101,6 +101,10 @@
     <Compile Include="Migrations\201507270858506_UpdateOrderDetails.Designer.cs">
       <DependentUpon>201507270858506_UpdateOrderDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508210611073_OrderDetails.cs" />
+    <Compile Include="Migrations\201508210611073_OrderDetails.Designer.cs">
+      <DependentUpon>201508210611073_OrderDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -176,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507270858506_UpdateOrderDetails.resx">
       <DependentUpon>201507270858506_UpdateOrderDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508210611073_OrderDetails.resx">
+      <DependentUpon>201508210611073_OrderDetails.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

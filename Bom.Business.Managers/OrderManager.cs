@@ -45,6 +45,7 @@ namespace Bom.Business.Managers
             {
                 IOrderRepository orderRepository = _dataRepositoryFactory.GetDataRepository<IOrderRepository>();
                 var order = orderRepository.Get(id);
+                order.Items = orderRepository.GetItems(id);
                 return order;
             });
         }
@@ -69,8 +70,12 @@ namespace Bom.Business.Managers
 
         public void DeleteOrder(int orderId)
         {
-            //ToDo implement
-            throw new NotImplementedException();
+            ExecuteFaultHandledOperation(() =>
+            {
+                IOrderRepository orderRepository = _dataRepositoryFactory.GetDataRepository<IOrderRepository>();
+                orderRepository.Remove(orderId);
+                return;
+            });
         }
 
     }

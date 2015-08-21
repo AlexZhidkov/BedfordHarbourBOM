@@ -4,21 +4,22 @@
         xmlns:controls="clr-namespace:Core.Common.UI.Controls;assembly=Core.Common.UI"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:common="clr-namespace:Bom.Common;assembly=Bom.Common"
+        xmlns:core="clr-namespace:Core.Common.UI.Core;assembly=Core.Common.UI"
         xmlns:support="clr-namespace:Bom.Desktop.Support"
-        Title="Edit Order" Height="850" Width="600" DataContextChanged="Window_DataContextChanged">
+        Title="Edit Order" Height="575" Width="600" DataContextChanged="Window_DataContextChanged">
     <Window.Resources>
         <support:ViewModelNullToVisibilityConverter x:Key="viewModelNullToVisibilityConverter" />
     </Window.Resources>
-    <Grid>
+    <Grid Margin="0,0,0,14">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <controls:ValidationHeader Grid.Row="0" DataContext="{Binding}" />
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0,0,10,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -26,7 +27,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="130" />
+                <RowDefinition Height="70" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
@@ -69,7 +70,7 @@
             <TextBox Grid.Row="6" Grid.Column="1" Margin="3" Text="{Binding Order.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch"
                 AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
         </Grid>
-        <ListView Grid.Row="2" ItemsSource="{Binding Order.Items}" Height="400">
+        <ListView Grid.Row="2" ItemsSource="{Binding Order.Items}" Margin="0,1,0,1" x:Name="ListView1">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -79,10 +80,14 @@
                             <ColumnDefinition Width="50" SharedSizeGroup="price" />
                             <ColumnDefinition Width="50" SharedSizeGroup="count" />
                             <ColumnDefinition Width="50" SharedSizeGroup="total" />
-                            <ColumnDefinition Width="300" SharedSizeGroup="notes" />
+                            <ColumnDefinition Width="*" SharedSizeGroup="notes" />
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Column="0" Content="X" Margin="5" Command="{Binding DeleteOrderDetailCommand}" />
+                        <TextBlock Grid.Column="0"  Margin="3">
+                                <Hyperlink Command="{Binding DataContext.DeleteOrderDetailCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Id}">
+                                    <TextBlock Text="delete"/>
+                                </Hyperlink>
+                            </TextBlock>
                         <TextBlock Grid.Column="1" Text="{Binding PartDescription}" HorizontalAlignment="Left" Margin="3"/>
                         <TextBlock Grid.Column="2" Text="{Binding Price, StringFormat=c}" HorizontalAlignment="Right" Margin="3"/>
                         <TextBlock Grid.Column="3" Text="{Binding Count}" HorizontalAlignment="Right" Margin="3"/>
@@ -92,16 +97,25 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Add New" Command="{Binding AddOrderDetailCommand}" />
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Content="Add New" Margin="5" Command="{Binding AddOrderDetailCommand}" />
         </StackPanel>
-        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <Button Content="Save" Margin="5" Command="{Binding SaveCommand}" />
             <Button Content="Cancel" Margin="5" Command="{Binding CancelCommand}" />
         </StackPanel>
         <Border Grid.Row="2" CornerRadius="4" Margin="10" BorderBrush="SteelBlue" BorderThickness="1" Background="BlanchedAlmond"
                 Visibility="{Binding CurrentOrderDetailViewModel, Converter={StaticResource viewModelNullToVisibilityConverter}}">
-            <ContentControl Content="{Binding CurrentOrderDetailViewModel}" />
+            <ContentControl Content="{Binding CurrentOrderDetailViewModel}" RenderTransformOrigin="0.5,0.5" >
+                <ContentControl.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="0.602"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="1.99"/>
+                    </TransformGroup>
+                </ContentControl.RenderTransform>
+            </ContentControl>
         </Border>
     </Grid>
 </Window>

@@ -27,10 +27,32 @@ namespace Bom.Data
             return newOrder;
         }
 
+        private static void UpdateOrderDetailOfOrder(BomContext entityContext, Order entity)
+        {
+            entityContext.OrderDetails.RemoveRange(entityContext.OrderDetails.Where(s => s.OrderId == entity.Id));
+
+            if (entity.Items == null) return;
+
+            foreach (var component in entity.Items)
+            {
+                entityContext.OrderDetails.Add(new OrderDetail
+                {
+                    OrderId = entity.Id,
+                    Count = component.Count,
+                    Price = component.Price,
+                    Notes = component.Notes,
+                    PartId = component.PartId,
+                    PartDescription = component.PartDescription
+                });
+            }
+        }
+
         protected override Order UpdateEntity(BomContext entityContext, Order entity)
         {
+            if (entity.Items != null) UpdateOrderDetailOfOrder(entityContext, entity);
             //Prevent Entity Framework from creating new Supplier. ToDo confirm.
             entity.Supplier = null;
+            //entity.Items = null;
             //entityContext.Entry(entity).State = EntityState.Modified; 
             //entityContext.Entry(entity.Supplier).State = EntityState.Detached;
             return (entityContext.Orders.Where(e => e.Id == entity.Id)).FirstOrDefault();
@@ -41,13 +63,23 @@ namespace Bom.Data
             return entityContext.Orders.Select(e => e).Include(o => o.Supplier);
         }
 
+        public IEnumerable<OrderDetail> GetItems(int orderId)
+        {
+            IEnumerable<OrderDetail> Items;
+            using (BomContext entityContext = new BomContext())
+            {
+                Items = entityContext.OrderDetails.Where(e => e.OrderId == orderId).ToFullyLoaded();
+                foreach (var item in Items)
+                {
+                    item.PartDescription = entityContext.Parts.Single(p => p.Id == item.PartId).Description;
+                }
+            }
+            return Items;
+        }
+
         protected override Order GetEntity(BomContext entityContext, int id)
         {
-            var order = (entityContext.Orders.Where(e => e.Id == id).Include(o => o.Supplier).Include(o => o.Items)).Single();
-            foreach (var item in order.Items)
-            {
-                item.PartDescription = entityContext.Parts.Single(p => p.Id == item.PartId).Description;
-            }
+            var order = (entityContext.Orders.Where(e => e.Id == id).Include(o => o.Supplier)).Single();
             return order;
         }
 

@@ -137,18 +137,29 @@ namespace Bom.Desktop.ViewModels
 
         void OnDeleteOrderCommand(Order order)
         {
-            CancelEventArgs args = new CancelEventArgs();
-            if (ConfirmDelete != null)
-                ConfirmDelete(this, args);
-
-            if (!args.Cancel)
+            // get order items count
+            /*int? itemsCount = 0;
+            WithClient(_serviceFactory.CreateClient<IOrderService>(), orderClient =>
             {
-                WithClient(_serviceFactory.CreateClient<IOrderService>(), suplierClient =>
+                itemsCount = orderClient.GetOrder(order.Id).Items.Count();
+            });*/
+
+            // check that order doesn't have any items
+            //if (itemsCount == 0)
+            //{
+                CancelEventArgs args = new CancelEventArgs();
+                if (ConfirmDelete != null)
+                    ConfirmDelete(this, args);
+
+                if (!args.Cancel)
                 {
-                    suplierClient.DeleteOrder(order.Id);
-                    _orders.Remove(order);
-                });
-            }
+                    WithClient(_serviceFactory.CreateClient<IOrderService>(), orderClient =>
+                    {
+                        orderClient.DeleteOrder(order.Id);
+                        _orders.Remove(order);
+                    });
+                }
+            //}
         }
     }
 }

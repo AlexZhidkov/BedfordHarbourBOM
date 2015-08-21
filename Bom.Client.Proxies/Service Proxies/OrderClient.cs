@@ -29,6 +29,11 @@ namespace Bom.Client.Proxies
             Channel.DeleteOrder(orderId);
         }
 
+        public void DeleteOrderDetail(int orderDetailId)
+        {
+            Channel.DeleteOrderDetail(orderDetailId);
+        }
+
         public void RecalculateCostsForAssembly(int orderId)
         {
             Channel.RecalculateCostsForAssembly(orderId);

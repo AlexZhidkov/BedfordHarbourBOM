@@ -7,5 +7,6 @@ namespace Bom.Data.Contracts
 {
     public interface IOrderRepository : IDataRepository<Order>
     {
+        IEnumerable<OrderDetail> GetItems(int orderId);
     }
 }

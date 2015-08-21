@@ -27,6 +27,10 @@ namespace Bom.Client.Contracts
         void DeleteOrder(int orderId);
 
         [OperationContract]
+        [TransactionFlow(TransactionFlowOption.Allowed)]
+        void DeleteOrderDetail(int orderDetailId);
+
+        [OperationContract]
         void RecalculateCostsForAssembly(int orderId);
 
         [OperationContract]

@@ -60,6 +60,7 @@ namespace Bom.Data
             modelBuilder.Entity<Subassembly>().Property(o => o.Demand).HasPrecision(25, 13);
 
             modelBuilder.Entity<Order>().HasKey<int>(e => e.Id).Ignore(e => e.EntityId);
+            modelBuilder.Entity<Order>().Ignore(e => e.Items);
 
             //ToDo establish relationship by OrderID
             modelBuilder.Entity<OrderDetail>().HasKey<int>(e => e.Id).Ignore(e => e.EntityId);
