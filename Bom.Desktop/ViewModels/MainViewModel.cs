@@ -15,6 +15,8 @@ namespace Bom.Desktop.ViewModels
         [Import]
         public DashboardViewModel DashboardViewModel { get; private set; }
         [Import]
+        public ProductTreeViewModel ProductTreeViewModel { get; private set; }
+        [Import]
         public StockViewModel StockViewModel { get; private set; }
         [Import]
         public PartsViewModel PartsViewModel { get; private set; }

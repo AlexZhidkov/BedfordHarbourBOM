@@ -76,6 +76,7 @@
       <DependentUpon>EditOrderWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Support\PartEventArgs.cs" />
+    <Compile Include="Support\ProductTreeEventArgs.cs" />
     <Compile Include="Support\StockEventArgs.cs" />
     <Compile Include="Support\ComponentEventArgs.cs" />
     <Compile Include="Support\OrderEventArgs.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="ViewModels\EditOrderDetailViewModel.cs" />
     <Compile Include="ViewModels\EditSupplierViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ProductTreeViewModel.cs" />
     <Compile Include="ViewModels\StockViewModel.cs" />
     <Compile Include="ViewModels\PartsViewModel.cs" />
     <Compile Include="ViewModels\OrdersViewModel.cs" />
@@ -115,6 +117,9 @@
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductTreeView.xaml.cs">
+      <DependentUpon>ProductTreeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StockView.xaml.cs">
       <DependentUpon>StockView.xaml</DependentUpon>
@@ -171,6 +176,10 @@
     <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductTreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\StockView.xaml">
       <SubType>Designer</SubType>

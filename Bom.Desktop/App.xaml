@@ -9,6 +9,9 @@
         <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
             <v:DashboardView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ProductTreeViewModel}">
+            <v:ProductTreeView />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type vm:StockViewModel}">
             <v:StockView />
         </DataTemplate>
