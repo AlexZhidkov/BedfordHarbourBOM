@@ -51,7 +51,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="StoredProcedures.cs" />
+    <Compile Include="IStoredProcedureTest.cs" />
+    <Compile Include="RecalculateCostsForAssemblyHelper.cs" />
+    <Compile Include="RecalculateRecurseHelper.cs" />
+    <Compile Include="StoredProcedureHelperBase.cs" />
+    <Compile Include="StoredProceduresTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Choose>
