@@ -10,16 +10,25 @@
     <UserControl.Resources>
         <conv:ViewModelNullToVisibilityConverter x:Key="viewModelNullToVisibilityConverter" />
     </UserControl.Resources>
-    <Grid>
-        <TreeView>
-            <TreeViewItem Header="Level 1" IsExpanded="True">
-                <TreeViewItem Header="Level 2.1" />
-                <TreeViewItem Header="Level 2.2" IsExpanded="True">
-                    <TreeViewItem Header="Level 3.1" />
-                    <TreeViewItem Header="Level 3.2" />
-                </TreeViewItem>
-                <TreeViewItem Header="Level 2.3" />
-            </TreeViewItem>
-        </TreeView>
-    </Grid>
+    <TreeView ItemsSource="{Binding FirstGeneration}">
+        <TreeView.ItemContainerStyle>
+            <!--     This Style binds a TreeViewItem to a PersonViewModel.     -->
+            <Style TargetType="{x:Type TreeViewItem}">
+                <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="FontWeight" Value="Bold" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </TreeView.ItemContainerStyle>
+
+        <TreeView.ItemTemplate>
+            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                <TextBlock Text="{Binding Name}" />
+            </HierarchicalDataTemplate>
+        </TreeView.ItemTemplate>
+    </TreeView>
 </core:UserControlViewBase>
