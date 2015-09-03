@@ -15,13 +15,6 @@ using Bom.Data.Contracts.DTOs;
 
 namespace Bom.Desktop.ViewModels
 {
-    public class Person
-    {
-        public IList<Person> Children { get; set; }
-
-        public string Name { get; set; }
-    }
-
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ProductTreeViewModel : ViewModelBase
@@ -31,54 +24,14 @@ namespace Bom.Desktop.ViewModels
         {
             _serviceFactory = serviceFactory;
 
-            var rootPerson = new Person
-            {
-                Name = "Root Person",
-                Children = new List<Person>
-                {
-                    new Person {Name = "Child1",
-                        Children = new List<Person>()
-                    },
-                    new Person {Name = "Child2",
-                        Children = new List<Person>()
-                    }
-                }
-
-            };
-
-            _rootPerson = new PersonViewModel(rootPerson);
-
-            _firstGeneration = new ReadOnlyCollection<PersonViewModel>(
-                new PersonViewModel[]
-                {
-                    _rootPerson
-                });
-
-
             //EditProductTreeCommand = new DelegateCommand<Part>(OnEditProductTreeCommand);
             //EditPartCommand = new DelegateCommand<int>(OnEditPartCommand);
             //DeleteProductTreeCommand = new DelegateCommand<int>(OnDeleteProductTreeCommand);
             //AddProductTreeCommand = new DelegateCommand<object>(OnAddProductTreeCommand);
 
         }
-        /*
-                public ProductTreeViewModel(Person rootPerson)
-                {
-                    _rootPerson = new PersonViewModel(rootPerson);
 
-                    _firstGeneration = new ReadOnlyCollection<PersonViewModel>(
-                        new PersonViewModel[]
-                        {
-                            _rootPerson
-                        });
-
-                    //_searchCommand = new SearchFamilyTreeCommand(this);
-                }
-        */
         readonly IServiceFactory _serviceFactory;
-
-        PersonViewModel _rootPerson;
-        ReadOnlyCollection<PersonViewModel> _firstGeneration;
 
         /*
                         EditStockViewModel _currentStockViewModel;
@@ -91,11 +44,7 @@ namespace Bom.Desktop.ViewModels
         */
         public override string ViewTitle
         {
-            get { return "ProductTree"; }
-        }
-        public ReadOnlyCollection<PersonViewModel> FirstGeneration
-        {
-            get { return _firstGeneration; }
+            get { return "Product Tree"; }
         }
 
         /*

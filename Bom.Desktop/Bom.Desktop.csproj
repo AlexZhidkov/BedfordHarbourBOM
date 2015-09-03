@@ -98,7 +98,6 @@
     <Compile Include="ViewModels\EditOrderDetailViewModel.cs" />
     <Compile Include="ViewModels\EditSupplierViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\PersonViewModel.cs" />
     <Compile Include="ViewModels\ProductTreeViewModel.cs" />
     <Compile Include="ViewModels\StockViewModel.cs" />
     <Compile Include="ViewModels\PartsViewModel.cs" />
