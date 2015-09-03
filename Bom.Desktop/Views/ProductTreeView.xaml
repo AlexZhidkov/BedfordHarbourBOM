@@ -38,8 +38,8 @@
             <TextBlock Grid.Column="6" Text="Demand" />
             <TextBlock Grid.Column="7" Text="Notes" />
         </Grid>
-        <TreeView Grid.Row="1" ItemsSource="{Binding ProductTree}" ScrollViewer.VerticalScrollBarVisibility="Visible"
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+        <TreeView Grid.Row="1" ItemsSource="{Binding ProductTree}" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                ScrollViewer.HorizontalScrollBarVisibility="Auto" >
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Path=ChildNodes}">
                     <StackPanel Orientation="Horizontal">
