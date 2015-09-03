@@ -24,8 +24,7 @@ namespace Bom.Desktop.ViewModels
         {
             _serviceFactory = serviceFactory;
 
-            //EditProductTreeCommand = new DelegateCommand<Part>(OnEditProductTreeCommand);
-            //EditPartCommand = new DelegateCommand<int>(OnEditPartCommand);
+            EditPartCommand = new DelegateCommand<int>(OnEditPartCommand);
             //DeleteProductTreeCommand = new DelegateCommand<int>(OnDeleteProductTreeCommand);
             //AddProductTreeCommand = new DelegateCommand<object>(OnAddProductTreeCommand);
 
@@ -33,12 +32,12 @@ namespace Bom.Desktop.ViewModels
 
         readonly IServiceFactory _serviceFactory;
 
+        EditPartViewModel _currentPartViewModel;
+        public DelegateCommand<int> EditPartCommand { get; private set; }
         /*
                         EditStockViewModel _currentStockViewModel;
-                        EditPartViewModel _currentPartViewModel;
 
                         public DelegateCommand<Part> EditProductTreeCommand { get; private set; }
-                        public DelegateCommand<int> EditPartCommand { get; private set; }
                         public DelegateCommand<int> DeleteProductTreeCommand { get; private set; }
                         public DelegateCommand<object> AddProductTreeCommand { get; private set; }
         */
@@ -47,11 +46,11 @@ namespace Bom.Desktop.ViewModels
             get { return "Product Tree"; }
         }
 
+        public event EventHandler<EditPartViewModel> OpenEditPartWindow;
         /*
                 public event CancelEventHandler ConfirmDelete;
                 public event EventHandler<ErrorMessageEventArgs> ErrorOccured;
                 public event EventHandler<EditStockViewModel> OpenEditProductTreeWindow;
-                public event EventHandler<EditPartViewModel> OpenEditPartWindow;
 
                 public EditStockViewModel CurrentStockViewModel
                 {
@@ -65,159 +64,147 @@ namespace Bom.Desktop.ViewModels
                         }
                     }
                 }
-
-                public EditPartViewModel CurrentPartViewModel
-                {
-                    get { return _currentPartViewModel; }
-                    set
-                    {
-                        if (_currentPartViewModel != value)
-                        {
-                            _currentPartViewModel = value;
-                            OnPropertyChanged(() => CurrentPartViewModel, false);
-                        }
-                    }
-                }
 */
+
+        public EditPartViewModel CurrentPartViewModel
+        {
+            get { return _currentPartViewModel; }
+            set
+            {
+                if (_currentPartViewModel != value)
+                {
+                    _currentPartViewModel = value;
+                    OnPropertyChanged(() => CurrentPartViewModel, false);
+                }
+            }
+        }
 
         ObservableCollection<HierarchyNode<ProductTree>> _productTree;
 
-                public ObservableCollection<HierarchyNode<ProductTree>> ProductTree
+        public ObservableCollection<HierarchyNode<ProductTree>> ProductTree
+        {
+            get { return _productTree; }
+            set
+            {
+                if (_productTree != value)
                 {
-                    get { return _productTree; }
-                    set
-                    {
-                        if (_productTree != value)
+                    _productTree = value;
+                    OnPropertyChanged(() => ProductTree, false);
+                }
+            }
+        }
+        protected override void OnViewLoaded()
+        {
+            _productTree = new ObservableCollection<HierarchyNode<ProductTree>>();
+
+            WithClient(_serviceFactory.CreateClient<IPartService>(), partClient =>
+            {
+                _productTree.Add(partClient.GetProductTree());
+            });
+        }
+        void OnEditPartCommand(int partId)
+        {
+            if (partId > 0)
+            {
+                CurrentPartViewModel = new EditPartViewModel(_serviceFactory, partId);
+                CurrentPartViewModel.PartUpdated += CurrentPartViewModel_PartUpdated;
+                CurrentPartViewModel.CancelEditPart += CurrentPartViewModel_CancelEvent;
+            }
+
+            if (OpenEditPartWindow != null) OpenEditPartWindow(this, CurrentPartViewModel);
+        }
+
+        /*
+                        void OnAddProductTreeCommand(object arg)
                         {
-                            _productTree = value;
-                            OnPropertyChanged(() => ProductTree, false);
+                            CurrentPartViewModel = new EditPartViewModel(_serviceFactory, new Part());
+                            CurrentPartViewModel.PartUpdated += CurrentPartViewModel_PartUpdated;
+                            CurrentPartViewModel.CancelEditPart += CurrentPartViewModel_CancelEvent;
+
+                            if (OpenEditPartWindow != null) OpenEditPartWindow(this, CurrentPartViewModel);
                         }
-                    }
-                }
-                protected override void OnViewLoaded()
-                {
-                    _productTree = new ObservableCollection<HierarchyNode<ProductTree>>();
 
-                    WithClient(_serviceFactory.CreateClient<IPartService>(), partClient =>
-                    {
-                        _productTree.Add(partClient.GetProductTree());
-                    });
-                }
-/*
-                void OnEditProductTreeCommand(Part stockItem)
-                {
-                    if (stockItem.Id > 0)
-                    {
-                        CurrentStockViewModel = new EditStockViewModel(_serviceFactory, stockItem);
-                        CurrentStockViewModel.StockUpdated += CurrentStockViewModel_StockUpdated;
-                        CurrentStockViewModel.CancelEditStock += CurrentStockViewModel_CancelEvent;
-                    }
-
-                    if (OpenEditProductTreeWindow != null) OpenEditProductTreeWindow(this, CurrentStockViewModel);
-                }
-
-                void OnEditPartCommand(int partId)
-                {
-                    if (partId > 0)
-                    {
-                        CurrentPartViewModel = new EditPartViewModel(_serviceFactory, partId);
-                        CurrentPartViewModel.PartUpdated += CurrentPartViewModel_PartUpdated;
-                        CurrentPartViewModel.CancelEditPart += CurrentPartViewModel_CancelEvent;
-                    }
-
-                    if (OpenEditPartWindow != null) OpenEditPartWindow(this, CurrentPartViewModel);
-                }
-
-                void OnAddProductTreeCommand(object arg)
-                {
-                    CurrentPartViewModel = new EditPartViewModel(_serviceFactory, new Part());
-                    CurrentPartViewModel.PartUpdated += CurrentPartViewModel_PartUpdated;
-                    CurrentPartViewModel.CancelEditPart += CurrentPartViewModel_CancelEvent;
-
-                    if (OpenEditPartWindow != null) OpenEditPartWindow(this, CurrentPartViewModel);
-                }
-
-                void CurrentStockViewModel_StockUpdated(object sender, StockEventArgs e)
-                {
-                    if (!e.IsNew)
-                    {
-                        Part stock = _stocks.Single(item => item.Id == e.Stock.Id);
-                        if (stock != null)
+                        void CurrentStockViewModel_StockUpdated(object sender, StockEventArgs e)
                         {
-                            stock.Type = e.Stock.Type;
-                            stock.Number = e.Stock.Number;
-                            stock.Description = e.Stock.Description;
-                            stock.IsOwnMake = e.Stock.IsOwnMake;
-                            stock.Length = e.Stock.Length;
-                            stock.OwnCost = e.Stock.OwnCost;
-                            stock.ComponentsCost = e.Stock.ComponentsCost;
-                            stock.Count = e.Stock.Count;
-                            stock.CountDate = e.Stock.CountDate;
-                            stock.OnOrder = e.Stock.OnOrder;
-                            stock.Notes = e.Stock.Notes;
+                            if (!e.IsNew)
+                            {
+                                Part stock = _stocks.Single(item => item.Id == e.Stock.Id);
+                                if (stock != null)
+                                {
+                                    stock.Type = e.Stock.Type;
+                                    stock.Number = e.Stock.Number;
+                                    stock.Description = e.Stock.Description;
+                                    stock.IsOwnMake = e.Stock.IsOwnMake;
+                                    stock.Length = e.Stock.Length;
+                                    stock.OwnCost = e.Stock.OwnCost;
+                                    stock.ComponentsCost = e.Stock.ComponentsCost;
+                                    stock.Count = e.Stock.Count;
+                                    stock.CountDate = e.Stock.CountDate;
+                                    stock.OnOrder = e.Stock.OnOrder;
+                                    stock.Notes = e.Stock.Notes;
+                                }
+                            }
+                            else
+                            {
+                                _stocks.Add(new Part(e.Stock));
+                            }
+
+                            CurrentStockViewModel = null;
                         }
-                    }
-                    else
-                    {
-                        _stocks.Add(new Part(e.Stock));
-                    }
 
-                    CurrentStockViewModel = null;
-                }
-
-                void CurrentStockViewModel_CancelEvent(object sender, EventArgs e)
-                {
-                    CurrentStockViewModel = null;
-                }
-
-                void CurrentPartViewModel_PartUpdated(object sender, PartEventArgs e)
-                {
-                    if (!e.IsNew)
-                    {
-                        Part stock = _stocks.Single(item => item.Id == e.Part.Id);
-                        if (stock != null)
+                        void CurrentStockViewModel_CancelEvent(object sender, EventArgs e)
                         {
-                            stock.Type = e.Part.Type;
-                            stock.Number = e.Part.Number;
-                            stock.Description = e.Part.Description;
-                            stock.IsOwnMake = e.Part.IsOwnMake;
-                            stock.Length = e.Part.Length;
-                            stock.OwnCost = e.Part.OwnCost;
-                            stock.ComponentsCost = e.Part.ComponentsCost;
-                            stock.Count = e.Part.Count;
-                            stock.CountDate = e.Part.CountDate;
-                            stock.OnOrder = e.Part.OnOrder;
-                            stock.Notes = e.Part.Notes;
+                            CurrentStockViewModel = null;
                         }
-                    }
-                    else
-                    {
-                        _stocks.Add(new Part(e.Part));
-                    }
+*/
+        void CurrentPartViewModel_PartUpdated(object sender, PartEventArgs e)
+        {
+            if (!e.IsNew)
+            {
+                //Part stock = _stocks.Single(item => item.Id == e.Part.Id);
+                //if (stock != null)
+                //{
+                //    stock.Type = e.Part.Type;
+                //    stock.Number = e.Part.Number;
+                //    stock.Description = e.Part.Description;
+                //    stock.IsOwnMake = e.Part.IsOwnMake;
+                //    stock.Length = e.Part.Length;
+                //    stock.OwnCost = e.Part.OwnCost;
+                //    stock.ComponentsCost = e.Part.ComponentsCost;
+                //    stock.Count = e.Part.Count;
+                //    stock.CountDate = e.Part.CountDate;
+                //    stock.OnOrder = e.Part.OnOrder;
+                //    stock.Notes = e.Part.Notes;
+                //}
+            }
+            else
+            {
+                //_stocks.Add(new Part(e.Part));
+            }
 
-                    CurrentPartViewModel = null;
-                }
+            CurrentPartViewModel = null;
+        }
 
-                void CurrentPartViewModel_CancelEvent(object sender, EventArgs e)
+        void CurrentPartViewModel_CancelEvent(object sender, EventArgs e)
+        {
+            CurrentPartViewModel = null;
+        }
+        /*
+        void OnDeleteProductTreeCommand(int stockId)
+        {
+            CancelEventArgs args = new CancelEventArgs();
+            if (ConfirmDelete != null)
+                ConfirmDelete(this, args);
+
+            if (!args.Cancel)
+            {
+                WithClient(_serviceFactory.CreateClient<IPartService>(), partClient =>
                 {
-                    CurrentPartViewModel = null;
-                }
-
-                void OnDeleteProductTreeCommand(int stockId)
-                {
-                    CancelEventArgs args = new CancelEventArgs();
-                    if (ConfirmDelete != null)
-                        ConfirmDelete(this, args);
-
-                    if (!args.Cancel)
-                    {
-                        WithClient(_serviceFactory.CreateClient<IPartService>(), partClient =>
-                        {
-                            partClient.DeletePart(stockId);
-                            _stocks.Remove(_stocks.Single(i => i.Id == stockId));
-                        });
-                    }
-                }
-        */
+                    partClient.DeletePart(stockId);
+                    _stocks.Remove(_stocks.Single(i => i.Id == stockId));
+                });
+            }
+        }
+*/
     }
 }

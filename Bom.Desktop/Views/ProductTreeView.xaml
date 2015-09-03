@@ -8,9 +8,6 @@
              mc:Ignorable="d" >
     <UserControl.Resources>
         <conv:ViewModelNullToVisibilityConverter x:Key="viewModelNullToVisibilityConverter" />
-        <Style TargetType="TreeViewItem">
-            <Setter Property="IsExpanded" Value="True" />
-        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -40,10 +37,20 @@
         </Grid>
         <TreeView Grid.Row="1" ItemsSource="{Binding ProductTree}" ScrollViewer.VerticalScrollBarVisibility="Auto"
                 ScrollViewer.HorizontalScrollBarVisibility="Auto" >
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="True" />
+                </Style>
+            </TreeView.ItemContainerStyle>
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Path=ChildNodes}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Path=Entity.PartDescription}"></TextBlock>
+                        <TextBlock>
+                        <Hyperlink Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" 
+                                   CommandParameter="{Binding Entity.Id}">
+                            <TextBlock Text="{Binding Entity.PartDescription}"/>
+                        </Hyperlink>
+                  </TextBlock>
                         <!--<TextBlock Text=" "></TextBlock>
                             <TextBlock Text="{Binding Path=Entity.LastName}"></TextBlock>-->
                     </StackPanel>
