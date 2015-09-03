@@ -78,6 +78,7 @@
     <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Extensions\CoreExtensions.cs" />
     <Compile Include="Extensions\DataExtensions.cs" />
+    <Compile Include="Extensions\LinqExtensions.cs" />
     <Compile Include="Extensions\MefExtensions.cs" />
     <Compile Include="Misc\ErrorMessageEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

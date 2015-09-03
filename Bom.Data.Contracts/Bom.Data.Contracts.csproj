@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\ProductTree.cs" />
     <Compile Include="DTOs\SubassemblyInfo.cs" />
     <Compile Include="DTOs\StockItemsInfo.cs" />
     <Compile Include="IOrderRepository.cs" />
@@ -57,10 +58,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bom.Business.Contracts\Bom.Business.Contracts.csproj">
-      <Project>{49282531-c8e2-4e44-a33c-c576e6ebecb4}</Project>
-      <Name>Bom.Business.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Bom.Business.Entities\Bom.Business.Entities.csproj">
       <Project>{9D062E6F-BB5B-476D-925C-2BE58549DB01}</Project>
       <Name>Bom.Business.Entities</Name>
@@ -68,6 +65,10 @@
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
       <Project>{bc9ea015-d89a-409d-a3cc-9909ddcb786e}</Project>
       <Name>Core.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
+      <Project>{ea04e951-7123-4b9a-a6c0-e454eb743fcd}</Project>
+      <Name>Core.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

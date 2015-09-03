@@ -84,6 +84,10 @@
       <Project>{993F9605-28D3-437C-9CB3-1CEEC3A4A453}</Project>
       <Name>Bom.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bom.Data.Contracts\Bom.Data.Contracts.csproj">
+      <Project>{85c1ebb9-cdf5-4110-8593-2e2bb627daf0}</Project>
+      <Name>Bom.Data.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bom.Desktop\Bom.Desktop.csproj">
       <Project>{80CB0A5A-6C32-40AF-9973-21BB21BEA534}</Project>
       <Name>Bom.Desktop</Name>

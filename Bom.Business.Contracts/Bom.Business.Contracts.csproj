@@ -60,6 +60,10 @@
       <Project>{993F9605-28D3-437C-9CB3-1CEEC3A4A453}</Project>
       <Name>Bom.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bom.Data.Contracts\Bom.Data.Contracts.csproj">
+      <Project>{85c1ebb9-cdf5-4110-8593-2e2bb627daf0}</Project>
+      <Name>Bom.Data.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
       <Project>{BC9EA015-D89A-409D-A3CC-9909DDCB786E}</Project>
       <Name>Core.Common.Contracts</Name>

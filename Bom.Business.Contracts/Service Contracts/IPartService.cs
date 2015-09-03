@@ -1,5 +1,7 @@
 ﻿using System.ServiceModel;
 using Bom.Business.Entities;
+using Core.Common.Extensions;
+using Bom.Data.Contracts.DTOs;
 
 namespace Bom.Business.Contracts
 {
@@ -8,6 +10,8 @@ namespace Bom.Business.Contracts
     {
         [OperationContract]
         Part[] GetAllParts();
+        [OperationContract]
+        HierarchyNode<ProductTree> GetProductTree();
 
         [OperationContract]
         Part GetPart(int id);

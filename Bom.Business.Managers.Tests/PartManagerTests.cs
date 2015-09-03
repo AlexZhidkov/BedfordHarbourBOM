@@ -3,8 +3,10 @@ using Bom.Business.Contracts;
 using Bom.Business.Entities;
 using Bom.Data;
 using Bom.Data.Contracts;
+using Bom.Data.Contracts.DTOs;
 using Core.Common.Contracts;
 using Core.Common.Core;
+using Core.Common.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -29,6 +31,23 @@ namespace Bom.Business.Managers.Tests
             var resultedPart = manager.GetAllParts();
 
             Assert.AreEqual(parts.Length, resultedPart.Length);
+        }
+
+        [TestMethod]
+        public void Part_GetProductTree()
+        {
+            var productTree = new HierarchyNode<ProductTree>
+            {
+                Depth = 111
+            };
+
+            Mock<IDataRepositoryFactory> mockDataRepositoryFactory = new Mock<IDataRepositoryFactory>();
+            mockDataRepositoryFactory.Setup(mock => mock.GetDataRepository<IPartRepository>().GetProductTree()).Returns(productTree);
+
+            PartManager manager = new PartManager(mockDataRepositoryFactory.Object);
+            var resultedTree = manager.GetProductTree();
+
+            Assert.AreEqual(111, resultedTree.Depth);
         }
 
         [TestMethod]

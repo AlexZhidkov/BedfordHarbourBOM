@@ -2,6 +2,8 @@
 using System.ServiceModel;
 using Bom.Client.Contracts;
 using Bom.Client.Entities;
+using Core.Common.Extensions;
+using Bom.Data.Contracts.DTOs;
 
 namespace Bom.Client.Proxies
 {
@@ -12,6 +14,11 @@ namespace Bom.Client.Proxies
         public Part[] GetAllParts()
         {
             return Channel.GetAllParts();
+        }
+
+        public HierarchyNode<ProductTree> GetProductTree()
+        {
+            return Channel.GetProductTree();
         }
 
         public Part GetPart(int id)

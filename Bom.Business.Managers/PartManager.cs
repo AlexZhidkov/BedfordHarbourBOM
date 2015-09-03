@@ -9,6 +9,8 @@ using Bom.Business.Contracts;
 using Bom.Business.Entities;
 using Bom.Data.Contracts;
 using Core.Common.Contracts;
+using Bom.Data.Contracts.DTOs;
+using Core.Common.Extensions;
 
 namespace Bom.Business.Managers
 {
@@ -36,6 +38,15 @@ namespace Bom.Business.Managers
                 IPartRepository repo = _dataRepositoryFactory.GetDataRepository<IPartRepository>();
                 var parts = repo.Get();
                 return parts.ToArray();
+            });
+        }
+
+        public HierarchyNode<ProductTree> GetProductTree()
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IPartRepository repo = _dataRepositoryFactory.GetDataRepository<IPartRepository>();
+                return repo.GetProductTree();
             });
         }
 

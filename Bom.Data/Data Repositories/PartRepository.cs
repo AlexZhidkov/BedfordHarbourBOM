@@ -12,6 +12,7 @@ using Bom.Business.Entities;
 using Bom.Data.Contracts;
 using Core.Common.Extensions;
 using Core.Common.Utils;
+using Bom.Data.Contracts.DTOs;
 
 namespace Bom.Data
 {
@@ -71,6 +72,26 @@ namespace Bom.Data
                 }
             }
             return subassemblies;
+        }
+        public HierarchyNode<ProductTree> GetProductTree()
+        {
+            var productTree = new HierarchyNode<ProductTree>();
+            using (BomContext entityContext = new BomContext())
+            {
+                var productTreeQuery = from part in entityContext.Parts
+                                join s in entityContext.Subassemblies on part.Id equals s.SubassemblyId into ps
+                                from s in ps.DefaultIfEmpty()
+                                select new ProductTree
+                                {
+                                    Id = part.Id,
+                                    PartDescription = part.Description,
+                                    ParentId = (s == null ? 0 : s.AssemblyId)
+                                };
+
+                productTree = productTreeQuery.ToFullyLoaded().AsHierarchy(e => e.Id, e => e.ParentId).FirstOrDefault();
+
+            }
+            return productTree;
         }
 
         public void RecalculateCostsForAssembly(int partId)

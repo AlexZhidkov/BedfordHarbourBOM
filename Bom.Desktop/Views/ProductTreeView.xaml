@@ -10,9 +10,21 @@
     <UserControl.Resources>
         <conv:ViewModelNullToVisibilityConverter x:Key="viewModelNullToVisibilityConverter" />
     </UserControl.Resources>
-    <TreeView ItemsSource="{Binding FirstGeneration}">
+    <TreeView Name="treeView1" ItemsSource="{Binding ProductTree}">
+        <TreeView.ItemTemplate>
+            <HierarchicalDataTemplate ItemsSource="{Binding Path=ChildNodes}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Path=Entity.PartDescription}"></TextBlock>
+                    <!--<TextBlock Text=" "></TextBlock>
+                    <TextBlock Text="{Binding Path=Entity.LastName}"></TextBlock>-->
+                </StackPanel>
+            </HierarchicalDataTemplate>
+        </TreeView.ItemTemplate>
+    </TreeView>
+
+    <!--<TreeView ItemsSource="{Binding ProductTree}">
         <TreeView.ItemContainerStyle>
-            <!--     This Style binds a TreeViewItem to a PersonViewModel.     -->
+            --><!--     This Style binds a TreeViewItem to a PersonViewModel.     --><!--
             <Style TargetType="{x:Type TreeViewItem}">
                 <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
                 <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
@@ -30,5 +42,5 @@
                 <TextBlock Text="{Binding Name}" />
             </HierarchicalDataTemplate>
         </TreeView.ItemTemplate>
-    </TreeView>
+    </TreeView>-->
 </core:UserControlViewBase>

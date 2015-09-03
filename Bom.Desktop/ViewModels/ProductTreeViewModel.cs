@@ -10,12 +10,13 @@ using Core.Common;
 using Core.Common.Contracts;
 using Core.Common.UI.Core;
 using System.Collections.Generic;
+using Core.Common.Extensions;
+using Bom.Data.Contracts.DTOs;
 
 namespace Bom.Desktop.ViewModels
 {
     public class Person
     {
-        //List<Person> _children = new List<Person>();
         public IList<Person> Children { get; set; }
 
         public string Name { get; set; }
@@ -128,37 +129,32 @@ namespace Bom.Desktop.ViewModels
                         }
                     }
                 }
+*/
 
-                ObservableCollection<Part> _stocks;
+        ObservableCollection<HierarchyNode<ProductTree>> _productTree;
 
-                public ObservableCollection<Part> ProductTrees
+                public ObservableCollection<HierarchyNode<ProductTree>> ProductTree
                 {
-                    get { return _stocks; }
+                    get { return _productTree; }
                     set
                     {
-                        if (_stocks != value)
+                        if (_productTree != value)
                         {
-                            _stocks = value;
-                            OnPropertyChanged(() => ProductTrees, false);
+                            _productTree = value;
+                            OnPropertyChanged(() => ProductTree, false);
                         }
                     }
                 }
-
                 protected override void OnViewLoaded()
                 {
-                    _stocks = new ObservableCollection<Part>();
+                    _productTree = new ObservableCollection<HierarchyNode<ProductTree>>();
 
-                    WithClient(_serviceFactory.CreateClient<IPartService>(), stockClient =>
+                    WithClient(_serviceFactory.CreateClient<IPartService>(), partClient =>
                     {
-                        Part[] stocks = stockClient.GetAllParts();
-                        if (stocks != null)
-                        {
-                            foreach (Part stock in stocks)
-                                _stocks.Add(stock);
-                        }
+                        _productTree.Add(partClient.GetProductTree());
                     });
                 }
-
+/*
                 void OnEditProductTreeCommand(Part stockItem)
                 {
                     if (stockItem.Id > 0)

@@ -8,6 +8,8 @@ using Core.Common.Contracts;
 using Core.Common.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Core.Common.Extensions;
+using Bom.Data.Contracts.DTOs;
 
 namespace Bom.Data.Tests
 {
@@ -109,8 +111,17 @@ namespace Bom.Data.Tests
 
             Assert.AreEqual(ret, parts);
         }
-    }
 
+        [TestMethod]
+        public void GetProductTree()
+        {
+            PartRepositoryTestClass repositoryTest = new PartRepositoryTestClass();
+
+            var part = repositoryTest.GetProductTree();
+
+            Assert.IsNotNull(part);
+        }
+    }
     public class PartRepositoryTestClass
     {
         public PartRepositoryTestClass()
@@ -146,6 +157,11 @@ namespace Bom.Data.Tests
         public Part Update(Part part)
         {
             return _PartRepository.Update(part);
+        }
+
+        public HierarchyNode<ProductTree> GetProductTree()
+        {
+            return _PartRepository.GetProductTree();
         }
     }
 }

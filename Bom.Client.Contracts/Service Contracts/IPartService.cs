@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Bom.Client.Entities;
 using Core.Common.Contracts;
+using Core.Common.Extensions;
+using Bom.Data.Contracts.DTOs;
 
 namespace Bom.Client.Contracts
 {
@@ -25,6 +27,9 @@ namespace Bom.Client.Contracts
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         void DeletePart(int partId);
+
+        [OperationContract]
+        HierarchyNode<ProductTree> GetProductTree();
 
         [OperationContract]
         void RecalculateCostsForAssembly(int partId);
