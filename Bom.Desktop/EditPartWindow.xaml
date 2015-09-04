@@ -12,7 +12,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <controls:ValidationHeader Grid.Row="0" DataContext="{Binding}" />
@@ -23,7 +23,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -31,7 +31,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="450" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Description:" />
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Number:" />
@@ -52,7 +52,7 @@
                 SelectedValuePath="Value"  />
             <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Part.Length, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
             <CheckBox Grid.Row="4" Grid.Column="1" Margin="3" IsChecked="{Binding Part.IsOwnMake, Mode=TwoWay}" HorizontalAlignment="Left"/>
-            <ListBox Grid.Row="5" Grid.Column="1" Margin="3" BorderThickness="0" ItemsSource="{Binding Part.Components, UpdateSourceTrigger=PropertyChanged}" Height="200">
+            <ListBox Grid.Row="5" Grid.Column="1" Margin="3" BorderThickness="0" ItemsSource="{Binding Part.Components, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" >
