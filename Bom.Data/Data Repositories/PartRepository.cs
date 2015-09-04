@@ -86,6 +86,8 @@ namespace Bom.Data
                                     Id = part.Id,
                                     ParentId = (s == null ? 0 : s.AssemblyId),
                                     PartDescription = part.Description,
+                                    OwnCost = part.OwnCost,
+                                    ComponentsCost = part.ComponentsCost,
                                     Capability = part.Capability,
                                     Count = part.Count,
                                     CountDate = part.CountDate,

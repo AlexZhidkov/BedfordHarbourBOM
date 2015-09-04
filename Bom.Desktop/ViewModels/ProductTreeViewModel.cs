@@ -140,21 +140,8 @@ namespace Bom.Desktop.ViewModels
         {
             if (!e.IsNew)
             {
-                //Part stock = _stocks.Single(item => item.Id == e.Stock.Id);
-                //if (stock != null)
-                //{
-                //    stock.Type = e.Stock.Type;
-                //    stock.Number = e.Stock.Number;
-                //    stock.Description = e.Stock.Description;
-                //    stock.IsOwnMake = e.Stock.IsOwnMake;
-                //    stock.Length = e.Stock.Length;
-                //    stock.OwnCost = e.Stock.OwnCost;
-                //    stock.ComponentsCost = e.Stock.ComponentsCost;
-                //    stock.Count = e.Stock.Count;
-                //    stock.CountDate = e.Stock.CountDate;
-                //    stock.OnOrder = e.Stock.OnOrder;
-                //    stock.Notes = e.Stock.Notes;
-                //}
+                //ToDo This doesn't update UI
+                UpdateProductTree(_productTree, e.Stock);
             }
             else
             {
@@ -162,6 +149,27 @@ namespace Bom.Desktop.ViewModels
             }
 
             CurrentStockViewModel = null;
+        }
+
+        private void UpdateProductTree(IEnumerable<HierarchyNode<ProductTree>> node, Part part)
+        {
+            foreach (var p in node)
+            {
+                if (p.Entity.Id == part.Id)
+                {
+                    p.Entity.PartDescription = part.Description;
+                    p.Entity.Count = part.Count;
+                    p.Entity.CountDate = part.CountDate;
+                    p.Entity.OnOrder = part.OnOrder;
+                    p.Entity.Capability = part.Capability;
+                    p.Entity.Demand = part.Demand;
+                    p.Entity.Notes = part.Notes;
+                }
+                if (p.ChildNodes.Count() > 0)
+                {
+                    UpdateProductTree(p.ChildNodes, part);
+                }
+            }
         }
 
         void CurrentStockViewModel_CancelEvent(object sender, EventArgs e)

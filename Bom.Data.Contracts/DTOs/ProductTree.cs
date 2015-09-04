@@ -11,6 +11,15 @@ namespace Bom.Data.Contracts.DTOs
         public int Id { get; set; }
         public int ParentId { get; set; }
         public string PartDescription { get; set; }
+        /// <summary>
+        /// If part is assembly this is the cost of the assembly which added to costs of all subassembvlies to get total cost.
+        /// Otherwise Own Cost is equal to total Cost.
+        /// </summary>
+        public decimal OwnCost { get; set; }
+        /// <summary>
+        /// Total cost of all subassemblies.
+        /// </summary>
+        public decimal ComponentsCost { get; set; }
         public int Count { get; set; }
         /// <summary>
         /// Stock count date
@@ -29,5 +38,13 @@ namespace Bom.Data.Contracts.DTOs
         /// </summary>
         public int Demand { get; set; }
         public string Notes { get; set; }
+        /// <summary>
+        /// Value of stock
+        /// </summary>
+        public Decimal Value
+        {
+            get { return (OwnCost + ComponentsCost) * Count; }
+        }
+
     }
 }

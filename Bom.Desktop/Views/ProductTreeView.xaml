@@ -196,14 +196,14 @@
                       BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=TreeViewItem}}" BorderThickness="1">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" SharedSizeGroup="name" />
-                                <ColumnDefinition Width="50" SharedSizeGroup="value" />
-                                <ColumnDefinition Width="50" SharedSizeGroup="count" />
-                                <ColumnDefinition Width="80" SharedSizeGroup="countDate" />
-                                <ColumnDefinition Width="50" SharedSizeGroup="onOrder" />
-                                <ColumnDefinition Width="50" SharedSizeGroup="capability" />
-                                <ColumnDefinition Width="50" SharedSizeGroup="demand" />
-                                <ColumnDefinition Width="300" SharedSizeGroup="notes" />
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="300"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0"  Margin="3">
                                 <Hyperlink Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" 
@@ -212,16 +212,17 @@
                                 </Hyperlink>
                             </TextBlock>
                             <TextBlock Grid.Column="1" Text="{Binding Entity.Value, StringFormat=c}" HorizontalAlignment="Right" Margin="3"/>
-                            <TextBlock Grid.Column="2" Margin="3" >
-                                <Hyperlink Command="{Binding DataContext.EditStockCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding Entity.Id}">
-                                    <TextBlock Text="{Binding Entity.Count}" HorizontalAlignment="Right"/>
+                            <TextBlock Grid.Column="2" Margin="3"  HorizontalAlignment="Right">
+                                <Hyperlink Command="{Binding DataContext.EditStockCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" 
+                                           CommandParameter="{Binding Entity.Id}">
+                                    <TextBlock Text="{Binding Entity.Count}"/>
                                 </Hyperlink>
                             </TextBlock>
-                            <TextBlock Grid.Column="3" Text="{Binding Entity.CountDate, StringFormat=dd/MM/yyyy}" Margin="3"
+                            <TextBlock Grid.Column="3" Text="{Binding Entity.CountDate, StringFormat=dd/MM/yyyy}" Margin="3" HorizontalAlignment="Right"
                                 Visibility="{Binding CountDate, Converter={StaticResource viewModelNullToVisibilityConverter}}"/>
-                            <TextBlock Grid.Column="4" Margin="3" >
+                            <TextBlock Grid.Column="4" Margin="3" HorizontalAlignment="Right" >
                                 <Hyperlink Command="{Binding DataContext.EditStockCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding Entity.Id}">
-                                    <TextBlock Text="{Binding Entity.OnOrder}" HorizontalAlignment="Right"/>
+                                    <TextBlock Text="{Binding Entity.OnOrder}"/>
                                 </Hyperlink>
                             </TextBlock>
                             <TextBlock Grid.Column="5" Text="{Binding Entity.Capability}" HorizontalAlignment="Right" Margin="3"/>
