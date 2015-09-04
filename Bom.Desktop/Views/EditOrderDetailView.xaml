@@ -22,8 +22,8 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="180" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Margin="3" Text="Part:" />
             <TextBlock Grid.Row="1" Grid.Column="0" Margin="3" Text="Price:" />
@@ -35,9 +35,9 @@
                 SelectedValue="{Binding OrderDetail.PartId}"
                 SelectedValuePath="Id"
                 DropDownClosed="ComboBox_OnDropDownClosed"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Width ="Auto" Text="{Binding OrderDetail.Price, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Width ="Auto" Text="{Binding OrderDetail.Count, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Width ="Auto" Height="Auto" Text="{Binding OrderDetail.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" 
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding OrderDetail.Price, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Text="{Binding OrderDetail.Count, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" />
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding OrderDetail.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Left" 
                      AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
         </Grid>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
