@@ -52,18 +52,36 @@
                 SelectedValuePath="Value"  />
             <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Text="{Binding Part.Length, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch" />
             <CheckBox Grid.Row="4" Grid.Column="1" Margin="3" IsChecked="{Binding Part.IsOwnMake, Mode=TwoWay}" HorizontalAlignment="Left"/>
-            <ListBox Grid.Row="5" Grid.Column="1" Margin="3" BorderThickness="0" ItemsSource="{Binding Part.Components, UpdateSourceTrigger=PropertyChanged}">
+            <ListBox Grid.Row="5" Grid.Column="1" Margin="3" BorderThickness="0" ItemsSource="{Binding Part.Components, UpdateSourceTrigger=PropertyChanged}" 
+                     HorizontalContentAlignment="Stretch">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" >
-                            <Button Margin="3" Content="{Binding PartDescription}" Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding SubassemblyId}"/>
-                            <Button Margin="3" Content="{Binding CostContribution, StringFormat=N4}" Command="{Binding DataContext.EditComponentCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"/>
-                            <Button Margin="3" Content="X" Command="{Binding DataContext.RemoveComponentCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding SubassemblyId}"/>
-                        </StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Left" 
+                                    Content="{Binding PartDescription}" 
+                                    Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                    CommandParameter="{Binding SubassemblyId}"/>
+                            <Button Grid.Row="0" Grid.Column="1" ContentStringFormat="N4" HorizontalContentAlignment="Right" 
+                                    Content="{Binding CostContribution}"
+                                    Command="{Binding DataContext.EditComponentCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                    CommandParameter="{Binding}"/>
+                            <Button Grid.Row="0" Grid.Column="2" Margin="5,0"
+                                    Content="X"
+                                    Command="{Binding DataContext.RemoveComponentCommand, RelativeSource={RelativeSource AncestorType=Window}}" 
+                                    CommandParameter="{Binding SubassemblyId}"/>
+                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <TextBlock Grid.Row="6" Grid.Column="1" Margin="3" Text="{Binding Part.ComponentsCost, StringFormat=c}" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="6" Grid.Column="1" Margin="3" Text="{Binding Part.ComponentsCost, StringFormat=c}" HorizontalAlignment="Left"/>
             <Button Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right" Content="Add" Margin="5" Command="{Binding DataContext.AddComponentCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding Part.Id}"/>
             <TextBox Grid.Row="8" Grid.Column="1" Margin="3" Text="{Binding Part.OwnCost, StringFormat=c, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
             <TextBox Grid.Row="9" Grid.Column="1" Margin="3" Text="{Binding Part.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" HorizontalAlignment="Stretch"
