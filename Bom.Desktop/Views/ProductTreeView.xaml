@@ -206,18 +206,27 @@
                                 <ColumnDefinition Width="300" SharedSizeGroup="notes" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0"  Margin="3">
-                            <Hyperlink Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" 
-                                       CommandParameter="{Binding Entity.Id}">
-                                <TextBlock Text="{Binding Entity.PartDescription}"/>
-                            </Hyperlink>
-                        </TextBlock>
-                            <TextBlock Grid.Column="1" Text="Value" />
-                            <TextBlock Grid.Column="2" Text="Count" />
-                            <TextBlock Grid.Column="3" Text="Count Date" />
-                            <TextBlock Grid.Column="4" Text="On Order" />
-                            <TextBlock Grid.Column="5" Text="Capability" />
-                            <TextBlock Grid.Column="6" Text="Demand" />
-                            <TextBlock Grid.Column="7" Text="Notes" />
+                                <Hyperlink Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" 
+                                           CommandParameter="{Binding Entity.Id}">
+                                    <TextBlock Text="{Binding Entity.PartDescription}"/>
+                                </Hyperlink>
+                            </TextBlock>
+                            <TextBlock Grid.Column="1" Text="{Binding Entity.Value, StringFormat=c}" HorizontalAlignment="Right" Margin="3"/>
+                            <TextBlock Grid.Column="2" Margin="3" >
+                                <Hyperlink Command="{Binding DataContext.EditStockCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding Entity.Id}">
+                                    <TextBlock Text="{Binding Entity.Count}" HorizontalAlignment="Right"/>
+                                </Hyperlink>
+                            </TextBlock>
+                            <TextBlock Grid.Column="3" Text="{Binding Entity.CountDate, StringFormat=dd/MM/yyyy}" Margin="3"
+                                Visibility="{Binding CountDate, Converter={StaticResource viewModelNullToVisibilityConverter}}"/>
+                            <TextBlock Grid.Column="4" Margin="3" >
+                                <Hyperlink Command="{Binding DataContext.EditStockCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" CommandParameter="{Binding Entity.Id}">
+                                    <TextBlock Text="{Binding Entity.OnOrder}" HorizontalAlignment="Right"/>
+                                </Hyperlink>
+                            </TextBlock>
+                            <TextBlock Grid.Column="5" Text="{Binding Entity.Capability}" HorizontalAlignment="Right" Margin="3"/>
+                            <TextBlock Grid.Column="6" Text="{Binding Entity.Demand}" HorizontalAlignment="Right" Margin="3"/>
+                            <TextBlock Grid.Column="7" Text="{Binding Entity.Notes}" TextWrapping="Wrap"  Margin="3"/>
                         </Grid>
                     </Border>
                 </HierarchicalDataTemplate>

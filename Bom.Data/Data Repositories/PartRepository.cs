@@ -84,8 +84,14 @@ namespace Bom.Data
                                 select new ProductTree
                                 {
                                     Id = part.Id,
+                                    ParentId = (s == null ? 0 : s.AssemblyId),
                                     PartDescription = part.Description,
-                                    ParentId = (s == null ? 0 : s.AssemblyId)
+                                    Capability = part.Capability,
+                                    Count = part.Count,
+                                    CountDate = part.CountDate,
+                                    Demand = part.Demand,
+                                    OnOrder = part.OnOrder,
+                                    Notes = part.Notes
                                 };
 
                 productTree = productTreeQuery.ToFullyLoaded().AsHierarchy(e => e.Id, e => e.ParentId).FirstOrDefault();

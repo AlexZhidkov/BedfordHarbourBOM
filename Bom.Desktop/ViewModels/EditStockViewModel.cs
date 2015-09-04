@@ -37,6 +37,31 @@ namespace Bom.Desktop.ViewModels
             CancelCommand = new DelegateCommand<object>(OnCancelCommandExecute);
         }
 
+        public EditStockViewModel(IServiceFactory serviceFactory, int partId)
+        {
+            _serviceFactory = serviceFactory ?? ObjectBase.Container.GetExportedValue<IServiceFactory>();
+            _isNew = (partId == 0);
+
+            if (_isNew)
+            {
+                throw new NotImplementedException();
+            }
+            else
+            {
+                WithClient(_serviceFactory.CreateClient<IPartService>(), partsClient =>
+                {
+                    if (partsClient == null) return;
+                    _stock = partsClient.GetPart(partId);
+                });
+                PartDescription = _stock.Description;
+            }
+
+            _stock.CleanAll();
+
+            SaveCommand = new DelegateCommand<object>(OnSaveCommandExecute, OnSaveCommandCanExecute);
+            CancelCommand = new DelegateCommand<object>(OnCancelCommandExecute);
+        }
+
         private void LoadParts()
         {
             WithClient(_serviceFactory.CreateClient<IPartService>(), partsClient =>
@@ -50,7 +75,7 @@ namespace Bom.Desktop.ViewModels
         }
 
         readonly IServiceFactory _serviceFactory;
-        readonly Part _stock = new Part();
+        Part _stock = new Part();
         readonly bool _isNew;
         List<Part> _parts = null;
 

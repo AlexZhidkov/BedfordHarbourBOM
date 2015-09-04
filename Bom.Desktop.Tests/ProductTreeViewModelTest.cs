@@ -23,7 +23,8 @@ namespace Bom.Desktop.Tests
                 {
                     ParentId = 0,
                     Id = 1,
-                    PartDescription = "Bin"
+                    PartDescription = "Bin",
+                    Notes = "Notes"
                 }
             };
 

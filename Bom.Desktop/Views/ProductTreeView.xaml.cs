@@ -22,8 +22,8 @@ namespace Bom.Desktop.Views
             if (vm != null)
             {
                 //vm.ConfirmDelete -= OnConfirmDelete;
-                //vm.ErrorOccured -= OnErrorOccured;
-                //vm.OpenEditProductTreeWindow -= OnOpenEditProductTreeWindow;
+                vm.ErrorOccured -= OnErrorOccured;
+                vm.OpenEditStockWindow -= OnOpenEditStockWindow;
                 vm.OpenEditPartWindow -= OnOpenEditPartWindow;
             }
         }
@@ -34,8 +34,8 @@ namespace Bom.Desktop.Views
             if (vm != null)
             {
                 //vm.ConfirmDelete += OnConfirmDelete;
-                //vm.ErrorOccured += OnErrorOccured;
-                //vm.OpenEditProductTreeWindow += OnOpenEditProductTreeWindow;
+                vm.ErrorOccured += OnErrorOccured;
+                vm.OpenEditStockWindow += OnOpenEditStockWindow;
                 vm.OpenEditPartWindow += OnOpenEditPartWindow;
             }
         }
@@ -53,7 +53,7 @@ namespace Bom.Desktop.Views
             MessageBox.Show(e.ErrorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        void OnOpenEditProductTreeWindow(object sender, EditStockViewModel e)
+        void OnOpenEditStockWindow(object sender, EditStockViewModel e)
         {
             var updateStockWindow = new UpdateStockWindow(e);
             updateStockWindow.Show();
