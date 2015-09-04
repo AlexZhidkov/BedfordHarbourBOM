@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300" SharedSizeGroup="name" />
+                <ColumnDefinition Width="*" SharedSizeGroup="name" />
                 <ColumnDefinition Width="50" SharedSizeGroup="value" />
                 <ColumnDefinition Width="50" SharedSizeGroup="count" />
                 <ColumnDefinition Width="80" SharedSizeGroup="countDate" />
@@ -35,25 +35,43 @@
             <TextBlock Grid.Column="6" Text="Demand" />
             <TextBlock Grid.Column="7" Text="Notes" />
         </Grid>
-        <TreeView Grid.Row="1" ItemsSource="{Binding ProductTree}" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                ScrollViewer.HorizontalScrollBarVisibility="Auto" >
+        <TreeView Name="ProductTree" Grid.Row="1" ItemsSource="{Binding ProductTree}" 
+                  HorizontalContentAlignment="Stretch"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" >
             <TreeView.ItemContainerStyle>
                 <Style TargetType="{x:Type TreeViewItem}">
                     <Setter Property="IsExpanded" Value="True" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 </Style>
             </TreeView.ItemContainerStyle>
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Path=ChildNodes}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock>
-                        <Hyperlink Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" 
-                                   CommandParameter="{Binding Entity.Id}">
-                            <TextBlock Text="{Binding Entity.PartDescription}"/>
-                        </Hyperlink>
-                  </TextBlock>
-                        <!--<TextBlock Text=" "></TextBlock>
-                            <TextBlock Text="{Binding Path=Entity.LastName}"></TextBlock>-->
-                    </StackPanel>
+                    <Grid Width="{Binding Width, ElementName=ProductTree, Mode=Default}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" SharedSizeGroup="name" />
+                            <ColumnDefinition Width="50" SharedSizeGroup="value" />
+                            <ColumnDefinition Width="50" SharedSizeGroup="count" />
+                            <ColumnDefinition Width="80" SharedSizeGroup="countDate" />
+                            <ColumnDefinition Width="50" SharedSizeGroup="onOrder" />
+                            <ColumnDefinition Width="50" SharedSizeGroup="capability" />
+                            <ColumnDefinition Width="50" SharedSizeGroup="demand" />
+                            <ColumnDefinition Width="300" SharedSizeGroup="notes" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"  Margin="3">
+                            <Hyperlink Command="{Binding DataContext.EditPartCommand, RelativeSource={RelativeSource AncestorType=core:UserControlViewBase}}" 
+                                       CommandParameter="{Binding Entity.Id}">
+                                <TextBlock Text="{Binding Entity.PartDescription}"/>
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock Grid.Column="1" Text="Value" />
+                        <TextBlock Grid.Column="2" Text="Count" />
+                        <TextBlock Grid.Column="3" Text="Count Date" />
+                        <TextBlock Grid.Column="4" Text="On Order" />
+                        <TextBlock Grid.Column="5" Text="Capability" />
+                        <TextBlock Grid.Column="6" Text="Demand" />
+                        <TextBlock Grid.Column="7" Text="Notes" />
+                    </Grid>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
