@@ -81,8 +81,11 @@ namespace Bom.Database.Tests
             RecalculateRecurseHelper helper = (RecalculateRecurseHelper)makeStoredProcedureHelperBase(StoredProcedures.RecalculateRecurse, m_connectionString);
             helper.InitTableData();
 
-            int res = helper.Run(503, 2);
-            Assert.AreEqual(2, res);
+            int productscount = 0;
+            decimal totalcost = 0;
+            int res = helper.Run(503, 2, out productscount, out totalcost);
+            Assert.AreEqual(2, productscount);
+            Assert.AreEqual(60, totalcost);
         }
 
         [TestCleanup]
