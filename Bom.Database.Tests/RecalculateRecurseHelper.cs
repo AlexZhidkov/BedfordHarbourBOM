@@ -21,7 +21,7 @@ namespace Bom.Database.Tests
             m_sqlInitTableData.Add(sql);
         }
 
-        public int Run(int partId, decimal productsDemand)
+        public int Run(int partId, decimal productsDemand, out int productscount, out decimal totalcost)
         {
             int result = 0;
             using (SqlConnection connection = new SqlConnection(m_connectionString))
@@ -32,12 +32,14 @@ namespace Bom.Database.Tests
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@partId", partId));
                     cmd.Parameters.Add(new SqlParameter("@ProductsDemand", productsDemand));
-                    int productsCount = 0;
-                    cmd.Parameters.Add(new SqlParameter("@ProductsCount", productsCount));
-                    SqlParameter retval = cmd.Parameters.Add("@ProductsCount", SqlDbType.Int);
-                    retval.Direction = ParameterDirection.ReturnValue;
-                    cmd.ExecuteNonQuery();
-                    result = Convert.ToInt32(retval.Value);
+                    //two output parameters - products count and total cost
+                    SqlParameter sp_productscount = cmd.Parameters.Add(new SqlParameter("@ProductsCount", SqlDbType.Int));
+                    cmd.Parameters["@ProductsCount"].Direction = ParameterDirection.Output;
+                    SqlParameter sp_totalcost = cmd.Parameters.Add(new SqlParameter("@TotalCost", SqlDbType.Decimal));
+                    cmd.Parameters["@TotalCost"].Direction = ParameterDirection.Output;
+                    result = cmd.ExecuteNonQuery();
+                    productscount = Convert.ToInt32(sp_productscount.Value);
+                    totalcost = Convert.ToDecimal(sp_totalcost.Value);
                 }
                 connection.Close();
             }
